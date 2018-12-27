@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.moho.rxjava2.TestRxjava2;
 import com.monk.aidldemo.IAidlInterface;
 import com.monk.aidldemo.LogUtil;
 import com.monk.aidldemo.R;
@@ -25,12 +26,15 @@ import com.monk.aidldemo.service.MyAidlService;
 import java.util.List;
 import java.util.Random;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+
 /**
  * @author monk
  * @date 2018-12-13
  */
 public class MainActivity extends AppCompatActivity {
-    private TextView mTextMessage;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -52,9 +56,30 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            //连接后拿到 Binder，转换成 AIDL，在不同进程会返回个代理
+            iAidlInterface = IAidlInterface.Stub.asInterface(service);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            iAidlInterface = null;
+        }
+    };
+
+    private final String tag = "MainActivity";
+    private TextView mTextMessage;
     private IAidlInterface iAidlInterface;
     private AppCompatButton button;
     private LinearLayout myLayout;
+    private Disposable subscribe;
+    private Disposable subscribe1;
+    private Disposable subscribe2;
+    private Disposable subscribe3;
+    private Disposable subscribe4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,33 +126,89 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myLayout.setOnTouchListener(new View.OnTouchListener() {
+//        myLayout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                LogUtil.e("事件分发机制", event.toString());
+//                return false;
+//            }
+//        });
+
+//        TestRxjava2.getInstance().create();
+
+//        subscribe = TestRxjava2.getInstance().mapOperate().subscribe(new Consumer<DouBanMovie>() {
+//            @Override
+//            public void accept(DouBanMovie douBanMovie) throws Exception {
+//                LogUtil.i(tag, "成功:" + douBanMovie.toString());
+//                mTextMessage.setText(douBanMovie.title);
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                LogUtil.e(tag, "失败：" + throwable.getMessage());
+//            }
+//        });
+
+//        subscribe1 = TestRxjava2.getInstance().concatOperation().subscribe(new Consumer<DouBanMovie>() {
+//            @Override
+//            public void accept(DouBanMovie douBanMovie) throws Exception {
+//                LogUtil.i(tag,"成功:"+douBanMovie.toString());
+//                mTextMessage.setText(douBanMovie.title);
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                LogUtil.e(tag,"失败："+throwable.getMessage());
+//            }
+//        });
+
+//        subscribe2 = TestRxjava2.getInstance().flatMapOperation().observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<DouBanMovie>() {
+//            @Override
+//            public void accept(DouBanMovie douBanMovie) throws Exception {
+//                LogUtil.i(tag,"成功:"+douBanMovie.toString());
+//                mTextMessage.setText(douBanMovie.title);
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                LogUtil.e(tag,"失败："+throwable.getMessage());
+//            }
+//        });
+
+        subscribe3 = TestRxjava2.getInstance().zipOperation().subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Boolean>() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                LogUtil.e("事件分发机制", event.toString());
-                return false;
+            public void accept(Boolean aBoolean) throws Exception {
+                LogUtil.v(tag,"aBoolean："+aBoolean);
             }
         });
 
+        subscribe4 = TestRxjava2.getInstance().intervalOperation().observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                if (aLong == 3) {
+                    subscribe4.dispose();
+                }
+                LogUtil.v(tag,"aLong = "+aLong);
+            }
+        });
     }
 
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            //连接后拿到 Binder，转换成 AIDL，在不同进程会返回个代理
-            iAidlInterface = IAidlInterface.Stub.asInterface(service);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            iAidlInterface = null;
-        }
-    };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(mConnection);
+        if (subscribe != null) {
+            subscribe.dispose();
+        }
+        if (subscribe1 != null) {
+            subscribe1.dispose();
+        }
+        if (subscribe2 != null) {
+            subscribe2.dispose();
+        }
+        if (subscribe3 != null) {
+            subscribe3.dispose();
+        }
     }
 }

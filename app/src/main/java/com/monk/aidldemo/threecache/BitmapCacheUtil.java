@@ -184,7 +184,7 @@ public class BitmapCacheUtil {
     }
 
     /**
-     * 使用三级缓存为ImageView设置图片
+     * 使用三级缓存为ImageView设置图片(LruCache,SoftReference,FileDir)
      * @param path
      * @param view
      */
