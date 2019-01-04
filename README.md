@@ -1,7 +1,8 @@
 some record daily
 
-HttpUrlConnection.
-SelectSort,BubbleSort.
+HttpUrlConnection
+SelectSort
+BubbleSort
 LruCache
 
 RxJava2
