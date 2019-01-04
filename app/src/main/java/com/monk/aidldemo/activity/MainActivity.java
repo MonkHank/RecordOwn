@@ -189,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                     subscribe4.dispose();
                 }
                 LogUtil.v(tag,"aLong = "+aLong);
+
             }
         });
     }
