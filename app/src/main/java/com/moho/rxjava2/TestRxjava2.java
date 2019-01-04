@@ -205,6 +205,7 @@ public class TestRxjava2 {
             public Boolean apply(String s, Integer integer) throws Exception {
                 int result = Integer.parseInt(s) + integer;
                 return result==2;
+
             }
         });
     }
