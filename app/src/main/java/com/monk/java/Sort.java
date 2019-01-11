@@ -1,4 +1,4 @@
-package com.monk.aidldemo.java;
+package com.monk.java;
 
 /**
  * @author monk

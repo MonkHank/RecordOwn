@@ -2,7 +2,7 @@ package com.moho.rxjava2;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
-import com.monk.aidldemo.LogUtil;
+import com.monk.LogUtil;
 
 import java.util.concurrent.TimeUnit;
 

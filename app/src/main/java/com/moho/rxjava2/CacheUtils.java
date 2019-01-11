@@ -2,7 +2,7 @@ package com.moho.rxjava2;
 
 import com.alibaba.fastjson.util.IOUtils;
 import com.com.moho.app.MyApplication;
-import com.monk.aidldemo.LogUtil;
+import com.monk.LogUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

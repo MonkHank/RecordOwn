@@ -6,10 +6,9 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context="com.monk.MainActivity">
 
-    <com.monk.aidldemo.view.MyLayout
-        android:id="@+id/myLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -39,7 +38,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.501"/>
-    </com.monk.aidldemo.view.MyLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/eventDispatchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="eventDispatch"/>
+    </LinearLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.monk.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -41,6 +41,7 @@
 
         <activity
             android:name=".activity.ScrollingActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
@@ -49,6 +50,7 @@
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name="com.monk.eventdispatch.EventDispatchActivity"/>
     </application>
 
 </manifest>

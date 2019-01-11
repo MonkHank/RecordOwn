@@ -1,4 +1,4 @@
-package com.monk.aidldemo.view;
+package com.monk.eventdispatch;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -7,13 +7,14 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-import com.monk.aidldemo.LogUtil;
+import com.monk.LogUtil;
 
 /**
  * @author monk
  * @date 2018-12-24.
  */
 public class MyLayout extends LinearLayout implements GestureDetector.OnDoubleTapListener,GestureDetector.OnGestureListener {
+    private String tag = "MyLayout";
 
     private GestureDetector mGestureDetector;
 
@@ -33,13 +34,22 @@ public class MyLayout extends LinearLayout implements GestureDetector.OnDoubleTa
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        LogUtil.e(tag,"dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        LogUtil.e(tag,"onInterceptTouchEvent");
         return super.onInterceptTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return mGestureDetector.onTouchEvent(event);
+//        return mGestureDetector.onTouchEvent(event);
+        LogUtil.e(tag,"onTouchEvent");
+        return super.onTouchEvent(event);
     }
 
     @Override

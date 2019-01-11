@@ -1,4 +1,4 @@
-package com.monk.aidldemo.activity;
+package com.monk;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -11,16 +11,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.moho.rxjava2.TestRxjava2;
 import com.monk.aidldemo.IAidlInterface;
-import com.monk.aidldemo.LogUtil;
 import com.monk.aidldemo.R;
+import com.monk.aidldemo.activity.ScrollingActivity;
 import com.monk.aidldemo.bean.Person;
+import com.monk.eventdispatch.EventDispatchActivity;
 import com.monk.aidldemo.service.MyAidlService;
 
 import java.util.List;
@@ -34,7 +34,7 @@ import io.reactivex.functions.Consumer;
  * @author monk
  * @date 2018-12-13
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -74,27 +74,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private IAidlInterface iAidlInterface;
     private AppCompatButton button;
-    private LinearLayout myLayout;
     private Disposable subscribe;
     private Disposable subscribe1;
     private Disposable subscribe2;
     private Disposable subscribe3;
     private Disposable subscribe4;
+    private Button eventDispatchButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mTextMessage =  findViewById(R.id.message);
-        BottomNavigationView navigation =  findViewById(R.id.navigation);
-        button = findViewById(R.id.button);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        myLayout=findViewById(R.id.myLayout);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.button:
                 Random random = new Random();
                 Person person = new Person("shixin" + random.nextInt(10));
                 try {
@@ -105,34 +95,32 @@ public class MainActivity extends AppCompatActivity {
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
-            }
-        });
+                break;
+            case R.id.eventDispatchButton:
+                startActivity(new Intent(this,EventDispatchActivity.class));
+                break;
+             default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        BottomNavigationView navigation =  findViewById(R.id.navigation);
+        mTextMessage =  findViewById(R.id.message);
+        button = findViewById(R.id.button);
+        eventDispatchButton = findViewById(R.id.eventDispatchButton);
+
+        button.setOnClickListener(this);
+        eventDispatchButton.setOnClickListener(this);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent intent1 = new Intent(getApplicationContext(), MyAidlService.class);
         bindService(intent1, mConnection, BIND_AUTO_CREATE);
 
-        mTextMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LogUtil.v("事件分发机制",""+v.toString());
-            }
-        });
-
-        mTextMessage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                LogUtil.i("事件分发机制", event.toString());
-                return false;
-            }
-        });
-
-//        myLayout.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                LogUtil.e("事件分发机制", event.toString());
-//                return false;
-//            }
-//        });
 
 //        TestRxjava2.getInstance().create();
 
@@ -212,4 +200,6 @@ public class MainActivity extends AppCompatActivity {
             subscribe3.dispose();
         }
     }
+
+
 }

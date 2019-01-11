@@ -1,4 +1,4 @@
-package com.monk.aidldemo.threecache;
+package com.monk.threecache;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;

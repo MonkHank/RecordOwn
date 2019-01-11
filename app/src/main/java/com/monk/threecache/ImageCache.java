@@ -1,4 +1,4 @@
-package com.monk.aidldemo.threecache;
+package com.monk.threecache;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;

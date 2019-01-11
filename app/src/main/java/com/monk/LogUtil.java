@@ -1,4 +1,4 @@
-package com.monk.aidldemo;
+package com.monk;
 
 import android.util.Log;
 
