@@ -17,3 +17,5 @@ LayoutInflater,onResume之后获取getTop有效
 原型模式
 
 builder模式
+
+委托模式，notification
