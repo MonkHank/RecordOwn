@@ -1,4 +1,4 @@
-package com.com.moho.app;
+package com.monk;
 
 import android.app.Application;
 

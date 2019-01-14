@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.moho.rxjava2.TestRxjava2;
+import com.monk.rxjava2.TestRxjava2;
 import com.monk.aidldemo.IAidlInterface;
 import com.monk.aidldemo.R;
 import com.monk.aidldemo.activity.ScrollingActivity;

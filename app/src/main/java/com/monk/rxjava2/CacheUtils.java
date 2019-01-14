@@ -1,7 +1,7 @@
-package com.moho.rxjava2;
+package com.monk.rxjava2;
 
 import com.alibaba.fastjson.util.IOUtils;
-import com.com.moho.app.MyApplication;
+import com.monk.MyApplication;
 import com.monk.LogUtil;
 
 import java.io.BufferedReader;
@@ -12,11 +12,9 @@ import java.io.IOException;
 
 /**
  * 最好还是单例，因为还要设置有效时间，静态的话就不能设置时间了；
- *
  * @author Kevin
  * @date 2017/8/15.
  */
-
 public class CacheUtils {
     private static final String tag = "CacheUtils";
 
