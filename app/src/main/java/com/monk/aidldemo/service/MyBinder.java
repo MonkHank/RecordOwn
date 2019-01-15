@@ -8,6 +8,7 @@ import com.monk.aidldemo.bean.Person;
 import java.util.List;
 
 /**
+ * AIDL 实现方式
  * @author monk
  * @date 2019/1/12
  */

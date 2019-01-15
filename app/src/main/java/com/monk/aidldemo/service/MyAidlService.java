@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.monk.aidldemo.bean.Person;
+import com.monk.aidldemo.binder.ManualBinder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,8 @@ public class MyAidlService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         List<Person> mPersons = new ArrayList<>();
-        return new MyBinder(mPersons);
+//        return new MyBinder(mPersons);
+        return new ManualBinder(mPersons);
     }
 
 }

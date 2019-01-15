@@ -1,10 +1,14 @@
 package com.monk;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -15,14 +19,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.monk.rxjava2.TestRxjava2;
-import com.monk.aidldemo.IAidlInterface;
 import com.monk.aidldemo.R;
 import com.monk.aidldemo.activity.ScrollingActivity;
 import com.monk.aidldemo.bean.Person;
-import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.aidldemo.binder.IPersonInterface;
+import com.monk.aidldemo.binder.ManualBinder;
+import com.monk.aidldemo.binder.messenger.MyMessengerService;
 import com.monk.aidldemo.service.MyAidlService;
+import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.rxjava2.TestRxjava2;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Random;
 
@@ -61,7 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             //连接后拿到 Binder，转换成 AIDL，在不同进程会返回个代理
-            iAidlInterface = IAidlInterface.Stub.asInterface(service);
+            iAidlInterface = ManualBinder.asInterface(service);
+            try {
+                service.linkToDeath(mDeathRecipient,0);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -70,10 +82,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    private ServiceConnection mMessengerConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Messenger mMessenger = new Messenger(service);
+            Message msg = Message.obtain(null, 0);
+            Bundle data = new Bundle();
+            data.putString("msg"," send messenger to client");
+            msg.setData(data);
+            msg.replyTo=mGetReplyMessager;
+            try {
+                mMessenger.send(msg);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    private Messenger mGetReplyMessager = new Messenger(new ClientHandler(this));
+
+    private static class ClientHandler extends Handler{
+        WeakReference<Activity>weakReference;
+
+        public ClientHandler(Activity activity) {
+            weakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (weakReference.get() != null) {
+                LogUtil.v("MainActivity",msg.getData().getString("msgServer"));
+            }
+        }
+    }
+
+    /**
+     * 死亡代理
+     */
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            if (iAidlInterface == null) {
+                return;
+            }
+            iAidlInterface.asBinder().unlinkToDeath(mDeathRecipient, 0);
+            iAidlInterface=null;
+            Intent intent1 = new Intent(getApplicationContext(), MyAidlService.class);
+            bindService(intent1, mConnection, BIND_AUTO_CREATE);
+        }
+    };
+
     private final String tag = "MainActivity";
     private TextView mTextMessage;
-    private IAidlInterface iAidlInterface;
-    private AppCompatButton button;
+    private IPersonInterface iAidlInterface;
+    private AppCompatButton button,scrollActivityButton;
     private Disposable subscribe;
     private Disposable subscribe1;
     private Disposable subscribe2;
@@ -91,10 +158,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     iAidlInterface.addPerson(person);
                     List<Person> personList = iAidlInterface.getPersonList();
                     mTextMessage.setText(personList.toString());
-                    ScrollingActivity.intoHere(MainActivity.this);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
+                break;
+            case R.id.scrollActivityButton:
+                ScrollingActivity.intoHere(MainActivity.this);
                 break;
             case R.id.eventDispatchButton:
                 startActivity(new Intent(this,EventDispatchActivity.class));
@@ -112,14 +181,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigationView navigation =  findViewById(R.id.navigation);
         mTextMessage =  findViewById(R.id.message);
         button = findViewById(R.id.button);
+        scrollActivityButton = findViewById(R.id.scrollActivityButton);
         eventDispatchButton = findViewById(R.id.eventDispatchButton);
 
         button.setOnClickListener(this);
+        scrollActivityButton.setOnClickListener(this);
         eventDispatchButton.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Intent intent1 = new Intent(getApplicationContext(), MyAidlService.class);
         bindService(intent1, mConnection, BIND_AUTO_CREATE);
+
+        Intent intent2 = new Intent(getApplicationContext(), MyMessengerService.class);
+        bindService(intent2, mMessengerConnection, BIND_AUTO_CREATE);
+
 
 
 //        TestRxjava2.getInstance().create();
@@ -187,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onDestroy() {
         super.onDestroy();
         unbindService(mConnection);
+        unbindService(mMessengerConnection);
         if (subscribe != null) {
             subscribe.dispose();
         }

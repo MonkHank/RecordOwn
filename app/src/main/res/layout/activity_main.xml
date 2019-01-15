@@ -40,6 +40,12 @@
             app:layout_constraintVertical_bias="0.501"/>
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/scrollActivityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="eventDispatch"/>
+
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/eventDispatchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
