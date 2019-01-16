@@ -23,3 +23,5 @@ builder模式
 几种IPC方式实现
 手写binder，其实就是复制AIDL生成的远程服务接口实现；
 Messenger
+
+try catch机制
