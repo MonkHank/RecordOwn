@@ -1,4 +1,4 @@
-package com.monk.aidldemo.activity;
+package com.monk.activity;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 
 import com.monk.LogUtil;
 import com.monk.aidldemo.R;
-import com.monk.aidldemo.TestDialogFragment;
+import com.monk.TestDialogFragment;
 
 /**
  * @author monk
@@ -60,7 +60,7 @@ public class ScrollingActivity extends AppCompatActivity {
                 .setContentTitle("contentTitle")
                 .setContentText("contentText")
                 .setContentIntent(PendingIntent.getActivity(ScrollingActivity.this, 0, new Intent(ScrollingActivity.this, TabbedActivity.class), PendingIntent.FLAG_UPDATE_CURRENT))
-                .setSmallIcon(R.mipmap.logo_button)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .build();
         notificationManager.notify(0,notification);
     }

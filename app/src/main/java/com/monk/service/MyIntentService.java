@@ -1,4 +1,4 @@
-package com.monk.aidldemo.service;
+package com.monk.service;
 
 import android.app.IntentService;
 import android.content.Intent;

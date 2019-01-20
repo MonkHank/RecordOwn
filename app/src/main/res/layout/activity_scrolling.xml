@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:id="@+id/linearLayout"
-    tools:context=".activity.ScrollingActivity">
+    tools:context="com.monk.activity.ScrollingActivity">
 </LinearLayout>

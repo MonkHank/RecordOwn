@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.monk.LogUtil;
 import com.monk.aidldemo.bean.Person;
 import com.monk.aidldemo.binder.ManualBinder;
 
@@ -15,6 +16,8 @@ import java.util.List;
  * @date 2018-12-13
  */
 public class MyAidlService extends Service {
+
+    private static final String tag = "MyAidlService";
 
     public MyAidlService() {
     }
@@ -31,4 +34,11 @@ public class MyAidlService extends Service {
         return new ManualBinder(mPersons);
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        LogUtil.v(tag,"getApplication =" +getApplication());
+        LogUtil.v(tag,"getApplication =" +getApplicationContext());
+        LogUtil.v(tag,"getBaseContext = " +getBaseContext());
+    }
 }

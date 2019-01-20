@@ -1,4 +1,4 @@
-package com.monk.aidldemo.activity;
+package com.monk.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
