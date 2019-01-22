@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
-import com.monk.LogUtil;
+import com.monk.utils.LogUtil;
 import com.monk.aidldemo.R;
 
 /**
@@ -24,6 +24,7 @@ public class EventDispatchActivity extends AppCompatActivity {
 
         myLayout = findViewById(R.id.myLayout);
         myView = findViewById(R.id.myView);
+
     }
 
     @Override

@@ -12,20 +12,21 @@ import java.util.Map;
  */
 public class ImageCache extends LruCache<String,Bitmap> {
     private Map<String,SoftReference<Bitmap>>cacheMap;
+
     public ImageCache(Map<String,SoftReference<Bitmap>>cacheMap) {
-        super((int) (Runtime.getRuntime().maxMemory()/8));
+        super((int) (Runtime.getRuntime().maxMemory()/1024/8));
         this.cacheMap=cacheMap;
     }
 
     /**
-     * 获取图片大小
+     * 获取图片大小，计算缓存对象的大小
      * @param key
      * @param value
      * @return
      */
     @Override
     protected int sizeOf(String key, Bitmap value) {
-        return value.getRowBytes() * value.getHeight();
+        return value.getRowBytes() * value.getHeight()/1024;
     }
 
     /**

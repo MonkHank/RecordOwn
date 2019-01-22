@@ -15,6 +15,7 @@ public class DouBanMovie {
                 ", start=" + start +
                 ", total=" + total +
                 ", title='" + title + '\'' +
+                ", subjects=" + subjects +
                 '}';
     }
 
@@ -25,6 +26,25 @@ public class DouBanMovie {
     public List<SubjectsBean> subjects;
 
     public static class SubjectsBean {
+
+        @Override
+        public String toString() {
+            return "SubjectsBean{" +
+                    "rating=" + rating +
+                    ", title='" + title + '\'' +
+                    ", collect_count=" + collect_count +
+                    ", original_title='" + original_title + '\'' +
+                    ", subtype='" + subtype + '\'' +
+                    ", year='" + year + '\'' +
+                    ", images=" + images +
+                    ", alt='" + alt + '\'' +
+                    ", id='" + id + '\'' +
+                    ", genres=" + genres +
+                    ", casts=" + casts +
+                    ", directors=" + directors +
+                    '}';
+        }
+
         public RatingBean rating;
         public String title;
         public int collect_count;
@@ -59,11 +79,29 @@ public class DouBanMovie {
             public String name;
             public String id;
 
+            @Override
+            public String toString() {
+                return "CastsBean{" +
+                        "alt='" + alt + '\'' +
+                        ", avatars=" + avatars +
+                        ", name='" + name + '\'' +
+                        ", id='" + id + '\'' +
+                        '}';
+            }
+
             public static class AvatarsBean {
                 public String small;
                 public String large;
                 public String medium;
 
+                @Override
+                public String toString() {
+                    return "AvatarsBean{" +
+                            "small='" + small + '\'' +
+                            ", large='" + large + '\'' +
+                            ", medium='" + medium + '\'' +
+                            '}';
+                }
             }
         }
 
@@ -73,10 +111,29 @@ public class DouBanMovie {
             public String name;
             public String id;
 
+            @Override
+            public String toString() {
+                return "DirectorsBean{" +
+                        "alt='" + alt + '\'' +
+                        ", avatars=" + avatars +
+                        ", name='" + name + '\'' +
+                        ", id='" + id + '\'' +
+                        '}';
+            }
+
             public static class AvatarsBeanX {
                 public String small;
                 public String large;
                 public String medium;
+
+                @Override
+                public String toString() {
+                    return "AvatarsBeanX{" +
+                            "small='" + small + '\'' +
+                            ", large='" + large + '\'' +
+                            ", medium='" + medium + '\'' +
+                            '}';
+                }
             }
         }
     }

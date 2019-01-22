@@ -1,0 +1,16 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //这两个库用于在build/generate下生成文件
+    implementation 'com.squareup:javapoet:1.11.1'
+    implementation 'com.google.auto.service:auto-service:1.0-rc4'
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"\
+
+// 错误: 编码GBK的不可映射字符 ，指定编译编码
+tasks.withType(JavaCompile){
+    options.encoding="UTF-8"
+}

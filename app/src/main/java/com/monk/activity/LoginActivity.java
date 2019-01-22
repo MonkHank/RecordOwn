@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.monk.aidldemo.R;
+import com.monk.retrofit.RetrofitUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        RetrofitUtils instance = RetrofitUtils.getInstance();
+        instance.create();
+        instance.asyncFun();
     }
 
     private void populateAutoComplete() {

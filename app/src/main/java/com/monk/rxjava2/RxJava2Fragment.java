@@ -9,9 +9,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.monk.LogUtil;
 import com.monk.aidldemo.R;
+import com.monk.utils.LogUtil;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -24,6 +25,8 @@ import io.reactivex.functions.Consumer;
  * to handle interaction events.
  * Use the {@link RxJava2Fragment#newInstance} factory method to
  * create an instance of this fragment.
+ * @author peter
+ * @date 2019-1-21 14:52:16
  */
 public class RxJava2Fragment extends Fragment {
     private static final String tag = "RxJava2Fragment";
@@ -76,9 +79,11 @@ public class RxJava2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        LogUtil.i(tag,"onCreateView");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rx_java2, container, false);
+        LogUtil.i(tag,"onCreateView"+"\tbundle="+savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_rx_java2, container, false);
+        TextView tvRxJava2 = view.findViewById(R.id.tvRxJava2);
+        tvRxJava2.setText(getArguments().getString(ARG_PARAM1));
+        return view;
     }
 
     @Override
@@ -169,6 +174,9 @@ public class RxJava2Fragment extends Fragment {
         }
         if (subscribe3 != null) {
             subscribe3.dispose();
+        }
+        if (subscribe4 != null) {
+            subscribe4.dispose();
         }
     }
 

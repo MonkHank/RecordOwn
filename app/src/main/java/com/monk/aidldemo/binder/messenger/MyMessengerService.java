@@ -9,7 +9,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 
-import com.monk.LogUtil;
+import com.monk.utils.LogUtil;
 
 import java.lang.ref.WeakReference;
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 定义一个 本地 Binder，实现远程服务接口定制方法
+ * ① 写个远程接口继承自IInterface，写个本地binder类实现它
  * @author monk
  * @date 2019-01-15
  */
@@ -21,12 +22,17 @@ public class ManualBinder extends Binder implements IPersonInterface {
         this.mPersons = mPersons;
     }
 
+    /**
+     * ② 手写的binder定义个asInterface(IBinder)方法
+     * @param obj
+     * @return
+     */
     public static IPersonInterface asInterface(android.os.IBinder obj) {
         if ((obj == null)) {
             return null;
         }
         android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
-        if (((iin != null) && (iin instanceof com.monk.aidldemo.IAidlInterface))) {
+        if (((iin != null) && (iin instanceof IPersonInterface))) {
             return (IPersonInterface) iin;
         }
         return new Proxy(obj);
@@ -48,6 +54,7 @@ public class ManualBinder extends Binder implements IPersonInterface {
     }
 
     /**
+     * ③ 重写onTransact(Parcel,Parcel,int)方法
      * 是运行在另外一个进程中的方法，也就是Binder线程中执行的方法
      * @param code
      * @param data
@@ -90,6 +97,7 @@ public class ManualBinder extends Binder implements IPersonInterface {
     }
 
     /**
+     * ④ 定义跨进程 Binder 代理类
      * 如果是跨进程那么就调用 远程Binder 在本地的代理Binder
      */
     private static class Proxy implements IPersonInterface {

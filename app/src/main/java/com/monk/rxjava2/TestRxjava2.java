@@ -2,7 +2,9 @@ package com.monk.rxjava2;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
-import com.monk.LogUtil;
+import com.monk.global.Constant;
+import com.monk.utils.FileCacheUtils;
+import com.monk.utils.LogUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -112,7 +114,7 @@ public class TestRxjava2 {
             @Override
             public void subscribe(ObservableEmitter<Response> e) throws Exception {
                 Request request = new Request.Builder()
-                        .url("http://api.douban.com/v2/movie/top250?start=0&count=1")
+                        .url(Constant.GET_DOUBAN_URL)
                         .get().build();
                 Call call = new OkHttpClient().newCall(request);
                 Response response = call.execute();
@@ -126,7 +128,7 @@ public class TestRxjava2 {
                     if (body != null) {
                         String string = body.string();
                         LogUtil.i(tag, string, false);
-                        CacheUtils.setCache(tag, string);
+                        FileCacheUtils.setCache(tag, string);
                         return new Gson().fromJson(string, DouBanMovie.class);
                     }
                 }
@@ -147,7 +149,7 @@ public class TestRxjava2 {
             @Override
             public void subscribe(ObservableEmitter<DouBanMovie> e) throws Exception {
                 LogUtil.e(tag, "create 当前线程：" + Thread.currentThread().getName());
-                String cache = CacheUtils.getCache(tag);
+                String cache = FileCacheUtils.getCache(tag);
                 if (!"".equals(cache)) {
                     LogUtil.v(tag, "读缓存数据");
                     DouBanMovie douBanMovie = JSON.parseObject(cache, DouBanMovie.class);
@@ -167,7 +169,7 @@ public class TestRxjava2 {
             @Override
             public void subscribe(ObservableEmitter<Response> e) throws Exception {
                 Request request = new Request.Builder()
-                        .url("http://api.douban.com/v2/movie/top250?start=0&count=1")
+                        .url(Constant.GET_DOUBAN_URL)
                         .get().build();
                 Call call = new OkHttpClient().newCall(request);
                 Response response = call.execute();

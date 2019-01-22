@@ -18,7 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.monk.LogUtil;
+import com.monk.utils.LogUtil;
 import com.monk.aidldemo.R;
 import com.monk.aidldemo.bean.Person;
 import com.monk.aidldemo.binder.IPersonInterface;
@@ -107,6 +107,9 @@ public class AidlFullscreenActivity extends AppCompatActivity implements View.On
         }
     };
 
+    /**
+     * ⑥ 通过bind方法实现本地和服务端Binder关联，拿到远程服务接口
+     */
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {

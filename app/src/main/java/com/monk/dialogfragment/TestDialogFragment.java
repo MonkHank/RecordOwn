@@ -1,4 +1,4 @@
-package com.monk;
+package com.monk.dialogfragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.monk.utils.LogUtil;
 
 /**
  * @author monk

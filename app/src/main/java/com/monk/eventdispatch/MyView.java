@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.monk.LogUtil;
+import com.monk.utils.LogUtil;
 
 /**
  * @author monk

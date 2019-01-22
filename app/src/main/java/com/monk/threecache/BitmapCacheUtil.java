@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.widget.ImageView;
 
+import com.monk.utils.ThreadPoolManager;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

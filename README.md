@@ -21,9 +21,11 @@ builder模式
 委托模式，notification
 
 几种IPC方式实现
-手写binder，其实就是复制AIDL生成的远程服务接口实现；
+手写binder，其实就是复制AIDL生成的远程服务接口实现；6个步骤
 Messenger
 
 try catch机制
 
 分类，fragment使用
+
+DiskLruCache、Retrofit2.0、Annotation、AnnotationProcessor、jni、NDK编程

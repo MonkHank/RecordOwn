@@ -19,28 +19,32 @@ import com.monk.activity.LoginActivity;
 import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
 import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.jni.JniFragment;
 import com.monk.rxjava2.RxJava2Fragment;
+import com.monk.utils.LogUtil;
 
 /**
  * @author monk
  * @date 2018-12-13
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, RxJava2Fragment.OnFragmentInteractionListener {
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.flRxJava2, RxJava2Fragment.newInstance("", ""));
+                    ft.replace(R.id.flRxJava2, RxJava2Fragment.newInstance("RxJava2", ""));
                     ft.addToBackStack("");
                     ft.commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    FragmentManager fm2 = getSupportFragmentManager();
+                    FragmentTransaction ft2 = fm2.beginTransaction();
+                    ft2.replace(R.id.flRxJava2, new JniFragment());
+                    ft2.addToBackStack("com.monk.jni.JniFragment");
+                    ft2.commit();
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
@@ -75,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventDispatchButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        findViewById(R.id.navigation_home).performClick();
+
 
         new Thread(new Runnable() {
             @Override

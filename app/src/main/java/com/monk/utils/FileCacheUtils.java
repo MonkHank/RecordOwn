@@ -1,8 +1,7 @@
-package com.monk.rxjava2;
+package com.monk.utils;
 
 import com.alibaba.fastjson.util.IOUtils;
-import com.monk.MyApplication;
-import com.monk.LogUtil;
+import com.monk.global.MyApplication;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +14,7 @@ import java.io.IOException;
  * @author Kevin
  * @date 2017/8/15.
  */
-public class CacheUtils {
+public class FileCacheUtils {
     private static final String tag = "CacheUtils";
 
     private static long deadTime = System.currentTimeMillis() + 30 * 60 * 1000;

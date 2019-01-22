@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class Temporary {
     public static void main(String[] args) {
         String s = OneClass.get();
         System.out.println(s);
+
+        ClassLoader classLoader = OneClass.class.getClassLoader();
+        URL resource = classLoader.getResource("");
 
     }
 }
