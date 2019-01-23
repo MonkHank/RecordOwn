@@ -1,6 +1,7 @@
 package com.monk.global;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.monk.utils.LogUtil;
 
@@ -8,7 +9,7 @@ import com.monk.utils.LogUtil;
  * @author monk
  * @date 2019-01-03
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static final String tag = "MyApplication";
     public static Application mApplication;
     @Override
