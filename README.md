@@ -14,5 +14,4 @@
 12. 分类，fragment使用
 13. DiskLruCache、Retrofit2.0、Annotation、AnnotationProcessor、jni、NDK编程
 14. MultiDex
-15. 2019-1-24 17:54:55 <br/>
-    customView
+15. customView
