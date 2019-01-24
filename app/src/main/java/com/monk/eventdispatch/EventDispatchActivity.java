@@ -30,8 +30,8 @@ public class EventDispatchActivity extends AppCompatActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         LogUtil.i(tag,"dispatchTouchEvent");
-//        return super.dispatchTouchEvent(ev);
-        return false;
+        return super.dispatchTouchEvent(ev);
+//        return false;
     }
 
     @Override

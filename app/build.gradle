@@ -13,8 +13,8 @@ android {
         multiDexEnabled true
 
     }
-    externalNativeBuild{
-        cmake{
+    externalNativeBuild {
+        cmake {
             path "src/main/cpp/CMakeLists.txt"
         }
     }

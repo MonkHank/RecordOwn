@@ -127,6 +127,13 @@ public class LogUtil {
         }
     }
 
+    public static void w(String tag, String msg) {
+        String[] autoJumpLogInfos = getAutoJumpLogInfos();
+        if (isDebug) {
+            Log.w(tag, autoJumpLogInfos[2] + Symbol + msg);
+        }
+    }
+
     private static String[] getAutoJumpLogInfos() {
         // 下标0对应的是类，下标1对应的是所在方法，下标2对应的是所在的类名全路径的行数
         String[] infos = new String[]{"", "", ""};

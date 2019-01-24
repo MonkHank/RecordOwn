@@ -29,4 +29,8 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <declare-styleable name="PercentCircleView">
+        <attr name="paintId" format="integer"/>
+    </declare-styleable>
+
 </resources>

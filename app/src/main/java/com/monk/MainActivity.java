@@ -18,6 +18,7 @@ import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.LoginActivity;
 import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
+import com.monk.customview.CustomViewFragment;
 import com.monk.eventdispatch.EventDispatchActivity;
 import com.monk.jni.JniFragment;
 import com.monk.rxjava2.RxJava2Fragment;
@@ -47,7 +48,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ft2.commit();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    FragmentManager fm3 = getSupportFragmentManager();
+                    FragmentTransaction ft3 = fm3.beginTransaction();
+                    ft3.replace(R.id.flRxJava2, CustomViewFragment.newInstance("", ""));
+                    ft3.addToBackStack("com.monk.customview.CustomViewFragment");
+                    ft3.commit();
                     return true;
                 default:
                     break;
@@ -79,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventDispatchButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        findViewById(R.id.navigation_home).performClick();
+        findViewById(R.id.navigation_notifications).performClick();
 
 
         new Thread(new Runnable() {

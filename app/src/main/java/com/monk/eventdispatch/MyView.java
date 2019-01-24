@@ -1,6 +1,7 @@
 package com.monk.eventdispatch;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,5 +28,17 @@ public class MyView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         LogUtil.v(tag,"onTouchEvent");
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        LogUtil.i(tag,"canvas = "+canvas);
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        LogUtil.i(tag,"canvas = "+canvas);
     }
 }
