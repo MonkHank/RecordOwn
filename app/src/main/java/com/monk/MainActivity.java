@@ -1,6 +1,7 @@
 package com.monk;
 
 import android.content.Intent;
+import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
@@ -18,7 +19,8 @@ import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.LoginActivity;
 import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
-import com.monk.customview.CustomViewFragment;
+import com.monk.customview.fragment.CustomViewFragment;
+import com.monk.customview.fragment.CustomViewFragment2;
 import com.monk.eventdispatch.EventDispatchActivity;
 import com.monk.jni.JniFragment;
 import com.monk.rxjava2.RxJava2Fragment;
@@ -28,7 +30,9 @@ import com.monk.utils.LogUtil;
  * @author monk
  * @date 2018-12-13
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, RxJava2Fragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        RxJava2Fragment.OnFragmentInteractionListener,
+        CustomViewFragment.OnFragmentInteractionListener{
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     FragmentManager fm3 = getSupportFragmentManager();
                     FragmentTransaction ft3 = fm3.beginTransaction();
                     ft3.replace(R.id.flRxJava2, CustomViewFragment.newInstance("", ""));
-                    ft3.addToBackStack("com.monk.customview.CustomViewFragment");
+                    ft3.addToBackStack("com.monk.customview.fragment.CustomViewFragment");
                     ft3.commit();
                     return true;
                 default:
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mTextMessage;
 
     private AppCompatButton button,eventDispatchButton,scrollActivityButton,loginButton;
+    private UriMatcher uriMatcher;
 
 
     @Override
@@ -97,6 +102,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LogUtil.i(tag,"之心");
             }
         }).start();
+        initUri();
+    }
+
+    private final int customViewFragment=0;
+
+    private void initUri() {
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(getPackageName(),CustomViewFragment.class.getName(),customViewFragment);
     }
 
     @Override
@@ -121,6 +134,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
+        LogUtil.v(tag,uri.toString());
+        int match = uriMatcher.match(uri);
+        switch(match){
+            case customViewFragment:
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.flRxJava2, CustomViewFragment2.newInstance());
+                ft.addToBackStack(CustomViewFragment2.class.getSimpleName());
+                ft.commit();
+                break;
+             default:
+                break;
+        }
     }
 }

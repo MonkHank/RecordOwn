@@ -30,6 +30,7 @@ public class PercentCircleView extends View {
 
     private float backgroundRadius;
     private float circleX, circleY;
+    private final StaticLayout staticLayout;
 
 
     public PercentCircleView(Context context, AttributeSet attrs) {
@@ -84,6 +85,10 @@ public class PercentCircleView extends View {
         circlePaint3.setStrokeWidth(50 * density);
         circlePaint3.setStyle(Paint.Style.FILL);
 
+        // 文字的位置跟width有关系
+        String text="one \n No2";
+        staticLayout = new StaticLayout(text,textPaint, (int) (100*density), Layout.Alignment.ALIGN_NORMAL, 1.2f, 1, false);
+
     }
 
     @Override
@@ -131,6 +136,10 @@ public class PercentCircleView extends View {
         LogUtil.i(tag, "onLayout：" + changed + "\t" + left + "\t" + top + "\t" + right + "\t" + bottom);
     }
 
+    /**
+     * 覆盖而画，和FrameLayout机制类似
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         LogUtil.w(tag, "canvas：" + canvas);
@@ -147,12 +156,9 @@ public class PercentCircleView extends View {
         canvas.drawRect(rectF2, backgroundPaint);
         canvas.drawOval(rectF2, redPaint);
 
-        // 文字的位置跟width有关系
-        String text="one \n No2";
-        StaticLayout layout = new StaticLayout(text,textPaint, (int) (100*density), Layout.Alignment.ALIGN_NORMAL, 1.2f, 1, false);
         canvas.save();
         canvas.translate(circleX,circleY-10*density);
-        layout.draw(canvas);
+        staticLayout.draw(canvas);
         canvas.restore();
     }
 

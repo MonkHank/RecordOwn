@@ -15,3 +15,17 @@
 13. DiskLruCache、Retrofit2.0、Annotation、AnnotationProcessor、jni、NDK编程
 14. MultiDex
 15. customView
+16. Display、DisplayMetrics，得到屏幕参数信息(像素、density)
+17. Uri说明<br/>
+```
+<scheme>://<authority><absolute path>?<query>#<fragment>
+四部分：sheme、authority、path、query
+其中authority又包括：host、port
+例如：scheme://host:8080/path1/path?query1=123&query2=test
+Android中的 scheme默认是 content://
+content://com.example.project:200/folder/subfolder/etc
+\-------/\-------------------/\-/\-------------------/
+ scheme          host        port        path
+         \----------------------/
+               authority   
+``` 
