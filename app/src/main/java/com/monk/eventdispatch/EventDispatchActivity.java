@@ -5,8 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
-import com.monk.utils.LogUtil;
 import com.monk.aidldemo.R;
+import com.monk.commonutils.LogUtil;
 
 /**
  * @author monk

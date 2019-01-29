@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
 
 /**
  * @author monk

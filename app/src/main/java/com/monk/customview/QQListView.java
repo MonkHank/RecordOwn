@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.monk.aidldemo.R;
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
 
 /**
  * @author MonkeyHank

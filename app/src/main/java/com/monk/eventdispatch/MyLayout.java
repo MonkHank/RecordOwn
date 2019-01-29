@@ -7,7 +7,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
 
 /**
  * @author monk

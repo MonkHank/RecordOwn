@@ -2,9 +2,9 @@ package com.monk.rxjava2;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
+import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 import com.monk.utils.FileCacheUtils;
-import com.monk.utils.LogUtil;
 
 import java.util.concurrent.TimeUnit;
 

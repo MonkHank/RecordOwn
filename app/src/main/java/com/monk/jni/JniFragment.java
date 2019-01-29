@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.monk.aidldemo.R;
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
 
 /**
  * A simple {@link Fragment} subclass.

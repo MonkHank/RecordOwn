@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.widget.ImageView;
 
-import com.monk.utils.ThreadPoolManager;
+import com.monk.commonutils.ThreadPoolManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

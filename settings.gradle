@@ -1,1 +1,1 @@
-include ':app', ':annotationprocessor'
+include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils'

@@ -7,7 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.widget.ScrollView;
 
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
 
 /**
  * @author monk

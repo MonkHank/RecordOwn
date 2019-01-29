@@ -4,9 +4,9 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.monk.utils.LogUtil;
 import com.monk.aidldemo.bean.Person;
 import com.monk.aidldemo.binder.ManualBinder;
+import com.monk.commonutils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

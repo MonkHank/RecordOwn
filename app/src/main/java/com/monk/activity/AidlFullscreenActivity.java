@@ -18,13 +18,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.monk.utils.LogUtil;
 import com.monk.aidldemo.R;
 import com.monk.aidldemo.bean.Person;
 import com.monk.aidldemo.binder.IPersonInterface;
 import com.monk.aidldemo.binder.ManualBinder;
 import com.monk.aidldemo.binder.messenger.MyMessengerService;
 import com.monk.aidldemo.service.MyAidlService;
+import com.monk.commonutils.LogUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

@@ -3,7 +3,7 @@ package com.monk.global;
 import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
 
 /**
  * @author monk

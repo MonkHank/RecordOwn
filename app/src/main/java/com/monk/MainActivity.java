@@ -19,20 +19,20 @@ import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.LoginActivity;
 import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
+import com.monk.commonutils.LogUtil;
 import com.monk.customview.fragment.CustomViewFragment;
 import com.monk.customview.fragment.CustomViewFragment2;
 import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.global.OnFragmentInteractionListener;
 import com.monk.jni.JniFragment;
 import com.monk.rxjava2.RxJava2Fragment;
-import com.monk.utils.LogUtil;
 
 /**
  * @author monk
  * @date 2018-12-13
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        RxJava2Fragment.OnFragmentInteractionListener,
-        CustomViewFragment.OnFragmentInteractionListener{
+        OnFragmentInteractionListener{
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -106,10 +106,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private final int customViewFragment=0;
+    private final int customViewFragment2=1;
 
     private void initUri() {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(getPackageName(),CustomViewFragment.class.getName(),customViewFragment);
+        uriMatcher.addURI(getPackageName(),CustomViewFragment2.class.getName(),customViewFragment2);
     }
 
     @Override
@@ -136,10 +138,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onFragmentInteraction(Uri uri) {
         LogUtil.v(tag,uri.toString());
         int match = uriMatcher.match(uri);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         switch(match){
             case customViewFragment:
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.flRxJava2, CustomViewFragment2.newInstance());
+                ft.addToBackStack(CustomViewFragment2.class.getSimpleName());
+                ft.commit();
+                break;
+            case customViewFragment2:
+                ft.replace(R.id.flRxJava2,DragViewFragment.newInstance());
                 ft.addToBackStack(CustomViewFragment2.class.getSimpleName());
                 ft.commit();
                 break;

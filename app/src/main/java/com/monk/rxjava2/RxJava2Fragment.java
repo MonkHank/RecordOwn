@@ -1,34 +1,28 @@
 package com.monk.rxjava2;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.monk.aidldemo.R;
-import com.monk.utils.LogUtil;
+import com.monk.commonutils.LogUtil;
+import com.monk.global.BaseFragment;
+import com.monk.global.OnFragmentInteractionListener;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RxJava2Fragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RxJava2Fragment#newInstance} factory method to
- * create an instance of this fragment.
  * @author peter
  * @date 2019-1-21 14:52:16
  */
-public class RxJava2Fragment extends Fragment {
+public class RxJava2Fragment extends BaseFragment {
     private static final String tag = "RxJava2Fragment";
 
     private static final String ARG_PARAM1 = "param1";
@@ -41,9 +35,6 @@ public class RxJava2Fragment extends Fragment {
 
     private Disposable subscribe,subscribe1,subscribe2,subscribe3, subscribe4;
 
-    public RxJava2Fragment() {
-        // Required empty public constructor
-    }
 
     public static RxJava2Fragment newInstance(String param1, String param2) {
         RxJava2Fragment fragment = new RxJava2Fragment();
@@ -52,18 +43,6 @@ public class RxJava2Fragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        LogUtil.i(tag,"onAttach");
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -77,8 +56,7 @@ public class RxJava2Fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtil.i(tag,"onCreateView"+"\tbundle="+savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_rx_java2, container, false);
         TextView tvRxJava2 = view.findViewById(R.id.tvRxJava2);
@@ -162,7 +140,6 @@ public class RxJava2Fragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
         if (subscribe != null) {
             subscribe.dispose();
         }
@@ -178,9 +155,5 @@ public class RxJava2Fragment extends Fragment {
         if (subscribe4 != null) {
             subscribe4.dispose();
         }
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 }

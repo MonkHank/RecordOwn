@@ -1,8 +1,8 @@
 package com.monk.retrofit;
 
+import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 import com.monk.rxjava2.DouBanMovie;
-import com.monk.utils.LogUtil;
 
 import java.io.IOException;
 

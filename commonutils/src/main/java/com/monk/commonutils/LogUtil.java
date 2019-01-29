@@ -1,4 +1,4 @@
-package com.monk.utils;
+package com.monk.commonutils;
 
 import android.util.Log;
 
