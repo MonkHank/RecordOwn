@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.monk.aidldemo.R;
+import com.monk.base.BaseFragment;
 import com.monk.commonutils.LogUtil;
-import com.monk.global.BaseFragment;
-import com.monk.global.OnFragmentInteractionListener;
+import com.monk.global.Constant;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -22,7 +22,7 @@ import io.reactivex.functions.Consumer;
  * @author peter
  * @date 2019-1-21 14:52:16
  */
-public class RxJava2Fragment extends BaseFragment {
+public class RxJava2Fragment extends BaseFragment implements View.OnClickListener{
     private static final String tag = "RxJava2Fragment";
 
     private static final String ARG_PARAM1 = "param1";
@@ -30,8 +30,6 @@ public class RxJava2Fragment extends BaseFragment {
 
     private String mParam1;
     private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
 
     private Disposable subscribe,subscribe1,subscribe2,subscribe3, subscribe4;
 
@@ -68,6 +66,7 @@ public class RxJava2Fragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LogUtil.i(tag,"onViewCreated");
+        view.findViewById(R.id.locationButton).setOnClickListener(this);
     }
 
     @Override
@@ -130,12 +129,6 @@ public class RxJava2Fragment extends BaseFragment {
 
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
 
     @Override
     public void onDetach() {
@@ -155,5 +148,12 @@ public class RxJava2Fragment extends BaseFragment {
         if (subscribe4 != null) {
             subscribe4.dispose();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        String uriPath= Constant.URI_SCKEME+mActivity.getPackageName()+"/"+ RxJava2Fragment.class.getName();
+        LogUtil.e(tag,uriPath);
+        mListener.onFragmentInteraction( Uri.parse(uriPath));
     }
 }

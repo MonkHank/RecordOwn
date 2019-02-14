@@ -6,15 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.monk.aidldemo.R;
-import com.monk.global.BaseFragment;
+import com.monk.base.BaseFragment;
 
 /**
  * @author monk
  * @date 2019-1-24 10:37:01
  */
-public class DragViewFragment extends BaseFragment {
+public class DragViewFragment extends BaseFragment{
     private final String tag = "DragViewFragment";
-
 
 
     public static DragViewFragment newInstance() {
@@ -24,10 +23,10 @@ public class DragViewFragment extends BaseFragment {
         return fragment;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_drag_view, container, false);
         return view;
     }
+
 }

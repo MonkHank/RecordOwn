@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.monk.aidldemo.R;
 import com.monk.commonutils.LogUtil;
 import com.monk.customview.PercentCircleView;
-import com.monk.global.BaseFragment;
+import com.monk.base.BaseFragment;
 import com.monk.global.Constant;
 
 /**
@@ -67,12 +67,6 @@ public class CustomViewFragment extends BaseFragment implements View.OnClickList
             String uriPath= Constant.URI_SCKEME+mActivity.getPackageName()+"/"+CustomViewFragment.class.getName();
             LogUtil.e(tag,uriPath);
             mListener.onFragmentInteraction( Uri.parse(uriPath));
-        }
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
         }
     }
 }

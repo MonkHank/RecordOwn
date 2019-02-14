@@ -19,12 +19,13 @@ import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.LoginActivity;
 import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
+import com.monk.base.OnFragmentInteractionListener;
 import com.monk.commonutils.LogUtil;
 import com.monk.customview.fragment.CustomViewFragment;
 import com.monk.customview.fragment.CustomViewFragment2;
 import com.monk.eventdispatch.EventDispatchActivity;
-import com.monk.global.OnFragmentInteractionListener;
 import com.monk.jni.JniFragment;
+import com.monk.location.LocationFragment;
 import com.monk.rxjava2.RxJava2Fragment;
 
 /**
@@ -40,21 +41,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case R.id.navigation_home:
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.flRxJava2, RxJava2Fragment.newInstance("RxJava2", ""));
+                    ft.replace(R.id.fragmentContainer, RxJava2Fragment.newInstance("RxJava2", ""));
                     ft.addToBackStack("");
                     ft.commit();
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_jni:
                     FragmentManager fm2 = getSupportFragmentManager();
                     FragmentTransaction ft2 = fm2.beginTransaction();
-                    ft2.replace(R.id.flRxJava2, new JniFragment());
+                    ft2.replace(R.id.fragmentContainer, new JniFragment());
                     ft2.addToBackStack("com.monk.jni.JniFragment");
                     ft2.commit();
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_custom_view:
                     FragmentManager fm3 = getSupportFragmentManager();
                     FragmentTransaction ft3 = fm3.beginTransaction();
-                    ft3.replace(R.id.flRxJava2, CustomViewFragment.newInstance("", ""));
+                    ft3.replace(R.id.fragmentContainer, CustomViewFragment.newInstance("", ""));
                     ft3.addToBackStack("com.monk.customview.fragment.CustomViewFragment");
                     ft3.commit();
                     return true;
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventDispatchButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        findViewById(R.id.navigation_notifications).performClick();
+        findViewById(R.id.navigation_custom_view).performClick();
 
 
         new Thread(new Runnable() {
@@ -103,15 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }).start();
         initUri();
-    }
-
-    private final int customViewFragment=0;
-    private final int customViewFragment2=1;
-
-    private void initUri() {
-        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI(getPackageName(),CustomViewFragment.class.getName(),customViewFragment);
-        uriMatcher.addURI(getPackageName(),CustomViewFragment2.class.getName(),customViewFragment2);
     }
 
     @Override
@@ -134,20 +126,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private final int customViewFragment=0;
+    private final int customViewFragment2=1;
+    private final int locationFragment=3;
+
+    private void initUri() {
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(getPackageName(),CustomViewFragment.class.getName(),customViewFragment);
+        uriMatcher.addURI(getPackageName(),CustomViewFragment2.class.getName(),customViewFragment2);
+        uriMatcher.addURI(getPackageName(), RxJava2Fragment.class.getName(),locationFragment);
+    }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
-        LogUtil.v(tag,uri.toString());
         int match = uriMatcher.match(uri);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        LogUtil.v(tag,uri.toString()+"- - - "+match);
         switch(match){
             case customViewFragment:
-                ft.replace(R.id.flRxJava2, CustomViewFragment2.newInstance());
-                ft.addToBackStack(CustomViewFragment2.class.getSimpleName());
+                ft.replace(R.id.fragmentContainer, CustomViewFragment2.newInstance());
+                ft.addToBackStack(CustomViewFragment.class.getSimpleName());
                 ft.commit();
                 break;
             case customViewFragment2:
-                ft.replace(R.id.flRxJava2,DragViewFragment.newInstance());
+                ft.replace(R.id.fragmentContainer,DragViewFragment.newInstance());
                 ft.addToBackStack(CustomViewFragment2.class.getSimpleName());
+                ft.commit();
+                break;
+            case locationFragment:
+                ft.replace(R.id.fragmentContainer,LocationFragment.newInstance());
+                ft.addToBackStack(RxJava2Fragment.class.getSimpleName());
                 ft.commit();
                 break;
              default:

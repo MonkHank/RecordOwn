@@ -1,8 +1,8 @@
 # some record daily
-1. HttpUrlConnection  
-2. SelectSort、BubbleSort  
-3. LruCache  
-4. RxJava2操作符  
+1. **HttpUrlConnection**  
+2. **SelectSort、BubbleSort**
+3. **LruCache**  
+4. **RxJava2操作符**  
 5. LayoutInflater,onResume之后获取getTop有效  
 6. 事件分发处理机制  
 7. 原型模式 、builder模式  
@@ -31,3 +31,4 @@ content://com.example.project:200/folder/subfolder/etc
          \----------------------/
                authority   
 ``` 
+18.[定位方式](https://github.com/MonkHank/RecordOwn/blob/master/readme18.md)

@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import com.monk.aidldemo.R;
 import com.monk.commonutils.LogUtil;
 import com.monk.customview.QQListView;
-import com.monk.global.BaseFragment;
+import com.monk.base.BaseFragment;
 import com.monk.global.Constant;
 
 /**

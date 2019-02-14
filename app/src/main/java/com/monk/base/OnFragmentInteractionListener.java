@@ -1,4 +1,4 @@
-package com.monk.global;
+package com.monk.base;
 
 import android.net.Uri;
 
