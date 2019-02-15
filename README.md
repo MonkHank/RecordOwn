@@ -31,4 +31,7 @@ content://com.example.project:200/folder/subfolder/etc
          \----------------------/
                authority   
 ``` 
-18.[定位方式](https://github.com/MonkHank/RecordOwn/blob/master/readme18.md)
+18. [定位方式](https://github.com/MonkHank/RecordOwn/blob/master/readme18.md)
+19. [蓝牙开发总结](https://github.com/MonkHank/RecordOwn/blob/master/readme19.md)
+20. [网络七层模型](https://github.com/MonkHank/RecordOwn/blob/master/readme20.md)
+21. [Android WebService连接](https://github.com/MonkHank/RecordOwn/blob/master/readme21.md)
