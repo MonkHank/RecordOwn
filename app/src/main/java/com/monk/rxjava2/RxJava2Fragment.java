@@ -14,7 +14,6 @@ import com.monk.base.BaseFragment;
 import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
@@ -73,7 +72,8 @@ public class RxJava2Fragment extends BaseFragment implements View.OnClickListene
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         LogUtil.i(tag,"onActivityCreated");
-        TestRxjava2.getInstance().create();
+//        TestRxjava2.getInstance().create();
+
         subscribe = TestRxjava2.getInstance().mapOperate().subscribe(new Consumer<DouBanMovie>() {
             @Override
             public void accept(DouBanMovie douBanMovie) throws Exception {
@@ -85,47 +85,47 @@ public class RxJava2Fragment extends BaseFragment implements View.OnClickListene
                 LogUtil.e(tag, "失败：" + throwable.getMessage());
             }
         });
-        subscribe1 = TestRxjava2.getInstance().concatOperation().subscribe(new Consumer<DouBanMovie>() {
-            @Override
-            public void accept(DouBanMovie douBanMovie) throws Exception {
-                LogUtil.i(tag,"成功:"+douBanMovie.toString());
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                LogUtil.e(tag,"失败："+throwable.getMessage());
-            }
-        });
+//        subscribe1 = TestRxjava2.getInstance().concatOperation().subscribe(new Consumer<DouBanMovie>() {
+//            @Override
+//            public void accept(DouBanMovie douBanMovie) throws Exception {
+//                LogUtil.i(tag,"成功:"+douBanMovie.toString());
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                LogUtil.e(tag,"失败："+throwable.getMessage());
+//            }
+//        });
 
-        subscribe2 = TestRxjava2.getInstance().flatMapOperation().observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<DouBanMovie>() {
-            @Override
-            public void accept(DouBanMovie douBanMovie) throws Exception {
-                LogUtil.i(tag,"成功:"+douBanMovie.toString());
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                LogUtil.e(tag,"失败："+throwable.getMessage());
-            }
-        });
+//        subscribe2 = TestRxjava2.getInstance().flatMapOperation().observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<DouBanMovie>() {
+//            @Override
+//            public void accept(DouBanMovie douBanMovie) throws Exception {
+//                LogUtil.i(tag,"成功:"+douBanMovie.toString());
+//            }
+//        }, new Consumer<Throwable>() {
+//            @Override
+//            public void accept(Throwable throwable) throws Exception {
+//                LogUtil.e(tag,"失败："+throwable.getMessage());
+//            }
+//        });
 
-        subscribe3 = TestRxjava2.getInstance().zipOperation().subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Boolean>() {
-            @Override
-            public void accept(Boolean aBoolean) throws Exception {
-                LogUtil.v(tag,"aBoolean："+aBoolean);
-            }
-        });
+//        subscribe3 = TestRxjava2.getInstance().zipOperation().subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Boolean>() {
+//            @Override
+//            public void accept(Boolean aBoolean) throws Exception {
+//                LogUtil.v(tag,"aBoolean："+aBoolean);
+//            }
+//        });
 
-        subscribe4 = TestRxjava2.getInstance().intervalOperation().observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(Long aLong) throws Exception {
-                if (aLong == 3) {
-                    subscribe4.dispose();
-                }
-                LogUtil.v(tag,"aLong = "+aLong);
-
-            }
-        });
+//        subscribe4 = TestRxjava2.getInstance().intervalOperation().observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<Long>() {
+//            @Override
+//            public void accept(Long aLong) throws Exception {
+//                if (aLong == 3) {
+//                    subscribe4.dispose();
+//                }
+//                LogUtil.v(tag,"aLong = "+aLong);
+//
+//            }
+//        });
 
     }
 

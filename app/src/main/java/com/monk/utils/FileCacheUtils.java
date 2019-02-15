@@ -16,7 +16,7 @@ import java.io.IOException;
  * @date 2017/8/15.
  */
 public class FileCacheUtils {
-    private static final String tag = "CacheUtils";
+    private static final String tag = "FileCacheUtils";
 
     private static long deadTime = System.currentTimeMillis() + 30 * 60 * 1000;
 

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventDispatchButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        findViewById(R.id.navigation_custom_view).performClick();
+//        findViewById(R.id.navigation_custom_view).performClick();
 
 
         new Thread(new Runnable() {

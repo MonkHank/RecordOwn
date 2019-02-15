@@ -113,12 +113,14 @@ public class TestRxjava2 {
         return Observable.create(new ObservableOnSubscribe<Response>() {
             @Override
             public void subscribe(ObservableEmitter<Response> e) throws Exception {
+                LogUtil.i(tag, "验证 execute 阻塞");
                 Request request = new Request.Builder()
                         .url(Constant.GET_DOUBAN_URL)
                         .get().build();
                 Call call = new OkHttpClient().newCall(request);
                 Response response = call.execute();
                 e.onNext(response);
+                LogUtil.i(tag, response.toString());
             }
         }).map(new Function<Response, DouBanMovie>() {
             @Override
@@ -128,19 +130,21 @@ public class TestRxjava2 {
                     if (body != null) {
                         String string = body.string();
                         LogUtil.i(tag, string, false);
+                        LogUtil.i(tag,"body");
                         FileCacheUtils.setCache(tag, string);
                         return new Gson().fromJson(string, DouBanMovie.class);
                     }
                 }
                 return null;
             }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(new Consumer<DouBanMovie>() {
+        }).doOnNext(new Consumer<DouBanMovie>() {
                     @Override
                     public void accept(DouBanMovie douBanMovie) throws Exception {
                         LogUtil.e(tag, "doNext：保存成功：" + douBanMovie.toString() + "\n");
                     }
+                    // 指定subscribe()时发生的线程
                 }).subscribeOn(Schedulers.io())
+                // 指定下游Observer回调发生的线程
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
