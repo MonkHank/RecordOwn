@@ -12,6 +12,7 @@ import retrofit2.http.Query;
  */
 public interface NewService {
     /**
+     * http://api.douban.com/v2/movie/top250?start=0&count=1
      * java.lang.IllegalArgumentException: URL query string "start={start}&count={count}"
      * must not have replace block. For dynamic query parameters use @Query.
      * @param start

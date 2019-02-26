@@ -143,7 +143,9 @@ public class TestRxjava2 {
                         LogUtil.e(tag, "doNext：保存成功：" + douBanMovie.toString() + "\n");
                     }
                     // 指定subscribe()时发生的线程
-                }).subscribeOn(Schedulers.io())
+                })
+                // 指定被观察者 生产事件的线程
+                .subscribeOn(Schedulers.io())
                 // 指定下游Observer回调发生的线程
                 .observeOn(AndroidSchedulers.mainThread());
     }

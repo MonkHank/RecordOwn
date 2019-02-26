@@ -1,24 +1,23 @@
 package com.monk.jni;
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.monk.aidldemo.R;
+import com.monk.base.BaseFragment;
 import com.monk.commonutils.LogUtil;
+import com.monk.retrofit.mvp.view.RetrofitActivity;
 
 /**
- * A simple {@link Fragment} subclass.
- * javah -encoding UTF-8  -classpath F:\study\AIDLDemo\app\src\main\java -jni com.monk.jni.JniFragment
- *
  * @author monk
  * @date 2019-1-22 15:15:33
  */
-public class JniFragment extends Fragment {
+public class JniFragment extends BaseFragment implements View.OnClickListener{
     private final String tag="JniFragment";
 
     static {
@@ -36,7 +35,12 @@ public class JniFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_jni, container, false);
         TextView tvJni = view.findViewById(R.id.tvJni);
         tvJni.setText(sayHello("咦嘿"));
+        view.findViewById(R.id.btNext).setOnClickListener(this);
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(mActivity,RetrofitActivity.class));
+    }
 }

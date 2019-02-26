@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.monk.aidldemo">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -9,16 +10,18 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:name="com.monk.global.MyApplication"
         android:allowBackup="true"
+        android:appComponentFactory="任意字符"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
         <activity
             android:name="com.monk.activity.AidlFullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -60,6 +63,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="com.monk.eventdispatch.EventDispatchActivity"/>
         <activity android:name="com.monk.activity.LoginActivity"/>
+        <activity
+            android:name="com.monk.retrofit.mvp.view.RetrofitActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
