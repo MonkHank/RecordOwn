@@ -7,7 +7,7 @@
 1. 四部分：scheme、authority、path、query
 2. 其中authority又包括：host、port
 3. 例如：scheme://host:8080/path1/path?query1=123&query2=test
-4. Android中的 scheme默认是 content://
+4. Android中的 scheme 默认是 content://
 
     content://com.example.project:200/folder/subfolder/etc
     \-------/\-------------------/\-/\-------------------/
