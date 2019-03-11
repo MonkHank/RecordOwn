@@ -1,7 +1,7 @@
 
 ##### Uri：
- - [x]统一资源标识符（Uniform Resource Identifier）
- - [x]用于标识某一互联网资源名称的字符串
+ - [x] 统一资源标识符（Uniform Resource Identifier）
+ - [x] 用于标识某一互联网资源名称的字符串
 ```
 <scheme>://<authority><absolute path>?<query>#<fragment>
 四部分：scheme、authority、path、query
