@@ -1,11 +1,17 @@
 apply plugin: 'com.android.application'
 
+// 把buidl.gradle看成个类来设计
+def mCompileVersion = 25
+def libAndroidDesign = 'com.android.support:design:28.0.0'
+
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion mCompileVersion
+    buildToolsVersion buildToolsVersion
     defaultConfig {
         applicationId "com.monk.aidldemo"
-        minSdkVersion rootProject.minSdkVersion
+        // 第一种方式，继承扩展属性
+        minSdkVersion minSdkVersion
+        // 第二种方式，引用rootProject扩展属性
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -33,6 +39,25 @@ android {
     }
 }
 
+/**========================== 文件属性操作API ================================*/
+// 文件拷贝
+/*
+copy {
+    from file('build/outputs/apk') into getRootProject().getBuildDir().path+'/apks/'
+}*/
+
+// 对文件数进行遍历
+fileTree('build/outputs/apk') { FileTree fileTree ->
+    fileTree.visit { FileTreeElement element ->
+        println "the file name is ${element.file.name}"
+        copy {
+            from element.file into getRootProject().getBuildDir().path + '/test/'
+        }
+    }
+}
+
+/**========================= 依赖相关api =============================================*/
+// 为应用程序添加的第三方库依赖，区分root下的build.gradle
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
@@ -40,25 +65,155 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation "com.android.support:appcompat-v7:$rootProject.v7Version"
-    implementation "com.android.support:design:$rootProject.v7Version"
+    implementation libAndroidDesign
     implementation "com.android.support:support-v4:$rootProject.v7Version"
     implementation "com.android.support:recyclerview-v7:$rootProject.v7Version"
     implementation 'com.android.support:multidex:1.0.3@aar'
     implementation 'com.alibaba:fastjson:1.2.54'
-
     implementation 'com.jakewharton:butterknife:9.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
-
     implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
-
-
+    implementation('com.squareup.okhttp3:logging-interceptor:3.8.1') {
+        // 排除依赖，key排除的类型，value排除的名字
+//        exclude module:'support-v4'
+//        exclude group:'com.android.support'
+        // 传递依赖，不调用库中的依赖，gradle默认也是false
+//        transitive false
+    }
     annotationProcessor project(':annotationprocessor')
     implementation project(':dragviewlibrary')
     implementation project(':commonutils')
+}
+
+/**======================= 执行外部命令==============================================*/
+/*
+task(name:'apkcopy'){
+    doLast{
+        // gradle的执行的阶段执行
+        def sourcePaht=this.buildDir.path+"/outputs/apk"
+        def destinationPath='Users/xxx/Downloads/'
+        def commond="mv -f ${sourcePaht} ${destinationPath}"
+        exec {
+            try {
+                executable 'bash'
+                agrs '-c', commond
+                println 'the command is execute success'
+            } catch (GradleException e) {
+                println 'the command is execute fail'
+            }
+        }
+    }
+}*/
+/**=========================== Task ==========================================*/
+println '---------- Task------------------'
+// 直接通过task函数去创建，推荐这种方式
+task helloTask(group: 'imooc', description: 'task study') {
+    println 'i am helloTask.'
+    // 第一种方式指定执行阶段
+    doFirst {
+        println "the task group is ${group}"
+    }
+    doFirst {}
+}
+// 第二种方式指定执行阶段
+helloTask.doFirst {
+    println "the task description is ${description}"
+}
+// TaskContainer去创建Task
+this.tasks.create(name: 'helloTask2') {
+    println 'i am task2'
+    setGroup('imooc')
+    setDescription('task study')
+}
+
+// 计算build执行时长
+def startBuildTime, endBuildTime
+this.afterEvaluate { Project project ->
+    // 保证要找的task已经配置完毕，preBuild是第一个执行的task
+    def preBuildTask = project.tasks.getByName('preBuild')
+    preBuildTask.doFirst {
+        startBuildTime = System.currentTimeMillis()
+        println "the start time is ${startBuildTime}"
+    }
+    def buildTask = project.tasks.getByName('build')
+    buildTask.doLast {
+        endBuildTime = System.currentTimeMillis()
+        // 执行阶段的耗时,占了一大半，开发调试的task可以关闭掉，这个小技巧可以省点构建时间
+        println "the build time is ${endBuildTime - startBuildTime}"
+    }
+}
+
+/* ----------------- task依赖讲解 -----------------------*/
+println '------------task 依赖讲解----------------------'
+task taskX {
+    doLast {
+        println 'taskX'
+    }
+}
+task taskY {
+    doLast {
+        println 'taskY'
+    }
+}
+
+task taskZ(dependsOn: [taskX, taskY]) {
+    // 第二种方式依赖，先去掉上面的taskX,taskY依赖
+    /* dependsOn this.tasks.findAll { task ->
+         return task.name.startsWith('lib')
+     }*/
+    doLast {
+        println 'taskZ'
+    }
+}
+// 建议使用上一种方式
+taskZ.dependsOn(taskX, taskY)
+
+// 动态依赖 << 等效于 doLast，但还是建议使用doLast
+task lib1 << {
+    println 'lib1'
+}
+task lib2 << {
+    println 'lib2'
+}
+task noLib << {
+    println 'noLib'
+}
+
+// 实际应用中参考commonlibrary release.xml文件，输出版本信息
+task handleReleaseFile {
+    def srcFile = file('release.xml')
+    def desFile = new File(this.buildDir, 'generated/release/')
+    doLast {
+        println '开始解析对应的xml文件...'
+        desFile.mkdir()
+        def releases = new XmlParser().parse(srcFile)
+        releases.release.each { releaseNode ->
+            // 解析每个release结点的内容
+            def name = releaseNode.name.text()
+            def versionCode = releaseNode.versionCode.text()
+            def versionInfo = releaseNode.versionInfo.text()
+            // 创建文件并写入结点数据
+            def destFile = new File(destDir, "release-${name}.text")
+            // 闭包的形式不需要处理流的关闭，已经做过了
+            destFile.withWriter { writer ->
+                writer.write("${name}->${versionCode}->${versionInfo}")
+            }
+        }
+    }
+}
+
+// 测试上面task
+task handleReleaseFileTest(dependsOn: handleReleaseFile) {
+    def dir = fileTree(this.buildDir.path + 'generated/release/')
+    doLast {
+        dir.each {
+            println "the file name is: ${it}"
+        }
+        println '输出完成...'
+    }
 }

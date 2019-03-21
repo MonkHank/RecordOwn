@@ -1,6 +1,7 @@
 package com.monk.aidldemo;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -22,5 +23,11 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.monk.aidldemo", appContext.getPackageName());
+    }
+
+    @Test
+    public void testUriApi() {
+        Uri uri1 = Uri.parse("http://www.baidu.com").buildUpon().path("favicom.ico").build();
+        System.out.println("url.toString()= "+uri1.toString());
     }
 }

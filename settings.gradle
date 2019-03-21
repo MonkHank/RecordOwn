@@ -1,1 +1,2 @@
 include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils'
+println '-settings 开始执行gradle'

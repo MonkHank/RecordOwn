@@ -120,6 +120,12 @@ public class AidlFullscreenActivity extends AppCompatActivity implements View.On
             }
         }
 
+        /**
+         * 类 ServiceConnection 中的 onServiceDisconnected() 方法在正常情况下是不被调用的，
+         * 它的调用时机是当Service服务被异外销毁时，例如内存的资源不足时.
+         *
+         * @param name Service
+         */
         @Override
         public void onServiceDisconnected(ComponentName name) {
 
