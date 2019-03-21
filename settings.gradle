@@ -1,2 +1,2 @@
-include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils'
+include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils', ':buildsrc', ':buildSrc'
 println '-settings 开始执行gradle'
