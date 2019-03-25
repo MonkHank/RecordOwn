@@ -22,4 +22,4 @@
 20. [网络七层模型](https://github.com/MonkHank/RecordOwn/blob/master/readme20.md)
 21. [Android WebService连接](https://github.com/MonkHank/RecordOwn/blob/master/readme21.md)
 22. 添加一种尺寸适配方式
-23. gradle讲解
+23. [gradle讲解](https://github.com/MonkHank/HelloGroovy/blob/master/ReadMe.md)
