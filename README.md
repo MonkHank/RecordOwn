@@ -23,3 +23,6 @@
 21. [Android WebService连接](https://github.com/MonkHank/RecordOwn/blob/master/readme21.md)
 22. 添加一种尺寸适配方式
 23. [gradle讲解](https://github.com/MonkHank/HelloGroovy/blob/master/ReadMe.md)
+24. okhttp3的请求图解 
+- [OkHttp3 只会用是不够的，还得懂这些](https://mp.weixin.qq.com/s?fontRatio=1&__biz=MzIwMTAzMTMxMg==&mid=2649493901&idx=1&sn=f6bd286853c1ead2df98b6287b9e2ba0&scene=94&subscene=315&passparam=searchid%3D7936326947001632800&ascene=0&devicetype=android-23&version=2700033b&nettype=WIFI&abtest_cookie=BAABAAoACwASABMABQAjlx4AVpkeAMiZHgDZmR4A3JkeAAAA&lang=zh_CN&pass_ticket=0g6RZbauAUj9GDsOwNeX0Em8Jxk3qzzXGQRO5iz8Ur3QJoQ7ZLqbOV7w62oVl0In&wx_header=1)
+- ![](/picture/okhttp3请求过程.webp)
