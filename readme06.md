@@ -25,7 +25,7 @@ dispatchTouchEvent(MotionEvent)源码
 在ACTION_DOWN执行完后，后面的一系列action都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。
 
 根据以上分析可知：
-<font color="de87">如果一个控件是可点击的，那么点击该控件时，dispatchTouchEvent的返回值必定是true。（89行）</font>
+<font color="de87">**如果一个控件是可点击的，那么点击该控件时，dispatchTouchEvent的返回值必定是true（super.OnTouchEvent(ev)结果为true，89行）**</font>
 
 ### onTouch和onTouchEvent有什么区别，又该如何使用？
 从源码中可以看出，这两个方法都是在View的dispatchTouchEvent中调用的，onTouch优先于onTouchEvent执行。如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。
