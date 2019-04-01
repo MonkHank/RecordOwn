@@ -35,7 +35,7 @@ dispatchTouchEvent(MotionEvent)源码
 ## Android事件分发机制（下）
 你会发现，不管你点击哪里，永远都只会触发MyLayout的touch事件了，按钮的点击事件完全被屏蔽掉了！这是为什么呢？如果Android中的touch事件是先传递到View，再传递到ViewGroup的，那么MyLayout又怎么可能屏蔽掉Button的点击事件呢？
 
-搞清楚Android中ViewGroup的事件分发机制，才能解决我们心中的疑惑了，不过这里可以透露一句，$\color{#de87}{**Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的，** }$记得在（上）中说过这么一句，**只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。** 实际情况是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。
+搞清楚Android中ViewGroup的事件分发机制，才能解决我们心中的疑惑了，不过这里可以透露一句，==**Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的，**== 记得在（上）中说过这么一句，**只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。** 实际情况是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。
 ![](/picture/dipatchTouchEvent2.webp)
 ![](/picture/dipatchTouchEvent3.webp)
 
