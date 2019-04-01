@@ -4,7 +4,7 @@
 3. **LruCache**  
 4. **RxJava2操作符**  
 5. LayoutInflater,onResume之后获取getTop有效  
-6. [事件分发处理机制]((https://github.com/MonkHank/RecordOwn/blob/master/readme06.md))  
+6. [事件分发处理机制](https://github.com/MonkHank/RecordOwn/blob/master/readme06.md)  
 7. 原型模式 、builder模式  
 8. 委托模式，notification  
 9. 几种IPC方式实现  
