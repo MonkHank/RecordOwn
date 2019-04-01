@@ -35,7 +35,7 @@ dispatchTouchEvent(MotionEvent)源码
 ## Android事件分发机制（下）
 你会发现，不管你点击哪里，永远都只会触发MyLayout的touch事件了，按钮的点击事件完全被屏蔽掉了！这是为什么呢？如果Android中的touch事件是先传递到View，再传递到ViewGroup的，那么MyLayout又怎么可能屏蔽掉Button的点击事件呢？
 
-搞清楚Android中ViewGroup的事件分发机制，才能解决我们心中的疑惑了，不过这里可以透露一句，<font color="00574B">Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的，</font>记得在（上）中说过这么一句，只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。实际情况是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。
+搞清楚Android中ViewGroup的事件分发机制，才能解决我们心中的疑惑了，不过这里可以透露一句，<font color="00574B">**Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的，**</font>记得在（上）中说过这么一句，**只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。** 实际情况是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。
 ![](/picture/dipatchTouchEvent2.webp)
 ![](/picture/dipatchTouchEvent3.webp)
 
@@ -47,7 +47,7 @@ dispatchTouchEvent(MotionEvent)源码
 
 那我们重点来看下条件判断的内部是怎么实现的。在第19行通过一个for循环，遍历了当前ViewGroup下的所有子View，然后在第24行判断当前遍历的View是不是正在点击的View，如果是的话就会进入到该条件判断的内部，然后在第29行调用了该View的dispatchTouchEvent，之后的流程就和 Android事件分发机制完全解析，带你从源码的角度彻底理解(上) 中讲解的是一样的了。我们也因此证实了，按钮点击事件的处理确实就是在这里进行的。<br>
 
-然后需要注意一下，调用子View的dispatchTouchEvent后是有返回值的。我们已经知道，<font color="de87">如果一个控件是可点击的，那么点击该控件时，dispatchTouchEvent 的返回值必定是true。</font>因此会导致第29行的条件判断成立，于是在第31行给ViewGroup的dispatchTouchEvent方法直接返回了true。这样就导致后面的代码无法执行到了，也是印证了我们前面的Demo打印的结果，如果按钮的点击事件得到执行，就会把MyLayout的touch事件拦截掉。
+然后需要注意一下，调用子View的dispatchTouchEvent后是有返回值的。我们已经知道，<font color="de87">**如果一个控件是可点击的，那么点击该控件时，dispatchTouchEvent 的返回值必定是true。**</font>因此会导致第29行的条件判断成立，于是在第31行给ViewGroup的dispatchTouchEvent方法直接返回了true。这样就导致后面的代码无法执行到了，也是印证了我们前面的Demo打印的结果，如果按钮的点击事件得到执行，就会把MyLayout的touch事件拦截掉。
 
 那如果我们点击的不是按钮，而是空白区域呢？这种情况就一定不会在第31行返回true了，而是会继续执行后面的代码。那我们继续往后看，在第44行，如果target等于null，就会进入到该条件判断内部，这里一般情况下target都会是null，因此会在第50行调用super.dispatchTouchEvent(ev)。这句代码会调用到哪里呢？当然是View中的dispatchTouchEvent方法了，因为ViewGroup的父类就是View。之后的处理逻辑又和前面所说的是一样的了，也因此MyLayout中注册的onTouch方法会得到执行。之后的代码在一般情况下是走不到的了，我们也就不再继续往下分析。
 
