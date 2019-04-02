@@ -19,6 +19,7 @@ public class Observable<T>{
     }
 
     public  Observer<T> subscribe(Subscriber<T> subscriber) {
+        // 这个是最核心的调用
         this.onSubscriber.call(subscriber);
         return subscriber;
     }

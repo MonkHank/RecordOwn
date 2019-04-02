@@ -184,13 +184,13 @@ Actionbar对应的布局文件是screen_action_bar.xml，在 WindowDecorActionBa
 PhoneWindow 通过 父类 Window 中的 setWindowManager(WindowManager wm, IBinder appToken, String appName); 方法将 Window（PhoneWindow）和 WindowManager（WindowManagerImpl）绑定
 
 ### 几个类的介绍
-- Window 是个抽象类，它的实现，到目前来看只见到了 PhoneWindow，需要注意的是在Window中有个 **setWindowManager**  函数，此函数会将 Window（PhoneWIndow） 与WindowManagerImpl相关联.
+- **Window** 是个抽象类，它的实现，到目前来看只见到了 PhoneWindow，需要注意的是在Window中有个 **setWindowManager**  函数，此函数会将 Window（PhoneWIndow） 与WindowManagerImpl相关联.
 
-- WindowManager是接口，它的实现是 WindowManagerImpl，这个类通过 WindowManagerGlobal 来 完成添加、删除、更新view 的功能.
+- **WindowManager** 是接口，它的实现是 WindowManagerImpl，这个类通过 WindowManagerGlobal 来 完成添加、删除、更新view 的功能.
 
-- WindowManagerGlobal这个类主要是addView、removeView、updateViewLayout，操作，这个类也是和 ViewRootImpl 建立关系的一个类，通过ViewRootImpl 的 setView 函数进而执行 performTraversals 函数进行view的渲染等一系列操作.
+- **WindowManagerGlobal** 这个类主要是addView、removeView、updateViewLayout，操作，这个类也是和 ViewRootImpl 建立关系的一个类，通过ViewRootImpl 的 setView 函数进而执行 performTraversals 函数进行view的渲染等一系列操作.
 
-- ViewRootImpl 的初始化是在WMG（WindowMangerGlobal）的addView方法中完成，ViewRootImpl 是Framework与native之间的通信桥梁，换句话说就是Framework与WMS之间是通过Binder机制通信，它的 setView 函数就是WMG调用的，很复杂的一个函数具体干了两件事：
+- **ViewRootImpl** 的初始化是在WMG（WindowMangerGlobal）的addView方法中完成，ViewRootImpl 是Framework与native之间的通信桥梁，换句话说就是Framework与WMS之间是通过Binder机制通信，它的 setView 函数就是WMG调用的，很复杂的一个函数具体干了两件事：
 
 1. requestLayout.    
 
@@ -210,5 +210,6 @@ PhoneWindow 通过 父类 Window 中的 setWindowManager(WindowManager wm, IBind
 
 源码是Android 2.3版本的。到了Android 4.0之后，ViewRoot类的名字改成了ViewRootImpl，它们的作用仍然一样的.
 
-- ThreadRenderer
+- **ThreadRenderer**
 代理Reader Thread的一个类，也就是Open GL线程，硬件加速线程，4.0之后Android默认开启硬件加速
+

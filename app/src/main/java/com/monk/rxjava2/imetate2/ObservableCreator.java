@@ -21,7 +21,8 @@ public class ObservableCreator<T> extends Observable<T> {
         observableOnSubscribe.subscribe(observableEmitter);
     }
 
-    public static final class ObservableEmitter<T> extends AtomicReference<Disposable> implements Emitter<T>, Disposable {
+    public static final class ObservableEmitter<T> extends AtomicReference<Disposable>
+            implements Emitter<T>, Disposable {
         private Observer<T> observer;
 
         public ObservableEmitter(Observer<T> observer) {

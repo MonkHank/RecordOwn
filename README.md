@@ -2,15 +2,18 @@
 
 ## 一些基本原理
 1. [事件分发处理机制](https://github.com/MonkHank/RecordOwn/blob/master/readme06.md)  
-2. [window 和 activity(view)之间的关系](https://github.com/MonkHank/RecordOwn/blob/master/readme07.md)
+2. <span id=2>[Window 和 Activity(View)之间的关系](https://github.com/MonkHank/RecordOwn/blob/master/readme07.md)
+3. [反射的一些常见用法](https://github.com/MonkHank/RecordOwn/blob/master/readme23.md)
 
+
+## 一些三方框架
+1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/readme04.md)
 
 ## 一些基本处理
 1. **HttpUrlConnection**  
 2. **SelectSort、BubbleSort**
 3. **LruCache**  
-4. **RxJava2操作符**  
-5. LayoutInflater,onResume之后获取getTop有效  
+5. LayoutInflater,onResume之后获取getTop有效 ，可参见[标注](#2)
 
 7. 原型模式 、builder模式  
 8. 委托模式，notification  

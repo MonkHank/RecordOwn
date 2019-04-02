@@ -15,5 +15,4 @@ public abstract class Observable<T> {
     }
 
     public abstract void subscribeActual(Observer<T> observer);
-
 }

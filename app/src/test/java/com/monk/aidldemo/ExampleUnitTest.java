@@ -2,6 +2,11 @@ package com.monk.aidldemo;
 
 import org.junit.Test;
 
+import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -24,20 +29,26 @@ import java.util.concurrent.TimeUnit;
  */
 public class ExampleUnitTest {
 
+    /**
+     * 测试 string IndexOf()函数
+     */
     @Test
     public void testStrIndexOf() {
-        String wholeStr="我是中国共产党";
+        String wholeStr = "我是中国共产党";
         int 共产党 = wholeStr.indexOf("共产党");
         System.out.println(共产党);
     }
 
+    /**
+     * 测试月份之间相差的数目
+     */
     @Test
     public void testMonthSpace() {
         int monthSpace = getMonthSpace("2019-02-13", "2019-02-14");
         System.out.println(monthSpace);
     }
 
-    private int getMonthSpace(String date1, String date2)  {
+    private int getMonthSpace(String date1, String date2) {
         int result = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c1 = Calendar.getInstance();
@@ -52,12 +63,18 @@ public class ExampleUnitTest {
         return result == 0 ? 1 : Math.abs(result);
     }
 
+    /**
+     * 测试子类复写父类方法后，父类方法return，会不会影响子类该复写方法的执行
+     */
     @Test
     public void testParentReturnHasRelationshipWithChid() {
         Person stu = new Student("stu", 10);
         stu.testParentReturn(0);
     }
 
+    /**
+     * 测试 list 的 subList()函数
+     */
     @Test
     public void testSubList() {
         List<Person> list = new ArrayList<>();
@@ -72,6 +89,9 @@ public class ExampleUnitTest {
         System.out.println(list);
     }
 
+    /**
+     * 测试 ArrayList 作为参数传入其他方法执行后，会不会影响该 ArrayList；会
+     */
     @Test
     public void testArrayListK() {
         ArrayList<String> strList = new ArrayList<>();
@@ -83,6 +103,11 @@ public class ExampleUnitTest {
         stringArrayList.add("A");
     }
 
+    /**
+     * 测试 空字符串 substring() 的结果；报异常
+     *
+     * @throws Exception
+     */
     @Test
     public void addition_isCorrect() throws Exception {
 //        assertEquals(4, 2 + 2);
@@ -99,6 +124,11 @@ public class ExampleUnitTest {
         System.out.println(str.substring(0, str.length() - 1));
     }
 
+    /**
+     * 冒泡排序
+     *
+     * @param arr
+     */
     void bubbleSort(int[] arr) {
         int temp;
         int flag = 0;
@@ -120,6 +150,11 @@ public class ExampleUnitTest {
         System.out.println("bubbleSort--->" + Arrays.toString(arr));
     }
 
+    /**
+     * 选择排序
+     *
+     * @param arr
+     */
     void selectSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
@@ -139,6 +174,11 @@ public class ExampleUnitTest {
         System.out.println("selectSort--->" + Arrays.toString(arr));
     }
 
+    /**
+     * 测试 线程池规则
+     *
+     * @throws InterruptedException
+     */
     void verifyThreadPool() throws InterruptedException {
         Runnable runnable = new Runnable() {
             @Override
@@ -189,6 +229,9 @@ public class ExampleUnitTest {
         }
     }
 
+    /**
+     * 计算小数形式的天数
+     */
     @Test
     public void testDotDays() {
         // 0.9583333333333334
@@ -198,6 +241,9 @@ public class ExampleUnitTest {
         System.out.println(df.format(49 / 24.0));
     }
 
+    /**
+     * 测试 Map 输出结果
+     */
     @Test
     public void testMap() {
         ArrayList<String> mediaList = new ArrayList<>();
@@ -223,6 +269,9 @@ public class ExampleUnitTest {
         System.out.println(mediaList.toString());
     }
 
+    /**
+     * 测试 Calendar 获取当前时间
+     */
     @Test
     public void testCalendar() {
         Calendar now = Calendar.getInstance();
@@ -231,12 +280,15 @@ public class ExampleUnitTest {
         System.out.println("currentTime = " + dateStr);
     }
 
+    /**
+     * 计算两个时间之间相差多少
+     */
     @Test
     public void testTimeSeconds() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
             String now = df.format(new Date());
-            System.out.println("现在时间："+now);
+            System.out.println("现在时间：" + now);
             Date d1 = df.parse(now);
             Date d2 = df.parse("2019-03-26 21:23");
             long diff = d2.getTime() - d1.getTime();//这样得到的差值是毫秒级别
@@ -253,12 +305,15 @@ public class ExampleUnitTest {
         Date date = new Date();
         long time = date.getTime();
         long senconds2 = time / (1000 * 60 * 60 * 24);
-        System.out.println("January 1, 1970 秒数："+senconds2);
+        System.out.println("January 1, 1970 秒数：" + senconds2);
         long roughlyYear = System.currentTimeMillis() / (1000 * 60 * 60 * 24) / 365;
         System.out.println(roughlyYear);
     }
 
 
+    /**
+     * 测试成员变量的赋值情况；null
+     */
     @Test
     public void testParameter() {
         String[] strings = new String[]{"a", "b"};
@@ -282,5 +337,117 @@ public class ExampleUnitTest {
             this.strings = strings;
             System.out.println(Arrays.toString(strings));
         }
+    }
+
+    /**
+     * 测试反射常见api
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws NoSuchFieldException
+     */
+    @Test
+    public void testReflect() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+        /**===================== 类加载器 ==========================*/
+        println("==================类加载器====================");
+        // 1.获取一个系统的类加载器(可以获取，当前这个类 ExampleUnitTest 就是它加载的)
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        println("系统类加载器:" + classLoader);
+
+
+        // 2.获取系统类加载器的父类加载器（扩展类加载器，可以获取）.
+        classLoader = classLoader.getParent();
+        println("扩展类加载器:" + classLoader);
+
+        // 3.获取扩展类加载器的父类加载器（引导类加载器，不可获取）.
+        classLoader = classLoader.getParent();
+        println("引导类加载器:" + classLoader);
+
+
+        // 4.测试当前类由哪个类加载器进行加载（系统类加载器）:
+        classLoader = Class.forName("com.monk.aidldemo.ReflectClass").getClassLoader();
+        System.out.println("系统类加载器:" + classLoader);
+        InputStream in = classLoader.getResourceAsStream("Student.java");
+        println("获取文件：" + in);
+
+        //5. 测试 JDK 提供的 Object 类由哪个类加载器负责加载（引导类）
+        classLoader = Class.forName("java.lang.Object").getClassLoader();
+        println("Object类加载器：" + classLoader);
+
+        /***===================================== 常用API =================================*/
+
+        println("=================== 获取 Class 的三种方式 ==================");
+        Class clazz = null;
+        //1.通过类名
+        clazz = ReflectClass.class;
+
+
+        //2.通过对象名，这种方式是用在传进来一个对象，却不知道对象类型的时候使用
+//        ReflectClass reflectClass = new ReflectClass();
+//        clazz = reflectClass.getClass();
+        //上面这个例子的意义不大，因为已经知道 reflectClass 类型是 ReflectClass 类，再这样写就没有必要了
+        //如果传进来是一个Object类，这种做法就是应该的
+//        Object obj = new ReflectClass();
+//        clazz = obj.getClass();
+
+
+        //3.通过全类名(会抛出异常)
+        //一般框架开发中这种用的比较多，因为配置文件中一般配的都是全类名，通过这种方式可以得到Class实例
+        String className = "com.monk.aidldemo.ReflectClass";
+        clazz = Class.forName(className);
+
+        println(clazz);
+
+        println("=================== 无参构造和有参构造 ===================");
+        // 默认无参构造函数，没有无参构造函数则会报错
+        ReflectClass newInstance = (ReflectClass) clazz.newInstance();
+        Constructor constructor = clazz.getConstructor(String.class, int.class);
+        ReflectClass nancy = (ReflectClass) constructor.newInstance("nancy", 12);
+
+        println(newInstance);
+        println(nancy);
+
+        println("=================== 反射方法 =============================");
+        // 1. 获取指定类所有方法，不含父类方法，private方法也可以获取
+        Method[] methods = clazz.getDeclaredMethods();
+        for (Method t : methods) {
+            println(t.getName());
+        }
+
+        // 2.获取指定方法，int直接写，不用转Integer
+        Method setName = clazz.getDeclaredMethod("setName", String.class);
+        Method setAge = clazz.getDeclaredMethod("setAge", int.class);
+        System.out.println();
+        println(setName);
+        println(setAge);
+
+        // 3. 执行方法，需要有对象
+        setName.invoke(newInstance, "jack");
+        setAge.invoke(newInstance, 11);
+        println(newInstance.toString());
+
+        println("=================== 反射字段 =============================");
+        // 1. 获取所有字段，公有私有，不包含父类
+        Field[] fields = clazz.getDeclaredFields();
+        for(Field t : fields){
+            println(t.getName());
+        }
+        System.out.println();
+        // 2. 获取指定字段
+        Field name = clazz.getDeclaredField("name");
+        println(name.getName());
+        // 3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set()
+        Object value = name.get(newInstance);
+        println(value);
+        name.set(newInstance,"jack_set");
+        println(name.get(newInstance));
+
+
+    }
+
+    private void println(Object lineText) {
+        System.out.println(lineText);
     }
 }

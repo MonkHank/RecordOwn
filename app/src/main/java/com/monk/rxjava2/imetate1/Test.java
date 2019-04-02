@@ -13,6 +13,8 @@ public class Test {
                 stringSubscriber.onNext("test");
                 stringSubscriber.onComplete();
             }
+            // 这个 subscriber 就是上面这个 subscriber，
+            // 响应式编程，通过 subscriber 调用其自身 onNext、onComplete方法，然后执行该些方法
         }).subscribe(new Subscriber<String>() {
             @Override
             public void onComplete() {
