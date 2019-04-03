@@ -91,6 +91,7 @@ public class AidlFullscreenActivity extends AppCompatActivity implements View.On
         public void onServiceConnected(ComponentName name, IBinder service) {
             //连接后拿到 Binder，转换成 AIDL，在不同进程会返回个代理
             iAidlInterface = ManualBinder.asInterface(service);
+//            IAidlInterface iAidlInterface = MyBinder.asInterface(service);
             try {
                 service.linkToDeath(mDeathRecipient,0);
             } catch (RemoteException e) {

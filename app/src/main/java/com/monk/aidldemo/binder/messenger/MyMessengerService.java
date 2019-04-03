@@ -19,26 +19,23 @@ import java.lang.ref.WeakReference;
  */
 public class MyMessengerService extends Service {
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return messenger.getBinder();
-    }
+    private Messenger messenger = new Messenger(new MessengerHandler(this));
 
-    private static class MessengerHandler extends Handler{
+    private static class MessengerHandler extends Handler {
         WeakReference<Service> weakReference;
 
-         MessengerHandler(Service service) {
+        MessengerHandler(Service service) {
             weakReference = new WeakReference<>(service);
         }
 
         @Override
         public void handleMessage(Message msg) {
             if (weakReference.get() != null) {
-                LogUtil.v("MyMessengerService",msg.getData().getString("msg"));
+                LogUtil.v("MyMessengerService", msg.getData().getString("msg"));
                 Messenger client = msg.replyTo;
                 Message serverMsg = Message.obtain(null, 0);
                 Bundle bundle = new Bundle();
-                bundle.putString("msgServer","服务器返回数据");
+                bundle.putString("msgServer", "服务器返回数据");
                 serverMsg.setData(bundle);
                 try {
                     client.send(serverMsg);
@@ -47,7 +44,11 @@ public class MyMessengerService extends Service {
                 }
             }
         }
+
     }
 
-    private Messenger messenger = new Messenger(new MessengerHandler(this));
+    @Override
+    public IBinder onBind(Intent intent) {
+        return messenger.getBinder();
+    }
 }

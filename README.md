@@ -4,6 +4,7 @@
 1. [事件分发处理机制](https://github.com/MonkHank/RecordOwn/blob/master/readme06.md)  
 2. <span id=2>[Window 和 Activity(View)之间的关系](https://github.com/MonkHank/RecordOwn/blob/master/readme07.md)
 3. [反射的一些常见用法](https://github.com/MonkHank/RecordOwn/blob/master/readme23.md)
+4. [Android客户端实现Binder](https://github.com/MonkHank/RecordOwn/blob/master/readme10.md)
 
 
 ## 一些三方框架
@@ -18,8 +19,6 @@
 7. 原型模式 、builder模式  
 8. 委托模式，notification  
 9. 几种IPC方式实现  
-10. 手写binder，其实就是复制AIDL生成的远程服务接口实现；6个步骤
-    - [x] Messenger
 11. try catch机制
 12. 分类，fragment使用
 13. DiskLruCache、Retrofit2.0、Annotation、AnnotationProcessor、jni、NDK编程
