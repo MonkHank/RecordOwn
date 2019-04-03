@@ -97,6 +97,12 @@ protected DecorView generateDecor(int featureId) {
             - handleLaunchActivity(ActivityClientRecord r，，) 
             - performLaunchActivity(ActivityClientRecord r，)
                 - 初始化 Activity ，执行 Activity 的 attach(16参数) 方法 
+        - RESUME_ACTIVITY
+            -  handleResumeActivity(IBinder，，，，，)
+            -  ActivityClientRecord performResumeActivity(IBinder，，)
+            -  WindowManager addView(decor,l)
+            -  Activity makeVisible()
+            
 - Activity 的 attach(16个参数)
     - 完成  PhoneWindow 的初始化
     - setContentView(layoutResId)

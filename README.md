@@ -13,7 +13,7 @@
 1. **HttpUrlConnection**  
 2. **SelectSort、BubbleSort**
 3. **LruCache**  
-5. LayoutInflater,onResume之后获取getTop有效 ，可参见[标注](#2)
+5. LayoutInflater,onResume之后获取getTop有效 ，可参见[Window 和 Activity(View)之间的关系](#2)
 
 7. 原型模式 、builder模式  
 8. 委托模式，notification  
