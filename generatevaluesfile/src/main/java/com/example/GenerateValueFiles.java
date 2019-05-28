@@ -265,6 +265,7 @@ public class GenerateValueFiles {
         return temp / 100f;
     }
 
+
     /*** 基准 640 x 480*/
     public static void main(String[] args) {
         System.out.println("args.length=" + args.length);

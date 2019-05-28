@@ -103,6 +103,7 @@ protected DecorView generateDecor(int featureId) {
             -  WindowManager addView(decor,l)
             -  Activity makeVisible()
             
+            
 - Activity 的 attach(16个参数)
     - 完成  PhoneWindow 的初始化
     - setContentView(layoutResId)

@@ -1,6 +1,5 @@
 package com.monk;
 
-import android.content.Intent;
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,32 +8,32 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import com.monk.activity.AidlFullscreenActivity;
-import com.monk.activity.LoginActivity;
-import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
+import com.monk.base.BaseCompatActivity;
 import com.monk.base.OnFragmentInteractionListener;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
 import com.monk.customview.fragment.CustomViewFragment;
 import com.monk.customview.fragment.CustomViewFragment2;
-import com.monk.eventdispatch.EventDispatchActivity;
 import com.monk.jni.JniFragment;
 import com.monk.location.LocationFragment;
 import com.monk.rxjava2.RxJava2Fragment;
+import com.monk.utils.ThreadManager;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author monk
  * @date 2018-12-13
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        OnFragmentInteractionListener {
+public class MainActivity extends BaseCompatActivity implements OnFragmentInteractionListener {
+
+    @BindView(R.id.message) TextView tvMessage;
+    @BindView(R.id.navigation)  BottomNavigationView navigation;
 
     private JniFragment jniFragment;
     private RxJava2Fragment rxJava2Fragment;
@@ -79,9 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
     private final String tag = "MainActivity";
-    private TextView mTextMessage;
 
-    private AppCompatButton button, eventDispatchButton, scrollActivityButton, loginButton;
     private UriMatcher uriMatcher;
     private FragmentManager fragmentManager;
 
@@ -90,31 +87,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        mTextMessage = findViewById(R.id.message);
-        button = findViewById(R.id.button);
-        scrollActivityButton = findViewById(R.id.scrollActivityButton);
-        eventDispatchButton = findViewById(R.id.eventDispatchButton);
-        loginButton = findViewById(R.id.loginButton);
-
-        button.setOnClickListener(this);
-        scrollActivityButton.setOnClickListener(this);
-        eventDispatchButton.setOnClickListener(this);
-        loginButton.setOnClickListener(this);
+        ButterKnife.bind(this);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         fragmentManager = getSupportFragmentManager();
 //        findViewById(R.id.navigation_custom_view).performClick();
 
 
-        new Thread(() -> {
+        ThreadManager.getThreadPool().execute(()->{
             Looper.prepare();
-//                Toast.makeText(MainActivity.this,"提示",Toast.LENGTH_LONG).show();
-            loginButton.setText("登录界面");
+//            ToastUtils.showImageToast(mContext, "奔溃");
+            tvMessage.setText("子线程更新UI问题");
             Looper.loop();
             LogUtil.i(tag, "之心");
-        }).start();
+        });
         initUri();
     }
 
@@ -127,26 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (customViewFragment1 != null) {
             ft.hide(customViewFragment1);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button:
-                startActivity(new Intent(this, AidlFullscreenActivity.class));
-                break;
-            case R.id.scrollActivityButton:
-                ScrollingActivity.intoHere(MainActivity.this);
-                break;
-            case R.id.eventDispatchButton:
-                startActivity(new Intent(this, EventDispatchActivity.class));
-                break;
-            case R.id.loginButton:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-            default:
-                break;
         }
     }
 

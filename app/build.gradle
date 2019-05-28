@@ -191,15 +191,15 @@ task taskZ(dependsOn: [taskX, taskY]) {
 taskZ.dependsOn(taskX, taskY)
 
 // 动态依赖 << 等效于 doLast，但还是建议使用doLast
-task lib1 << {
-    println 'lib1'
-}
-task lib2 << {
-    println 'lib2'
-}
-task noLib << {
-    println 'noLib'
-}
+//task lib1 << {
+//    println 'lib1'
+//}
+//task lib2 << {
+//    println 'lib2'
+//}
+//task noLib << {
+//    println 'noLib'
+//}
 
 // 实际应用中参考commonlibrary release.xml文件，输出版本信息
 task handleReleaseFile {

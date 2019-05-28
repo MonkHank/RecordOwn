@@ -2,7 +2,7 @@ package com.monk.utils;
 
 import com.alibaba.fastjson.util.IOUtils;
 import com.monk.commonutils.LogUtil;
-import com.monk.global.MyApplication;
+import com.monk.global.RecordOwnApplication;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,7 +26,7 @@ public class FileCacheUtils {
 
     /*** 30分钟有效期*/
     public static void setCache(String url, String json) {
-        String cacheDir = MyApplication.mApplication.getCacheDir().getAbsolutePath();
+        String cacheDir = RecordOwnApplication.mApplication.getCacheDir().getAbsolutePath();
         LogUtil.v(tag, "设置缓存：" + cacheDir + "\t/" + url);
         File cacheFile = new File(cacheDir, url);
         FileWriter fw = null;
@@ -47,7 +47,7 @@ public class FileCacheUtils {
 
     /*** 读取写入缓存时候的缓存时间*/
     public static long getCacheDeadTime(String url) {
-        File cacheDir = MyApplication.mApplication.getCacheDir();
+        File cacheDir = RecordOwnApplication.mApplication.getCacheDir();
         File cacheFile = new File(cacheDir, url);
         if (cacheFile.exists()) {
             BufferedReader br = null;
@@ -67,7 +67,7 @@ public class FileCacheUtils {
 
     /*** 30分钟有效期*/
     public static String getCache(String url) {
-        File cacheDir = MyApplication.mApplication.getCacheDir();
+        File cacheDir = RecordOwnApplication.mApplication.getCacheDir();
         File cacheFile = new File(cacheDir, url);
         if (cacheFile.exists()) {
             BufferedReader br = null;
@@ -99,7 +99,7 @@ public class FileCacheUtils {
     /*** 没有时间期限的缓存*/
     public static void setCacheNoTime(String url, String text) {
         //  /data/data/包名/cache目录
-        String cacheDir = MyApplication.mApplication.getCacheDir().getAbsolutePath();
+        String cacheDir = RecordOwnApplication.mApplication.getCacheDir().getAbsolutePath();
         LogUtil.v(tag, cacheDir + "\n设置缓存" + url);
         File cacheFile = new File(cacheDir, url);
         FileWriter fw = null;
@@ -116,7 +116,7 @@ public class FileCacheUtils {
     }
 
     public static String getCacheNoTime(String url) {
-        File cacheDir = MyApplication.mApplication.getCacheDir();
+        File cacheDir = RecordOwnApplication.mApplication.getCacheDir();
         File cacheFile = new File(cacheDir, url);
         if (cacheFile.exists()) {
             BufferedReader br = null;

@@ -28,6 +28,9 @@ import java.util.concurrent.TimeUnit;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+    private void println(Object lineText) {
+        System.out.println(lineText);
+    }
 
     /**
      * 测试 string IndexOf()函数
@@ -120,8 +123,13 @@ public class ExampleUnitTest {
 
 //        System.out.println(0x8 & 0);
 
+        String time = "2019-4-4 13:39:19";
+
+        System.out.println(time.substring(0, time.length() - 3));
+
         String str = "";
         System.out.println(str.substring(0, str.length() - 1));
+
     }
 
     /**
@@ -290,7 +298,7 @@ public class ExampleUnitTest {
             String now = df.format(new Date());
             System.out.println("现在时间：" + now);
             Date d1 = df.parse(now);
-            Date d2 = df.parse("2019-03-26 21:23");
+            Date d2 = df.parse("2019-04-19 20:33");
             long diff = d2.getTime() - d1.getTime();//这样得到的差值是毫秒级别
             long days = diff / (1000 * 60 * 60 * 24);
 
@@ -341,6 +349,7 @@ public class ExampleUnitTest {
 
     /**
      * 测试反射常见api
+     *
      * @throws ClassNotFoundException
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -431,7 +440,7 @@ public class ExampleUnitTest {
         println("=================== 反射字段 =============================");
         // 1. 获取所有字段，公有私有，不包含父类
         Field[] fields = clazz.getDeclaredFields();
-        for(Field t : fields){
+        for (Field t : fields) {
             println(t.getName());
         }
         System.out.println();
@@ -441,13 +450,137 @@ public class ExampleUnitTest {
         // 3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set()
         Object value = name.get(newInstance);
         println(value);
-        name.set(newInstance,"jack_set");
+        name.set(newInstance, "jack_set");
         println(name.get(newInstance));
 
 
     }
 
-    private void println(Object lineText) {
-        System.out.println(lineText);
+
+    /*** 测试枚举*/
+    @Test
+    public void testEnum() {
+        System.out.println(Alphabet.values().length);
     }
+
+    enum Alphabet {
+        A, B, C, D
+    }
+
+    /**
+     * 测试不同switch执行情况，看看适不适合将长的switch语句分段成小switch方法
+     */
+    @Test
+    public void testSwitch() {
+        int condition = 1;
+        switch1(condition);
+        switch2(condition);
+    }
+
+    void switch1(int condition) {
+        println("switch1");
+        switch (condition) {
+            case 1:
+                println("condition：" + condition);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void switch2(int condition) {
+        println("switch2");
+        switch (condition) {
+            case 2:
+                println("condition：" + condition);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 测试 i++ 和 ++i
+     */
+    @Test
+    public void testIPlusPlus() {
+        int i = 3;
+        int j;
+        //先输出 i = 3，在执行 i+1 = 4
+        j = i++;
+        println(j);
+
+        // 先执行 i+1 =5，再赋值j = 5
+        j = ++i;
+        println(j);
+
+    }
+
+
+    /**
+     * 测试 for循环内部删除集合，集合长度是否自动变换
+     */
+    @Test
+    public void testForDeleteList() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("b");
+        list.add("c");
+        list.add("D");
+
+
+        for (int i = 0; i < list.size(); i++) {
+            String s = list.get(i);
+            if (s.equals("D")) {
+                list.remove(s);
+            }
+        }
+    }
+
+    /**
+     * 双重for循环判断问题，只有一个可以不判断
+     */
+    @Test
+    public void testDoubleFor() {
+
+        String current = "7";
+        List<String> list = Utils.strList();
+        for (int i = 0; i < list.size(); i++) {
+            String bean = list.get(i);
+            System.out.println(bean);
+            String next;
+            if (i + 1 < list.size()) {
+                next = list.get(i + 1);
+                if (current.equals(next)) {
+                    System.out.println("执行了" + next);
+                }
+                if (i + 1 == list.size() - 1) {
+                    break;
+                }
+            }
+
+        }
+    }
+
+    /**
+     * 死锁
+     */
+    @Test
+    public void testDeadLock() {
+        DeadLock td1 = new DeadLock();
+        DeadLock td2 = new DeadLock();
+        td1.flag = 1;
+        td2.flag = 0;
+        //td1,td2都处于可执行状态，但JVM线程调度先执行哪个线程是不确定的。
+        //td2的run()可能在td1的run()之前运行
+        new Thread(td1).start();
+        new Thread(td2).start();
+    }
+
+    @Test
+    public void test2() {
+        System.out.println( Double.parseDouble("0.04"));
+    }
+
+
 }

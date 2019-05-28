@@ -12,7 +12,6 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,6 +23,7 @@ import com.monk.aidldemo.binder.IPersonInterface;
 import com.monk.aidldemo.binder.ManualBinder;
 import com.monk.aidldemo.binder.messenger.MyMessengerService;
 import com.monk.aidldemo.service.MyAidlService;
+import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 
 import java.lang.ref.WeakReference;
@@ -34,7 +34,7 @@ import java.util.Random;
  * @author monk
  * @date 2019-1-17 14:28:39
  */
-public class AidlFullscreenActivity extends AppCompatActivity implements View.OnClickListener{
+public class AidlFullscreenActivity extends BaseCompatActivity implements View.OnClickListener{
     private static final boolean AUTO_HIDE = true;
 
     private static final int AUTO_HIDE_DELAY_MILLIS = 3000;

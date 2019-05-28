@@ -12,8 +12,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application
-        android:name="com.monk.global.MyApplication"
+        android:name="com.monk.global.RecordOwnApplication"
         android:allowBackup="true"
         android:appComponentFactory="任意字符"
         android:icon="@mipmap/ic_launcher"
@@ -30,12 +32,6 @@
         <activity
             android:name="com.monk.MainActivity"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
         <service
@@ -66,6 +62,14 @@
         <activity
             android:name="com.monk.retrofit.mvp.view.RetrofitActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.monk.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
