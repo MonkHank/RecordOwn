@@ -8,19 +8,19 @@ import android.content.Context;
  * @author monk
  * @date 2018-12-21
  */
-public class MyIntentService extends IntentService {
+public class IntentServices extends IntentService {
     private static final String ACTION_FOO = "com.monk.aidldemo.action.FOO";
     private static final String ACTION_BAZ = "com.monk.aidldemo.action.BAZ";
 
     private static final String EXTRA_PARAM1 = "com.monk.aidldemo.extra.PARAM1";
     private static final String EXTRA_PARAM2 = "com.monk.aidldemo.extra.PARAM2";
 
-    public MyIntentService() {
+    public IntentServices() {
         super("MyIntentService");
     }
 
     public static void startActionFoo(Context context, String param1, String param2) {
-        Intent intent = new Intent(context, MyIntentService.class);
+        Intent intent = new Intent(context, IntentServices.class);
         intent.setAction(ACTION_FOO);
         intent.putExtra(EXTRA_PARAM1, param1);
         intent.putExtra(EXTRA_PARAM2, param2);
@@ -28,7 +28,7 @@ public class MyIntentService extends IntentService {
     }
 
     public static void startActionBaz(Context context, String param1, String param2) {
-        Intent intent = new Intent(context, MyIntentService.class);
+        Intent intent = new Intent(context, IntentServices.class);
         intent.setAction(ACTION_BAZ);
         intent.putExtra(EXTRA_PARAM1, param1);
         intent.putExtra(EXTRA_PARAM2, param2);

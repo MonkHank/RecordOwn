@@ -1,8 +1,6 @@
-package com.monk.utils;
+package com.monk.commonutils;
 
-import com.alibaba.fastjson.util.IOUtils;
-import com.monk.commonutils.LogUtil;
-import com.monk.global.RecordOwnApplication;
+import android.content.Context;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +10,7 @@ import java.io.IOException;
 
 /**
  * 最好还是单例，因为还要设置有效时间，静态的话就不能设置时间了；
+ *
  * @author Kevin
  * @date 2017/8/15.
  */
@@ -24,9 +23,11 @@ public class FileCacheUtils {
         deadTime = validTime;
     }
 
-    /*** 30分钟有效期*/
-    public static void setCache(String url, String json) {
-        String cacheDir = RecordOwnApplication.mApplication.getCacheDir().getAbsolutePath();
+    /**
+     * 30分钟有效期
+     */
+    public static void setCache(Context context, String url, String json) {
+        String cacheDir = context.getCacheDir().getAbsolutePath();
         LogUtil.v(tag, "设置缓存：" + cacheDir + "\t/" + url);
         File cacheFile = new File(cacheDir, url);
         FileWriter fw = null;
@@ -45,9 +46,11 @@ public class FileCacheUtils {
         }
     }
 
-    /*** 读取写入缓存时候的缓存时间*/
-    public static long getCacheDeadTime(String url) {
-        File cacheDir = RecordOwnApplication.mApplication.getCacheDir();
+    /**
+     * 读取写入缓存时候的缓存时间
+     */
+    public static long getCacheDeadTime(Context context, String url) {
+        File cacheDir = context.getCacheDir();
         File cacheFile = new File(cacheDir, url);
         if (cacheFile.exists()) {
             BufferedReader br = null;
@@ -65,9 +68,11 @@ public class FileCacheUtils {
         return -1;
     }
 
-    /*** 30分钟有效期*/
-    public static String getCache(String url) {
-        File cacheDir = RecordOwnApplication.mApplication.getCacheDir();
+    /**
+     * 30分钟有效期
+     */
+    public static String getCache(Context context, String url) {
+        File cacheDir = context.getCacheDir();
         File cacheFile = new File(cacheDir, url);
         if (cacheFile.exists()) {
             BufferedReader br = null;
@@ -96,10 +101,12 @@ public class FileCacheUtils {
         return "";
     }
 
-    /*** 没有时间期限的缓存*/
-    public static void setCacheNoTime(String url, String text) {
+    /**
+     * 没有时间期限的缓存
+     */
+    public static void setCacheNoTime(Context context, String url, String text) {
         //  /data/data/包名/cache目录
-        String cacheDir = RecordOwnApplication.mApplication.getCacheDir().getAbsolutePath();
+        String cacheDir = context.getCacheDir().getAbsolutePath();
         LogUtil.v(tag, cacheDir + "\n设置缓存" + url);
         File cacheFile = new File(cacheDir, url);
         FileWriter fw = null;
@@ -115,8 +122,8 @@ public class FileCacheUtils {
         }
     }
 
-    public static String getCacheNoTime(String url) {
-        File cacheDir = RecordOwnApplication.mApplication.getCacheDir();
+    public static String getCacheNoTime(Context context, String url) {
+        File cacheDir = context.getCacheDir();
         File cacheFile = new File(cacheDir, url);
         if (cacheFile.exists()) {
             BufferedReader br = null;

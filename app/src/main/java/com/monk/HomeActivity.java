@@ -1,7 +1,9 @@
 package com.monk;
 
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,6 +17,7 @@ import com.monk.activity.LayoutInflaterActivity;
 import com.monk.activity.LoginActivity;
 import com.monk.aidldemo.R;
 import com.monk.base.BaseCompatActivity;
+import com.monk.broadcast.BroadcastReciver;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
 import com.monk.eventdispatch.EventDispatchActivity;
@@ -41,6 +44,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
     private List<HomeBean> list =new ArrayList<>();
+    private BroadcastReciver reciver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +76,8 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnRecyclerViewItemClickListener(this);
 
+        registScreenStatusReceiver();
+        monitorNetWork();
     }
 
     /**
@@ -103,11 +109,32 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
                 startActivity(LoginActivity.class);
                 break;
             case 6:
-                Process.killProcess(Process.myPid());
+//                Process.killProcess(Process.myPid());
+                break;
+            case 7:
+
                 break;
             default:
                 break;
         }
     }
 
+
+    private void registScreenStatusReceiver() {
+        reciver = new BroadcastReciver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_TIME_TICK);
+        filter.addAction(Intent.ACTION_DATE_CHANGED);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(reciver, filter);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(reciver);
+    }
 }

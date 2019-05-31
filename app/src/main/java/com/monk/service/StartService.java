@@ -28,7 +28,7 @@ public class StartService extends BaseService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.i(tag,simpleName+"：onStartCommand(Intent)");
-        return super.onStartCommand(intent, flags, START_STICKY);
+        return START_STICKY;
     }
 
     public static class DemoBinder extends Binder implements IBindInterface {

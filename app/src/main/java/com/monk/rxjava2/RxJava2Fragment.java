@@ -74,7 +74,7 @@ public class RxJava2Fragment extends BaseFragment implements View.OnClickListene
         LogUtil.i(tag,"onActivityCreated");
 //        TestRxjava2.getInstance().create();
 
-        subscribe = TestRxjava2.getInstance().mapOperate().subscribe(new Consumer<DouBanMovie>() {
+        subscribe = TestRxjava2.getInstance().mapOperate(mActivity).subscribe(new Consumer<DouBanMovie>() {
             @Override
             public void accept(DouBanMovie douBanMovie) throws Exception {
                 LogUtil.i(tag, "成功:" + douBanMovie.toString());

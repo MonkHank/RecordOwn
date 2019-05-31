@@ -1,10 +1,12 @@
 package com.monk.rxjava2;
 
+import android.content.Context;
+
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
-import com.monk.utils.FileCacheUtils;
+import com.monk.commonutils.FileCacheUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -109,19 +111,16 @@ public class TestRxjava2 {
 //        });
     }
 
-    public Observable<DouBanMovie> mapOperate() {
-        return Observable.create(new ObservableOnSubscribe<Response>() {
-            @Override
-            public void subscribe(ObservableEmitter<Response> e) throws Exception {
-                LogUtil.i(tag, "验证 execute 阻塞");
-                Request request = new Request.Builder()
-                        .url(Constant.GET_DOUBAN_URL)
-                        .get().build();
-                Call call = new OkHttpClient().newCall(request);
-                Response response = call.execute();
-                e.onNext(response);
-                LogUtil.i(tag, response.toString());
-            }
+    public Observable<DouBanMovie> mapOperate(Context context) {
+        return Observable.create((ObservableOnSubscribe<Response>) e -> {
+            LogUtil.i(tag, "验证 execute 阻塞");
+            Request request = new Request.Builder()
+                    .url(Constant.GET_DOUBAN_URL)
+                    .get().build();
+            Call call = new OkHttpClient().newCall(request);
+            Response response = call.execute();
+            e.onNext(response);
+            LogUtil.i(tag, response.toString());
         }).map(new Function<Response, DouBanMovie>() {
             @Override
             public DouBanMovie apply(Response response) throws Exception {
@@ -131,7 +130,7 @@ public class TestRxjava2 {
                         String string = body.string();
                         LogUtil.i(tag, string, false);
                         LogUtil.i(tag,"body");
-                        FileCacheUtils.setCache(tag, string);
+                        FileCacheUtils.setCache(context,tag, string);
                         return new Gson().fromJson(string, DouBanMovie.class);
                     }
                 }
@@ -150,12 +149,12 @@ public class TestRxjava2 {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<DouBanMovie> concatOperation() {
+    public Observable<DouBanMovie> concatOperation(Context context) {
         return Observable.concat(Observable.create(new ObservableOnSubscribe<DouBanMovie>() {
             @Override
             public void subscribe(ObservableEmitter<DouBanMovie> e) throws Exception {
                 LogUtil.e(tag, "create 当前线程：" + Thread.currentThread().getName());
-                String cache = FileCacheUtils.getCache(tag);
+                String cache = FileCacheUtils.getCache(context,tag);
                 if (!"".equals(cache)) {
                     LogUtil.v(tag, "读缓存数据");
                     DouBanMovie douBanMovie = JSON.parseObject(cache, DouBanMovie.class);
@@ -165,7 +164,7 @@ public class TestRxjava2 {
                     e.onComplete();
                 }
             }
-        }), mapOperate())
+        }), mapOperate(context))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

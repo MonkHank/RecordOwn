@@ -1,4 +1,4 @@
-package com.monk.aidldemo.design;
+package com.monk.designmode.adapter;
 
 /**
  * @author monk
