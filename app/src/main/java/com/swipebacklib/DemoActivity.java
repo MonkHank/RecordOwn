@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 
 import com.monk.aidldemo.R;
 import com.monk.commonutils.LogUtil;
-import com.monk.utils.ThreadManager;
+import com.monk.commonutils.ThreadPoolManager;
 import com.swipebacklib.app.SwipeBackActivity;
 
 
@@ -85,7 +85,7 @@ public class DemoActivity extends SwipeBackActivity implements View.OnClickListe
             }
         });
 
-        ThreadManager.getThreadPool().execute(() -> {
+        ThreadPoolManager.getInstance().execute(() -> {
 //                Looper.prepare();
 //                ToastUtils.showToast(DemoActivity.this, "测绘looper函数");
             // onResume()方法还没执行，不会检测是否在子线程哦

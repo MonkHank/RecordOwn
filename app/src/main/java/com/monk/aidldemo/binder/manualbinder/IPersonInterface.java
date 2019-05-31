@@ -1,4 +1,4 @@
-package com.monk.aidldemo.binder;
+package com.monk.aidldemo.binder.manualbinder;
 
 import android.os.IInterface;
 
@@ -7,7 +7,8 @@ import com.monk.aidldemo.bean.Person;
 import java.util.List;
 
 /**
- * 定义一个远程服务接口
+ * ① 定义一个远程服务接口，继承自 IInterface
+ *
  * @author monk
  * @date 2019-01-15
  */

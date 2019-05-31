@@ -1,33 +1,32 @@
 package com.monk;
 
 import android.os.Bundle;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.monk.activity.AidlFullscreenActivity;
+import com.monk.activity.LayoutInflaterActivity;
 import com.monk.activity.LoginActivity;
-import com.monk.activity.ScrollingActivity;
 import com.monk.aidldemo.R;
 import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
 import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.ui.HomeBean;
 import com.monk.ui.adapter.HomeAdapter;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener2;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author monk
@@ -37,35 +36,16 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         OnRecyclerViewItemClickListener2 {
 
     @BindView(R.id.drawerLayout) DrawerLayout drawerLayout;
-    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.navigationView) NavigationView navigationView;
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
-    private List<String> list = Arrays.asList("ManiActivity", "JniActivity", "AidlDemo",
-            "ScrollbarActivity","EventDispatchActivity","DemoLoginActivity",
-            "1","2","3",
-            "4","5","6",
-            "7","8","9",
-            "10","11","12",
-            "13","14","15",
-            "16","17","18",
-            "19","20");
+    private List<HomeBean> list =new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // 设置导航默认是箭头，id是android.R.id.home
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            // 将箭头设置成我们的图片
-//            actionBar.setHomeAsUpIndicator();
-        }
+        initToolbar(R.layout.activity_home);
 
         navigationView.setCheckedItem(R.id.nav_call);
         View headerView = navigationView.getHeaderView(0);
@@ -79,51 +59,55 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
             return true;
         });
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
 
+        list.add(new HomeBean(0,MainActivity.class.getSimpleName()));
+        list.add(new HomeBean(4,LoginActivity.class.getSimpleName()));
+        list.add(new HomeBean(1,AidlFullscreenActivity.class.getSimpleName()));
+        list.add(new HomeBean(2,LayoutInflaterActivity.class.getSimpleName()));
+        list.add(new HomeBean(3,EventDispatchActivity.class.getSimpleName()));
+        list.add(new HomeBean(6,"kill MySelf"));
         HomeAdapter homeAdapter = new HomeAdapter(this, list,this);
-        // setAdapter 为异步操作
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnRecyclerViewItemClickListener(this);
+
     }
 
     /**
-     * 不会执行，已被第二种方式拦截
+     * RecyclerView 的 itemClick 回调；不会执行，已被第二种方式拦截
      * @param view
      */
     @Override
     public void onRecyclerViewItemClick(View view) {
-        LogUtil.i(tag,"view:"+view);
+        LogUtil.i(simpleName,"view:"+view);
     }
 
     @Override
     public void onRecyclerViewItemClick(View view, int position) {
-        LogUtil.i(tag,"position="+position);
-        switch(position){
+        HomeBean bean = list.get(position);
+        switch(bean.Tag){
             case 0:
                 startActivity(MainActivity.class);
                 break;
-            case 2:
+            case 1:
                 startActivity(AidlFullscreenActivity.class);
                 break;
-            case 3:
-                ScrollingActivity.intoHere(mContext);
+            case 2:
+                LayoutInflaterActivity.intoHere(mContext);
                 break;
-            case 4:
+            case 3:
                 startActivity(EventDispatchActivity.class);
                 break;
-            case 5:
+            case 4:
                 startActivity(LoginActivity.class);
+                break;
+            case 6:
+                Process.killProcess(Process.myPid());
                 break;
             default:
                 break;
         }
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return super.onSupportNavigateUp();
-    }
 }

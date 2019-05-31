@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Process;
 import android.support.multidex.MultiDexApplication;
 
+import com.monk.commonutils.CrashHandler;
 import com.monk.commonutils.LogUtil;
 
 /**
@@ -27,6 +28,8 @@ public class RecordOwnApplication extends MultiDexApplication {
         context = getApplicationContext();
         handler = new Handler();
         mainThreadId = Process.myPid();
+
+        CrashHandler.getInstance(this).init();
 
         long occupyMemory = Runtime.getRuntime().totalMemory();
         long maxMemory = Runtime.getRuntime().maxMemory();

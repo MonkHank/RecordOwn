@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.monk.aidldemo.R;
 import com.monk.commonutils.LogUtil;
+import com.monk.ui.HomeBean;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener2;
 
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private final LayoutInflater layoutInflater;
     private Context context;
-    private List<String> list;
+    private List<HomeBean> list;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
     private OnRecyclerViewItemClickListener2 onRecyclerViewItemClickListener2;
 
@@ -33,7 +34,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         this.onRecyclerViewItemClickListener = onRecyclerViewItemClickListener;
     }
 
-    public HomeAdapter(Context context, List<String> list, OnRecyclerViewItemClickListener2 onRecyclerViewItemClickListener2) {
+    public HomeAdapter(Context context, List<HomeBean> list, OnRecyclerViewItemClickListener2 onRecyclerViewItemClickListener2) {
         this.context = context;
         this.list = list;
         this.onRecyclerViewItemClickListener2 = onRecyclerViewItemClickListener2;
@@ -54,8 +55,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String str = list.get(position);
-        holder.tvContactName.setText(str);
+        HomeBean bean = list.get(position);
+        holder.tvContactName.setText(bean.Name);
         int adapterPosition = holder.getAdapterPosition();
         int layoutPosition = holder.getLayoutPosition();
         LogUtil.i("HomeAdapter","adapterPosition="+adapterPosition+"\tlayoutPosition="+layoutPosition+"\tposition="+position);

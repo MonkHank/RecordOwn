@@ -27,7 +27,8 @@ public class ThreadPoolManager {
     public static class ThreadPool{
         private final ExecutorService executorService;
         ThreadPool() {
-            executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+            executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 0,
+                    TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
         }
 
         public void execute(Runnable r) {

@@ -13,16 +13,15 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.AppCompatButton;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.monk.aidldemo.R;
 import com.monk.aidldemo.bean.Person;
-import com.monk.aidldemo.binder.IPersonInterface;
-import com.monk.aidldemo.binder.ManualBinder;
+import com.monk.aidldemo.binder.AIDLService;
+import com.monk.aidldemo.binder.manualbinder.IPersonInterface;
+import com.monk.aidldemo.binder.manualbinder.ManualBinder;
 import com.monk.aidldemo.binder.messenger.MyMessengerService;
-import com.monk.aidldemo.service.MyAidlService;
 import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 
@@ -67,20 +66,13 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
         }
     };
     private boolean mVisible;
-    private final Runnable mHideRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
+    private final Runnable mHideRunnable = this::hide;
+
+    private final View.OnTouchListener mDelayHideTouchListener = (view, motionEvent) -> {
+        if (AUTO_HIDE) {
+            delayedHide(AUTO_HIDE_DELAY_MILLIS);
         }
-    };
-    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
-        }
+        return false;
     };
 
     /**
@@ -89,9 +81,10 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtil.v(simpleName,"service:"+service);
             //连接后拿到 Binder，转换成 AIDL，在不同进程会返回个代理
-            iAidlInterface = ManualBinder.asInterface(service);
-//            IAidlInterface iAidlInterface = MyBinder.asInterface(service);
+            iPersonInterface = ManualBinder.asInterface(service);
+//            IAidlInterface iAidlInterface = AIDLBinder.asInterface(service);
             try {
                 service.linkToDeath(mDeathRecipient,0);
             } catch (RemoteException e) {
@@ -101,7 +94,7 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            iAidlInterface = null;
+            iPersonInterface = null;
         }
     };
 
@@ -156,24 +149,24 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
     private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
         @Override
         public void binderDied() {
-            if (iAidlInterface == null) {
+            if (iPersonInterface == null) {
                 return;
             }
-            iAidlInterface.asBinder().unlinkToDeath(mDeathRecipient, 0);
-            iAidlInterface=null;
-            Intent intent1 = new Intent(getApplicationContext(), MyAidlService.class);
+            iPersonInterface.asBinder().unlinkToDeath(mDeathRecipient, 0);
+            iPersonInterface =null;
+            Intent intent1 = new Intent(getApplicationContext(), AIDLService.class);
             bindService(intent1, mConnection, BIND_AUTO_CREATE);
         }
     };
 
-    private IPersonInterface iAidlInterface;
+    private IPersonInterface iPersonInterface;
     private AppCompatButton aidlButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_fullscreen);
+        initToolbar(R.layout.activity_fullscreen);
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -183,19 +176,14 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
 
 
         // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });
+        mContentView.setOnClickListener(view -> toggle());
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
-        Intent intent1 = new Intent(getApplicationContext(), MyAidlService.class);
+        Intent intent1 = new Intent(getApplicationContext(), AIDLService.class);
         bindService(intent1, mConnection, BIND_AUTO_CREATE);
 
         Intent intent2 = new Intent(getApplicationContext(), MyMessengerService.class);
@@ -209,8 +197,8 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
                 Random random = new Random();
                 Person person = new Person("shixin" + random.nextInt(10));
                 try {
-                    iAidlInterface.addPerson(person);
-                    List<Person> personList = iAidlInterface.getPersonList();
+                    iPersonInterface.addPerson(person);
+                    List<Person> personList = iPersonInterface.getPersonList();
                     mContentView.setText(personList.toString());
                 } catch (RemoteException e) {
                     e.printStackTrace();

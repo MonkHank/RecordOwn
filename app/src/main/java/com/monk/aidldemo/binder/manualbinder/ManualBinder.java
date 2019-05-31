@@ -1,16 +1,18 @@
-package com.monk.aidldemo.binder;
+package com.monk.aidldemo.binder.manualbinder;
 
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.monk.aidldemo.bean.Person;
+import com.monk.commonutils.LogUtil;
 
 import java.util.List;
 
 /**
  * 定义一个 本地 Binder，实现远程服务接口定制方法
- * ① 写个远程接口继承自IInterface，写个本地binder类实现它
+ * 写个远程接口继承自IInterface，写个本地 binder 类实现它
+ *
  * @author monk
  * @date 2019-01-15
  */
@@ -23,16 +25,20 @@ public class ManualBinder extends Binder implements IPersonInterface {
     }
 
     /**
-     * ② 手写的binder定义个asInterface(IBinder)方法
-     * @param obj
+     * ② 手写的 binder 定义个 asInterface(IBinder) 方法
+     *
+     * @param obj 1. serviceConnection 的 onServiceConnected(IBinder service) 方法中的 service；
+     *            2. 也就是 ManualBinder；
+     *            3. 还有 Proxy 也是
      * @return
      */
     public static IPersonInterface asInterface(android.os.IBinder obj) {
+        LogUtil.v("ManualBinder","ManualBinder obj="+obj);
         if ((obj == null)) {
             return null;
         }
         android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
-        if (((iin != null) && (iin instanceof IPersonInterface))) {
+        if (((iin instanceof IPersonInterface))) {
             return (IPersonInterface) iin;
         }
         return new Proxy(obj);
@@ -45,7 +51,7 @@ public class ManualBinder extends Binder implements IPersonInterface {
 
     @Override
     public List<Person> getPersonList() throws RemoteException {
-         return mPersons;
+        return mPersons;
     }
 
     @Override
@@ -55,7 +61,8 @@ public class ManualBinder extends Binder implements IPersonInterface {
 
     /**
      * ③ 重写onTransact(Parcel,Parcel,int)方法
-     * 是运行在另外一个进程中的方法，也就是Binder线程中执行的方法
+     * 是运行在另外一个进程中的方法，也就是 Binder 线程中执行的方法
+     *
      * @param code
      * @param data
      * @param reply
@@ -65,6 +72,7 @@ public class ManualBinder extends Binder implements IPersonInterface {
      */
     @Override
     public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException {
+        LogUtil.i("ManualBinder","ManualBinder code="+code);
         java.lang.String descriptor = DESCRIPTOR;
         switch (code) {
             case INTERFACE_TRANSACTION: {
