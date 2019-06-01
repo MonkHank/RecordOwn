@@ -45,6 +45,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
 
     private List<HomeBean> list =new ArrayList<>();
     private BroadcastReciver reciver;
+    private boolean isRegisterReceiver;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,17 +67,18 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         GridLayoutManager layoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
 
-        list.add(new HomeBean(0,MainActivity.class.getSimpleName()));
-        list.add(new HomeBean(4,LoginActivity.class.getSimpleName()));
+        list.add(new HomeBean(0,"Fragment"));
+        list.add(new HomeBean(4,"Service"));
         list.add(new HomeBean(1,AidlFullscreenActivity.class.getSimpleName()));
         list.add(new HomeBean(2,LayoutInflaterActivity.class.getSimpleName()));
         list.add(new HomeBean(3,EventDispatchActivity.class.getSimpleName()));
         list.add(new HomeBean(6,"kill MySelf"));
+        list.add(new HomeBean(7,"unregisterReceiver"));
         HomeAdapter homeAdapter = new HomeAdapter(this, list,this);
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnRecyclerViewItemClickListener(this);
 
-        registScreenStatusReceiver();
+        isRegisterReceiver = registScreenStatusReceiver();
         monitorNetWork();
     }
 
@@ -112,7 +114,10 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
 //                Process.killProcess(Process.myPid());
                 break;
             case 7:
-
+                if (isRegisterReceiver) {
+                    unregisterReceiver(reciver);
+                    isRegisterReceiver =false;
+                }
                 break;
             default:
                 break;
@@ -120,7 +125,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
     }
 
 
-    private void registScreenStatusReceiver() {
+    private boolean registScreenStatusReceiver() {
         reciver = new BroadcastReciver();
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_ON);
@@ -129,6 +134,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         filter.addAction(Intent.ACTION_DATE_CHANGED);
         filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(reciver, filter);
+        return true;
     }
 
 

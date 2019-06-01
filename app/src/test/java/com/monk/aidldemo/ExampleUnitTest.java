@@ -583,4 +583,10 @@ public class ExampleUnitTest {
     }
 
 
+    @Test
+    public void testStringFormat() {
+        // 输出 PRAGMA foreign_keys = ON
+        String query = String.format("PRAGMA foreign_keys = %s", "ON");
+        System.out.println(query);
+    }
 }
