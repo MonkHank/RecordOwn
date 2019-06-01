@@ -44,7 +44,7 @@ public class Test {
             }
         };
 
-        ObservableCreator<String> creator=new ObservableCreator<>(observableOnSubscribe);
+        ObservableCreator<String> creator = new ObservableCreator<>(observableOnSubscribe);
 
         creator.subscribeActual(new Observer<String>() {
             @Override

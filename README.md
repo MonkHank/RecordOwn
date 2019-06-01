@@ -1,4 +1,7 @@
 # some record daily
+## 一些习惯
+1. IDE 自带列方向 Editor 竖线，那么超过的方法形参进行换行不换行？不换！！！
+
 
 ## 一些基本原理
 1. [事件分发处理机制](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme06.md)  

@@ -4,34 +4,40 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.ComponentName;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.monk.aidldemo.R;
+import com.monk.base.BaseCompatActivity;
+import com.monk.commonutils.LogUtil;
+import com.monk.commonutils.ToastUtils;
 import com.monk.retrofit.RetrofitUtils;
+import com.monk.service.StartService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,61 +46,32 @@ import static android.Manifest.permission.READ_CONTACTS;
  * @author monk
  * @date 2019-1-17 14:01:46
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends BaseCompatActivity implements LoaderCallbacks<Cursor> {
+    @BindView(R.id.email) AutoCompleteTextView mEmailView;
+    @BindView(R.id.password) EditText mPasswordView;
+    @BindView(R.id.login_progress) View mProgressView;
+    @BindView(R.id.login_form) View mLoginFormView;
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
     private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+    private static final String[] DUMMY_CREDENTIALS = new String[]{"foo@example.com:hello", "bar@example.com:world"};
     private UserLoginTask mAuthTask = null;
-
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
+    private boolean isServiceBind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        initToolbar(R.layout.activity_login);
+
         populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mPasswordView.setOnEditorActionListener((textView, id, keyEvent) -> {
+            if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 attemptLogin();
+                return true;
             }
+            return false;
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        findViewById(R.id.email_sign_in_button).setOnClickListener(view -> attemptLogin());
 
         RetrofitUtils instance = RetrofitUtils.getInstance();
         instance.create();
@@ -105,7 +82,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (!mayRequestContacts()) {
             return;
         }
-
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -118,13 +94,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
             Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
+                    .setAction(android.R.string.ok, v -> requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS));
         } else {
             requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
         }
@@ -352,5 +322,51 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
+    @OnClick({R.id.btStartService, R.id.btStopService, R.id.btBindService, R.id.btUnbindService})
+    public void relativeService(View v) {
+        Intent myStartService = new Intent(mContext, StartService.class);
+        switch(v.getId()){
+            case R.id.btStartService:
+                startService(myStartService);
+                break;
+            case R.id.btStopService:
+                boolean isStopService = stopService(myStartService);
+                LogUtil.v(simpleName,"isStopService:"+isStopService);
+                break;
+            case R.id.btBindService:
+                isServiceBind = bindService(myStartService, serviceConnection, BIND_AUTO_CREATE);
+                break;
+            case R.id.btUnbindService:
+                if (isServiceBind) {
+                    unbindService(serviceConnection);
+                }else {
+                    ToastUtils.showToast(mContext,"已经解绑过了");
+                }
+                break;
+             default:
+                break;
+        }
+    }
+
+    ServiceConnection serviceConnection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtil.v(simpleName,"componentName:"+name+"\tIBinder:"+service);
+            StartService.DemoBinder demoBinder= (StartService.DemoBinder) service;
+            demoBinder.execute();
+        }
+
+        /**
+         * 类 ServiceConnection 中的 onServiceDisconnected() 方法在正常情况下是不被调用的，
+         * 它的调用时机是当Service服务被异外销毁时，例如内存的资源不足时.
+         *
+         * @param name Service
+         */
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtil.e(simpleName,"componentName:"+name);
+        }
+    };
 }
 

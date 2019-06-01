@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.monk.activity.LayoutInflaterActivity">
+
+    <include layout="@layout/appbar_toolbar"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skipToOtherApp"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btSkip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skipToOtherApp2"/>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btSkip3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skipToOtherApp2"/>
+</LinearLayout>

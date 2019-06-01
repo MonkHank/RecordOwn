@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,24 +8,47 @@
     android:layout_height="match_parent"
     tools:context="com.monk.MainActivity">
 
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/appbar_toolbar"/>
 
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:text="@string/title_home"
+        android:padding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/appbar"/>
 
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btTestAttach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试 FragmentTransaction 的 attach()和 detach()"
+        app:layout_constraintLeft_toRightOf="@+id/message"
+        app:layout_constraintTop_toBottomOf="@+id/appbar"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试重复add 或者 replace"
+        app:layout_constraintLeft_toRightOf="@+id/message"
+        app:layout_constraintTop_toBottomOf="@+id/btTestAttach"
+        />
 
     <FrameLayout
+        android:background="@drawable/rect_shape_a"
         android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAdd"
+        app:layout_constraintWidth_percent=".9"
         />
 
     <android.support.design.widget.BottomNavigationView
@@ -36,6 +59,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>
