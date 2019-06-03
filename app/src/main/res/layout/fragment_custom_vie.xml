@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     tools:context="com.monk.customview.fragment.CustomViewFragment">
 
-    <com.monk.customview.PercentCircleView
+    <com.peoplesafe.views.PercentCircleView
         android:id="@+id/percentCircleView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <com.monk.customview.MaxHeightScrollView
+        <com.peoplesafe.views.MaxHeightScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/large_text"/>
-        </com.monk.customview.MaxHeightScrollView>
+        </com.peoplesafe.views.MaxHeightScrollView>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btNext"

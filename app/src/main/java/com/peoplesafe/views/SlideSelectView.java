@@ -1,4 +1,4 @@
-package com.monk.customview.frompps;
+package com.peoplesafe.views;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;

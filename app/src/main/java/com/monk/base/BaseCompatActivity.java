@@ -151,6 +151,7 @@ public class BaseCompatActivity<T extends BaseCompatActivity> extends AppCompatA
         LogUtil.i(tag, simpleName + "：onResume()");
     }
 
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

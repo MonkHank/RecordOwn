@@ -4,7 +4,7 @@
              android:layout_height="match_parent"
              tools:context="com.monk.customview.fragment.CustomViewFragment2">
 
-   <com.monk.customview.QQListView
+   <com.peoplesafe.views.QQListView
        android:id="@+id/qqListView"
        android:layout_width="match_parent"
        android:layout_height="match_parent"/>

@@ -1,4 +1,4 @@
-package com.monk.customview;
+package com.peoplesafe.views;
 
 import android.app.Activity;
 import android.content.Context;

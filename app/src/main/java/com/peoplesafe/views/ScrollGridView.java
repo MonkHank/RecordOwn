@@ -1,4 +1,4 @@
-package com.monk.customview.frompps;
+package com.peoplesafe.views;
 
 import android.content.Context;
 import android.util.AttributeSet;

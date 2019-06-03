@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.monk.aidldemo.R;
 import com.monk.commonutils.LogUtil;
-import com.monk.customview.PercentCircleView;
+import com.peoplesafe.PercentCircleView;
 import com.monk.base.BaseFragment;
 import com.monk.global.Constant;
 
