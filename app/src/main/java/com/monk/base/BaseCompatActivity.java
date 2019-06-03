@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -243,6 +244,11 @@ public class BaseCompatActivity<T extends BaseCompatActivity> extends AppCompatA
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         LogUtil.v(tag, simpleName + "：onConfigurationChanged() -- " + newConfig.orientation);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
     }
 
     protected void monitorNetWork() {

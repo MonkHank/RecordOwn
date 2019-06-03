@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.monk.aidldemo.R;
-import com.monk.commonutils.LogUtil;
-import com.peoplesafe.PercentCircleView;
 import com.monk.base.BaseFragment;
+import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
+import com.peoplesafe.views.PercentCircleView;
 
 /**
  * @author monk

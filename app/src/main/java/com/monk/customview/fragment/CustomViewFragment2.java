@@ -11,10 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.monk.aidldemo.R;
-import com.monk.commonutils.LogUtil;
-import com.peoplesafe.QQListView;
 import com.monk.base.BaseFragment;
+import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
+import com.peoplesafe.views.QQListView;
 
 /**
  * @author monk
