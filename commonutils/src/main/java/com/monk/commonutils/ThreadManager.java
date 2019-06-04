@@ -19,7 +19,8 @@ public class ThreadManager {
             synchronized (ThreadManager.class) {
                 if (mThreadPool == null) {
                     int threadCount = 10;
-                    mThreadPool = new ThreadPool(threadCount, threadCount, 1L);
+                    int cpuCount = Runtime.getRuntime().availableProcessors();
+                    mThreadPool = new ThreadPool(cpuCount+1, threadCount, 1L);
                 }
             }
         }

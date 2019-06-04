@@ -1,5 +1,6 @@
 package com.monk.eventdispatch;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -45,6 +46,13 @@ public class EventDispatchActivity extends BaseCompatActivity {
             }).start();
         });
 
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
     }
 
     @Override
