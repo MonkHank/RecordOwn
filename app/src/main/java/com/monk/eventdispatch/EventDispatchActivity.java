@@ -1,5 +1,6 @@
 package com.monk.eventdispatch;
 
+import android.animation.ValueAnimator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +30,7 @@ public class EventDispatchActivity extends BaseCompatActivity {
         super.onCreate(savedInstanceState);
         initToolbar(R.layout.activity_event_dispatch);
 
+        simpleName=simpleName+"：";
         btMessage.setOnClickListener(v -> {
             new Thread(() -> {
                 Looper.prepare();
@@ -53,6 +55,19 @@ public class EventDispatchActivity extends BaseCompatActivity {
 
             }
         });
+
+        animatorUses();
+    }
+
+    void animatorUses() {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 10);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                LogUtil.i(tag,simpleName+"animation:"+animation.getAnimatedValue());
+            }
+        });
+        valueAnimator.start();
     }
 
     @Override
