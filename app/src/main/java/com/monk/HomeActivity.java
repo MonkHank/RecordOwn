@@ -20,7 +20,7 @@ import com.monk.base.BaseCompatActivity;
 import com.monk.broadcast.BroadcastReciver;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
-import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.eventdispatch.EventAndViewActivity;
 import com.monk.ui.HomeBean;
 import com.monk.ui.adapter.HomeAdapter;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener;
@@ -71,7 +71,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         list.add(new HomeBean(4,"Service"));
         list.add(new HomeBean(1,AidlFullscreenActivity.class.getSimpleName()));
         list.add(new HomeBean(2,LayoutInflaterActivity.class.getSimpleName()));
-        list.add(new HomeBean(3,EventDispatchActivity.class.getSimpleName()));
+        list.add(new HomeBean(3, EventAndViewActivity.class.getSimpleName()));
         list.add(new HomeBean(6,"kill MySelf"));
         list.add(new HomeBean(7,"unregisterReceiver"));
         HomeAdapter homeAdapter = new HomeAdapter(this, list,this);
@@ -105,7 +105,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
                 LayoutInflaterActivity.intoHere(mContext);
                 break;
             case 3:
-                startActivity(EventDispatchActivity.class);
+                startActivity(EventAndViewActivity.class);
                 break;
             case 4:
                 startActivity(LoginActivity.class);
