@@ -11,14 +11,14 @@
 
 
 ## 一些三方框架
-1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/readme04.md)
+1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme04.md)
 
 ## 一些基本处理
 1. **HttpUrlConnection**  
 2. **SelectSort、BubbleSort**
 3. **LruCache**  
 5. LayoutInflater,onResume之后获取getTop有效 ，可参见[Window 和 Activity(View)之间的关系](#2)
-6. 生产者消费者，面向过程设计模式(https://github.com/MonkHank/RecordOwn/blob/master/readme08.md)
+6. [生产者消费者，面向过程设计模式](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme08.md)
 
 7. 原型模式 、builder模式  
 8. 委托模式，notification  
