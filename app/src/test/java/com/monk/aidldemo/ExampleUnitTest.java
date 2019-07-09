@@ -17,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -588,5 +589,23 @@ public class ExampleUnitTest {
         // 输出 PRAGMA foreign_keys = ON
         String query = String.format("PRAGMA foreign_keys = %s", "ON");
         System.out.println(query);
+    }
+
+    @Test
+    public void testArrayListAndLinkedList() {
+        Random r = new Random();
+        int next = r.nextInt(2);
+        System.out.println(next);
+    }
+
+
+    void getRepeatCharacter(String[] letters) {
+        if (letters==null||letters.length==0)
+            return;
+        for (String letter : letters) {
+            for (int i = 0; i < letter.length(); i++) {
+                char c = letter.charAt(i);
+            }
+        }
     }
 }
