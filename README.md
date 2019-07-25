@@ -8,6 +8,7 @@
 2. <span id=2>[Window 和 Activity(View)之间的关系](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme07.md)
 3. [反射的一些常见用法](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme23.md)
 4. [Android客户端实现Binder](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme10.md)
+5. [读Android源码之View分析](https://blog.csdn.net/handsome_926/article/details/80053601)，View 生命周期
 
 
 ## 一些三方框架
