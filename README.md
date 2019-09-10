@@ -8,6 +8,8 @@
 2. <span id=2>[Window 和 Activity(View)之间的关系](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme07.md)
 3. [反射的一些常见用法](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme23.md)
 4. [Android客户端实现Binder](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme10.md)
+5. [LayoutInflater.inflate函数理解](https://blog.csdn.net/u012702547/article/details/52628453)
+6. [单例的8种写法](https://www.cnblogs.com/zhaoyan001/p/6365064.html)
 
 
 ## 一些三方框架
