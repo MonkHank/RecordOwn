@@ -127,68 +127,68 @@ task(name:'apkcopy'){
     }
 }*/
 /**=========================== Task ==========================================*/
-println '---------- Task------------------'
+//println '---------- Task------------------'
 // 直接通过task函数去创建，推荐这种方式
-task helloTask(group: 'imooc', description: 'task study') {
-    println 'i am helloTask.'
-    // 第一种方式指定执行阶段
-    doFirst {
-        println "the task group is ${group}"
-    }
-    doFirst {}
-}
+//task helloTask(group: 'imooc', description: 'task study') {
+//    println 'i am helloTask.'
+//    // 第一种方式指定执行阶段
+//    doFirst {
+//        println "the task group is ${group}"
+//    }
+//    doFirst {}
+//}
 // 第二种方式指定执行阶段
-helloTask.doFirst {
-    println "the task description is ${description}"
-}
-// TaskContainer去创建Task
-this.tasks.create(name: 'helloTask2') {
-    println 'i am task2'
-    setGroup('imooc')
-    setDescription('task study')
-}
+//helloTask.doFirst {
+//    println "the task description is ${description}"
+//}
+//// TaskContainer去创建Task
+//this.tasks.create(name: 'helloTask2') {
+//    println 'i am task2'
+//    setGroup('imooc')
+//    setDescription('task study')
+//}
 
 // 计算build执行时长
-def startBuildTime, endBuildTime
-this.afterEvaluate { Project project ->
-    // 保证要找的task已经配置完毕，preBuild是第一个执行的task
-    def preBuildTask = project.tasks.getByName('preBuild')
-    preBuildTask.doFirst {
-        startBuildTime = System.currentTimeMillis()
-        println "the start time is ${startBuildTime}"
-    }
-    def buildTask = project.tasks.getByName('build')
-    buildTask.doLast {
-        endBuildTime = System.currentTimeMillis()
-        // 执行阶段的耗时,占了一大半，开发调试的task可以关闭掉，这个小技巧可以省点构建时间
-        println "the build time is ${endBuildTime - startBuildTime}"
-    }
-}
+//def startBuildTime, endBuildTime
+//this.afterEvaluate { Project project ->
+//    // 保证要找的task已经配置完毕，preBuild是第一个执行的task
+//    def preBuildTask = project.tasks.getByName('preBuild')
+//    preBuildTask.doFirst {
+//        startBuildTime = System.currentTimeMillis()
+//        println "the start time is ${startBuildTime}"
+//    }
+//    def buildTask = project.tasks.getByName('build')
+//    buildTask.doLast {
+//        endBuildTime = System.currentTimeMillis()
+//        // 执行阶段的耗时,占了一大半，开发调试的task可以关闭掉，这个小技巧可以省点构建时间
+//        println "the build time is ${endBuildTime - startBuildTime}"
+//    }
+//}
 
 /* ----------------- task依赖讲解 -----------------------*/
 println '------------task 依赖讲解----------------------'
-task taskX {
-    doLast {
-        println 'taskX'
-    }
-}
-task taskY {
-    doLast {
-        println 'taskY'
-    }
-}
+//task taskX {
+//    doLast {
+//        println 'taskX'
+//    }
+//}
+//task taskY {
+//    doLast {
+//        println 'taskY'
+//    }
+//}
 
-task taskZ(dependsOn: [taskX, taskY]) {
-    // 第二种方式依赖，先去掉上面的taskX,taskY依赖
-    /* dependsOn this.tasks.findAll { task ->
-         return task.name.startsWith('lib')
-     }*/
-    doLast {
-        println 'taskZ'
-    }
-}
+//task taskZ(dependsOn: [taskX, taskY]) {
+//    // 第二种方式依赖，先去掉上面的taskX,taskY依赖
+//    /* dependsOn this.tasks.findAll { task ->
+//         return task.name.startsWith('lib')
+//     }*/
+//    doLast {
+//        println 'taskZ'
+//    }
+//}
 // 建议使用上一种方式
-taskZ.dependsOn(taskX, taskY)
+//taskZ.dependsOn(taskX, taskY)
 
 // 动态依赖 << 等效于 doLast，但还是建议使用doLast
 //task lib1 << {
@@ -202,137 +202,137 @@ taskZ.dependsOn(taskX, taskY)
 //}
 
 // 实际应用中参考commonlibrary release.xml文件，输出版本信息
-task handleReleaseFile {
-    def srcFile = file('release.xml')
-    def desFile = new File(this.buildDir, 'generated/release/')
-    doLast {
-        println '开始解析对应的xml文件...'
-        desFile.mkdir()
-        def releases = new XmlParser().parse(srcFile)
-        releases.release.each { releaseNode ->
-            // 解析每个release结点的内容
-            def name = releaseNode.name.text()
-            def versionCode = releaseNode.versionCode.text()
-            def versionInfo = releaseNode.versionInfo.text()
-            // 创建文件并写入结点数据
-            def destFile = new File(destDir, "release-${name}.text")
-            // 闭包的形式不需要处理流的关闭，已经做过了
-            destFile.withWriter { writer ->
-                writer.write("${name}->${versionCode}->${versionInfo}")
-            }
-        }
-    }
-}
+//task handleReleaseFile {
+//    def srcFile = file('release.xml')
+//    def desFile = new File(this.buildDir, 'generated/release/')
+//    doLast {
+//        println '开始解析对应的xml文件...'
+//        desFile.mkdir()
+//        def releases = new XmlParser().parse(srcFile)
+//        releases.release.each { releaseNode ->
+//            // 解析每个release结点的内容
+//            def name = releaseNode.name.text()
+//            def versionCode = releaseNode.versionCode.text()
+//            def versionInfo = releaseNode.versionInfo.text()
+//            // 创建文件并写入结点数据
+//            def destFile = new File(destDir, "release-${name}.text")
+//            // 闭包的形式不需要处理流的关闭，已经做过了
+//            destFile.withWriter { writer ->
+//                writer.write("${name}->${versionCode}->${versionInfo}")
+//            }
+//        }
+//    }
+//}
 
 // 测试上面task
-task handleReleaseFileTest(dependsOn: handleReleaseFile) {
-    def dir = fileTree(this.buildDir.path + 'generated/release/')
-    doLast {
-        dir.each {
-            println "the file name is: ${it}"
-        }
-        println '输出完成...'
-    }
-}
+//task handleReleaseFileTest(dependsOn: handleReleaseFile) {
+//    def dir = fileTree(this.buildDir.path + 'generated/release/')
+//    doLast {
+//        dir.each {
+//            println "the file name is: ${it}"
+//        }
+//        println '输出完成...'
+//    }
+//}
 
 /* ----------------- task 输入输出 -----------------------*/
 println '------------task 输入输出----------------------'
 
-ext{
-    versionName = '1.0.0'
-    versionCode='100'
-    vsersionInfo='App的第1个版本'
-    destFile = file('release.xml')
-    if (destFile != null && !destFile.exists()) {
-        destFile.createNewFile()
-    }
-}
+//ext{
+//    versionName = '1.0.0'
+//    versionCode='100'
+//    vsersionInfo='App的第1个版本'
+//    destFile = file('release.xml')
+//    if (destFile != null && !destFile.exists()) {
+//        destFile.createNewFile()
+//    }
+//}
 
-task writeTask{
-    // 为task指定输入
-    inputs.property('versionCode',this.versionCode)
-    inputs.property('versionName',this.versionName)
-    inputs.property('vsersionInfo',this.vsersionInfo)
-    // 为task指定输出
-    outputs.file destFile
-    // 指定输入、输出后，执行
-    doLast{
-        def data= inputs.getProperties()
-        File file = outputs.getFiles().getSingleFile()
-        // 将map转化为实体对象
-        def versionMsg = new VersionMsg(data)
-        // 将实体对象转成xml，写入sw中
-        def sw = new StringWriter()
-        def xmlBuilder = new MarkupBuilder(sw)
-        if (file.text != null && file.text.size() <= 0) {
-            // 文件中没有内容
-            xmlBuilder.release{
-                release{
-                    // 全部写进sw
-                    versionCode(versionMsg.versionCode)
-                    versionName(versionMsg.versionName)
-                    versionInfo(versionMsg.versionInfo)
-                }
-            }
-            file.withWriter {writer->writer.append(sw.toString())}
-        }else {
-            xmlBuilder.release{
-                versionCode(versionMsg.versionCode)
-                versionName(versionMsg.versionName)
-                versionInfo(versionMsg.versionInfo)
-            }
-            // 将生成的xml数据插入到根节点之前
-            def lines=file.readLines()
-            def lengths=lines.size()-1
-            file.withWriter {writer->
-                lines.eachWithIndex { String line, int index ->
-                    if (index != lengths) {
-                        writer.append(line+'\r\n')
-                    }else if (index == lengths) {
-                        writer.append('\r\r\n'+sw.toString()+'\r\n')
-                        writer.append(lines.get(lengths))
-                    }
-                }
-            }
-        }
-    }
-}
-class VersionMsg{
-    String versionName,versionCode,versionInfo
-}
-
-task readTask{
-    inputs.file destFile
-    doLast{
-        def file = inputs.files.singleFile
-        println file.text
-    }
-}
-
-task taskTest{
-    dependsOn readTask,writeTask
-    doLast{
-        println '输入输出任务结束'
-    }
-}
+//task writeTask{
+//    // 为task指定输入
+//    inputs.property('versionCode',this.versionCode)
+//    inputs.property('versionName',this.versionName)
+//    inputs.property('vsersionInfo',this.vsersionInfo)
+//    // 为task指定输出
+//    outputs.file destFile
+//    // 指定输入、输出后，执行
+//    doLast{
+//        def data= inputs.getProperties()
+//        File file = outputs.getFiles().getSingleFile()
+//        // 将map转化为实体对象
+//        def versionMsg = new VersionMsg(data)
+//        // 将实体对象转成xml，写入sw中
+//        def sw = new StringWriter()
+//        def xmlBuilder = new MarkupBuilder(sw)
+//        if (file.text != null && file.text.size() <= 0) {
+//            // 文件中没有内容
+//            xmlBuilder.release{
+//                release{
+//                    // 全部写进sw
+//                    versionCode(versionMsg.versionCode)
+//                    versionName(versionMsg.versionName)
+//                    versionInfo(versionMsg.versionInfo)
+//                }
+//            }
+//            file.withWriter {writer->writer.append(sw.toString())}
+//        }else {
+//            xmlBuilder.release{
+//                versionCode(versionMsg.versionCode)
+//                versionName(versionMsg.versionName)
+//                versionInfo(versionMsg.versionInfo)
+//            }
+//            // 将生成的xml数据插入到根节点之前
+//            def lines=file.readLines()
+//            def lengths=lines.size()-1
+//            file.withWriter {writer->
+//                lines.eachWithIndex { String line, int index ->
+//                    if (index != lengths) {
+//                        writer.append(line+'\r\n')
+//                    }else if (index == lengths) {
+//                        writer.append('\r\r\n'+sw.toString()+'\r\n')
+//                        writer.append(lines.get(lengths))
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//class VersionMsg{
+//    String versionName,versionCode,versionInfo
+//}
+//
+//task readTask{
+//    inputs.file destFile
+//    doLast{
+//        def file = inputs.files.singleFile
+//        println file.text
+//    }
+//}
+//
+//task taskTest{
+//    dependsOn readTask,writeTask
+//    doLast{
+//        println '输入输出任务结束'
+//    }
+//}
 
 /* -----------------  挂接自定义task到构建过程 -----------------------*/
 println '------------ 挂接自定义task到构建过程----------------------'
 
-task taskX1 {
-    doLast {
-        println 'taskX1'
-    }
-}
-task taskY1 {
-    mustRunAfter taskX1
-//    shoudRunAfter taskX1
-    doLast {
-        println 'taskY1'
-    }
-}
-task taskZ1() {
-    doLast {
-        println 'taskZ1'
-    }
-}
+//task taskX1 {
+//    doLast {
+//        println 'taskX1'
+//    }
+//}
+//task taskY1 {
+//    mustRunAfter taskX1
+////    shoudRunAfter taskX1
+//    doLast {
+//        println 'taskY1'
+//    }
+//}
+//task taskZ1() {
+//    doLast {
+//        println 'taskZ1'
+//    }
+//}
