@@ -608,4 +608,8 @@ public class ExampleUnitTest {
             }
         }
     }
+
+    void local_branch001() {
+        System.out.println("测试本地分支001 ");
+    }
 }
