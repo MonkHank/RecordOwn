@@ -101,6 +101,9 @@ dependencies {
         // 传递依赖，不调用库中的依赖，gradle默认也是false
 //        transitive false
     }
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+
     annotationProcessor project(':annotationprocessor')
     implementation project(':dragviewlibrary')
     implementation project(':commonutils')

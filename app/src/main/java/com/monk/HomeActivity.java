@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.LayoutInflaterActivity;
 import com.monk.activity.LoginActivity;
@@ -52,7 +53,13 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         initToolbar(R.layout.activity_home);
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true,0.2f)
+                .barColor(R.color.colorPrimary)
+                .keyboardEnable(true)
+                .init();
 
         navigationView.setCheckedItem(R.id.nav_call);
         View headerView = navigationView.getHeaderView(0);
