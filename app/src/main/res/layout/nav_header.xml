@@ -10,25 +10,54 @@
         android:id="@+id/icon_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_centerInParent="true"
         android:src="@mipmap/default_avatar"/>
-
-    <TextView
-        android:id="@+id/mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="monkhank@mail.com"
-        android:textColor="#FFF"
-        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/mail"
+        android:layout_below="@+id/icon_image"
         android:text="MonkHank"
         android:textColor="#FFF"
         android:textSize="14sp"/>
+
+
+    <TextView
+        android:id="@+id/mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:text="monkhank@mail.com"
+        android:textColor="#FFF"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="tv1"
+        android:textColor="#FFF"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tv2"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tv1"
+        android:textColor="#FFF"
+        android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tv3"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tv2"
+        android:textColor="#FFF"
+        android:textSize="14sp"/>
+
 
 </RelativeLayout>
