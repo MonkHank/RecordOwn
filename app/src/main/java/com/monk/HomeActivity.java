@@ -11,12 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.LayoutInflaterActivity;
 import com.monk.activity.LoginActivity;
+import com.monk.activity.TestActivity;
 import com.monk.aidldemo.R;
 import com.monk.base.BaseCompatActivity;
 import com.monk.broadcast.BroadcastReciver;
@@ -63,15 +65,16 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
 
         navigationView.setCheckedItem(R.id.nav_call);
         View headerView = navigationView.getHeaderView(0);
+
         headerView.findViewById(R.id.icon_image).setOnClickListener(v -> ToastUtils.showImageToast(mContext,"点击了头像"));
         headerView.findViewById(R.id.mail).setOnClickListener(v -> ToastUtils.showImageToast(mContext,"点击了邮箱"));
         headerView.findViewById(R.id.username).setOnClickListener(v -> ToastUtils.showImageToast(mContext,"点击了名字"));
 
         int i = DateUtils.daysOfTwo("2019-08-19", DateUtils.getCurrentTime().split(" ")[0]) + 1;
         int i2 = DateUtils.daysOfTwo("2019-10-08", DateUtils.getCurrentTime().split(" ")[0]) + 24;
+        int i3 = DateUtils.daysOfTwo("2019-09-10", DateUtils.getCurrentTime().split(" ")[0]) + 1;
         ((TextView)headerView.findViewById(R.id.tv1)).setText("我和芸芸认识的第 "+ i+" 天");
-        ((TextView)headerView.findViewById(R.id.tv2)).setText("我和芸芸几乎见面的第 "+ i2+" 天");
-
+        ((TextView)headerView.findViewById(R.id.tv2)).setText("10.8到现在 "+ i2+" 天 \n 9.10到现在："+i3+"天");
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // 关闭侧滑
@@ -89,6 +92,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         list.add(new HomeBean(3, EventAndViewActivity.class.getSimpleName()));
         list.add(new HomeBean(6,"kill MySelf"));
         list.add(new HomeBean(7,"unregisterReceiver"));
+        list.add(new HomeBean(8, TestActivity.class.getSimpleName()));
         HomeAdapter homeAdapter = new HomeAdapter(this, list,this);
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnRecyclerViewItemClickListener(this);
@@ -134,11 +138,13 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
                     isRegisterReceiver =false;
                 }
                 break;
+            case 8:
+                startActivity(TestActivity.class);
+                break;
             default:
                 break;
         }
     }
-
 
     private boolean registScreenStatusReceiver() {
         reciver = new BroadcastReciver();

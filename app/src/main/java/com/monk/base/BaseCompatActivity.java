@@ -49,7 +49,7 @@ public class BaseCompatActivity<T extends BaseCompatActivity> extends AppCompatA
         super.onCreate(savedInstanceState);
         mContext = this;
         simpleName = mContext.getClass().getSimpleName();
-        LogUtil.i(tag, simpleName + "：onCreate(Bundle)-- "+savedInstanceState);
+        LogUtil.i(tag, simpleName + "：savedInstanceState = "+savedInstanceState);
 
         fullScreen(mContext);
     }
@@ -105,6 +105,7 @@ public class BaseCompatActivity<T extends BaseCompatActivity> extends AppCompatA
         startActivity(new Intent(mContext, cls));
     }
 
+    /** 点击actionBar返回按钮*/
     @Override
     public boolean onSupportNavigateUp() {
         finish();
@@ -156,7 +157,7 @@ public class BaseCompatActivity<T extends BaseCompatActivity> extends AppCompatA
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        LogUtil.w(tag, simpleName + "：onWindowFocusChanged() -- " + hasFocus);
+        LogUtil.v(tag, simpleName + "：onWindowFocusChanged() -- " + hasFocus);
     }
 
     /**

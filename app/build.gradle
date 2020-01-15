@@ -38,20 +38,15 @@ android {
     }
 
     sourceSets {
-        main{
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/layout/',
+                    'src/main/res/layout/test'
+            ]
             // 修改so库存放位置
-            jniLibs.srcDirs=['libs']
+            jniLibs.srcDirs = ['libs']
         }
-    }
-    sourceSets {
-        main{
-            res.srcDirs=['src/main/res','src/main/res-ad','src/main/res-player']
-        }
-    }
-}
-this.android.sourceSets{
-    main{
-        res.srcDirs=['src/main/res','src/main/res-ad','src/main/res-player']
     }
 }
 

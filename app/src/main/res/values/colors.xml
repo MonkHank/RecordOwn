@@ -10,4 +10,12 @@
 
     <color name="low_orange">#f7c1b7</color>
     <color name="low_gray">#bebebe</color>
+
+    <color name="green_49FBFD">#49FBFD</color>
+    <color name="green_007D7F">#007D7F</color>
+    <color name="green_54d1d3">#54d1d3</color>
+    <color name="red5">#CC3300</color>
+    <color name="orange_FF6600">#FF6600</color>
+    <color name="green">#00c853</color>
+
 </resources>

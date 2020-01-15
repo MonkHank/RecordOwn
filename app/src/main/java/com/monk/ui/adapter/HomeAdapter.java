@@ -59,7 +59,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.tvContactName.setText(bean.Name);
         int adapterPosition = holder.getAdapterPosition();
         int layoutPosition = holder.getLayoutPosition();
-        LogUtil.i("HomeAdapter","adapterPosition="+adapterPosition+"\tlayoutPosition="+layoutPosition+"\tposition="+position);
+        LogUtil.i("HomeAdapter","adapterPosition = "+adapterPosition+"\tlayoutPosition = "+layoutPosition+"\tposition = "+position);
     }
 
     @Override
