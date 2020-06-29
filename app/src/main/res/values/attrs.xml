@@ -40,4 +40,27 @@
         <attr name="shadow_bottom" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="AddEquipmentItem">
+        <attr name="tvName" format="string"/>
+        <attr name="tvContent" format="string"/>
+        <attr name="tvNameColor" format="color"/>
+        <attr name="tvContentColor" format="color"/>
+        <attr name="etContentHint" format="string"/>
+        <attr name="linearLayoutVisibility" format="integer">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="gone" value="0x00000008"/>
+            <enum name="invisible" value="0x00000004"/>
+        </attr>
+        <attr name="tvVisibility" format="integer">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="gone" value="0x00000008"/>
+            <enum name="invisible" value="0x00000004"/>
+        </attr>
+        <attr name="etVisibility" format="integer">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="gone" value="0x00000008"/>
+            <enum name="invisible" value="0x00000004"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

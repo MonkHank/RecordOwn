@@ -83,6 +83,8 @@
                 <!--<action android:name="android.intent.action.TIME_TICK"/>-->
             <!--</intent-filter>-->
         <!--</receiver>-->
+
+        <activity android:name="com.monk.activity.DateActivity" />
     </application>
 
 </manifest>
