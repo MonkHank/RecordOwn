@@ -8,7 +8,7 @@ import android.util.Log;
  * @author Administrator
  * @date 2015-12-27
  */
-public class LogUtil {
+public class LogUtils {
     private static String Symbol = "--> ";
 
     public static void d(String msg) {
@@ -36,11 +36,6 @@ public class LogUtil {
         if (BuildConfig.DEBUG) Log.e("tag", getMsg(msg, autoJumpLogInfos, Symbol));
     }
 
-    public static void w(String tag,String msg) {
-        String[] autoJumpLogInfos = getAutoJumpLogInfos();
-        if (BuildConfig.DEBUG)  Log.w(tag, getMsg(msg, autoJumpLogInfos, Symbol));
-    }
-
     public static void w(String msg) {
         String[] autoJumpLogInfos = getAutoJumpLogInfos();
         if (BuildConfig.DEBUG)  Log.w("tag", getMsg(msg, autoJumpLogInfos, Symbol));
@@ -66,9 +61,9 @@ public class LogUtil {
         if (isPrint) Log.e(tag, getMsg(msg, autoJumpLogInfos, Symbol));
     }
 
-    public static void v(Object object, String msg) {
+    public static void v(Object object, String msg, boolean isPrint) {
         String[] autoJumpLogInfos = getAutoJumpLogInfos();
-        if (BuildConfig.DEBUG) Log.v(object.getClass().getSimpleName(), getMsg(msg, autoJumpLogInfos, Symbol));
+        if (isPrint) Log.v(object.getClass().getSimpleName(), getMsg(msg, autoJumpLogInfos, Symbol));
     }
 
     public static void v(String tag, String msg) {
@@ -144,4 +139,5 @@ public class LogUtil {
             return infos;
         }
     }
+
 }

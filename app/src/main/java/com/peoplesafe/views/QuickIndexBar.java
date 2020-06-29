@@ -62,7 +62,7 @@ public class QuickIndexBar extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         width = getMeasuredWidth();
         cellHeight = getMeasuredHeight() *1.0f/indexArr.length;
-        LogUtil.v(QuickIndexBar.this,"自定义控件宽:"+width+"像素");
+        LogUtil.v(QuickIndexBar.this,"自定义控件宽 = "+width+"像素");
 
     }
 

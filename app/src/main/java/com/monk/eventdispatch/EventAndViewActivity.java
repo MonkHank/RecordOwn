@@ -1,6 +1,5 @@
 package com.monk.eventdispatch;
 
-import android.animation.ValueAnimator;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +19,7 @@ import butterknife.BindView;
  * @author monk
  * @date 2019-01-11
  */
-public class EventDispatchActivity extends BaseCompatActivity {
+public class EventAndViewActivity extends BaseCompatActivity {
     @BindView(R.id.myLayout) MyLayout myLayout;
     @BindView(R.id.myView) MyView myView;
     @BindView(R.id.btMessage) AppCompatButton btMessage;
@@ -55,20 +54,8 @@ public class EventDispatchActivity extends BaseCompatActivity {
 
             }
         });
-
-        animatorUses();
     }
 
-    void animatorUses() {
-        ValueAnimator valueAnimator = ValueAnimator.ofInt(0, 10);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                LogUtil.i(tag,simpleName+"animation:"+animation.getAnimatedValue());
-            }
-        });
-        valueAnimator.start();
-    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {

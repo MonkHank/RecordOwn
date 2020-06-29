@@ -15,7 +15,7 @@ import com.monk.commonutils.LogUtil;
  * @date 2018-12-24.
  */
 public class MyLayout extends RelativeLayout implements GestureDetector.OnDoubleTapListener,GestureDetector.OnGestureListener {
-    private String tag = "MyLayout";
+    private String tag = "RelativeLayout";
     private String simpleName = "MyLayout：";
 
     private GestureDetector mGestureDetector;
@@ -36,14 +36,14 @@ public class MyLayout extends RelativeLayout implements GestureDetector.OnDouble
         mGestureDetector.setOnDoubleTapListener(this);
 
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        LogUtil.i(tag,simpleName+"density="+ dm.density+"\tdensityDpi:"+dm.densityDpi);
+        LogUtil.i(tag,simpleName+"构造函数：density="+ dm.density+"\tdensityDpi:"+dm.densityDpi);
 
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtil.e(tag,"MyLayout：dispatchTouchEvent");
-        return super.dispatchTouchEvent(ev);
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        LogUtil.i(tag,simpleName+"onMeasure");
     }
 
     /**
@@ -64,10 +64,29 @@ public class MyLayout extends RelativeLayout implements GestureDetector.OnDouble
     }
 
     @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        LogUtil.i(tag,simpleName+"onLayout");
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        LogUtil.e(tag,simpleName+"onDetachedFromWindow");
+    }
+
+    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         LogUtil.e(tag,"MyLayout：onInterceptTouchEvent");
         return super.onInterceptTouchEvent(ev);
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        LogUtil.e(tag,"MyLayout：dispatchTouchEvent");
+        return super.dispatchTouchEvent(ev);
+    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

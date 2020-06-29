@@ -34,7 +34,7 @@ public class RecordOwnApplication extends MultiDexApplication {
         long occupyMemory = Runtime.getRuntime().totalMemory();
         long maxMemory = Runtime.getRuntime().maxMemory();
 
-        LogUtil.v(tag,"occupyMemory = "+occupyMemory/1024/1024+"\t maxMemory = "+maxMemory/1024/1024);
+        LogUtil.v(tag,"占用内存(M) = "+occupyMemory/1024/1024+"\t maxMemory = "+maxMemory/1024/1024);
     }
 
     public static Context getContext() {

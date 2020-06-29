@@ -1,6 +1,7 @@
 # some record daily
 ## 一些习惯
 1. IDE 自带列方向 Editor 竖线，那么超过的方法形参进行换行不换行？不换！！！
+2. 尝试过几次，if 出现的单行是否需要去掉括号，结论是：百分百确定只有单行的情况，可以进行去掉括号，一般而言不要去掉
 
 
 ## 一些基本原理
@@ -8,17 +9,18 @@
 2. <span id=2>[Window 和 Activity(View)之间的关系](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme07.md)
 3. [反射的一些常见用法](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme23.md)
 4. [Android客户端实现Binder](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme10.md)
+5. [读Android源码之View分析](https://blog.csdn.net/handsome_926/article/details/80053601)，View 生命周期
 
 
 ## 一些三方框架
-1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/readme04.md)
+1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme04.md)
 
 ## 一些基本处理
 1. **HttpUrlConnection**  
 2. **SelectSort、BubbleSort**
 3. **LruCache**  
 5. LayoutInflater,onResume之后获取getTop有效 ，可参见[Window 和 Activity(View)之间的关系](#2)
-6. 生产者消费者，面向过程设计模式(https://github.com/MonkHank/RecordOwn/blob/master/readme08.md)
+6. [生产者消费者，面向过程设计模式](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme08.md)
 
 7. 原型模式 、builder模式  
 8. 委托模式，notification  
@@ -37,3 +39,5 @@
 22. 添加一种尺寸适配方式
 23. [gradle讲解](https://github.com/MonkHank/HelloGroovy/blob/master/ReadMe.md)
 24. [okhttp3的请求图解](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme22.md)
+25. socket编程
+    - [from 博客园](https://www.cnblogs.com/yiwangzhibujian/p/7107785.html#q1)

@@ -14,7 +14,7 @@ import com.monk.commonutils.LogUtil;
  * @date 2019-01-11
  */
 public class MyView extends AppCompatButton {
-    private final String tag = "MyView";
+    private final String tag = "AppCompatButton";
     private final String simpleName = "MyView：";
     private final Scroller mScroller;
     private boolean isValidToggle;
@@ -40,15 +40,39 @@ public class MyView extends AppCompatButton {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        LogUtil.v(tag, simpleName + "dispatchTouchEvent");
-        return super.dispatchTouchEvent(event);
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        LogUtil.i(tag,simpleName+"onMeasure");
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        LogUtil.i(tag,simpleName+"onSizeChanged");
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        LogUtil.i(tag,simpleName+"onLayout");
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+//        LogUtil.i(tag, "MyView：canvas = " + canvas);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         LogUtil.e(tag,simpleName+"onDetachedFromWindow");
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        LogUtil.v(tag, simpleName + "dispatchTouchEvent");
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
@@ -85,11 +109,6 @@ public class MyView extends AppCompatButton {
         return super.onTouchEvent(event);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-//        LogUtil.i(tag, "MyView：canvas = " + canvas);
-    }
 
     private void smoothScroll() {
         int deltaX = 0;
