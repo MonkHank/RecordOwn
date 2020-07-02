@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.monk.commonutils.LogUtil;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,18 +51,40 @@ public class DateUtils {
     }
 
     /**
-     * 返回两个日期之间相差几天(结束日期-开始日期)
-     *
-     * @param fDate 开始日期 2017-10-10
-     * @param oDate 结束日期 2017-10-16
-     * @return 天数
+     * @param sTime 2004-03-26 13:31
+     * @param eTime 2004-01-02 11:30
+     * @return 小时
      */
-    public  int daysOfTwo(String fDate, String oDate) {
+    public static int hoursOfTwo(String sTime, String eTime) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            long startTime = sdf.parse(fDate).getTime();
-            long endTime = sdf.parse(oDate).getTime();
-            return (int) ((endTime - startTime) / (1000 * 3600 * 24));
+            Date d1 = df.parse(sTime);
+            Date d2 = df.parse(eTime);
+            long diff = d2.getTime() - d1.getTime();
+            long days = diff / (1000 * 60 * 60 * 24);
+            long hours = (diff - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+            long minutes = (diff - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
+            return (int) (minutes > 0 ? days * 24 + hours + 1 : days * 24 + hours);
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    /**
+     * @param sTime 2004-03-26 13:31
+     * @param eTime 2004-03-26 13:30
+     * @return 分钟
+     */
+    public static int minutesOfTwo(String sTime, String eTime) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+        try {
+            Date d1 = df.parse(sTime);
+            Date d2 = df.parse(eTime);
+            long diff = d2.getTime() - d1.getTime();
+            long days = diff / (1000 * 60 * 60 * 24);
+            long hours = (diff - days * (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+            long minutes = (diff - days * (1000 * 60 * 60 * 24) - hours * (1000 * 60 * 60)) / (1000 * 60);
+            return (int) minutes ;
         } catch (Exception e) {
             return -1;
         }
