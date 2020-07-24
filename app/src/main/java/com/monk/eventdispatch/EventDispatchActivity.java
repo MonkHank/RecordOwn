@@ -19,7 +19,7 @@ import butterknife.BindView;
  * @author monk
  * @date 2019-01-11
  */
-public class EventAndViewActivity extends BaseCompatActivity {
+public class EventDispatchActivity extends BaseCompatActivity {
     @BindView(R.id.myLayout) MyLayout myLayout;
     @BindView(R.id.myView) MyView myView;
     @BindView(R.id.btMessage) AppCompatButton btMessage;

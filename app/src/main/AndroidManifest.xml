@@ -68,12 +68,11 @@
             android:name="com.monk.activity.TabbedActivity"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.monk.eventdispatch.EventAndViewActivity"/>
+        <activity android:name="com.monk.eventdispatch.EventDispatchActivity"/>
         <activity android:name="com.monk.activity.LoginActivity"/>
         <activity
             android:name="com.monk.retrofit.mvp.view.RetrofitActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.monk.activity.TestActivity"/>
 
 
         <!--<receiver android:name="com.monk.broadcast.BroadcastReciver">-->

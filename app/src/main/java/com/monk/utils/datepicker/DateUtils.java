@@ -51,6 +51,24 @@ public class DateUtils {
     }
 
     /**
+     * 返回两个日期之间相差几天(结束日期-开始日期)
+     *
+     * @param fDate 开始日期 2017-10-10
+     * @param oDate 结束日期 2017-10-16
+     * @return 天数
+     */
+    public static int daysOfTwo(String fDate, String oDate) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            long startTime = sdf.parse(fDate).getTime();
+            long endTime = sdf.parse(oDate).getTime();
+            return (int) ((endTime - startTime) / (1000 * 3600 * 24));
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    /**
      * @param sTime 2004-03-26 13:31
      * @param eTime 2004-01-02 11:30
      * @return 小时
