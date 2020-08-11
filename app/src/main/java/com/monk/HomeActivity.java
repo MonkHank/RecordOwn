@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.DateActivity;
+import com.monk.activity.DeviceActivity;
 import com.monk.activity.LayoutInflaterActivity;
 import com.monk.activity.LoginActivity;
 import com.monk.aidldemo.R;
@@ -76,6 +77,7 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
         list.add(new HomeBean(6,"kill MySelf"));
         list.add(new HomeBean(7,"unregisterReceiver"));
         list.add(new HomeBean(8, DateActivity.class.getSimpleName()));
+        list.add(new HomeBean(9, DeviceActivity.class.getSimpleName()));
         HomeAdapter homeAdapter = new HomeAdapter(this, list,this);
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnRecyclerViewItemClickListener(this);
@@ -123,6 +125,9 @@ public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewIt
                 break;
             case 8:
                 startActivity(DateActivity.class);
+                break;
+            case 9:
+                startActivity(DeviceActivity.class);
                 break;
         }
     }

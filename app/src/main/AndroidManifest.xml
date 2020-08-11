@@ -87,6 +87,7 @@
         <!--</receiver>-->
 
         <activity android:name="com.monk.activity.DateActivity" />
+        <activity android:name="com.monk.activity.DeviceActivity" />
     </application>
 
 </manifest>
