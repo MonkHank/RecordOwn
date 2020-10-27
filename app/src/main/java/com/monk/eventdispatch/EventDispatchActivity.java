@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatButton;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import android.view.MotionEvent;
 
 import com.monk.aidldemo.R;

@@ -1,7 +1,7 @@
 package com.monk.sockets;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.monk.commonutils.IOUtils;
 

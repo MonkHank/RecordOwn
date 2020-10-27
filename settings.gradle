@@ -1,3 +1,4 @@
+include ':homemodule'
 include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils',  ':buildSrc',
         ':generatevaluesfile',':generategreendao'
 println '-settings 开始执行gradle'

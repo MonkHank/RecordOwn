@@ -17,9 +17,9 @@
 package com.swipebacklib;
 
 import android.content.Context;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.VelocityTrackerCompat;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.VelocityTrackerCompat;
+import androidx.core.view.ViewCompat;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;

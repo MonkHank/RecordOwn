@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Process;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.monk.commonutils.CrashHandler;
 import com.monk.commonutils.LogUtil;

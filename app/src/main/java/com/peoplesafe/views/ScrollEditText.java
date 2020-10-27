@@ -9,7 +9,7 @@ import android.view.MotionEvent;
  * @author MonkHank
  * @date 2018-04-08.
  */
-public class ScrollEditText extends android.support.v7.widget.AppCompatEditText {
+public class ScrollEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     public ScrollEditText(Context context, AttributeSet attrs) {
         super(context, attrs);

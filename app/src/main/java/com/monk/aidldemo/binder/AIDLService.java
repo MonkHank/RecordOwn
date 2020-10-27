@@ -15,7 +15,7 @@ import java.util.List;
  * @author monk
  * @date 2018-12-13
  */
-public class AIDLService extends BaseService {
+public class AIDLService extends BaseService<AIDLService> {
 
     /**
      * ⑤ 通过 Service 与本地Binder 进行关联

@@ -1,7 +1,7 @@
 package com.monk.retrofit.netapi;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.monk.commonutils.LogUtil;
 

@@ -1,0 +1,53 @@
+if (rootProject.ext.isApplication) {
+    apply plugin:'com.android.application'
+}else {
+    apply plugin:'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        if (rootProject.ext.isApplication) {
+            applicationId "com.monk.home"
+        }
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets{
+        main {
+            if (rootProject.ext.isApplication) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+
+            }
+        }
+    }
+}
+
+dependencies {
+
+    implementation rootProject.ext.dependencies.implementation
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}

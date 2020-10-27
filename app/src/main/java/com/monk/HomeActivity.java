@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.monk.activity.AidlFullscreenActivity;
@@ -37,7 +37,8 @@ import butterknife.BindView;
  * @author monk
  * @date 2019-05-27
  */
-public class HomeActivity extends BaseCompatActivity implements OnRecyclerViewItemClickListener,
+public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
+        OnRecyclerViewItemClickListener,
         OnRecyclerViewItemClickListener2 {
 
     @BindView(R.id.drawerLayout) DrawerLayout drawerLayout;

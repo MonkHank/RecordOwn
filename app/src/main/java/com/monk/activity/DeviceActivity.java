@@ -1,7 +1,7 @@
 package com.monk.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatCheckedTextView;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
 
 import com.monk.aidldemo.R;
 import com.monk.base.BaseCompatActivity;
