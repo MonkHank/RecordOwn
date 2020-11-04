@@ -26,8 +26,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
 import com.monk.retrofit.RetrofitUtils;

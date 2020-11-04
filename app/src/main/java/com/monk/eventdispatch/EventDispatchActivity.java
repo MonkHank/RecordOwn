@@ -9,8 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import android.view.MotionEvent;
 
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 
 import butterknife.BindView;

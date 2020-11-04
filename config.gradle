@@ -2,14 +2,15 @@
 ext {
     isApplication = true
     android = [
-            compileSdkVersion: 28,
+            compileSdkVersion: 30,
             minSdkVersion    : 17,
-            targetSdkVersion : 28,
+            targetSdkVersion : 30,
             buildToolsVersion: "30.0.2",
             versionCode      : 5,
             versionName      : "2.0"
     ]
     dependencies = [
+            /** 主要是没法自动提示更新以及索引,知道这种方式便可*/
             implementation: [
                     'androidx.appcompat:appcompat:1.2.0',
                     'com.google.android.material:material:1.2.1',
@@ -19,5 +20,8 @@ ext {
                     path:':dragviewlibrary',
                     path:':commonutils']
     ]
+
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
 
 }

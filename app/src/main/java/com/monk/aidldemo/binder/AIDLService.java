@@ -3,9 +3,9 @@ package com.monk.aidldemo.binder;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.monk.activity.base.BaseService;
 import com.monk.aidldemo.bean.Person;
 import com.monk.aidldemo.binder.manualbinder.ManualBinder;
-import com.monk.base.BaseService;
 import com.monk.commonutils.LogUtil;
 
 import java.util.ArrayList;

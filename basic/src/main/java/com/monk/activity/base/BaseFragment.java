@@ -1,15 +1,16 @@
-package com.monk.base;
+package com.monk.activity.base;
 
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.monk.commonutils.LogUtil;
 
@@ -17,7 +18,7 @@ import com.monk.commonutils.LogUtil;
  * @author monk
  * @date 2019-01-28
  */
-public class BaseFragment<T extends BaseFragment> extends Fragment {
+public class BaseFragment<T extends BaseFragment<T>> extends Fragment {
     protected final String tag = BaseFragment.class.getSimpleName();
 
     protected OnFragmentInteractionListener mListener;

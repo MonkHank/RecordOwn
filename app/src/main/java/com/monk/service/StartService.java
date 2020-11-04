@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
-import com.monk.base.BaseService;
+import com.monk.activity.base.BaseService;
 import com.monk.commonutils.LogUtil;
 
 import java.lang.ref.WeakReference;

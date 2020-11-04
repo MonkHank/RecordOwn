@@ -79,46 +79,19 @@ fileTree('build/outputs/apk') { FileTree fileTree ->
 /**========================= 依赖相关api =============================================*/
 // 为应用程序添加的第三方库依赖，区分root下的build.gradle
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
 
-//    implementation libAndroidDesign
-    implementation 'com.google.android.material:material:1.2.1'
+    // 一种方式
+//    implementation project(rootProject.ext.dependencies.implementation)
+//    implementation project(rootProject.ext.dependencies.common)
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-
-    implementation 'androidx.multidex:multidex:2.0.1@aar'
-
-    implementation 'com.alibaba:fastjson:1.2.54'
-
-    implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation('com.squareup.okhttp3:logging-interceptor:3.12.0') {
-        // 排除依赖，key排除的类型，value排除的名字
-//        exclude module:'support-v4'
-//        exclude group:'com.android.support'
-        // 传递依赖，不调用库中的依赖，gradle默认也是false
-//        transitive false
-    }
-
-    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
-
-    annotationProcessor project(':annotationprocessor')
-    implementation project(rootProject.ext.dependencies.common)
-
+    // 编译时期注解，执行到此处时，就会去生成相关注解处理类
+    annotationProcessor project(path: ':annotationprocessor')
+    implementation project(path: ':basic')
     if (!rootProject.ext.isApplication) {
         implementation project(path:'homemodule')
     }

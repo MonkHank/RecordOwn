@@ -5,5 +5,5 @@ dependencies {
     implementation 'de.greenrobot:greendao-generator:2.1.0'
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = rootProject.ext.sourceCompatibility
+targetCompatibility = rootProject.ext.targetCompatibility

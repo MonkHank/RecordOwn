@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-apply from:"config.gradle"
+apply from: "config.gradle"
 
 // 运行gradle clean时，执行此处定义的task任务。 该任务继承自Delete，删除根目录中的build目录。
 // 相当于执行Delete.delete(rootProject.buildDir)。
@@ -10,10 +10,10 @@ task clean(type: Delete) {
 }
 
 // 自定义扩展属性，所有subproject可以使用
-ext{
-    compileSdkVersion=28
-    minSdkVersion=17
-    targetSdkVersion=compileSdkVersion
+ext {
+    compileSdkVersion = rootProject.ext.android.compileSdkVersion
+    minSdkVersion = rootProject.ext.android.minSdkVersion
+    targetSdkVersion = rootProject.ext.android.targetSdkVersion
 
 }
 
@@ -23,24 +23,25 @@ this.beforeEvaluate {
 }
 
 /*** 配置阶段完成以后的回调*/
-this.afterEvaluate { println '-project-配置阶段完成以后的回调'}
+this.afterEvaluate { println '-project-配置阶段完成以后的回调' }
 
 /*** gradle执行完毕后的回调监听*/
-this.gradle.buildFinished { println '-project-gradle执行完毕后的回调监听'}
+this.gradle.buildFinished { println '-project-gradle执行完毕后的回调监听' }
 
 this.gradle.beforeProject {}
 this.gradle.afterProject {}
 
 /**=============== project相关api讲解，执行在gradle配置阶段，执行阶段在Task中在讲 ==============*/
 this.getProjects()
-def getProjects(){
+
+def getProjects() {
     println '------------------'
     println 'Root Project'
     println '------------------'
     this.getAllprojects().eachWithIndex { Project entry, int index ->
         if (index == 0) {
             println "----Root project: ${entry.name}"
-        }else {
+        } else {
             println "+---Sub project: ${entry.name}"
         }
     }
@@ -53,34 +54,34 @@ def getSubProjects() {
 }
 
 // 获取父project   getParent()
-def getParentProjects(){
-    def name= this.getParent().name
+def getParentProjects() {
+    def name = this.getParent().name
     println "the parent project name is ${name}"
 }
 
 // 获取root project   getRootProject()
-def getRootProjects(){
-    def name= this.getRootProject().name
+def getRootProjects() {
+    def name = this.getRootProject().name
     println "the root project name is ${name}"
 }
 
 /**======================属性api介绍========================================================*/
 println '-------- 属性 ----------'
 // 获取指定 project，配置子project的gradle，一般不会怎么做
-project('app'){Project project->
+project('app') { Project project ->
     println project.name
     apply plugin: 'com.android.application'
 //    group 'com.imooc'
 //    version '1.0.0-release'
     dependencies {}
-    android{}
+    android {}
 }
-project('commonutils'){Project project->
+project('commonutils') { Project project ->
     apply plugin: 'com.android.library'
 //    group 'com.imooc'
 //    version '1.0.0-release'
     dependencies {}
-    android{}
+    android {}
 }
 
 // 配置所有project，包括root和subproject
@@ -92,7 +93,7 @@ allprojects {
         jcenter()
     }
 }
-println project('annotationprocessor').group+"---------------------------------------------------------------"
+println project('annotationprocessor').group + "---------------------------------------------------------------"
 
 // 不包括当前结点工程，只包括他的subproject
 subprojects { Project project ->
@@ -125,6 +126,7 @@ println getBuildDir().absolutePath
 println getProjectDir().absolutePath
 
 println getContent('local.properties')
+
 def getContent(String path) {
     try {
         def file = file(path)
@@ -140,32 +142,45 @@ def getContent(String path) {
 /**========================= 依赖相关api =============================================*/
 println '------ 依赖相关api--------------'
 // 闭包参数可以去掉，是因为闭包的delegate就是去掉的这些参数
-buildscript { ScriptHandler scriptHandler->
+buildscript {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+    }
+
+    /*
+    ScriptHandler scriptHandler ->
     // 配置工程仓库地址，也说明gradle兼容maven、jcenter仓库
-    scriptHandler.repositories {RepositoryHandler repositoryHandler->
+    scriptHandler.repositories { RepositoryHandler repositoryHandler ->
         repositoryHandler.google()
         repositoryHandler.jcenter()
-//        repositoryHandler.mavenCentral()
-//        repositoryHandler.ivy {}
+        //        repositoryHandler.mavenCentral()
+        //        repositoryHandler.ivy {}
         // 这个闭包的参数为 MavenArtifactRepository
-        repositoryHandler.maven {MavenArtifactRepository mp->
+        repositoryHandler.maven { MavenArtifactRepository mp ->
             // 一般为企业的名字
             mp.name 'personal'
             // 一般为企业的maven的仓库地址
             mp.url 'http://localhoset:8081:/nexus/repositories'
-            mp.credentials{
-                username='admin'
-                password='admin123'
+            mp.credentials {
+                username = 'admin'
+                password = 'admin123'
 
             }
         }
     }
     // 配置工程"插件"依赖地址（gradle本身对第三方的依赖）
     scriptHandler.dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:4.1.0'
         // tinker 热修复
-//        classpath 'com.tencent.tinker-patch-gralde-plugin:1.7.7'
+        //        classpath 'com.tencent.tinker-patch-gralde-plugin:1.7.7'
     }
+    */
+
 }
 
 

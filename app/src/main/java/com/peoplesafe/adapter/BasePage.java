@@ -3,7 +3,7 @@ package com.peoplesafe.adapter;
 import android.content.Context;
 import android.view.View;
 
-import com.monk.base.BaseCompatActivity;
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.commonutils.ToastUtils;
 
 import butterknife.ButterKnife;

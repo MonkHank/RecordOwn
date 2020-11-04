@@ -3,8 +3,8 @@ package com.monk.activity;
 import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
 
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.DeviceHelper;
 
 import butterknife.BindView;

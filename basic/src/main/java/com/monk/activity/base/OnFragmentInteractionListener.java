@@ -1,4 +1,4 @@
-package com.monk.base;
+package com.monk.activity.base;
 
 import android.net.Uri;
 

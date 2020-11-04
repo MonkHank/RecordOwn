@@ -5,14 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.monk.activity.base.BaseFragment;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseFragment;
 
 /**
  * @author monk
  * @date 2019-1-24 10:37:01
  */
-public class DragViewFragment extends BaseFragment{
+public class DragViewFragment extends BaseFragment {
     private final String tag = "DragViewFragment";
 
 

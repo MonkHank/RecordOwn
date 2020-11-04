@@ -30,12 +30,9 @@ public class Rectangle implements Serializable {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer(40);
-        sb.append("width : ");
-        sb.append(this.width);
-        sb.append("\nheight : ");
-        sb.append(this.height);
-        sb.append("\narea : ");
-        sb.append(this.area);
+        sb.append("width : ").append(this.width).append("\t");
+        sb.append("height : ").append(this.height).append("\t");
+        sb.append("area : ").append(this.area).append("\t");
         return sb.toString();
     }
 
@@ -44,19 +41,21 @@ public class Rectangle implements Serializable {
         Rectangle rectangle = new Rectangle();
         rectangle.width=3;
         rectangle.height=4;
-        System.out.println("1.原始对象\n" + rectangle);
+        rectangle.setArea();
+        System.out.println("1.原始对象\t\t" + rectangle);
+
         //  RecordOwn/app/rectangle
         ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("rectangle"));
-        // 往流写入对象
-        o.writeObject(rectangle);
+        o.writeObject(rectangle); // 往流写入对象
         o.close();
 
         // 从流读取对象
         ObjectInputStream in = new ObjectInputStream(new FileInputStream("rectangle"));
         Rectangle rectangle1 = (Rectangle) in.readObject();
-        System.out.println("2.反序列化后的对象\n" + rectangle1);
-        rectangle1.setArea();
-        System.out.println("3.恢复成原始对象\n" + rectangle1);
         in.close();
+        System.out.println("2.反序列化后的对象\t" + rectangle1);
+
+        rectangle1.setArea();
+        System.out.println("3.恢复成原始对象\t" + rectangle1);
     }
 }

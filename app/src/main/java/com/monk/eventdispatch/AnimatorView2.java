@@ -9,7 +9,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.monk.base.BaseView;
+import com.monk.activity.base.BaseView;
 import com.monk.commonutils.LogUtil;
 
 /**

@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.ToastUtils;
 import com.monk.utils.datepicker.CustomDatePicker;
 import com.monk.utils.datepicker.DateUtils;

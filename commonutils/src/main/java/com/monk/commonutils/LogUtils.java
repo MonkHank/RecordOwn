@@ -1,6 +1,5 @@
 package com.monk.commonutils;
 
-import androidx.annotation.NonNull;
 import android.util.Log;
 
 
@@ -102,7 +101,6 @@ public class LogUtils {
         if (isPrint) Log.i(tag, getMsg(msg, autoJumpLogInfos, Symbol));
     }
 
-    @NonNull
     private static String getMsg(String msg, String[] infos, String symbol) {
         return infos[2] + Symbol +  infos[1] + "："  + msg +infos[3];
     }

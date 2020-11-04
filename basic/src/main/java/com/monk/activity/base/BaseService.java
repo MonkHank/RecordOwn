@@ -1,4 +1,4 @@
-package com.monk.base;
+package com.monk.activity.base;
 
 import android.app.Service;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import com.monk.commonutils.LogUtil;
  * @author monk
  * @date 2019-5-30 10:59:14
  */
-public abstract class BaseService<T extends BaseService> extends Service {
+public abstract class BaseService<T extends BaseService<T>> extends Service {
     protected String tag = BaseService.class.getSimpleName();
     protected String simpleName;
     protected BaseService<T> mService;

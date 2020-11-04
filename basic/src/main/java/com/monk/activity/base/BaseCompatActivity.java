@@ -1,4 +1,4 @@
-package com.monk.base;
+package com.monk.activity.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +12,16 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.monk.aidldemo.R;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.monk.basic.R;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
 
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
  * @author monk
  * @date 2019-05-27
  */
-public class BaseCompatActivity<T extends BaseCompatActivity> extends AppCompatActivity {
+public class BaseCompatActivity<T extends BaseCompatActivity<T>> extends AppCompatActivity {
 
     protected String tag = BaseCompatActivity.class.getSimpleName();
 

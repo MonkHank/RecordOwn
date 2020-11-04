@@ -16,13 +16,13 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.view.View;
 import android.widget.TextView;
 
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
 import com.monk.aidldemo.bean.Person;
 import com.monk.aidldemo.binder.AIDLService;
 import com.monk.aidldemo.binder.manualbinder.IPersonInterface;
 import com.monk.aidldemo.binder.manualbinder.ManualBinder;
 import com.monk.aidldemo.binder.messenger.MyMessengerService;
-import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 
 import java.lang.ref.WeakReference;

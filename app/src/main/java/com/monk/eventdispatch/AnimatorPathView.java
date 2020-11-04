@@ -11,7 +11,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.animation.AnticipateOvershootInterpolator;
 
-import com.monk.base.BaseView;
+import com.monk.activity.base.BaseView;
+
 
 /**
  * @author monkey

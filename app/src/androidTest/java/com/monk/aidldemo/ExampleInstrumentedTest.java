@@ -20,9 +20,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("com.monk.aidldemo", appContext.getPackageName());
+//        Context appContext = InstrumentationRegistry.getTargetContext();
+//
+//        assertEquals("com.monk.aidldemo", appContext.getPackageName());
     }
 
     @Test

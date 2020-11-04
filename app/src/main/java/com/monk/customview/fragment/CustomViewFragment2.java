@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.monk.activity.base.BaseFragment;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseFragment;
 import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 import com.peoplesafe.views.QQListView;

@@ -1,5 +1,6 @@
 package com.monk;
 
+import android.annotation.SuppressLint;
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,10 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.monk.activity.base.BaseCompatActivity;
+import com.monk.activity.base.BaseFragment;
+import com.monk.activity.base.OnFragmentInteractionListener;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseCompatActivity;
-import com.monk.base.BaseFragment;
-import com.monk.base.OnFragmentInteractionListener;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ThreadPoolManager;
 import com.monk.customview.fragment.CustomViewFragment;
@@ -35,7 +36,8 @@ import butterknife.OnClick;
  * @author monk
  * @date 2018-12-13
  */
-public class MainActivity extends BaseCompatActivity implements OnFragmentInteractionListener,
+public class MainActivity extends BaseCompatActivity<MainActivity> implements
+        OnFragmentInteractionListener,
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.message) TextView tvMessage;
@@ -162,6 +164,7 @@ public class MainActivity extends BaseCompatActivity implements OnFragmentIntera
         }
     }
 
+    @SuppressLint("NonConstantResourceId")
     @OnClick({R.id.btTestAttach,R.id.btAdd})
     public void clickEvent(View v) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

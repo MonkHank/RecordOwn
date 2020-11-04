@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.monk.activity.base.BaseFragment;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseFragment;
 import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 

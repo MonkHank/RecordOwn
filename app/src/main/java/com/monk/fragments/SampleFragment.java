@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.monk.base.BaseFragment;
+import com.monk.activity.base.BaseFragment;
 
 /**
  * @author monk
  * @date 2019-05-29
  */
-public class SampleFragment extends BaseFragment {
+public class SampleFragment extends BaseFragment<SampleFragment> {
 
 
     @Nullable

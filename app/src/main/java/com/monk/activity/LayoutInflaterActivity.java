@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
-import com.monk.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtil;
 import com.monk.dialogfragment.TestDialogFragment;
 import com.monk.utils.IntentUtils;

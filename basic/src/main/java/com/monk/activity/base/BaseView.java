@@ -1,4 +1,4 @@
-package com.monk.base;
+package com.monk.activity.base;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,10 +10,9 @@ import com.monk.commonutils.LogUtil;
  * @author monk
  * @date 2019-06-05
  */
-public class BaseView<T extends BaseView> extends View {
+public class BaseView<T extends BaseView<T>> extends View {
     protected final String tag=BaseView.class.getSimpleName();
     protected  String simpleName;
-    private BaseView<T>mView;
 
     public BaseView(Context context) {
         this(context,null);
@@ -25,8 +24,8 @@ public class BaseView<T extends BaseView> extends View {
 
     public BaseView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mView=this;
-        simpleName=mView.getClass().getSimpleName()+"：";
+        BaseView<T> mView = this;
+        simpleName= mView.getClass().getSimpleName()+"：";
     }
 
     @Override
