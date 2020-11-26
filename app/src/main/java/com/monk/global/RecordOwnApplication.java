@@ -6,6 +6,7 @@ import android.os.Process;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.monk.basic.BaseApplication;
 import com.monk.commonutils.CrashHandler;
 import com.monk.commonutils.LogUtil;
 
@@ -13,35 +14,6 @@ import com.monk.commonutils.LogUtil;
  * @author monk
  * @date 2019-01-03
  */
-public class RecordOwnApplication extends MultiDexApplication {
-    public static Application mApplication;
-    private final String tag = "MyApplication";
-    private static Handler handler;
-    private static int mainThreadId;
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        mApplication = this;
-
-        handler = new Handler();
-        mainThreadId = Process.myPid();
-
-        CrashHandler.getInstance(this).init();
-
-        long occupyMemory = Runtime.getRuntime().totalMemory();
-        long maxMemory = Runtime.getRuntime().maxMemory();
-
-        LogUtil.v(tag,"占用内存(M) = "+occupyMemory/1024/1024+"\t maxMemory = "+maxMemory/1024/1024);
-    }
-
-
-    public static Handler getHandler() {
-        return handler;
-    }
-
-    public static int getMainThreadId() {
-        return mainThreadId;
-    }
-
+public class RecordOwnApplication extends BaseApplication {
+    private final String tag = "RecordOwnApplication";
 }

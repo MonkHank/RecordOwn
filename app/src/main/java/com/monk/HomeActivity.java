@@ -28,6 +28,8 @@ import com.monk.ui.adapter.HomeAdapter;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener2;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +87,9 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
 
         isRegisterReceiver = registScreenStatusReceiver();
         monitorNetWork();
+
+        EventBus.getDefault().postSticky(new Object());
+
     }
 
     /**

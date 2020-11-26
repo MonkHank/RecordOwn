@@ -1,5 +1,7 @@
 package com.monk.aidldemo;
 
+import com.monk.aidldemo.annotation.Subscribe;
+
 /**
  * @author monk
  * @date 2019-04-02
@@ -20,7 +22,6 @@ public class ReflectClass {
     }
 
 
-
     public String getName() {
         return name;
     }
@@ -37,10 +38,15 @@ public class ReflectClass {
         this.age = age;
     }
 
-
     private void privateMethod() {
-
     }
+
+    @Subscribe
+    void defaultMethod(EventBusBean busBean) {
+    }
+
+    static void staticMethod(){}
+
 
     @Override
     public String toString() {
@@ -49,4 +55,7 @@ public class ReflectClass {
                 ", age=" + age +
                 '}';
     }
+
+    class EventBusBean{}
+
 }

@@ -1,12 +1,16 @@
 package com.monk.aidldemo;
 
+import com.monk.aidldemo.annotation.Subscribe;
+
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -389,9 +393,9 @@ public class ExampleUnitTest {
         /***===================================== 常用API =================================*/
 
         println("=================== 获取 Class 的三种方式 ==================");
-        Class clazz = null;
+        Class<?> clazz0 ;
         //1.通过类名
-        clazz = ReflectClass.class;
+        clazz0 = ReflectClass.class;
 
 
         //2.通过对象名，这种方式是用在传进来一个对象，却不知道对象类型的时候使用
@@ -405,50 +409,103 @@ public class ExampleUnitTest {
 
         //3.通过全类名(会抛出异常)
         //一般框架开发中这种用的比较多，因为配置文件中一般配的都是全类名，通过这种方式可以得到Class实例
+        Class<?> clazz ;
         String className = "com.monk.aidldemo.ReflectClass";
         clazz = Class.forName(className);
 
+        println("---1. 类实例");
         println(clazz);
+
+        println("---2. 类实例名字（全类名）");
+        println(clazz.getName());
+
+        println("---3. 判断是否为某个类的父类 - isAssignableFrom()");
+        println(clazz.isAssignableFrom(clazz0));
+        println(clazz.isAssignableFrom(Object.class));
 
         println("=================== 无参构造和有参构造 ===================");
         // 默认无参构造函数，没有无参构造函数则会报错
         ReflectClass newInstance = (ReflectClass) clazz.newInstance();
-        Constructor constructor = clazz.getConstructor(String.class, int.class);
+        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);
         ReflectClass nancy = (ReflectClass) constructor.newInstance("nancy", 12);
 
         println(newInstance);
         println(nancy);
 
         println("=================== 反射方法 =============================");
+
         // 1. 获取指定类所有方法，不含父类方法，private方法也可以获取
+        println("---1. 获取指定类所有方法，不含父类方法，private方法也可以获取 - getDeclaredMethods()");
         Method[] methods = clazz.getDeclaredMethods();
         for (Method t : methods) {
             println(t.getName());
         }
 
+        println("---1.1 获取方法修饰符 - getModifiers()");
+        for (Method t : methods) {
+            println(t.getModifiers());
+        }
+
+        println("---1.2 EventBus中的一个运算");
+        println("1 & 1 = "+(1&1));
+        // 值 &  Modifier.ABSTRACT | Modifier.STATIC | 0x40 | 0x1000
+        // 值只要是其中一个，值为该值，否则为 0
+        int MODIFIERS_IGNORE = Modifier.ABSTRACT | Modifier.STATIC | 0x40 | 0x1000;
+        println("1 & MODIFIERS_IGNORE = "+( 1 & MODIFIERS_IGNORE));
+
+        println("---1.3 获取方法形参类型，方法没有形参，数组长度为0 - getParameterTypes()");
+        for (Method t : methods) {
+            Class<?>[] parameterTypes = t.getParameterTypes();
+            for (Class<?> p : parameterTypes) {
+                println(p);
+            }
+        }
+
+        println("---1.4 获取方法指定注解 - getAnnotation(Subscribe.class)");
+        for (Method m : methods) {
+            Subscribe annotation = m.getAnnotation(Subscribe.class);
+            if (annotation != null)
+                println(annotation);
+        }
+
+        println("---1.5 返回方法的类对象 - getDeclaringClass()");
+        for (Method m : methods) {
+            Class<?> cs = m.getDeclaringClass();
+            println(cs+"-- getName() = "+cs.getName());
+        }
+
+        println("---2. 获取包括父类在内的所有方法 - getMethods()");
+        Method[] methodsAll = clazz.getMethods();
+        for (Method method : methodsAll) {
+            println(method.getName());
+        }
+
         // 2.获取指定方法，int直接写，不用转Integer
+        println("---3. 获取指定方法，int直接写，不用转Integer - getDeclaredMethod(name,parameterTypes...)");
         Method setName = clazz.getDeclaredMethod("setName", String.class);
         Method setAge = clazz.getDeclaredMethod("setAge", int.class);
-        System.out.println();
         println(setName);
         println(setAge);
 
         // 3. 执行方法，需要有对象
+        println("---4. 执行方法，需要对象 - invoke(obj,args...)");
         setName.invoke(newInstance, "jack");
         setAge.invoke(newInstance, 11);
         println(newInstance.toString());
 
         println("=================== 反射字段 =============================");
         // 1. 获取所有字段，公有私有，不包含父类
+        println("---1. 获取所有字段，公有私有，不包含父类 - getDeclaredFields()");
         Field[] fields = clazz.getDeclaredFields();
         for (Field t : fields) {
             println(t.getName());
         }
-        System.out.println();
         // 2. 获取指定字段
+        println("---2. 获取指定字段 - getDeclaredField(name)");
         Field name = clazz.getDeclaredField("name");
         println(name.getName());
         // 3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set()
+        println("---2. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set() ");
         Object value = name.get(newInstance);
         println(value);
         name.set(newInstance, "jack_set");

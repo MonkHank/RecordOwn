@@ -1,6 +1,6 @@
-include ':basic'
+include ':module_basic'
 include ':annotation'
-include ':homemodule'
+include ':module_home'
 include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils',
         ':generatevaluesfile',':generategreendao'
 

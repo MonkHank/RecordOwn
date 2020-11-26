@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    sourceSets {
+        main{
+            res.srcDirs=['src/main/res','src/main/res-ad','src/main/res-player']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    api 'androidx.recyclerview:recyclerview:1.1.0'
+
+    api 'com.alibaba:fastjson:1.2.54'
+
+    api 'com.jakewharton:butterknife:10.2.1'
+
+    api 'io.reactivex.rxjava2:rxjava:2.2.19'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api('com.squareup.okhttp3:logging-interceptor:3.12.0') {
+        // 排除依赖，key排除的类型，value排除的名字
+//        exclude module:'support-v4'
+//        exclude group:'com.android.support'
+        // 传递依赖，不调用库中的依赖，gradle默认也是false
+//        transitive false
+    }
+
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    api 'androidx.multidex:multidex:2.0.1@aar'
+
+    api 'org.greenrobot:eventbus:3.2.0'
+
+    api project(rootProject.ext.dependencies.common)
+
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HomeModule</string>
+
+    <string name="working_station">首页</string>
+    <string name="record">发现</string>
+    <string name="mine">我的</string>
+</resources>

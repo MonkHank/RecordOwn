@@ -87,13 +87,13 @@ dependencies {
 //    implementation project(rootProject.ext.dependencies.implementation)
 //    implementation project(rootProject.ext.dependencies.common)
 
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     // 编译时期注解，执行到此处时，就会去生成相关注解处理类
     annotationProcessor project(path: ':annotationprocessor')
-    implementation project(path: ':basic')
+    implementation project(path: ':module_basic')
     if (!rootProject.ext.isApplication) {
-        implementation project(path:'homemodule')
+        implementation project(path:':module_home')
     }
 
 }
