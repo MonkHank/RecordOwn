@@ -1,16 +1,7 @@
 package com.monk.aidldemo;
 
-import com.monk.aidldemo.annotation.Subscribe;
-
 import org.junit.Test;
 
-import java.io.InputStream;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -22,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -32,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class JavaTest {
     private void println(Object lineText) {
         System.out.println(lineText);
     }
@@ -72,12 +64,15 @@ public class ExampleUnitTest {
     }
 
     /**
-     * 测试子类复写父类方法后，父类方法return，会不会影响子类该复写方法的执行
+     * 测试子类复写父类方法后，父类方法return，会不会影响子类该复写方法的执行，不会影响
      */
     @Test
     public void testParentReturnHasRelationshipWithChid() {
         Person stu = new Student("stu", 10);
         stu.testParentReturn(0);
+
+        println("=======正常情况=======");
+        stu.testParentReturn(1);
     }
 
     /**
@@ -95,6 +90,17 @@ public class ExampleUnitTest {
         list = list.subList(0, 4);
 
         System.out.println(list);
+    }
+
+    @Test
+    public void testTryCatch() {
+        try {
+            System.out.println(1 / 0);
+        } catch (Exception e) {
+//            e.printStackTrace();
+        }
+
+        System.out.println("执行了");
     }
 
     /**
@@ -335,7 +341,6 @@ public class ExampleUnitTest {
 
     class Base {
         private String[] strings;
-
         StringCallBackImpl callback = new StringCallBackImpl(strings);
 
         Base(String[] strings) {
@@ -352,167 +357,7 @@ public class ExampleUnitTest {
         }
     }
 
-    /**
-     * 测试反射常见api
-     *
-     * @throws ClassNotFoundException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws NoSuchFieldException
-     */
-    @Test
-    public void testReflect() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-        /**===================== 类加载器 ==========================*/
-        println("==================类加载器====================");
-        // 1.获取一个系统的类加载器(可以获取，当前这个类 ExampleUnitTest 就是它加载的)
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        println("系统类加载器:" + classLoader);
 
-
-        // 2.获取系统类加载器的父类加载器（扩展类加载器，可以获取）.
-        classLoader = classLoader.getParent();
-        println("扩展类加载器:" + classLoader);
-
-        // 3.获取扩展类加载器的父类加载器（引导类加载器，不可获取）.
-        classLoader = classLoader.getParent();
-        println("引导类加载器:" + classLoader);
-
-
-        // 4.测试当前类由哪个类加载器进行加载（系统类加载器）:
-        classLoader = Class.forName("com.monk.aidldemo.ReflectClass").getClassLoader();
-        System.out.println("系统类加载器:" + classLoader);
-        InputStream in = classLoader.getResourceAsStream("Student.java");
-        println("获取文件：" + in);
-
-        //5. 测试 JDK 提供的 Object 类由哪个类加载器负责加载（引导类）
-        classLoader = Class.forName("java.lang.Object").getClassLoader();
-        println("Object类加载器：" + classLoader);
-
-        /***===================================== 常用API =================================*/
-
-        println("=================== 获取 Class 的三种方式 ==================");
-        Class<?> clazz0 ;
-        //1.通过类名
-        clazz0 = ReflectClass.class;
-
-
-        //2.通过对象名，这种方式是用在传进来一个对象，却不知道对象类型的时候使用
-//        ReflectClass reflectClass = new ReflectClass();
-//        clazz = reflectClass.getClass();
-        //上面这个例子的意义不大，因为已经知道 reflectClass 类型是 ReflectClass 类，再这样写就没有必要了
-        //如果传进来是一个Object类，这种做法就是应该的
-//        Object obj = new ReflectClass();
-//        clazz = obj.getClass();
-
-
-        //3.通过全类名(会抛出异常)
-        //一般框架开发中这种用的比较多，因为配置文件中一般配的都是全类名，通过这种方式可以得到Class实例
-        Class<?> clazz ;
-        String className = "com.monk.aidldemo.ReflectClass";
-        clazz = Class.forName(className);
-
-        println("---1. 类实例");
-        println(clazz);
-
-        println("---2. 类实例名字（全类名）");
-        println(clazz.getName());
-
-        println("---3. 判断是否为某个类的父类 - isAssignableFrom()");
-        println(clazz.isAssignableFrom(clazz0));
-        println(clazz.isAssignableFrom(Object.class));
-
-        println("=================== 无参构造和有参构造 ===================");
-        // 默认无参构造函数，没有无参构造函数则会报错
-        ReflectClass newInstance = (ReflectClass) clazz.newInstance();
-        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);
-        ReflectClass nancy = (ReflectClass) constructor.newInstance("nancy", 12);
-
-        println(newInstance);
-        println(nancy);
-
-        println("=================== 反射方法 =============================");
-
-        // 1. 获取指定类所有方法，不含父类方法，private方法也可以获取
-        println("---1. 获取指定类所有方法，不含父类方法，private方法也可以获取 - getDeclaredMethods()");
-        Method[] methods = clazz.getDeclaredMethods();
-        for (Method t : methods) {
-            println(t.getName());
-        }
-
-        println("---1.1 获取方法修饰符 - getModifiers()");
-        for (Method t : methods) {
-            println(t.getModifiers());
-        }
-
-        println("---1.2 EventBus中的一个运算");
-        println("1 & 1 = "+(1&1));
-        // 值 &  Modifier.ABSTRACT | Modifier.STATIC | 0x40 | 0x1000
-        // 值只要是其中一个，值为该值，否则为 0
-        int MODIFIERS_IGNORE = Modifier.ABSTRACT | Modifier.STATIC | 0x40 | 0x1000;
-        println("1 & MODIFIERS_IGNORE = "+( 1 & MODIFIERS_IGNORE));
-
-        println("---1.3 获取方法形参类型，方法没有形参，数组长度为0 - getParameterTypes()");
-        for (Method t : methods) {
-            Class<?>[] parameterTypes = t.getParameterTypes();
-            for (Class<?> p : parameterTypes) {
-                println(p);
-            }
-        }
-
-        println("---1.4 获取方法指定注解 - getAnnotation(Subscribe.class)");
-        for (Method m : methods) {
-            Subscribe annotation = m.getAnnotation(Subscribe.class);
-            if (annotation != null)
-                println(annotation);
-        }
-
-        println("---1.5 返回方法的类对象 - getDeclaringClass()");
-        for (Method m : methods) {
-            Class<?> cs = m.getDeclaringClass();
-            println(cs+"-- getName() = "+cs.getName());
-        }
-
-        println("---2. 获取包括父类在内的所有方法 - getMethods()");
-        Method[] methodsAll = clazz.getMethods();
-        for (Method method : methodsAll) {
-            println(method.getName());
-        }
-
-        // 2.获取指定方法，int直接写，不用转Integer
-        println("---3. 获取指定方法，int直接写，不用转Integer - getDeclaredMethod(name,parameterTypes...)");
-        Method setName = clazz.getDeclaredMethod("setName", String.class);
-        Method setAge = clazz.getDeclaredMethod("setAge", int.class);
-        println(setName);
-        println(setAge);
-
-        // 3. 执行方法，需要有对象
-        println("---4. 执行方法，需要对象 - invoke(obj,args...)");
-        setName.invoke(newInstance, "jack");
-        setAge.invoke(newInstance, 11);
-        println(newInstance.toString());
-
-        println("=================== 反射字段 =============================");
-        // 1. 获取所有字段，公有私有，不包含父类
-        println("---1. 获取所有字段，公有私有，不包含父类 - getDeclaredFields()");
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field t : fields) {
-            println(t.getName());
-        }
-        // 2. 获取指定字段
-        println("---2. 获取指定字段 - getDeclaredField(name)");
-        Field name = clazz.getDeclaredField("name");
-        println(name.getName());
-        // 3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set()
-        println("---2. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set() ");
-        Object value = name.get(newInstance);
-        println(value);
-        name.set(newInstance, "jack_set");
-        println(name.get(newInstance));
-
-
-    }
 
 
     /*** 测试枚举*/
@@ -586,12 +431,18 @@ public class ExampleUnitTest {
         list.add("c");
         list.add("D");
 
+        // java.util.ConcurrentModificationException
+//        for (String s1 : list) {
+//            if ("D".equals(s1))list.remove(s1);
+//        }
 
+        System.out.println(list.size());
         for (int i = 0; i < list.size(); i++) {
             String s = list.get(i);
-            if (s.equals("D")) {
-                list.remove(s);
-            }
+            if (s.equals("A")) list.remove(s);
+            System.out.println("-- " + list.get(i));
+
+            System.out.println(s);
         }
     }
 
@@ -636,16 +487,52 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void test2() {
-        System.out.println( Double.parseDouble("0.04"));
+    public void testThread() throws InterruptedException, ExecutionException {
+        ThreadPoint tp = new ThreadPoint();
+        Thread threadA = tp.testJoin();
+
+        int i = 0;
+        do {
+            i++;
+            System.out.println(Thread.currentThread() + "：" + i + " - A线程状态：" + threadA.getState());
+            //1.  A 线程先执行，执行完毕再释放CPU，其他线程再执行
+//            threadA.join();
+
+            //2. 当前线程放弃对CPU的占用，但是不一定会让线程进入暂停状态，可能由 RUNNABLE -> READY，随缘
+//            Thread.yield();
+
+            //3. 时间到了之后再对CPU的抢夺上，随缘
+//            Thread.sleep(1);
+        } while (i < 10);
     }
 
+    @Test
+    public void testThread2() throws ExecutionException, InterruptedException {
+        ThreadPoint.testCAS();
+        ThreadPoint.testCAS();
+
+        Thread.sleep(2000);
+        System.out.println(Thread.currentThread());
+        System.out.println(ThreadPoint.count);
+
+        ThreadPoint.testWaitAndSleep();
+    }
+
+
+    @Test
+    public void test2() {
+        System.out.println(Double.parseDouble("0.04"));
+    }
 
     @Test
     public void testStringFormat() {
         // 输出 PRAGMA foreign_keys = ON
         String query = String.format("PRAGMA foreign_keys = %s", "ON");
         System.out.println(query);
+
+        System.out.println(query.indexOf("P"));
+        System.out.println(query.indexOf("_"));
+        System.out.println(query.substring(query.indexOf("_") + 1));
     }
 
     @Test
@@ -657,7 +544,7 @@ public class ExampleUnitTest {
 
 
     void getRepeatCharacter(String[] letters) {
-        if (letters==null||letters.length==0)
+        if (letters == null || letters.length == 0)
             return;
         for (String letter : letters) {
             for (int i = 0; i < letter.length(); i++) {

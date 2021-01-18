@@ -18,7 +18,7 @@ import com.monk.retrofit.mvp.view.RetrofitActivity;
  * @author monk
  * @date 2019-1-22 15:15:33
  */
-public class JniFragment extends BaseFragment implements View.OnClickListener{
+public class JniFragment extends BaseFragment<JniFragment> implements View.OnClickListener{
     private final String tag="JniFragment";
 
     static {

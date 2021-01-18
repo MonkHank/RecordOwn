@@ -10,6 +10,8 @@ import java.util.List;
 /**
  * AIDL 实现方式
  *
+ * IAidlInterface 接口的本地实现类 AIDLBinder
+ *
  * @author monk
  * @date 2019/1/12
  */
@@ -18,7 +20,6 @@ public class AIDLBinder extends IAidlInterface.Stub {
     /**
      * 创建生成的本地 Binder 对象，实现 AIDL 制定的方法
      */
-
     private List<Person> mPersons;
 
     public AIDLBinder(List<Person> mPersons) {

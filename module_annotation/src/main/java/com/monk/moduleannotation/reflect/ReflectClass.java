@@ -1,12 +1,15 @@
-package com.monk.aidldemo;
+package com.monk.moduleannotation.reflect;
 
-import com.monk.aidldemo.annotation.Subscribe;
+
+import org.greenrobot.eventbus.Subscribe;
+
+import retrofit2.http.Query;
 
 /**
  * @author monk
  * @date 2019-04-02
  */
-public class ReflectClass {
+public class ReflectClass<T> implements IInterface{
     String name;
     private int age;
 
@@ -26,26 +29,29 @@ public class ReflectClass {
         return name;
     }
 
-    public void setName(String name) {
+    public ReflectClass<T> setName(String name) {
         this.name = name;
+        return this;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(int sex, int age) {
         this.age = age;
     }
 
     private void privateMethod() {
     }
 
-    @Subscribe
-    void defaultMethod(EventBusBean busBean) {
-    }
 
     static void staticMethod(){}
+
+    @Subscribe
+    void testSub() {
+
+    }
 
 
     @Override
@@ -58,4 +64,8 @@ public class ReflectClass {
 
     class EventBusBean{}
 
+    @Override
+    public void postLogin(@Query("api/test") String path) {
+
+    }
 }
