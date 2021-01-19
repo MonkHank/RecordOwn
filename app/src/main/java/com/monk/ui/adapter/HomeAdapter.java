@@ -25,10 +25,10 @@ import butterknife.ButterKnife;
  */
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private final LayoutInflater layoutInflater;
-    private Context context;
-    private List<HomeBean> list;
+    private final Context context;
+    private final List<HomeBean> list;
     private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
-    private OnRecyclerViewItemClickListener2 onRecyclerViewItemClickListener2;
+    private final OnRecyclerViewItemClickListener2 onRecyclerViewItemClickListener2;
 
     public void setOnRecyclerViewItemClickListener(OnRecyclerViewItemClickListener onRecyclerViewItemClickListener) {
         this.onRecyclerViewItemClickListener = onRecyclerViewItemClickListener;

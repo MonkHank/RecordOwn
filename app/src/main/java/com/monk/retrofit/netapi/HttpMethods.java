@@ -35,8 +35,8 @@ public class HttpMethods {
     private HttpApi httpApi;
 
     /*** 请求失败重连次数*/
-    private int RETRY_COUNT = 0;
-    private OkHttpClient.Builder okHttpBuilder;
+    private final int RETRY_COUNT = 0;
+    private final OkHttpClient.Builder okHttpBuilder;
 
     private HttpMethods() {
         okHttpBuilder = new OkHttpClient.Builder();

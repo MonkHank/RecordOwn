@@ -32,7 +32,7 @@ public class StartService extends BaseService {
     }
 
     public static class DemoBinder extends Binder implements IBindInterface {
-        private WeakReference<BaseService> weakReference;
+        private final WeakReference<BaseService> weakReference;
 
         public DemoBinder(BaseService mService) {
             weakReference = new WeakReference<>(mService);

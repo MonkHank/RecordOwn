@@ -9,7 +9,7 @@ import android.util.Log;
  * @date 2015-12-27
  */
 public class LogUtil {
-    private static String Symbol = "--> ";
+    private static final String Symbol = "--> ";
 
     public static void d(String msg) {
         String[] autoJumpLogInfos = getAutoJumpLogInfos();

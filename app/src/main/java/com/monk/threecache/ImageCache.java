@@ -11,7 +11,7 @@ import java.util.Map;
  * @date 2018-12-27
  */
 public class ImageCache extends LruCache<String,Bitmap> {
-    private Map<String,SoftReference<Bitmap>>cacheMap;
+    private final Map<String,SoftReference<Bitmap>>cacheMap;
 
     public ImageCache(Map<String,SoftReference<Bitmap>>cacheMap) {
         super((int) (Runtime.getRuntime().maxMemory()/1024/8));

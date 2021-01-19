@@ -19,7 +19,7 @@ public class QuickIndexBar extends View {
     private final String tag = "QuickIndexBar";
 
     private final float density;
-    private String[] indexArr = { "#","A", "B", "C", "D", "E", "F", "G", "H",
+    private final String[] indexArr = { "#","A", "B", "C", "D", "E", "F", "G", "H",
             "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
             "V", "W", "X", "Y", "Z" };
     private Paint paint;
@@ -29,8 +29,8 @@ public class QuickIndexBar extends View {
     /*** 记录上一次按下的字母索引*/
     private int lastIndex = -1;
 
-    private int mid_transparent=0x11000000;
-    private int transparent=0x00000000;
+    private final int mid_transparent=0x11000000;
+    private final int transparent=0x00000000;
 
     private OnTouchLetterListener listener;
 

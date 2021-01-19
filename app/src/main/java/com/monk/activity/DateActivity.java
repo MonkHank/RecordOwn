@@ -44,13 +44,13 @@ public class DateActivity extends BaseCompatActivity {
         initStartDate();
         initEndDate();
 
-        int days = dateUtils.daysOfTwo("2019-08-19", dateUtils.getCurrentTime().split(" ")[0]) + 1;
+        int days = DateUtils.daysOfTwo("2019-08-19", dateUtils.getCurrentTime().split(" ")[0]) + 1;
         tvChole.setText("和芸芸认识的第 "+ days +" 天");
 
-        int days2 = dateUtils.daysOfTwo("2019-09-10", dateUtils.getCurrentTime().split(" ")[0]) + 1;
+        int days2 = DateUtils.daysOfTwo("2019-09-10", dateUtils.getCurrentTime().split(" ")[0]) + 1;
         tvChole2.setText("从19.09.10到现在第 "+ days2 +" 天");
 
-        int days3 = dateUtils.daysOfTwo("2019-10-08", dateUtils.getCurrentTime().split(" ")[0]) + 1;
+        int days3 = DateUtils.daysOfTwo("2019-10-08", dateUtils.getCurrentTime().split(" ")[0]) + 1;
         tvChole3.setText("从19.10.08到现在第 "+ days3 +" 天");
     }
 
@@ -58,7 +58,7 @@ public class DateActivity extends BaseCompatActivity {
         customDatePicker = dateUtils.initDatePicker(tvStartDate, time -> {
             String startDate = time.split(" ")[0];
             String endTime = tvEndDate.getText().toString();
-            long daysOfTwo = dateUtils.daysOfTwo(startDate, endTime);
+            long daysOfTwo = DateUtils.daysOfTwo(startDate, endTime);
 
             tvStartDate.setText(startDate);
 
@@ -72,7 +72,7 @@ public class DateActivity extends BaseCompatActivity {
             String startDate = tvStartDate.getText().toString();
             String endTime = time.split(" ")[0];
 
-            long daysOfTwo = dateUtils.daysOfTwo(startDate, endTime);
+            long daysOfTwo = DateUtils.daysOfTwo(startDate, endTime);
             if (daysOfTwo < 0) {
                 tvEndDate.setText(startDate);
                 ToastUtils.showImageToast(mContext, "结束日期不能小于开始日期");

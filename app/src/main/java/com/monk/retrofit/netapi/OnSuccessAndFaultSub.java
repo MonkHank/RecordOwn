@@ -26,7 +26,7 @@ public class OnSuccessAndFaultSub extends DisposableObserver<ResponseBody>
         implements ProgressCancelListener {
     private final String tag = "OnSuccessAndFaultSub";
     private boolean showProgress = true;
-    private OnSuccessAndFaultListener mOnSuccessAndFaultListener;
+    private final OnSuccessAndFaultListener mOnSuccessAndFaultListener;
 
     private Context context;
     private ProgressDialog progressDialog;

@@ -142,7 +142,7 @@ public class ViewDragHelper {
 
     private int mTrackingEdges;
 
-    private OverScroller mScroller;
+    private final OverScroller mScroller;
 
     private final Callback mCallback;
 

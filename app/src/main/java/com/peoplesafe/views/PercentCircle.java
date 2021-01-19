@@ -30,21 +30,21 @@ public class PercentCircle extends View {
 
     private float mTargetPercent;
 
-    private int mDefaultRadius = 60;
+    private final int mDefaultRadius = 60;
     private int mRadius;
 
-    private int mDefaultBackgroundColor = 0xffafb4db;
-    private int mBackgroundColor;
+    private final int mDefaultBackgroundColor = 0xffafb4db;
+    private final int mBackgroundColor;
 
-    private int mDefaultRingColor = 0xff6950a1;
-    private int mRingColor;
+    private final int mDefaultRingColor = 0xff6950a1;
+    private final int mRingColor;
 
     private int mTextSize;
 
 
-    private int mDefaultTextColor = 0xffffffff;
-    private int mTextColor;
-    private float density;
+    private final int mDefaultTextColor = 0xffffffff;
+    private final int mTextColor;
+    private final float density;
     private StaticLayout staticLayout;
 
     public PercentCircle(Context context, AttributeSet attrs) {
@@ -92,7 +92,7 @@ public class PercentCircle extends View {
         //获得文字的字号 因为要设置文字在圆的中心位置
         mTextSize = (int) mTextPaint.getTextSize();
 
-        String text="任务完成\n"+ String.valueOf((int) mTargetPercent)+"%";
+        String text="任务完成\n"+ (int) mTargetPercent +"%";
         staticLayout = new StaticLayout(text, mTextPaint, (int) (150*density), Layout.Alignment.ALIGN_NORMAL, 1.2F, 1.0F, true);
     }
 

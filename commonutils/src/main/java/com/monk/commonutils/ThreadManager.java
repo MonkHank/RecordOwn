@@ -28,9 +28,9 @@ public class ThreadManager {
     }
 
     public static class ThreadPool {
-        private int corePoolSize;
-        private int maximumPoolSize;
-        private long keepAliveTime;
+        private final int corePoolSize;
+        private final int maximumPoolSize;
+        private final long keepAliveTime;
 
         private ThreadPoolExecutor executor;
 

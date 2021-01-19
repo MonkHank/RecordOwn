@@ -24,7 +24,7 @@ import java.util.List;
  * @date 2020/1/13
  */
 public class LineChartView extends View {
-    private Context mContext;
+    private final Context mContext;
 
     private Paint mAxisPaint; //绘制坐标轴的画笔
     private Paint mPaint; //绘制曲线的画笔
@@ -49,17 +49,17 @@ public class LineChartView extends View {
     private int mXAxisMaxValue; //X轴的绘制距离
     private int mYAxisMaxValue;  //Y轴的绘制距离
 
-    private int yAxisSpace = 120; //Y轴刻度间距(px)
-    private int xAxisSpace = 200;  //X轴刻度间距(px)
+    private final int yAxisSpace = 120; //Y轴刻度间距(px)
+    private final int xAxisSpace = 200;  //X轴刻度间距(px)
 
-    private int mKeduWidth = 20; //Y轴刻度线宽度
+    private final int mKeduWidth = 20; //Y轴刻度线宽度
 
-    private float keduTextSize = 20;
+    private final float keduTextSize = 20;
 
-    private int textPadinng = 10; //刻度值距离坐标的padding距离
+    private final int textPadinng = 10; //刻度值距离坐标的padding距离
 
     private int yIncreaseValue;  //Y轴递增的实际值
-    private boolean isCurve = true;  //true：绘制曲线 false：折线
+    private final boolean isCurve = true;  //true：绘制曲线 false：折线
     private int mMaxTextWidth;
     private int mMaxTextHeight;
 

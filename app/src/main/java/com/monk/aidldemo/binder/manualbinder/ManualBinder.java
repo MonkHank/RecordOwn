@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2019-01-15
  */
 public class ManualBinder extends Binder implements IPersonInterface {
-    private List<Person> mPersons;
+    private final List<Person> mPersons;
 
     public ManualBinder(List<Person> mPersons) {
         this.attachInterface(this, DESCRIPTOR);
@@ -109,7 +109,7 @@ public class ManualBinder extends Binder implements IPersonInterface {
      * 如果是跨进程那么就调用 远程Binder 在本地的代理Binder
      */
     private static class Proxy implements IPersonInterface {
-        private android.os.IBinder mRemote;
+        private final android.os.IBinder mRemote;
 
         Proxy(android.os.IBinder remote) {
             mRemote = remote;

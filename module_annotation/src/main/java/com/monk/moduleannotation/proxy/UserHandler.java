@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 public class UserHandler implements InvocationHandler {
 
-    private User user;
+    private final User user;
 
     public UserHandler(User user) {
         this.user = user;

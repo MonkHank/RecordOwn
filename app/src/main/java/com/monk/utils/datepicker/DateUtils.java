@@ -14,7 +14,7 @@ import java.util.Locale;
 public class DateUtils {
     private final String tag = "DateUtils";
 
-    private Context mContext;
+    private final Context mContext;
 
     public static final int NOW = 0;
 

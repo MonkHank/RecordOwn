@@ -22,15 +22,15 @@ import com.monk.commonutils.LogUtil;
 public class QQListView extends ListView {
     private final String tag = "QQListView";
     /*** 用户滑动的最小距离*/
-    private int touchSlop;
+    private final int touchSlop;
     /***  是否响应滑动*/
     private boolean isSliding;
 
-    private PopupWindow mPopupWindow;
-    private int mPopupWindowHeight;
-    private int mPopupWindowWidth;
+    private final PopupWindow mPopupWindow;
+    private final int mPopupWindowHeight;
+    private final int mPopupWindowWidth;
 
-    private Button mDelBtn;
+    private final Button mDelBtn;
     private DelButtonClickListener mListener;
 
     /*** 当前手指触摸的View*/

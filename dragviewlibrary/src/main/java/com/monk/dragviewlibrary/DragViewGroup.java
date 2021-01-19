@@ -18,7 +18,7 @@ import com.monk.commonutils.LogUtil;
  */
 public class DragViewGroup extends FrameLayout {
     private final String tag = "DragViewGroup";
-    private int mSlop;
+    private final int mSlop;
     private View mDragView;
     private State mCurrentState;
     private float mCurrentX,mCurrentY;

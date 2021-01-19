@@ -102,7 +102,7 @@ public class SwipeBackLayout extends FrameLayout {
 
     private View mContentView;
 
-    private ViewDragHelper mDragHelper;
+    private final ViewDragHelper mDragHelper;
 
     private float mScrollPercent;
 
@@ -127,7 +127,7 @@ public class SwipeBackLayout extends FrameLayout {
 
     private boolean mInLayout;
 
-    private Rect mTmpRect = new Rect();
+    private final Rect mTmpRect = new Rect();
 
     /**
      * Edge being dragged

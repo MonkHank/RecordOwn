@@ -78,7 +78,7 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
     /**
      * ⑥ 通过bind方法实现本地和服务端Binder关联，拿到远程服务接口
      */
-    private ServiceConnection mConnection = new ServiceConnection() {
+    private final ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LogUtil.v(simpleName,"service:"+service);
@@ -98,7 +98,7 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
         }
     };
 
-    private ServiceConnection mMessengerConnection = new ServiceConnection() {
+    private final ServiceConnection mMessengerConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Messenger mMessenger = new Messenger(service);
@@ -126,7 +126,7 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
         }
     };
 
-    private Messenger mGetReplyMessager = new Messenger(new ClientHandler(this));
+    private final Messenger mGetReplyMessager = new Messenger(new ClientHandler(this));
 
     private static class ClientHandler extends Handler{
         WeakReference<Activity>weakReference;
@@ -146,7 +146,7 @@ public class AidlFullscreenActivity extends BaseCompatActivity implements View.O
     /**
      * 死亡代理
      */
-    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
+    private final IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
         @Override
         public void binderDied() {
             if (iPersonInterface == null) {

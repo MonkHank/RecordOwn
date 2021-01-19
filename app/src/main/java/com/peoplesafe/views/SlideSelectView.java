@@ -29,21 +29,21 @@ public class SlideSelectView extends View {
     /** 大圆半径*/
 	private  final float RADIU_BIG = 15;
     /*** 线的高度*/
-	private  float HEIGHT_LINE = 3;
+	private final float HEIGHT_LINE = 3;
     /*** 线距离两头的边距*/
-	private  float MARGEN_LINE = RADIU_BIG*8;
+	private final float MARGEN_LINE = RADIU_BIG*8;
     /*** 竖直线的数量*/
-	private int countOfSmallLine;
+	private final int countOfSmallLine;
     /*** 竖直线的横坐标*/
 	private float [] linesX;
-	private Context mContext;
-	private Paint mPaint;
-	private TextPaint mTextPaint;
+	private final Context mContext;
+	private final Paint mPaint;
+	private final TextPaint mTextPaint;
 	private float mHeight;
 	private float mWidth;
     /*** 大圆的横坐标*/
 	private float bigCircleX;
-	private float textSize;
+	private final float textSize;
     /*** 当前大球距离最近的位置*/
 	private int currentPosition;
     /*** 小圆之间的间距*/
@@ -55,7 +55,7 @@ public class SlideSelectView extends View {
 	private float currentPositionX;
 
 	private onSelectListener selectListener;
-	private float density;
+	private final float density;
 
 	public interface onSelectListener {
 		void onSelect(int position);
@@ -202,7 +202,7 @@ public class SlideSelectView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int screenSize[] = getScreenSize((Activity) mContext);
+		int[] screenSize = getScreenSize((Activity) mContext);
 		int resultWidth;
 		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 		int widthMode = MeasureSpec.getMode(widthMeasureSpec);

@@ -23,8 +23,11 @@ import com.monk.commonutils.LogUtil;
 public class PercentCircleView extends View {
     private final String tag = "PercentCircleView";
     private final int paintId;
-    private Paint  circlePaint, backgroundPaint, redPaint, circlePaint3;
-    private TextPaint textPaint;
+    private final Paint  circlePaint;
+    private final Paint backgroundPaint;
+    private final Paint redPaint;
+    private final Paint circlePaint3;
+    private final TextPaint textPaint;
     private final float density;
     private RectF rectF, rectF2, rectF3;
 

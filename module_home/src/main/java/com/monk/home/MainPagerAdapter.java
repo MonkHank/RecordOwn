@@ -18,15 +18,15 @@ import java.util.List;
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
-    private List<String> tabsTextList;
+    private final List<String> tabsTextList;
 
-    private int[] drawableUnselected = {R.mipmap.workingstation2, R.mipmap.record2, R.mipmap.mine2};
-    private int[] drawableSelected = {R.mipmap.workingstation, R.mipmap.record, R.mipmap.mine};
+    private final int[] drawableUnselected = {R.mipmap.workingstation2, R.mipmap.record2, R.mipmap.mine2};
+    private final int[] drawableSelected = {R.mipmap.workingstation, R.mipmap.record, R.mipmap.mine};
 
-    private Context context;
-    private List<Fragment> list;
-    private ImageView[] imageViews;
-    private TextView[] tvs;
+    private final Context context;
+    private final List<Fragment> list;
+    private final ImageView[] imageViews;
+    private final TextView[] tvs;
 
     @SuppressLint("WrongConstant")
     public MainPagerAdapter(Context context, @NonNull FragmentManager fm, List<Fragment> list) {

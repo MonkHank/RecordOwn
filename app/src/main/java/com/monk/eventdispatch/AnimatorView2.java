@@ -19,7 +19,7 @@ import com.monk.commonutils.LogUtil;
 public class AnimatorView2 extends BaseView {
 
     private Paint mPaint;
-    private int mRadius =50;
+    private final int mRadius =50;
     private ObjectAnimator mAnimator;
     private RectF rectF;
 

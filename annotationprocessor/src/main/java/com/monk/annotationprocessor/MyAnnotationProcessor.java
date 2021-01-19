@@ -3,11 +3,11 @@ package com.monk.annotationprocessor;
 import com.google.auto.service.AutoService;
 import com.mono.annotaton.BindPath;
 import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -47,12 +47,16 @@ public class MyAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-      /*
+        // 构建方法 此处使用到square 公司的javapoet库，用来辅助生成类的代码
+        MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("show")
+                .addModifiers(Modifier.PUBLIC)
+                .addStatement("String test = \"$N\"","HELLO WORLD");
+
        // 类名和包名
         TypeSpec finderClass = TypeSpec.classBuilder("MyGeneratedClass")
                 .addModifiers(Modifier.PUBLIC)
 //                .addSuperinterface(ParameterizedTypeName.get(TypeUtil.INJECTOR, TypeName.get(mClassElement.asType())))
-//                .addMethod(methodBuilder.build())
+                .addMethod(methodBuilder.build())
                 .build();
 
         // 创建Java文件
@@ -63,7 +67,7 @@ public class MyAnnotationProcessor extends AbstractProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
+
         Map<String, String> map = new HashMap<>();
         Set<? extends Element> set1 = roundEnvironment.getElementsAnnotatedWith(BindPath.class);
         for (Element element : set1) {

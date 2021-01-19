@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Sort {
 
     public static void main(String[] args) {
-        int a[] = {1, 3, 9, 4, 2};
+        int[] a = {1, 3, 9, 4, 2};
         System.out.println(Arrays.toString(bubbleSort(a)));
 
         test();
@@ -40,7 +40,7 @@ public class Sort {
         return a;
     }
 
-    static int[] selectSort(int a[]) {
+    static int[] selectSort(int[] a) {
         for (int i = 0; i < a.length; i++) {
             int minIndex =i;
             for (int j = i; j < a.length; j++) {

@@ -12,17 +12,16 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
-import javax.xml.transform.Source;
-
 public class TestReflect {
 
     @Subscribe
-    void methodSubscribe(){}
+    void methodSubscribe() {
+    }
 
     /**
      * 测试反射常见api
      */
-    public static void main(String[]args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
         /**===================== 类加载器 ==========================*/
         println("==================类加载器====================");
         // 1.获取一个系统的类加载器(可以获取，当前这个类 ExampleUnitTest 就是它加载的)
@@ -83,22 +82,35 @@ public class TestReflect {
         println(clazz.isAssignableFrom(Object.class));
 
         println("=================== 无参构造和有参构造 ===================");
-        // 默认无参构造函数，没有无参构造函数则会报错
-        ReflectClass newInstance = (ReflectClass) clazz.newInstance();
-        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);
-        ReflectClass nancy = (ReflectClass) constructor.newInstance("nancy", 12);
 
+        ReflectClass newInstance = (ReflectClass) clazz.newInstance();// 默认无参构造函数，没有无参构造函数则会报错
         println(newInstance);
+
+        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);// 有参构造
+        ReflectClass nancy = (ReflectClass) constructor.newInstance("nancy", 12);
         println(nancy);
 
         println("=================== 反射方法 =============================");
 
-        // 1. 获取指定类所有方法，不含父类方法，private方法也可以获取
         println("---1. 获取指定类所有方法，不含父类方法，private方法也可以获取 - getDeclaredMethods()");
         Method[] methods = clazz.getDeclaredMethods();
         for (Method t : methods) {
             println(t.getName());
         }
+
+        println("---2. 获取包括父类在内的所有方法 - getMethods()");
+        Method[] methodsAll = clazz.getMethods();
+        for (Method method : methodsAll) {
+            println(method.getName());
+        }
+        Method setAge1 = clazz.getMethod("setAge", int.class, int.class);// 获取指定方法
+
+        println("---3. 获取指定方法，int直接写，不用转Integer - 只获取本类中的方法 getDeclaredMethod(name,parameterTypes...)");
+        Method setName = clazz.getDeclaredMethod("setName", String.class);
+        Method setAge = clazz.getDeclaredMethod("setAge", int.class, int.class);
+        Method getAge = clazz.getMethod("getAge");
+        println(setName);
+        println(setAge);
 
         println("---1.1 获取方法修饰符 - getModifiers()");
         for (Method t : methods) {
@@ -133,65 +145,71 @@ public class TestReflect {
             println(cs);
         }
 
-        println("---2. 获取包括父类在内的所有方法 - getMethods()");
-        Method[] methodsAll = clazz.getMethods();
-        for (Method method : methodsAll) {
-            println(method.getName());
-        }
-
-        // 2.获取指定方法，int直接写，不用转Integer
-        println("---3. 获取指定方法，int直接写，不用转Integer - 只获取本类中的方法 getDeclaredMethod(name,parameterTypes...)");
-        Method setName = clazz.getDeclaredMethod("setName", String.class);
-        Method setAge = clazz.getDeclaredMethod("setAge", int.class, int.class);
-        Method getAge = clazz.getMethod("getAge");
-        println(setName);
-        println(setAge);
-
-        // 3. 执行方法，需要有对象
         println("---4. 执行方法，需要对象 - invoke(obj,args...)");
         Object jack = setName.invoke(newInstance, "jack");
         Object age = setAge.invoke(newInstance, 0, 11);
         Object get = getAge.invoke(newInstance);
-        System.out.println("jack = "+jack);
-        System.out.println("age = "+age);
-        System.out.println("getAge = "+get);
+        System.out.println("jack = " + jack);
+        System.out.println("age = " + age);
+        System.out.println("getAge = " + get);
         println(newInstance.toString());
 
         println("---5. 返回方法形参类型 getGenericParameterTypes ");
         for (Type g : setName.getGenericParameterTypes()) {
-            println("setName - type = "+g);
+            println("setName - type = " + g);
         }
         for (Type g : setAge.getGenericParameterTypes()) {
-            println("setAge - type = "+g);
+            println("setAge - type = " + g);
         }
 
         println("---6. 返回方法形参的注解，二维数组 getParameterAnnotations ");
         Method postLogin = clazz.getDeclaredMethod("postLogin", String.class);
         for (Annotation[] p : postLogin.getParameterAnnotations()) {
             for (Annotation a : p) {
-                println("annotation = "+a);
+                println("annotation = " + a);
             }
         }
 
         println("=================== end 反射方法 end=============================\n");
+
         println("=================== 反射字段 =============================");
-        // 1. 获取所有字段，公有私有，不包含父类
+
         println("---1. 获取所有字段，公有私有，不包含父类 - getDeclaredFields()");
         Field[] fields = clazz.getDeclaredFields();
         for (Field t : fields) {
             println(t.getName());
         }
-        // 2. 获取指定字段
-        println("---2. 获取指定字段 - getDeclaredField(name)");
-        Field name = clazz.getDeclaredField("name");
-        println(name.getName());
-        // 3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set()
-        println("---2. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set() ");
-        Object value = name.get(newInstance);
-        println(value);
-        name.set(newInstance, "jack_set");
-        println(name.get(newInstance));
 
+        println("---2. 获取指定字段 - getDeclaredField(name)");
+        Field name = clazz.getDeclaredField("name");    println(name.getName());
+
+        println("---3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set() ");
+        Object value = name.get(newInstance);   println(value);
+        name.set(newInstance, "jack_set");      println(name.get(newInstance));
+
+        println("---4. 反射 final 和 static 变量");
+        Class<Person> personClass = Person.class;
+        final Person person = new Person();
+
+        Field name1 = personClass.getDeclaredField("name");
+        name1.setAccessible(true);
+        name1.set(person, "xixi"); println("修改后："+person.getName());
+
+        Field age1 = personClass.getDeclaredField("age");
+        age1.setAccessible(true);
+        age1.set(person, 12);println("修改后："+person.age);
+
+        println("修改前："+person.student);
+        Field student = personClass.getDeclaredField("student");
+        student.setAccessible(true);
+        student.set(person, new Student()); println("修改后："+person.student);
+
+        Object o = name1.get(person); println("修改后："+o);// 通过这种方式获取final变量
+        println("修改后："+age1.get(person));
+
+        Field sex = personClass.getDeclaredField("sex");
+        sex.setAccessible(true);
+        sex.set(null, "男");println("修改后："+sex.get(null));
 
         println("=================== 反射类泛型 =============================");
         TypeVariable<? extends Class<?>>[] typeParameters = clazz.getTypeParameters();

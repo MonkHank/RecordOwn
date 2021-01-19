@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @date 2019-03-01
  */
 public class ObservableCreator<T> extends Observable<T> {
-    private ObservableOnSubscribe<T> observableOnSubscribe;
+    private final ObservableOnSubscribe<T> observableOnSubscribe;
 
     public ObservableCreator(ObservableOnSubscribe<T> observableOnSubscribe) {
         this.observableOnSubscribe = observableOnSubscribe;
@@ -23,7 +23,7 @@ public class ObservableCreator<T> extends Observable<T> {
 
     public static final class ObservableEmitter<T> extends AtomicReference<Disposable>
             implements Emitter<T>, Disposable {
-        private Observer<T> observer;
+        private final Observer<T> observer;
 
         public ObservableEmitter(Observer<T> observer) {
             this.observer = observer;

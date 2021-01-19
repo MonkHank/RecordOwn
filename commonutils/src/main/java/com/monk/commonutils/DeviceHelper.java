@@ -7,7 +7,7 @@ public class DeviceHelper {
     private DeviceHelper(){}
 
     private static class SingleTonHoler{
-        private static DeviceHelper INSTANCE = new DeviceHelper();
+        private static final DeviceHelper INSTANCE = new DeviceHelper();
     }
 
     public static DeviceHelper getInstance(){

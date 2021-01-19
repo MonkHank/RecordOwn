@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.DateActivity;
 import com.monk.activity.DeviceActivity;
@@ -48,7 +49,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
     @BindView(R.id.fab) FloatingActionButton floatingActionButton;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
-    private List<HomeBean> list =new ArrayList<>();
+    private final List<HomeBean> list =new ArrayList<>();
     private BroadcastReciver reciver;
     private boolean isRegisterReceiver;
 

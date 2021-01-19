@@ -36,7 +36,7 @@ public class SocketServer {
         System.out.println("从客户端获取的消息 = "+sb);
 
         OutputStream out = socket.getOutputStream();
-        out.write("服务端info".getBytes(Charset.forName("utf-8")));
+        out.write("服务端info".getBytes(StandardCharsets.UTF_8));
 
         IOUtils.close(in);
         IOUtils.close(out);

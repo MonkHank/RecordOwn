@@ -11,10 +11,10 @@ import java.io.PrintWriter;
  */
 public class GenerateValueFiles {
 
-    private int baseW;
-    private int baseH;
+    private final int baseW;
+    private final int baseH;
 
-    private String dirStr = "generatevaluesfile/res";
+    private final String dirStr = "generatevaluesfile/res";
 
     private final static String WTemplate = "<dimen name=\"x{0}\">{1}px</dimen>\n";
     private final static String HTemplate = "<dimen name=\"y{0}\">{1}px</dimen>\n";

@@ -27,7 +27,7 @@ import java.util.TimerTask;
  */
 public class DatePickerView extends View {
 
-    private Context context;
+    private final Context context;
     /*** 新增字段 控制是否首尾相接循环显示 默认为循环显示*/
     private boolean loop = true;
     /*** text之间间距和minTextSize之比*/
@@ -40,8 +40,8 @@ public class DatePickerView extends View {
     private Paint mPaint, nPaint;
     private float mMaxTextSize = 80;
     private float mMinTextSize = 40;
-    private float mMaxTextAlpha = 255;
-    private float mMinTextAlpha = 120;
+    private final float mMaxTextAlpha = 255;
+    private final float mMinTextAlpha = 120;
     private int mViewHeight,mViewWidth;
     private float mLastDownY;
     /*** 滑动的距离*/
@@ -52,7 +52,7 @@ public class DatePickerView extends View {
     private Timer timer;
     private MyTimerTask mTask;
 
-    private Handler updateHandler = new Handler(Looper.getMainLooper()) {
+    private final Handler updateHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             if (Math.abs(mMoveLen) < SPEED) {

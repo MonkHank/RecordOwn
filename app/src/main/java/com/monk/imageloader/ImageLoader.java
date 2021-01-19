@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2019-01-07
  */
 public class ImageLoader {
-    private ExecutorService executors = new ThreadPoolExecutor(0, 1, 0, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+    private final ExecutorService executors = new ThreadPoolExecutor(0, 1, 0, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 
     IImageCache<String,Bitmap> memoryCache = new MemoryCache();
 

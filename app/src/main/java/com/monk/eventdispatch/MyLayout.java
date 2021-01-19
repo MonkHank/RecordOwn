@@ -15,10 +15,10 @@ import com.monk.commonutils.LogUtil;
  * @date 2018-12-24.
  */
 public class MyLayout extends RelativeLayout implements GestureDetector.OnDoubleTapListener,GestureDetector.OnGestureListener {
-    private String tag = "RelativeLayout";
-    private String simpleName = "MyLayout：";
+    private final String tag = "RelativeLayout";
+    private final String simpleName = "MyLayout：";
 
-    private GestureDetector mGestureDetector;
+    private final GestureDetector mGestureDetector;
     private int width;
     private int height;
 

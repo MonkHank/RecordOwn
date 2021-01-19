@@ -26,7 +26,7 @@ public class Temporary {
 
 
 class OneClass{
-    private static List<String> arrayList= Collections.singletonList("OneClass");
+    private static final List<String> arrayList= Collections.singletonList("OneClass");
 
     public static String get() {
         return arrayList.get(0);

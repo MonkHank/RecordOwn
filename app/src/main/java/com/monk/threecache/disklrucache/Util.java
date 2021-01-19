@@ -6,14 +6,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author monk
  * @date 2019-01-21
  */
 public class Util {
-    static final Charset US_ASCII = Charset.forName("US-ASCII");
-    static final Charset UTF_8 = Charset.forName("UTF-8");
+    static final Charset US_ASCII = StandardCharsets.US_ASCII;
+    static final Charset UTF_8 = StandardCharsets.UTF_8;
 
     private Util() {
     }

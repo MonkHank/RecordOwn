@@ -17,7 +17,7 @@ import java.util.Random;
  */
 public final class SQLiteDao {
 
-    private SQLiteOpenHelper openHelper;
+    private final SQLiteOpenHelper openHelper;
 
     public SQLiteDao(SQLiteOpenHelper openHelper) {
         this.openHelper=openHelper;

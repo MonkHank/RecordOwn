@@ -8,7 +8,7 @@ import android.util.LruCache;
  * @date 2019-01-08
  */
 public class MemoryCache implements IImageCache<String,Bitmap> {
-    private LruCache<String,Bitmap> lruCache;
+    private final LruCache<String,Bitmap> lruCache;
 
     public MemoryCache() {
         final int maxMemory = (int) Runtime.getRuntime().maxMemory()/1024;

@@ -12,18 +12,18 @@ import android.view.MotionEvent;
 
 
 public class ZoomImageView extends AppCompatImageView {
-    private Matrix matrix = new Matrix();
-    private Matrix savedMatrix = new Matrix();
+    private final Matrix matrix = new Matrix();
+    private final Matrix savedMatrix = new Matrix();
 
     private static final int NONE = 0;
     private static final int DRAG = 1;
     private static final int ZOOM = 2;
     private int mode = NONE;
     private static final float MAX_SCALE = 3;
-    private static float mCurScale = 1.0f;
+    private static final float mCurScale = 1.0f;
     private static float mStartScale;
     // 第一个按下的手指的点
-    private PointF startPoint = new PointF();
+    private final PointF startPoint = new PointF();
     // 两个按下的手指的触摸点的中点
     private PointF midPoint = new PointF();
     // 初始的两个手指按下的触摸点的距离

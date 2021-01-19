@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * @date 2018-12-13.
  */
 public class Person implements Parcelable {
-    private String name;
+    private final String name;
 
     public Person(String name) {
         this.name = name;

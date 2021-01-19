@@ -22,7 +22,7 @@ public class RetrofitUtils {
     private Call<DouBanMovie> call;
 
     private static class Inner {
-        private static RetrofitUtils INSTANCE = new RetrofitUtils();
+        private static final RetrofitUtils INSTANCE = new RetrofitUtils();
     }
 
     public static RetrofitUtils getInstance() {

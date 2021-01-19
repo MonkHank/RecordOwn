@@ -27,7 +27,7 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private static class Inner {
-        private static CrashHandler INSTANCE = new CrashHandler();
+        private static final CrashHandler INSTANCE = new CrashHandler();
     }
 
     public void init() {

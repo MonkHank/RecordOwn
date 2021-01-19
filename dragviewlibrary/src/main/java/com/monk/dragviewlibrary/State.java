@@ -5,5 +5,5 @@ package com.monk.dragviewlibrary;
  * @date 2019-01-28
  */
 public enum State {
-    DRAGGING, IDLE;
+    DRAGGING, IDLE
 }

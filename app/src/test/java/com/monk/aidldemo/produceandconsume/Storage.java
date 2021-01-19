@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Storage {
     private final int MAX_SIZE = 100;
-    private List list = new LinkedList();
+    private final List list = new LinkedList();
 
     public void produce(int num) {
         synchronized (list) {

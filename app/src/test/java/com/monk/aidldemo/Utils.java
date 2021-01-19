@@ -61,7 +61,7 @@ class Generic<T>{
 }
 
 class MyGeneric<T extends MyGeneric> extends Generic{
-    private Generic member;
+    private final Generic member;
     public MyGeneric() {
         member= this;
     }

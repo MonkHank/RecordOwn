@@ -10,9 +10,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @date 2019-04-16
  */
 public class Consumer implements Runnable{
-    private volatile boolean isRunning=true;
-    private BlockingQueue<PcData>queue;
-    private static AtomicInteger count=new AtomicInteger();
+    private final boolean isRunning=true;
+    private final BlockingQueue<PcData>queue;
+    private static final AtomicInteger count=new AtomicInteger();
     private static final int SLEEP_TIME=1000;
 
     public Consumer(BlockingQueue<PcData>queue) {

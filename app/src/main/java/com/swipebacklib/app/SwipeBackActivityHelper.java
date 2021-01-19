@@ -15,7 +15,7 @@ import com.swipebacklib.Utils;
  * @author Yrom
  */
 public class SwipeBackActivityHelper {
-    private Activity mActivity;
+    private final Activity mActivity;
 
     private SwipeBackLayout mSwipeBackLayout;
 

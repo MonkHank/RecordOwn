@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2017-10-12 17:43
  */
 public class CommonPagerAdapter extends PagerAdapter {
-    private List<? extends BasePage> mPagers;
+    private final List<? extends BasePage> mPagers;
 
     public CommonPagerAdapter(List<? extends BasePage> mPagers) {
         this.mPagers = mPagers;

@@ -2,7 +2,7 @@ package com.monk.moduleannotation.proxy;
 
 import java.lang.reflect.Proxy;
 
-public class Test {
+public class TestProxy {
     /**
      * 测试动态代理
      */
@@ -10,7 +10,7 @@ public class Test {
         // 1. 常规
         User user = new User();
         UserHandler userHandler = new UserHandler(user);
-        Object o = Proxy.newProxyInstance(Test.class.getClassLoader(), new Class[]{UserInterface.class}, userHandler);
+        Object o = Proxy.newProxyInstance(TestProxy.class.getClassLoader(), new Class[]{UserInterface.class}, userHandler);
         ((UserInterface)o).sayHello();
 
         // 2. 理解

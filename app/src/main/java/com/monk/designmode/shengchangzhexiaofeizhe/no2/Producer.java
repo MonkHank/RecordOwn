@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Producer implements Runnable{
 
     private volatile boolean isRunning = true;
-    private BlockingQueue<PcData> queue;// 内存缓冲区
-    private static AtomicInteger count = new AtomicInteger();// 总数 原子操作
+    private final BlockingQueue<PcData> queue;// 内存缓冲区
+    private static final AtomicInteger count = new AtomicInteger();// 总数 原子操作
     private static final int SLEEPTIME = 1000;
 
 

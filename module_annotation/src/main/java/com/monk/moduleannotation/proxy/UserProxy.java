@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationHandler;
 
 public class UserProxy implements UserInterface{
 
-    private InvocationHandler handler;
+    private final InvocationHandler handler;
 
     public UserProxy(InvocationHandler handler) {
         this.handler = handler;

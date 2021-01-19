@@ -19,7 +19,7 @@ import java.lang.ref.WeakReference;
  */
 public class MyMessengerService extends Service {
 
-    private Messenger messenger = new Messenger(new MessengerHandler(this));
+    private final Messenger messenger = new Messenger(new MessengerHandler(this));
 
     private static class MessengerHandler extends Handler {
         WeakReference<Service> weakReference;

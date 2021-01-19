@@ -41,7 +41,7 @@ public class CompressUtils {
     public static void compress(InputStream is, OutputStream os) throws Exception {
         GZIPOutputStream gos = new GZIPOutputStream(os);
         int count;
-        byte data[] = new byte[BUFFER_LENGTH];
+        byte[] data = new byte[BUFFER_LENGTH];
         while ((count = is.read(data, 0, BUFFER_LENGTH)) != -1) {
             gos.write(data, 0, count);
         }
@@ -63,7 +63,7 @@ public class CompressUtils {
         GZIPInputStream gis = new GZIPInputStream(is);
 
         int count;
-        byte data[] = new byte[BUFFER_LENGTH];
+        byte[] data = new byte[BUFFER_LENGTH];
         while ((count = gis.read(data, 0, BUFFER_LENGTH)) != -1) {
             os.write(data, 0, count);
         }
@@ -82,7 +82,7 @@ public class CompressUtils {
         GZIPInputStream gis = new GZIPInputStream(is);
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         int count;
-        byte data[] = new byte[BUFFER_LENGTH];
+        byte[] data = new byte[BUFFER_LENGTH];
         while ((count = gis.read(data, 0, BUFFER_LENGTH)) != -1) {
             os.write(data, 0, count);
         }

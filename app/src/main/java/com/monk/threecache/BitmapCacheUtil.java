@@ -27,7 +27,7 @@ import java.util.Map;
 public class BitmapCacheUtil {
     private volatile static BitmapCacheUtil httpUtil;
     private ImageCache imageCache;
-    private Context context;
+    private final Context context;
 
     private BitmapCacheUtil(Context context) {
         this.context=context;

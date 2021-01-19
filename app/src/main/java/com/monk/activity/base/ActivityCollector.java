@@ -13,7 +13,7 @@ public class ActivityCollector {
     /**
      * 存放activity的列表
      */
-    private static HashMap<Class<?>, Activity> activities = new LinkedHashMap<>();
+    private static final HashMap<Class<?>, Activity> activities = new LinkedHashMap<>();
 
     /**
      * 添加Activity

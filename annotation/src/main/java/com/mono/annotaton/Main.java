@@ -5,11 +5,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 public class Main {
-    interface  IHello{
+    interface IHello {
         void hello();
     }
 
-    class Hello implements IHello{
+    static class Hello implements IHello {
 
         @Override
         public void hello() {
@@ -18,17 +18,19 @@ public class Main {
     }
 
     static class MyInvocationHanlder implements InvocationHandler {
-        public <T> T create(Class<T>target){
-            return (T) Proxy.newProxyInstance(target.getClassLoader(),
-                    new Class[]{target},
-                    this);
+        public <T> T create(Class<T> target) {
+            Object o = Proxy.newProxyInstance(target.getClassLoader(), new Class[]{target}, this);
+            return (T) o;
         }
+
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             // 在原方法前插入动态代理
 //            Object invoke = method.invoke(proxy, args);
+
             // 在原方法后边动态插入代码
-            System.out.println( "method = " +method);
+            System.out.println("method = " + method);
+            method.invoke(new Hello());
             return null;
         }
     }

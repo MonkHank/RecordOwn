@@ -10,7 +10,8 @@ public class DeadLock implements Runnable{
 
 
     //静态对象是类的所有对象共享的
-    private static Object o1 = new Object(), o2 = new Object();
+    private static final Object o1 = new Object();
+    private static final Object o2 = new Object();
     @Override
     public void run() {
         System.out.println("flag=" + flag);
