@@ -14,6 +14,7 @@
 
 ## 一些三方框架
 1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme04.md)
+2. [OkHttp源码解析系列-简书(391)](https://www.jianshu.com/p/82f74db14a18)
 
 ## 一些基本处理
 1. **HttpUrlConnection**  
@@ -41,5 +42,16 @@
 24. [okhttp3的请求图解](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme22.md)
 25. socket编程
     - [from 博客园](https://www.cnblogs.com/yiwangzhibujian/p/7107785.html#q1)
+
 ## kotlin
--  [kotlin的一些东西](https://github.com/MonkHank/HelloGroovy/blob/master/ReadMe.md)
+1. 变量与常量
+  - var 声明变量
+  - val 声明常量
+  - 不同的数据类型用不同的容器保存
+  - kotlin会通过类型自动推断数据类型
+  - 我们也可以显式的指定数据类型
+- java 中常量有三种类型：静态常量、成员常量和局部常量。
+    - [深入理解java虚拟机片段](https://www.cnblogs.com/syp172654682/p/8082625.html)
+    - public static final double PI = 3.14;
+    - final int y = 10;
+    - 方法内部的final定义的常量

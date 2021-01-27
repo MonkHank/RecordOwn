@@ -1,3 +1,4 @@
+include ':module_kotlin'
 include ':module_basic'
 include ':annotation'
 include ':module_home'
