@@ -1,12 +1,7 @@
-package com.monk.commonutils;
+package com.monk.commonutils
 
-import android.content.Context;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import android.content.Context
+import java.io.*
 
 /**
  * 最好还是单例，因为还要设置有效时间，静态的话就不能设置时间了；
@@ -14,134 +9,134 @@ import java.io.IOException;
  * @author Kevin
  * @date 2017/8/15.
  */
-public class FileCacheUtils {
-    private static final String tag = "FileCacheUtils";
-
-    private static long deadTime = System.currentTimeMillis() + 30 * 60 * 1000;
-
-    public static void setValidTime(long validTime) {
-        deadTime = validTime;
+object FileCacheUtils {
+    private const val tag = "FileCacheUtils"
+    private var deadTime = System.currentTimeMillis() + 30 * 60 * 1000
+    fun setValidTime(validTime: Long) {
+        deadTime = validTime
     }
 
     /**
      * 30分钟有效期
      */
-    public static void setCache(Context context, String url, String json) {
-        String cacheDir = context.getCacheDir().getAbsolutePath();
-        LogUtil.v(tag, "设置缓存：" + cacheDir + "\t/" + url);
-        File cacheFile = new File(cacheDir, url);
-        FileWriter fw = null;
+    @JvmStatic
+    fun setCache(context: Context, url: String, json: String?) {
+        val cacheDir = context.cacheDir.absolutePath
+        LogUtil.v(tag, "设置缓存：$cacheDir\t/$url")
+        val cacheFile = File(cacheDir, url)
+        var fw: FileWriter? = null
         try {
-            fw = new FileWriter(cacheFile);
-            fw.write(deadTime + "\n");
+            fw = FileWriter(cacheFile)
+            fw.write("""$deadTime""".trimIndent())
             if (json != null) {
-                fw.write(json);
+                fw.write(json)
             }
-            fw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+            fw.flush()
+        } catch (e: IOException) {
+            e.printStackTrace()
         } finally {
-            IOUtils.close(fw);
-            deadTime = System.currentTimeMillis() + 30 * 60 * 1000;
+            IOUtils.close(fw)
+            deadTime = System.currentTimeMillis() + 30 * 60 * 1000
         }
     }
 
     /**
      * 读取写入缓存时候的缓存时间
      */
-    public static long getCacheDeadTime(Context context, String url) {
-        File cacheDir = context.getCacheDir();
-        File cacheFile = new File(cacheDir, url);
+    fun getCacheDeadTime(context: Context, url: String?): Long {
+        val cacheDir = context.cacheDir
+        val cacheFile = File(cacheDir, url)
         if (cacheFile.exists()) {
-            BufferedReader br = null;
+            var br: BufferedReader? = null
             try {
-                br = new BufferedReader(new FileReader(cacheFile));
+                br = BufferedReader(FileReader(cacheFile))
                 //把时间读出来
-                String deadLine = br.readLine();
-                return Long.parseLong(deadLine);
-            } catch (Exception e) {
-                e.printStackTrace();
+                val deadLine = br.readLine()
+                return deadLine.toLong()
+            } catch (e: Exception) {
+                e.printStackTrace()
             } finally {
-                IOUtils.close(br);
+                IOUtils.close(br)
             }
         }
-        return -1;
+        return -1
     }
 
     /**
      * 30分钟有效期
      */
-    public static String getCache(Context context, String url) {
-        File cacheDir = context.getCacheDir();
-        File cacheFile = new File(cacheDir, url);
+    @JvmStatic
+    fun getCache(context: Context, url: String): String {
+        val cacheDir = context.cacheDir
+        val cacheFile = File(cacheDir, url)
         if (cacheFile.exists()) {
-            BufferedReader br = null;
+            var br: BufferedReader? = null
             try {
-                br = new BufferedReader(new FileReader(cacheFile));
+                br = BufferedReader(FileReader(cacheFile))
                 //把时间读出来
-                String deadLine = br.readLine();
-                long deadTime = Long.parseLong(deadLine);
+                val deadLine = br.readLine()
+                val deadTime = deadLine.toLong()
                 if (System.currentTimeMillis() < deadTime) {
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
+                    val sb = StringBuilder()
+                    var line: String?
+                    while (br.readLine().also { line = it } != null) {
                         // 去除时间从第二行开始读
-                        sb.append(line);
+                        sb.append(line)
                     }
-                    LogUtil.d(tag, "读缓存:\t" + url);
+                    LogUtil.d(tag, "读缓存:\t$url")
                     // 不包括时间
-                    return sb.toString();
+                    return sb.toString()
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (e: Exception) {
+                e.printStackTrace()
             } finally {
-                IOUtils.close(br);
+                IOUtils.close(br)
             }
         }
-        return "";
+        return ""
     }
 
     /**
      * 没有时间期限的缓存
      */
-    public static void setCacheNoTime(Context context, String url, String text) {
+    fun setCacheNoTime(context: Context, url: String, text: String?) {
         //  /data/data/包名/cache目录
-        String cacheDir = context.getCacheDir().getAbsolutePath();
-        LogUtil.v(tag, cacheDir + "\n设置缓存" + url);
-        File cacheFile = new File(cacheDir, url);
-        FileWriter fw = null;
+        val cacheDir = context.cacheDir.absolutePath
+        LogUtil.v(tag, "$cacheDir\n设置缓存$url")
+        val cacheFile = File(cacheDir, url)
+        var fw: FileWriter? = null
         try {
             //续写
-            fw = new FileWriter(cacheFile);
-            fw.write(text);
-            fw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+            fw = FileWriter(cacheFile)
+            fw.write(text)
+            fw.flush()
+        } catch (e: IOException) {
+            e.printStackTrace()
         } finally {
-            IOUtils.close(fw);
+            IOUtils.close(fw)
         }
     }
 
-    public static String getCacheNoTime(Context context, String url) {
-        File cacheDir = context.getCacheDir();
-        File cacheFile = new File(cacheDir, url);
+    fun getCacheNoTime(context: Context, url: String): String {
+        val cacheDir = context.cacheDir
+        val cacheFile = File(cacheDir, url)
         if (cacheFile.exists()) {
-            BufferedReader br = null;
+            var br: BufferedReader? = null
             try {
-                br = new BufferedReader(new FileReader(cacheFile));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line);
+                br = BufferedReader(FileReader(cacheFile))
+                val sb = StringBuilder()
+                var line: String?
+                while (br.readLine().also { line = it } != null) {
+                    sb.append(line)
                 }
-                LogUtil.v(tag, "读缓存:" + url);
-                return sb.toString();
-            } catch (Exception e) {
-                e.printStackTrace();
+                LogUtil.v(tag, "读缓存:$url")
+                return sb.toString()
+            } catch (e: Exception) {
+                e.printStackTrace()
             } finally {
-                IOUtils.close(br);
+                IOUtils.close(br)
             }
         }
-        return "";
+        return ""
     }
 }

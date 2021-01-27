@@ -1,11 +1,8 @@
 package com.monk.retrofit.netapi;
 
 
-import androidx.annotation.NonNull;
-
 import com.monk.commonutils.LogUtil;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -40,39 +37,28 @@ public class HttpMethods {
 
     private HttpMethods() {
         okHttpBuilder = new OkHttpClient.Builder();
-        Interceptor cacheInterceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                Response response = chain.proceed(request);
-                response.newBuilder()
-                        .build();
-                return response;
-            }
+        Interceptor cacheInterceptor = chain -> {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            response.newBuilder()
+                    .build();
+            return response;
         };
         okHttpBuilder.addInterceptor(cacheInterceptor);
 
-        Interceptor headerInterceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request.Builder requestBuilder = originalRequest.newBuilder()
-                        .addHeader("Content-Type", "application/json; charset=utf-8")
-                        .addHeader("Accept", "application/json; charset=utf-8")
-                        .method(originalRequest.method(), originalRequest.body());
-                Request request = requestBuilder.build();
-                return chain.proceed(request);
-            }
+        Interceptor headerInterceptor = chain -> {
+            Request originalRequest = chain.request();
+            Request.Builder requestBuilder = originalRequest.newBuilder()
+                    .addHeader("Content-Type", "application/json; charset=utf-8")
+                    .addHeader("Accept", "application/json; charset=utf-8")
+                    .method(originalRequest.method(), originalRequest.body());
+            Request request = requestBuilder.build();
+            return chain.proceed(request);
         };
         okHttpBuilder.addInterceptor(headerInterceptor);
 
 //        if (BuildConfig.DEBUG) {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(@NonNull String message) {
-                LogUtil.v(TAG,message);
-            }
-        });
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> LogUtil.v(TAG,message));
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         //设置 Debug Log 模式
         okHttpBuilder.addInterceptor(loggingInterceptor);

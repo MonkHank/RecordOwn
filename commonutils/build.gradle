@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+// kotlin (1)
+apply plugin: 'kotlin-android'
+
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
@@ -25,4 +28,13 @@ android {
 
 dependencies {
     implementation 'com.blankj:utilcode:1.29.0'
+
+    // kotlin (2) next 2 is kotlin
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    // kotlin (3) next 2 is kotlin
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    mavenCentral()
 }
