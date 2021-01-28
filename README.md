@@ -13,7 +13,7 @@
 
 
 ## 一些三方框架
-1. [RxJava2操作符](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme04.md)
+1. [RxJava2 的一些东西](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme04.md)
 2. [OkHttp源码解析系列-简书(391)](https://www.jianshu.com/p/82f74db14a18)
 
 ## 一些基本处理
