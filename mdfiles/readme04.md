@@ -24,5 +24,7 @@
 - [RxJava：这是一份全面 & 详细 的RxJava操作符 使用攻略](https://www.jianshu.com/p/cd984dd5aae8)
 - [rxjava2的disposable](https://blog.csdn.net/c_j33/article/details/78774546)
 - [Retrofit2.0](https://blog.csdn.net/carson_ho/article/details/73732076)
+- [RxJava中文版](https://www.kancloud.cn/luponu/rxjava_zh/974451)
+- [RxJava整理的API](https://juejin.cn/post/6844903617124630535#heading-43)
 
 - [x] 一般用 **Retrofit** 需要结合 **Rxjava** 一起使用；听说很多公司现在重构代码用这种模式去替代OKHttp
