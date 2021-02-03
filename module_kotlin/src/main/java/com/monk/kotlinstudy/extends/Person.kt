@@ -15,6 +15,8 @@ open class Person {
 /*** 主构造函数*/
 class Student(name: String, age: Int) : Person() {
 
+    val height: Int = 175
+
     init {
         println("init")
     }

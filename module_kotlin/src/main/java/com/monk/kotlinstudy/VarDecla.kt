@@ -1,6 +1,6 @@
 package com.monk.kotlinstudy
 
-import kotlin.concurrent.thread
+import java.util.*
 
 /***
  * - var 声明变量
@@ -10,18 +10,6 @@ import kotlin.concurrent.thread
  * - 我们也可以显式的指定数据类型
  */
 fun main() {
-    var name = "张三"
-
-    var i = 18
-    var ii: Int = 19// 指定类型
-
-    val PI = 3.1415926 // 只读类型，不允许修改
-
-    val b: Int = 0b0011 // 用0b来表示二进制
-    println("b的十进制：$b")
-
-    val s = "abc"
-    println("$s.length is ${s.length}")
 
     val range = 0..10 // 数学中的[0, 10]
     val range1 = 0 until 10 // 数学中的[0, 10)
@@ -33,12 +21,7 @@ fun main() {
     val list = listOf("a","b")
     val list2 = mutableListOf("a","b")
 
-    Thread { TODO("Not yet implemented") }
-    Thread(object :Runnable{
-        override fun run() {
-            TODO("Not yet implemented")
-        }
-    })
+    wenhaoAndDoubleGantanghao()
 
 }
 
@@ -70,4 +53,22 @@ fun doStudy(name:String?){
 }
 fun doStudy2(name:String){
     println(name)
+}
+
+/**
+ *  ? 相当于 if(=null)...
+ *  !! 相当于 throw new NullPointerException
+ */
+fun wenhaoAndDoubleGantanghao(){
+    var str : String?
+    str="a"
+    str?.toUpperCase()
+    println(str)
+
+    var str2:String?=null
+    try {
+        str2!!.toString()
+    } catch (e: Exception) {
+        println("捕捉到了")
+    }
 }

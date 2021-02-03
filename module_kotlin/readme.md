@@ -10,3 +10,5 @@
     - public static final double PI = 3.14;
     - final int y = 10;
     - 方法内部的final定义的常量
+- [kotlin中的单例](https://www.jianshu.com/p/5797b3d0ebd0)
+- [let、with、run、apply、also](https://blog.csdn.net/u013064109/article/details/78786646)
