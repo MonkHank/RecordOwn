@@ -12,3 +12,5 @@
     - 方法内部的final定义的常量
 - [kotlin中的单例](https://www.jianshu.com/p/5797b3d0ebd0)
 - [let、with、run、apply、also](https://blog.csdn.net/u013064109/article/details/78786646)
+- [Kotlin (一) 复合符号( '?.' '?:' '!!' 'as?' '?' )](https://blog.csdn.net/lckj686/article/details/80448471)
+- [kotlin 中得一些for语句](https://www.jianshu.com/p/27646c6561a7)

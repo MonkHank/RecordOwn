@@ -16,29 +16,82 @@ fun main() {
     println(range)
     println(range1)
 
+    println("------------------")
     forStatement()
+    println()
 
+    println("------------------")
     val list = listOf("a","b")
     val list2 = mutableListOf("a","b")
+    list.forEach(::print)
+    println()
+    list2.forEach(::print)
+    println()
 
+    println("------------------")
     wenhaoAndDoubleGantanghao()
 
+    println("------------------")
+    operateMap()
+
+    println("------------------")
+    val b = biBao()
+    println(b)
+    b()
+    b()
+    println(b())
+
+    println("-------------------")
+    arraysFunction()
+}
+
+fun operateMap(){
+    val list = arrayOf(1..5,50..55)
+    val mergeList = list.flatMap { intRage->
+        intRage.map { intElemet->
+            "No.$intElemet"
+        }
+    }
+    mergeList.forEach{print("$it,")}
+    println()
+}
+
+fun biBao():()->(Int){
+    var i=10
+    return fun():Int{
+        return i++
+    }
 }
 
 fun forStatement() {
-    // 遍历[0, 10]中的每一个元素
-    for (i in 0..10) print(i)
+    //1. 遍历[0, 10]中的每一个元素
+    for (i in 0..10) print("$i,")
     println()
 
-    // 遍历[0, 10)的时候，每次循环会在区间范围内递增2，相当于 for-i 中的 i = i + 2 效果
+    //2. 遍历[0, 10)的时候，每次循环会在区间范围内递增2，相当于 for-i 中的 i = i + 2 效果
     // step 关键字可以跳过其中一些元素
-    for (i in 0 until 10 step 2)print(i)
+    for (i in 0 until 10 step 2)print("$i,")
     println()
 
-    // 降序遍历[0, 10]中的每一个元素
+    //3. 降序遍历[0, 10]中的每一个元素
     // downTo 关键字用来创建降序的空间
-    for (i in 10 downTo 1)print(i)
+    for (i in 10 downTo 1)print("$i,")
     println()
+
+    // 4. 遍历一个数组/列表，想同时取出下标和元素：
+    val array = arrayOf("a", "b", "c")
+    for ((index,e) in array.withIndex()) print("$index--$e,")
+    println()
+
+    //5. 遍历一个数组/列表，只取出下标:
+    val array2 = arrayOf("a", "b", "c")
+    for (index in array2.indices) print("$index,")//输出0，1，2
+    println()
+
+    // 6. 遍历取元素：
+    val array3 = arrayOf("a", "b", "c")
+    for (element in array3) print("$element,")//输出a,b,c
+
 }
 
 fun getScore(name: String) = when (name) {
@@ -60,15 +113,24 @@ fun doStudy2(name:String){
  *  !! 相当于 throw new NullPointerException
  */
 fun wenhaoAndDoubleGantanghao(){
-    var str : String?
+    val str : String?
     str="a"
-    str?.toUpperCase()
+    str.toUpperCase(Locale.ROOT)
     println(str)
 
-    var str2:String?=null
+    val str2:String?=null
     try {
         str2!!.toString()
     } catch (e: Exception) {
         println("捕捉到了")
     }
+}
+
+fun arraysFunction(){
+    // int [] ints = new int[3];
+    val ints = arrayOfNulls<Int>(3)
+    ints[0]=0
+    ints[1]=1
+    ints[2]=2
+    ints.forEach { int -> println(int)}
 }

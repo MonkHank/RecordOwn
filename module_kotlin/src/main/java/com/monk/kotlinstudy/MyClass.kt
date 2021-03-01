@@ -125,6 +125,12 @@ class CallbackImpl{
         println("callback:"+callback?.callback())
         onConfirmListener()
         onCallback2(20,"jack")
+        onConfirmListener{
+        }
+    }
+
+    private fun onConfirmListener(function: () -> Unit) {
+        println("onConfirmListener")
     }
 
     fun setCallback(listener: () -> Unit): CallbackImpl {
