@@ -81,6 +81,17 @@ fun arraysFunction(){
     ints.forEach { int -> println(int)}
 }
 
+fun threeYinHao(){
+    val three = """
+        ${"19:50"}
+        ${"2021-4-19"}
+        """.trimIndent()
+    println(three)
+
+    val three2 = "${"19:50"}\n${"2021-4-19"}".trimIndent()
+    println(three2)
+}
+
 /***
  * - var 声明变量
  * - val 声明常量
@@ -124,4 +135,7 @@ fun main() {
 
     println("-------String?------")
     doStudy(null)
+
+    println("-------三引号------")
+    threeYinHao()
 }

@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
-import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.FileCacheUtils;
+import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 
 import java.util.concurrent.TimeUnit;

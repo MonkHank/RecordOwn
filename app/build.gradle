@@ -1,6 +1,9 @@
 import groovy.xml.MarkupBuilder
 
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+
+// jimu-config-step4:应用组件化编译脚本，在组件和host的build.gradle都需要增加此配置
+apply plugin: 'com.dd.comgradle'
 
 // 把buidl.gradle看成个类来设计
 def mCompileVersion = 28
@@ -17,6 +20,12 @@ android {
         versionName "1.0.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [host: "app"]
+            }
+        }
 
     }
     externalNativeBuild {
@@ -87,15 +96,29 @@ dependencies {
 //    implementation project(rootProject.ext.dependencies.implementation)
 //    implementation project(rootProject.ext.dependencies.common)
 
+    annotationProcessor 'com.github.jimu:router-anno-compiler:1.0.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     // 编译时期注解，执行到此处时，就会去生成相关注解处理类
     annotationProcessor project(path: ':annotationprocessor')
     implementation project(path: ':module_basic')
-    if (!rootProject.ext.isApplication) {
-        implementation project(path:':module_home')
-    }
 
+
+}
+
+// jimu-config-step5:增加extension配置
+def projectRoot = project.getRootProject().rootDir.absolutePath
+combuild{
+    applicationName = 'com.monk.global.RecordOwnApplication'
+    isRegisterCompoAuto = true
+    useMaat false
+
+    originalManifest = projectRoot + "/app/src/main/AndroidManifest.xml"
+
+    runAloneManifest = projectRoot + "/app/src/main/AndroidManifest.xml"
+    targetManifest = projectRoot + "/app/src/main/AndroidManifest.xml"
+    //如果不需要合并，改为false
+    enableManifestMerge = false
 }
 
 /**======================= 执行外部命令==============================================*/

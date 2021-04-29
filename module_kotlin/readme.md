@@ -13,4 +13,8 @@
 - [kotlin中的单例](https://www.jianshu.com/p/5797b3d0ebd0)
 - [let、with、run、apply、also](https://blog.csdn.net/u013064109/article/details/78786646)
 - [Kotlin (一) 复合符号( '?.' '?:' '!!' 'as?' '?' )](https://blog.csdn.net/lckj686/article/details/80448471)
-- [kotlin 中得一些for语句](https://www.jianshu.com/p/27646c6561a7)
+- [kotlin 中得一些for语句](https://www.jianshu.com/p/27646c6561a7
+- [菜鸟教程，kotlin循环控制](https://www.runoob.com/kotlin/kotlin-loop-control.html)
+
+## 位运算符
+- [kotlin位操作和位运算](https://blog.csdn.net/jdsjlzx/article/details/108606777)

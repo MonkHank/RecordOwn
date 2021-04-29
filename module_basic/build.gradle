@@ -69,4 +69,7 @@ dependencies {
 
     api project(rootProject.ext.dependencies.common)
 
+    api 'com.github.jimu:componentlib:1.3.3'
+//    api 'osp.leobert.android:maat:1.0.0'
+
 }

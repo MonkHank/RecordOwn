@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.luojilab.component.componentlib.router.Router;
+import com.luojilab.component.componentlib.router.ui.UIRouter;
 import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.DateActivity;
 import com.monk.activity.DeviceActivity;
@@ -91,6 +93,13 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
 
         EventBus.getDefault().postSticky(new Object());
 
+        Router.registerComponent("com.monk.home.applike.HomeApplike");
+        Router.registerComponent("com.monk.modulefragment.applike.FragmentApplike");
+
+        floatingActionButton.setOnClickListener(v ->{
+            UIRouter.getInstance().openUri(HomeActivity.this, "monk://home/uirouter/demo", null);
+        });
+
     }
 
     /**
@@ -107,7 +116,8 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
         HomeBean bean = list.get(position);
         switch(bean.Tag){
             case 0:
-                startActivity(MainActivity.class);
+//                startActivity(MainActivity.class);
+                UIRouter.getInstance().openUri(HomeActivity.this, "monk://modulefragment/main", null);
                 break;
             case 1:
                 startActivity(AidlFullscreenActivity.class);

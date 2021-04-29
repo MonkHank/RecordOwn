@@ -88,6 +88,9 @@ class Inline{
         println("also:$also")
     }
 
+    inline fun inlined(getString:()->String?)= println(getString())
+    fun notInlined(getString:()->String?)= println(getString())
+
 
     companion object{
         @JvmStatic
@@ -98,6 +101,9 @@ class Inline{
             inline.functionRun()
             inline.functionApply()
             inline.functionAlso()
+
+            inline.inlined { "inlined" }
+            inline.notInlined { "notInlined" }
         }
     }
 

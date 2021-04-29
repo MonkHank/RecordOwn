@@ -1,0 +1,66 @@
+<resources>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SlideSelectView">
+        <attr name="circleCount" format="integer"/>
+        <attr name="textSize" format="integer"/>
+    </declare-styleable>
+
+    <!--百分比环形  radius_integer不能写成 radius，编译的时候会提示
+       Attribute "radius" already defined with incompatible format.
+       那是因为 radius 这个属性跟系统的重复了
+   -->
+    <declare-styleable name="PercentCircle">
+        <attr name="radius_integer" format="integer"/>
+        <attr name="background_color" format="color"/>
+        <attr name="text_color" format="color"/>
+        <attr name="ring_color" format="color"/>
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference"/>
+
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension"/>
+        <attr name="edge_flag">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="all" value="3"/>
+        </attr>
+        <attr name="shadow_left" format="reference"/>
+        <attr name="shadow_right" format="reference"/>
+        <attr name="shadow_bottom" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="AddEquipmentItem">
+        <attr name="tvName" format="string"/>
+        <attr name="tvContent" format="string"/>
+        <attr name="tvNameColor" format="color"/>
+        <attr name="tvContentColor" format="color"/>
+        <attr name="etContentHint" format="string"/>
+        <attr name="linearLayoutVisibility" format="integer">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="gone" value="0x00000008"/>
+            <enum name="invisible" value="0x00000004"/>
+        </attr>
+        <attr name="tvVisibility" format="integer">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="gone" value="0x00000008"/>
+            <enum name="invisible" value="0x00000004"/>
+        </attr>
+        <attr name="etVisibility" format="integer">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="gone" value="0x00000008"/>
+            <enum name="invisible" value="0x00000004"/>
+        </attr>
+    </declare-styleable>
+
+</resources>

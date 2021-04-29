@@ -5,11 +5,11 @@ import com.monk.commonutils.LogUtil;
 import com.monk.global.Constant;
 import com.monk.retrofit.base.BasePresent;
 import com.monk.retrofit.bean.Bean;
-import com.monk.retrofit.netapi.OnSuccessAndFaultListener;
-import com.monk.retrofit.netapi.OnSuccessAndFaultSub;
 import com.monk.retrofit.mvp.model.RetrofitModle;
 import com.monk.retrofit.mvp.model.RetrofitModleImpl;
 import com.monk.retrofit.mvp.view.RetrofitView;
+import com.monk.retrofit.netapi.OnSuccessAndFaultListener;
+import com.monk.retrofit.netapi.OnSuccessAndFaultSub;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

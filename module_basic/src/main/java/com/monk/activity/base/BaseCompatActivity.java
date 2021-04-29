@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.gyf.immersionbar.ImmersionBar;
+import com.luojilab.component.componentlib.service.AutowiredService;
 import com.monk.basic.R;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
@@ -63,6 +64,9 @@ public class BaseCompatActivity<T extends BaseCompatActivity<T>> extends AppComp
 
 
         fullScreen(mContext);
+
+        AutowiredService.Factory.getSingletonImpl().autowire(this);
+
     }
 
     protected void initToolbar(int layoutResId) {

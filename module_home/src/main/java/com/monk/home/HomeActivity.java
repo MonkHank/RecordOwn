@@ -1,23 +1,22 @@
 package com.monk.home;
 
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.tabs.TabLayout;
+import com.luojilab.router.facade.annotation.RouteNode;
 import com.monk.activity.base.BaseCompatActivity;
+import com.monk.commonutils.LogUtils;
 import com.monk.ui.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
+@RouteNode(path = "/uirouter/demo" ,desc = "home")
 public class HomeActivity extends BaseCompatActivity<HomeActivity> {
 
-    @BindView(R.id.tabLayout)
     TabLayout tabLayout;
-    @BindView(R.id.viewPager)
     NoScrollViewPager viewPager;
 
     private MainPagerAdapter pagerAdapter;
@@ -25,7 +24,10 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initToolbar(R.layout.activity_home);
+        // 组件化中不能使用同名的布局文件，必须唯一，否则布局id找不到
+        initToolbar(R.layout.activity_home_home);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
         Fragment fragmentHome = FragmentHome.newFragment();
         Fragment fragmentDevelop = FragmentDevelop.newFragment();
@@ -36,12 +38,13 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
         fragmentList.add(fragmentDevelop);
         fragmentList.add(fragmentMine);
 
+        LogUtils.i("tag","viewPager = "+viewPager);
         pagerAdapter = new MainPagerAdapter(mContext,getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(2);
 
         tabLayout.setupWithViewPager(viewPager);
-        // 给底部3个标签设置样式
+//         给底部3个标签设置样式
         tabLayout.getTabAt(0).setCustomView(pagerAdapter.getTabView(0));
         tabLayout.getTabAt(1).setCustomView(pagerAdapter.getTabView(1));
         tabLayout.getTabAt(2).setCustomView(pagerAdapter.getTabView(2));
