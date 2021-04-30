@@ -45,14 +45,13 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
 
     implementation project(path: ':module_basic')
-
     annotationProcessor(rootProject.ext.dependencies.jimu.router_anno_compiler)
 
 }
 
 def projectRoot = project.getRootProject().rootDir.absolutePath
 combuild {
-    applicationName = 'com.monk.modulefragment.application.ModuleFragmentApplication'
+    applicationName = 'com.monk.modulefragment.runalone.application.ModuleFragmentApplication'
     isRegisterCompoAuto = true
 
     originalManifest = projectRoot + "/module_fragment/src/main/AndroidManifest.xml"

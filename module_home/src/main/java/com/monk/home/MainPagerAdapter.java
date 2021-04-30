@@ -68,7 +68,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
         if (position == 0) {
             ivLogo.setImageResource(drawableSelected[0]);
-            tvText.setTextColor(context.getResources().getColor(R.color.txt_change));
+            tvText.setTextColor(context.getResources().getColor(R.color.status_bar_bg));
         }
 
         imageViews[position] = ivLogo;
@@ -79,7 +79,7 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
     public void onTabSelected(int position) {
         imageViews[position].setImageResource(drawableSelected[position]);
-        tvs[position].setTextColor(context.getResources().getColor(R.color.txt_change));
+        tvs[position].setTextColor(context.getResources().getColor(R.color.status_bar_bg));
     }
 
     public void onTabUnSelected(int position) {

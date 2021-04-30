@@ -70,10 +70,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="com.monk.eventdispatch.EventDispatchActivity"/>
         <activity android:name="com.monk.activity.LoginActivity"/>
-        <activity
-            android:name="com.monk.retrofit.mvp.view.RetrofitActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity android:name="com.monk.jni.ActivityJni"/>
 
         <!--<receiver android:name="com.monk.broadcast.BroadcastReciver">-->
             <!--<intent-filter >-->
@@ -86,7 +83,6 @@
             <!--</intent-filter>-->
         <!--</receiver>-->
 
-        <activity android:name="com.monk.activity.DateActivity" />
         <activity android:name="com.monk.activity.DeviceActivity" />
     </application>
 

@@ -75,7 +75,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
                 immersionBar.statusBarColor(R.color.status_bar_bg).init();
                 break;
             case 2:
-                immersionBar.statusBarColor(R.color.txt_change).init();
+                immersionBar.statusBarColor(R.color.status_bar_bg).init();
                 break;
         }
 

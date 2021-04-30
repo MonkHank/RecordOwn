@@ -1,19 +1,18 @@
 package com.monk;
 
-import android.annotation.SuppressLint;
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.activity.base.BaseFragment;
 import com.monk.activity.base.OnFragmentInteractionListener;
@@ -22,15 +21,10 @@ import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ThreadPoolManager;
 import com.monk.customview.fragment.CustomViewFragment;
 import com.monk.customview.fragment.CustomViewFragment2;
-import com.monk.fragments.SampleFragment;
-import com.monk.jni.JniFragment;
-import com.monk.location.LocationFragment;
-import com.monk.rxjava2.RxJava2Fragment;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @author monk
@@ -44,7 +38,7 @@ public class MainActivity extends BaseCompatActivity<MainActivity> implements
     @BindView(R.id.navigation) BottomNavigationView navigation;
 
     private FragmentManager fragmentManager;
-    private BaseFragment sampleFragment, jniFragment,rxJava2Fragment, customViewFragment1;
+    private BaseFragment   customViewFragment1;
     private BaseFragment mCurrentFragment;
 
     private UriMatcher uriMatcher;
@@ -60,9 +54,6 @@ public class MainActivity extends BaseCompatActivity<MainActivity> implements
         navigation.setOnNavigationItemSelectedListener(this);
         fragmentManager = getSupportFragmentManager();
         if (savedInstanceState != null) {
-            sampleFragment = (BaseFragment) fragmentManager.findFragmentByTag(SampleFragment.class.getName());
-            jniFragment = (BaseFragment) fragmentManager.findFragmentByTag(JniFragment.class.getName());
-            rxJava2Fragment = (BaseFragment) fragmentManager.findFragmentByTag(RxJava2Fragment.class.getName());
             customViewFragment1 = (BaseFragment) fragmentManager.findFragmentByTag(CustomViewFragment.class.getName());
             menuItemItemId=savedInstanceState.getInt("menuItemItemId");
             navigation.setSelectedItemId(menuItemItemId);
@@ -86,24 +77,6 @@ public class MainActivity extends BaseCompatActivity<MainActivity> implements
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         menuItemItemId = menuItem.getItemId();
         switch (menuItem.getItemId()) {
-            case R.id.navigation_sample:
-                if (sampleFragment == null) {
-                    sampleFragment = new SampleFragment();
-                }
-                addAndShowFragment(sampleFragment);
-                return true;
-            case R.id.navigation_home:
-                if (rxJava2Fragment == null) {
-                    rxJava2Fragment = RxJava2Fragment.newInstance("RxJava2", "");
-                }
-                addAndShowFragment(rxJava2Fragment);
-                return true;
-            case R.id.navigation_jni:
-                if (jniFragment == null) {
-                    jniFragment = new JniFragment();
-                }
-                addAndShowFragment(jniFragment);
-                return true;
             case R.id.navigation_custom_view:
                 if (customViewFragment1 == null) {
                     customViewFragment1 = CustomViewFragment.newInstance("", "");
@@ -135,7 +108,6 @@ public class MainActivity extends BaseCompatActivity<MainActivity> implements
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(getPackageName(), CustomViewFragment.class.getName(), customViewFragment);
         uriMatcher.addURI(getPackageName(), CustomViewFragment2.class.getName(), customViewFragment2);
-        uriMatcher.addURI(getPackageName(), RxJava2Fragment.class.getName(), locationFragment);
     }
 
     @Override
@@ -154,37 +126,11 @@ public class MainActivity extends BaseCompatActivity<MainActivity> implements
                         .addToBackStack(CustomViewFragment2.class.getSimpleName())
                         .commit();
                 break;
-            case locationFragment:
-                ft.replace(R.id.fragmentContainer, LocationFragment.newInstance())
-                        .addToBackStack(RxJava2Fragment.class.getSimpleName())
-                        .commit();
-                break;
             default:
                 break;
         }
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @OnClick({R.id.btTestAttach,R.id.btAdd})
-    public void clickEvent(View v) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        switch(v.getId()){
-            case R.id.btTestAttach:
-                if (sampleFragment.isAdded()) {
-                    ft.detach(sampleFragment).commit();
-                }else {
-                    ft.attach(sampleFragment).commit();
-                }
-                LogUtil.i(tag,"sampleFragment.isAdded()："+sampleFragment.isAdded());
-                LogUtil.i(tag,"sampleFragment.isDetach()："+sampleFragment.isDetached());
-                break;
-            case R.id.btAdd:
-                ft.replace(R.id.fragmentContainer, sampleFragment).commit();
-                break;
-             default:
-                break;
-        }
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

@@ -27,7 +27,7 @@ public class BaseApplication extends MultiDexApplication {
         handler = new Handler();
         mainThreadId = Process.myPid();
 
-        CrashHandler.getInstance(this).init();
+        CrashHandler.Companion.getInstance(this).init();
 
         long occupyMemory = Runtime.getRuntime().totalMemory();
         long maxMemory = Runtime.getRuntime().maxMemory();

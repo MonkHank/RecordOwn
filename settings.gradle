@@ -1,3 +1,4 @@
+include ':module_views'
 include ':module_fragment'
 include ':module_annotation'
 include ':module_kotlin'

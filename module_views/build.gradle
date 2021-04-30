@@ -1,0 +1,67 @@
+apply plugin: 'com.dd.comgradle'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [host: "moduleviews"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+
+    implementation project(path: ':module_basic')
+    annotationProcessor(rootProject.ext.dependencies.jimu.router_anno_compiler)
+
+}
+
+def projectRoot = project.getRootProject().rootDir.absolutePath
+combuild {
+    applicationName = 'com.monk.moduleviews.runalone.application.ModuleFragmentApplication'
+    isRegisterCompoAuto = true
+
+    originalManifest = projectRoot + "/module_views/src/main/AndroidManifest.xml"
+
+    runAloneManifest = projectRoot + "/module_views/src/main/runalone/AndroidManifest.xml"
+    targetManifest = projectRoot + "/module_views/src/main/runalone/mergedManifest.xml"
+    //如果不需要合并，改为false
+    enableManifestMerge = false
+    useMaat= false
+
+
+
+}

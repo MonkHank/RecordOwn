@@ -16,7 +16,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.luojilab.component.componentlib.router.Router;
 import com.luojilab.component.componentlib.router.ui.UIRouter;
 import com.monk.activity.AidlFullscreenActivity;
-import com.monk.activity.DateActivity;
 import com.monk.activity.DeviceActivity;
 import com.monk.activity.LayoutInflaterActivity;
 import com.monk.activity.LoginActivity;
@@ -26,6 +25,7 @@ import com.monk.broadcast.BroadcastReciver;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
 import com.monk.eventdispatch.EventDispatchActivity;
+import com.monk.jni.ActivityJni;
 import com.monk.ui.HomeBean;
 import com.monk.ui.adapter.HomeAdapter;
 import com.monk.ui.interfaces.OnRecyclerViewItemClickListener;
@@ -76,14 +76,15 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
         recyclerView.setLayoutManager(layoutManager);
 
         list.add(new HomeBean(0,"Fragment"));
-        list.add(new HomeBean(4,"Service"));
         list.add(new HomeBean(1,AidlFullscreenActivity.class.getSimpleName()));
         list.add(new HomeBean(2,LayoutInflaterActivity.class.getSimpleName()));
         list.add(new HomeBean(3,EventDispatchActivity.class.getSimpleName()));
+        list.add(new HomeBean(4,"Service"));
+        list.add(new HomeBean(5,"Jni"));
         list.add(new HomeBean(6,"kill MySelf"));
         list.add(new HomeBean(7,"unregisterReceiver"));
-        list.add(new HomeBean(8, DateActivity.class.getSimpleName()));
         list.add(new HomeBean(9, DeviceActivity.class.getSimpleName()));
+        list.add(new HomeBean(10, "Views"));
         HomeAdapter homeAdapter = new HomeAdapter(this, list,this);
         recyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnRecyclerViewItemClickListener(this);
@@ -95,6 +96,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
 
         Router.registerComponent("com.monk.home.applike.HomeApplike");
         Router.registerComponent("com.monk.modulefragment.applike.FragmentApplike");
+        Router.registerComponent("com.monk.moduleviews.applike.ViewsApplike");
 
         floatingActionButton.setOnClickListener(v ->{
             UIRouter.getInstance().openUri(HomeActivity.this, "monk://home/uirouter/demo", null);
@@ -116,7 +118,6 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
         HomeBean bean = list.get(position);
         switch(bean.Tag){
             case 0:
-//                startActivity(MainActivity.class);
                 UIRouter.getInstance().openUri(HomeActivity.this, "monk://modulefragment/main", null);
                 break;
             case 1:
@@ -131,6 +132,9 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
             case 4:
                 startActivity(LoginActivity.class);
                 break;
+            case 5:
+                startActivity(ActivityJni.class);
+                break;
             case 6:
 //                Process.killProcess(Process.myPid());
                 break;
@@ -140,11 +144,11 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
                     isRegisterReceiver =false;
                 }
                 break;
-            case 8:
-                startActivity(DateActivity.class);
-                break;
             case 9:
                 startActivity(DeviceActivity.class);
+                break;
+            case 10:
+                UIRouter.getInstance().openUri(HomeActivity.this, "monk://moduleviews/views/main", null);
                 break;
         }
     }

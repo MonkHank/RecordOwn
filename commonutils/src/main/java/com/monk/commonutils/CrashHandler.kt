@@ -1,67 +1,51 @@
-package com.monk.commonutils;
+package com.monk.commonutils
 
-import android.app.Application;
-import android.os.Looper;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
+import android.app.Application
+import android.os.Looper
+import java.io.PrintWriter
+import java.io.StringWriter
+import java.io.Writer
 
 /**
  * @author user
  */
-public final class CrashHandler implements Thread.UncaughtExceptionHandler {
-    private final String tag = "CrashHandler";
+class CrashHandler private constructor() : Thread.UncaughtExceptionHandler {
+    private val tag = "CrashHandler"
+    private var mDefaultHandler: Thread.UncaughtExceptionHandler? = null
+    private val crash_text = "程序异常，即将退出"
 
-    private static Application mContext;
-    private Thread.UncaughtExceptionHandler mDefaultHandler;
-
-    private final String crash_text = "程序异常，即将退出";
-
-    private CrashHandler() {
+    private object Inner {
+        val INSTANCE = CrashHandler()
     }
 
-    public static CrashHandler getInstance(Application context) {
-        mContext = context;
-        return Inner.INSTANCE;
-    }
-
-    private static class Inner {
-        private static final CrashHandler INSTANCE = new CrashHandler();
-    }
-
-    public void init() {
-        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-        Thread.setDefaultUncaughtExceptionHandler(this);
+    fun init() {
+        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler(this)
     }
 
     /**
      * 当 UncaughtException 发生时会转入该函数来处理
      */
-    @Override
-    public void uncaughtException(Thread thread, Throwable ex) {
-        handleException(ex);
+    override fun uncaughtException(thread: Thread, ex: Throwable) {
+        handleException(ex)
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
         }
-        mDefaultHandler.uncaughtException(thread, ex);
+        mDefaultHandler!!.uncaughtException(thread, ex)
     }
 
-    private void handleException(Throwable ex) {
+    private fun handleException(ex: Throwable?) {
         if (ex == null) {
-            return;
+            return
         }
-        LogUtil.i(tag, Thread.currentThread().getName());
-        ThreadManager.getThreadPool().execute(new Runnable() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                ToastUtils.showToast(mContext, crash_text);
-                Looper.loop();
-            }
-        });
+        LogUtil.i(tag, Thread.currentThread().name)
+        ThreadManager.getThreadPool().execute {
+            Looper.prepare()
+            ToastUtils.showToast(mContext, crash_text)
+            Looper.loop()
+        }
     }
 
     /**
@@ -70,25 +54,32 @@ public final class CrashHandler implements Thread.UncaughtExceptionHandler {
      * @param ex
      * @return 返回文件名称, 便于将文件传送到服务器
      */
-    private String saveCrashInfo2File(Throwable ex) {
-        StringBuilder sb = new StringBuilder();
-        Writer writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        ex.printStackTrace(printWriter);
-        Throwable cause = ex.getCause();
+    private fun saveCrashInfo2File(ex: Throwable): String {
+        val sb = StringBuilder()
+        val writer: Writer = StringWriter()
+        val printWriter = PrintWriter(writer)
+        ex.printStackTrace(printWriter)
+        var cause = ex.cause
         while (cause != null) {
-            cause.printStackTrace(printWriter);
-            cause = cause.getCause();
+            cause.printStackTrace(printWriter)
+            cause = cause.cause
         }
-        printWriter.close();
-
-        String result = writer.toString();
-        sb.append(result);
+        printWriter.close()
+        val result = writer.toString()
+        sb.append(result)
         try {
-            LogUtil.e(sb.toString());
-        } catch (Exception e) {
-            LogUtil.i(tag, "an error occured while writing file...");
+            LogUtil.e(sb.toString())
+        } catch (e: Exception) {
+            LogUtil.i(tag, "an error occured while writing file...")
         }
-        return sb.toString();
+        return sb.toString()
+    }
+
+    companion object {
+        private var mContext: Application? = null
+        fun getInstance(context: Application?): CrashHandler {
+            mContext = context
+            return Inner.INSTANCE
+        }
     }
 }

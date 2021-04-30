@@ -17,8 +17,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.ContactsContract;
-import androidx.annotation.NonNull;
-import com.google.android.material.snackbar.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,11 +24,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
-import com.monk.retrofit.RetrofitUtils;
 import com.monk.service.StartService;
 
 import java.util.ArrayList;
@@ -73,9 +73,7 @@ public class LoginActivity extends BaseCompatActivity implements LoaderCallbacks
 
         findViewById(R.id.email_sign_in_button).setOnClickListener(view -> attemptLogin());
 
-        RetrofitUtils instance = RetrofitUtils.getInstance();
-        instance.create();
-        instance.asyncFun();
+
     }
 
     private void populateAutoComplete() {

@@ -11,21 +11,13 @@
         android:id="@+id/appbar"
         layout="@layout/appbar_toolbar"/>
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_home"
-        android:padding="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btTestAttach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试 FragmentTransaction 的 attach()和 detach()"
-        app:layout_constraintLeft_toRightOf="@+id/message"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar"
         />
 
@@ -34,18 +26,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试重复add 或者 replace"
-        app:layout_constraintLeft_toRightOf="@+id/message"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btTestAttach"
         />
+    <TextView
+        android:id="@+id/tvFragmentMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAdd"/>
 
     <FrameLayout
         android:id="@+id/fragmentContainer"
+        android:background="@drawable/rect_shape_a"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAdd"
+        app:layout_constraintTop_toBottomOf="@+id/tvFragmentMsg"
         app:layout_constraintWidth_percent=".9"
         />
 
@@ -57,6 +57,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/modulefragment_navigation"/>
 

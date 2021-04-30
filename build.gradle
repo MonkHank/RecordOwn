@@ -91,6 +91,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        // CymChad/BaseRecyclerViewAdapterHelper
+        // prolificinteractive/material-calendarview
+        maven { url 'https://jitpack.io' }
     }
 }
 println project('annotationprocessor').group + "---------------------------------------------------------------"

@@ -88,7 +88,7 @@ fileTree('build/outputs/apk') { FileTree fileTree ->
 /**========================= 依赖相关api =============================================*/
 // 为应用程序添加的第三方库依赖，区分root下的build.gradle
 dependencies {
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
