@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,39 +28,7 @@ public class JavaTest {
         System.out.println(lineText);
     }
 
-    /**
-     * 测试 string IndexOf()函数
-     */
-    @Test
-    public void testStrIndexOf() {
-        String wholeStr = "我是中国共产党";
-        int 共产党 = wholeStr.indexOf("共产党");
-        System.out.println(共产党);
-    }
 
-    /**
-     * 测试月份之间相差的数目
-     */
-    @Test
-    public void testMonthSpace() {
-        int monthSpace = getMonthSpace("2019-02-13", "2019-02-14");
-        System.out.println(monthSpace);
-    }
-
-    private int getMonthSpace(String date1, String date2) {
-        int result = 0;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c1 = Calendar.getInstance();
-        Calendar c2 = Calendar.getInstance();
-        try {
-            c1.setTime(sdf.parse(date1));
-            c2.setTime(sdf.parse(date2));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        result = c2.get(Calendar.MONTH) - c1.get(Calendar.MONTH);
-        return result == 0 ? 1 : Math.abs(result);
-    }
 
     /**
      * 测试子类复写父类方法后，父类方法return，会不会影响子类该复写方法的执行，不会影响
@@ -92,16 +59,6 @@ public class JavaTest {
         System.out.println(list);
     }
 
-    @Test
-    public void testTryCatch() {
-        try {
-            System.out.println(1 / 0);
-        } catch (Exception e) {
-//            e.printStackTrace();
-        }
-
-        System.out.println("执行了");
-    }
 
     /**
      * 测试 ArrayList 作为参数传入其他方法执行后，会不会影响该 ArrayList；会
@@ -557,5 +514,122 @@ public class JavaTest {
         System.out.println("测试本地分支001 ");
     }
 
+
+    /** =====================Message======================*/
+    Message mMessages;
+    @Test
+    public void testTime() {
+        MQ mq = new MQ();
+        Message m=null;
+        for (int i = 0; i < 10; i++) {
+            m = Message.obtain();
+            mq.enqueueMessage(m);
+        }
+        System.out.println(Message.sPoolSize);
+
+        long when = 1;
+
+        Message prev =null;
+        Message p = mMessages;
+
+        if (when != 0) {
+            while (p != null && p.when < when) {
+                prev = p;
+                p = p.next;
+            }
+        }
+
+        int[] ints = new int[8];
+        for (int anInt : ints) {
+            System.out.println(anInt);
+        }
+
+        String f ="123";
+
+    }
+
+    static class Message{
+        Message next;
+        long when;
+        static Message sPool;
+        static int sPoolSize;
+        int MAX_POOL_SIZE = 50;
+
+        void recycleUnchecked() {
+            if (sPoolSize < MAX_POOL_SIZE) {
+                next = sPool;
+                sPool = this;
+                sPoolSize++;
+            }
+        }
+
+        static Message obtain() {
+            if (sPool != null) {
+                Message m = sPool;
+                sPool = m.next;
+                m.next = null;
+                sPoolSize--;
+                return m;
+            }
+            return new Message();
+        }
+
+    }
+
+    class  MQ{
+        Message mMessages;
+        private void removeAllMessagesLocked() {
+            Message p = mMessages;
+            while (p != null) {
+                Message n = p.next;
+                p.recycleUnchecked();
+                p = n;
+            }
+            mMessages = null;
+        }
+
+        boolean enqueueMessage(Message msg) {
+            Message p = mMessages;
+            if (p == null ) {
+                msg.next = p;
+                mMessages = msg;
+            } else {
+                Message prev;
+                for (;;) {
+                    prev = p;
+                    p = p.next;
+                    if (p == null ) {
+                        break;
+                    }
+                }
+                msg.next = p;
+                prev.next = msg;
+            }
+
+            return true;
+        }
+    }
+
+    /** =====================|= 和 &= ~ 增加和清除操作 ======================*/
+    int mPrivateFlags;
+    int PFLAG_FORCE_LAYOUT                = 0x00001000;
+    int PFLAG_INVALIDATED                 = 0x80000000;
+    @Test
+    public void testYuYunSuan(){
+        System.out.println("PFLAG_FORCE_LAYOUT =                 "+PFLAG_FORCE_LAYOUT);
+        System.out.println("PFLAG_INVALIDATED  =                 "+PFLAG_INVALIDATED);
+
+        // 增加操作
+        mPrivateFlags |= PFLAG_FORCE_LAYOUT;
+        mPrivateFlags |= PFLAG_INVALIDATED;
+
+        int temp = mPrivateFlags & PFLAG_FORCE_LAYOUT ;
+        System.out.println("mPrivateFlags & PFLAG_FORCE_LAYOUT = "+temp);
+
+        // 清除操作
+        mPrivateFlags &= ~PFLAG_FORCE_LAYOUT;
+        System.out.println("mPrivateFlags =                      "+mPrivateFlags);
+
+    }
 
 }

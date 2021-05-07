@@ -13,14 +13,14 @@
         android:title="Rxjava2基础"/>
 
     <item
-        android:id="@+id/navigation_jni"
+        android:id="@+id/navigation_aidl"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="暂定"/>
+        android:title="AIDL"/>
 
     <item
-        android:id="@+id/navigation_custom_view"
+        android:id="@+id/navigation_service"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="暂定"/>
+        android:title="Service"/>
 
     <item
         android:id="@+id/navigation_other"

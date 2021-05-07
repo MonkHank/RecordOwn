@@ -27,7 +27,7 @@ class FragmentLocation : BaseFragment<FragmentLocation?>() {
     private var tvLocation: TextView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.fra_module_fra_location, container, false)
+        val view: View = inflater.inflate(R.layout.fra_modulefra_location, container, false)
         tvLocation = view.findViewById(R.id.tvMsg)
         return view
     }

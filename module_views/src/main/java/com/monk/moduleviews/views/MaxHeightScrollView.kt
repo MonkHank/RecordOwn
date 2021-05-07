@@ -11,7 +11,9 @@ import com.monk.commonutils.LogUtil
  * @author monk
  * @date 2019-01-25
  */
-class MaxHeightScrollView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : ScrollView(context, attrs) {
+class MaxHeightScrollView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
+    : ScrollView(context, attrs) {
+
     private val tag = "MaxHeightScrollView"
 
     init {

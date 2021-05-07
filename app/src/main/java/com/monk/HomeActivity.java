@@ -15,10 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.luojilab.component.componentlib.router.Router;
 import com.luojilab.component.componentlib.router.ui.UIRouter;
-import com.monk.activity.AidlFullscreenActivity;
 import com.monk.activity.DeviceActivity;
-import com.monk.activity.LayoutInflaterActivity;
-import com.monk.activity.LoginActivity;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.aidldemo.R;
 import com.monk.broadcast.BroadcastReciver;
@@ -76,11 +73,8 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
         recyclerView.setLayoutManager(layoutManager);
 
         list.add(new HomeBean(0,"Fragment"));
-        list.add(new HomeBean(1,AidlFullscreenActivity.class.getSimpleName()));
-        list.add(new HomeBean(2,LayoutInflaterActivity.class.getSimpleName()));
+        list.add(new HomeBean(1,"Jni"));
         list.add(new HomeBean(3,EventDispatchActivity.class.getSimpleName()));
-        list.add(new HomeBean(4,"Service"));
-        list.add(new HomeBean(5,"Jni"));
         list.add(new HomeBean(6,"kill MySelf"));
         list.add(new HomeBean(7,"unregisterReceiver"));
         list.add(new HomeBean(9, DeviceActivity.class.getSimpleName()));
@@ -121,19 +115,10 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
                 UIRouter.getInstance().openUri(HomeActivity.this, "monk://modulefragment/main", null);
                 break;
             case 1:
-                startActivity(AidlFullscreenActivity.class);
-                break;
-            case 2:
-                LayoutInflaterActivity.intoHere(mContext);
+                startActivity(ActivityJni.class);
                 break;
             case 3:
                 startActivity(EventDispatchActivity.class);
-                break;
-            case 4:
-                startActivity(LoginActivity.class);
-                break;
-            case 5:
-                startActivity(ActivityJni.class);
                 break;
             case 6:
 //                Process.killProcess(Process.myPid());
@@ -171,5 +156,17 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(reciver);
+    }
+
+    private long lastMills;
+
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - lastMills>2000){
+            lastMills = System.currentTimeMillis();
+            com.blankj.utilcode.util.ToastUtils.showLong("再按一次退出");
+            return;
+        }
+        finish();
     }
 }

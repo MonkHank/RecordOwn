@@ -23,6 +23,16 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".aidl.AIDLService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":aidl"/>
 
+        <service android:name=".aidl.MyMessengerService"/>
+
+        <service
+            android:name=".service.IntentServices"
+            android:exported="false"/>
     </application>
 </manifest>

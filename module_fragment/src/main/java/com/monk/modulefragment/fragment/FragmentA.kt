@@ -21,7 +21,7 @@ class FragmentA : BaseFragment<FragmentA?>() ,View.OnClickListener{
     private lateinit var tv2:TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fagment_modulefagment_a,container,false)
+        val view = inflater.inflate(R.layout.fra_modulefra_a,container,false)
 
         tv1 = view.findViewById(R.id.tv1)
         tv2 = view.findViewById(R.id.tv2)

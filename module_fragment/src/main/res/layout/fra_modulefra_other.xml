@@ -15,6 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="retrofit2"/>
+    <Button
+        android:id="@+id/btSkip"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="skip"/>
 
 
 </LinearLayout>

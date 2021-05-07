@@ -11,7 +11,7 @@ import com.monk.commonutils.LogUtil;
  * @date 2019-06-05
  */
 public class BaseView<T extends BaseView<T>> extends View {
-    protected final String tag=BaseView.class.getSimpleName();
+    protected  String tag;
     protected  String simpleName;
 
     public BaseView(Context context) {
@@ -26,6 +26,7 @@ public class BaseView<T extends BaseView<T>> extends View {
         super(context, attrs, defStyleAttr);
         BaseView<T> mView = this;
         simpleName= mView.getClass().getSimpleName()+"：";
+        tag = mView.getClass().getSimpleName();
     }
 
     @Override

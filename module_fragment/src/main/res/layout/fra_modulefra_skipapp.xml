@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到其他APP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMsg" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSkip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到其他APP2"
+        app:layout_constraintStart_toEndOf="@+id/btSkip"
+        app:layout_constraintTop_toBottomOf="@id/tvMsg" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSkip3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到其他APP3"
+        app:layout_constraintStart_toEndOf="@+id/btSkip2"
+        app:layout_constraintTop_toBottomOf="@id/tvMsg" />
+
+
+</LinearLayout>

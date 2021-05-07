@@ -23,7 +23,7 @@ class FragmentRetrofit2 : BaseFragment<FragmentRetrofit2?>(), RetrofitView {
     private var retrofitPresent: RetrofitPresent? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.fra_module_fra_retrofit, container, false)
+        val view: View = inflater.inflate(R.layout.fra_modulefra_retrofit, container, false)
         tvRetrofit = view.findViewById(R.id.tvMsg)
         return view
     }

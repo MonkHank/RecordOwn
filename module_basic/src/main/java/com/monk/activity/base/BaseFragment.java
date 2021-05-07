@@ -19,7 +19,7 @@ import com.monk.commonutils.LogUtil;
  * @date 2019-01-28
  */
 public class BaseFragment<T extends BaseFragment<T>> extends Fragment {
-    protected final String tag = BaseFragment.class.getSimpleName();
+    protected  String tag ;
 
     protected OnFragmentInteractionListener mListener;
     protected FragmentActivity mActivity;
@@ -35,6 +35,7 @@ public class BaseFragment<T extends BaseFragment<T>> extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         }
         simpleName = mFragment.getClass().getSimpleName();
+        tag = simpleName;
         LogUtil.i(tag, simpleName + "：onAttach()");
     }
 

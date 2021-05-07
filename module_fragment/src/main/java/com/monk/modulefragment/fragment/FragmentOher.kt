@@ -11,6 +11,7 @@ import com.monk.global.Constant
 import com.monk.modulefragment.R
 import com.monk.modulefragment.otherfra.FragmentLocation
 import com.monk.modulefragment.otherfra.FragmentRetrofit2
+import com.monk.modulefragment.otherfra.FragmentSkipApp
 
 /**
  * @author monk
@@ -21,6 +22,7 @@ class FragmentOher : BaseFragment<FragmentOher?>(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fra_modulefra_other, container, false)
         view.findViewById<TextView>(R.id.location).setOnClickListener(this)
         view.findViewById<TextView>(R.id.retrofit).setOnClickListener(this)
+        view.findViewById<TextView>(R.id.btSkip).setOnClickListener(this)
         return view
     }
 
@@ -36,6 +38,10 @@ class FragmentOher : BaseFragment<FragmentOher?>(), View.OnClickListener {
             }
             R.id.retrofit->{
                 val uriPath=Constant.URI_SCKEME+context?.packageName+"/"+FragmentRetrofit2::class.simpleName
+                mListener?.onFragmentInteraction(Uri.parse(uriPath))
+            }
+            R.id.btSkip->{
+                val uriPath=Constant.URI_SCKEME+context?.packageName+"/"+FragmentSkipApp::class.simpleName
                 mListener?.onFragmentInteraction(Uri.parse(uriPath))
             }
         }

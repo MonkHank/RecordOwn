@@ -35,7 +35,7 @@ import butterknife.ButterKnife;
  */
 public class BaseCompatActivity<T extends BaseCompatActivity<T>> extends AppCompatActivity {
 
-    protected String tag = BaseCompatActivity.class.getSimpleName();
+    protected String tag ;
 
     protected ImmersionBar immersionBar;
 
@@ -54,6 +54,7 @@ public class BaseCompatActivity<T extends BaseCompatActivity<T>> extends AppComp
         super.onCreate(savedInstanceState);
         mContext = this;
         simpleName = mContext.getClass().getSimpleName();
+        tag = simpleName;
         LogUtil.i(tag, simpleName + "：savedInstanceState = "+savedInstanceState);
 
 

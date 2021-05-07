@@ -38,38 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.monk.activity.AidlFullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_fullscreen"/>
-        <activity
-            android:name="com.monk.MainActivity"
-            android:label="@string/app_name">
-        </activity>
 
-        <service
-            android:name=".binder.AIDLService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":aidl"/>
-        <service
-            android:name="com.monk.service.IntentServices"
-            android:exported="false"/>
-        <service
-            android:name="com.monk.service.StartService"
-            android:enabled="true"
-            android:exported="true"/>
-        <service android:name=".binder.messenger.MyMessengerService"/>
 
-        <activity
-            android:name="com.monk.activity.LayoutInflaterActivity"
-            android:label="@string/title_activity_scrolling"/>
-        <activity
-            android:name="com.monk.activity.TabbedActivity"
-            android:label="@string/title_activity_tabbed"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="com.monk.eventdispatch.EventDispatchActivity"/>
-        <activity android:name="com.monk.activity.LoginActivity"/>
         <activity android:name="com.monk.jni.ActivityJni"/>
 
         <!--<receiver android:name="com.monk.broadcast.BroadcastReciver">-->

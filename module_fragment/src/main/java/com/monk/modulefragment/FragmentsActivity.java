@@ -19,20 +19,22 @@ import com.monk.activity.base.BaseCompatActivity;
 import com.monk.activity.base.OnFragmentInteractionListener;
 import com.monk.commonutils.LogUtil;
 import com.monk.modulefragment.fragment.FragmentA;
-import com.monk.modulefragment.fragment.FragmentC;
+import com.monk.modulefragment.fragment.FragmentAIDL;
 import com.monk.modulefragment.fragment.FragmentChildA;
-import com.monk.modulefragment.fragment.FragmentD;
 import com.monk.modulefragment.fragment.FragmentOher;
+import com.monk.modulefragment.fragment.FragmentService;
 import com.monk.modulefragment.otherfra.FragmentLocation;
 import com.monk.modulefragment.otherfra.FragmentRetrofit2;
+import com.monk.modulefragment.otherfra.FragmentSkipApp;
 import com.monk.modulefragment.rxjava2.RxJava2Fragment;
 
 import java.util.List;
 
 
-@RouteNode(path = "/main", desc = "主页")
+@RouteNode(path = "/main", desc = "module_fragment主页")
 public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> implements
-        OnFragmentInteractionListener, View.OnClickListener,
+        OnFragmentInteractionListener,
+        View.OnClickListener,
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView navigation;
@@ -40,19 +42,20 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
     private Button btTestAttach, btAdd;
 
     private FragmentManager fragmentManager;
-    private Fragment fragmentA, rxJava2Fra, fragmentC, fragmentD,fragmentOher;
+    private Fragment fragmentA, rxJava2Fra, fragmentAIDL, fragmentService,fragmentOher;
     private Fragment mCurrentFragment;
 
     private UriMatcher uriMatcher;
     private final int fragmentChildACode = 0;
     private final int fragmentOhterCode1 = 1;
     private final int fragmentOhterCode2 = 2;
+    private final int fragmentOhterCode3 = 3;
     private int menuItemItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initToolbar(R.layout.activity_module_fragment_main);
+        initToolbar(R.layout.act_modulefra_main);
 
         navigation = findViewById(R.id.navigation);
         tvFragmentMsg = findViewById(R.id.tvFragmentMsg);
@@ -67,8 +70,8 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         if (savedInstanceState != null) {
             fragmentA = fragmentManager.findFragmentByTag(FragmentA.class.getName());
             rxJava2Fra = fragmentManager.findFragmentByTag(RxJava2Fragment.class.getName());
-            fragmentC = fragmentManager.findFragmentByTag(FragmentC.class.getName());
-            fragmentD = fragmentManager.findFragmentByTag(FragmentD.class.getName());
+            fragmentAIDL = fragmentManager.findFragmentByTag(FragmentAIDL.class.getName());
+            fragmentService = fragmentManager.findFragmentByTag(FragmentService.class.getName());
             fragmentOher = fragmentManager.findFragmentByTag(FragmentOher.class.getName());
             menuItemItemId = savedInstanceState.getInt("menuItemItemId");
             navigation.setSelectedItemId(menuItemItemId);
@@ -96,14 +99,14 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
             addAndShowFragment(rxJava2Fra);
             return true;
         }
-        if (menuItem.getItemId() == R.id.navigation_jni) {
-            if (fragmentC == null) fragmentC = new FragmentC();
-            addAndShowFragment(fragmentC);
+        if (menuItem.getItemId() == R.id.navigation_aidl) {
+            if (fragmentAIDL == null) fragmentAIDL = new FragmentAIDL();
+            addAndShowFragment(fragmentAIDL);
             return true;
         }
-        if (menuItem.getItemId() == R.id.navigation_custom_view) {
-            if (fragmentD == null) fragmentD = new FragmentD();
-            addAndShowFragment(fragmentD);
+        if (menuItem.getItemId() == R.id.navigation_service) {
+            if (fragmentService == null) fragmentService = new FragmentService();
+            addAndShowFragment(fragmentService);
             return true;
         }
         if (menuItem.getItemId() == R.id.navigation_other) {
@@ -133,6 +136,7 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         uriMatcher.addURI(getPackageName(), FragmentA.class.getSimpleName(), fragmentChildACode);
         uriMatcher.addURI(getPackageName(), FragmentLocation.class.getSimpleName(), fragmentOhterCode1);
         uriMatcher.addURI(getPackageName(), FragmentRetrofit2.class.getSimpleName(), fragmentOhterCode2);
+        uriMatcher.addURI(getPackageName(), FragmentSkipApp.class.getSimpleName(), fragmentOhterCode3);
     }
 
     private void showOrHideFragmentButtons(boolean show){
@@ -160,6 +164,12 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         }
         if (match == fragmentOhterCode2){
             ft.replace(R.id.fragmentContainer,new FragmentRetrofit2())
+                    .addToBackStack(FragmentOher.class.getSimpleName())
+                    .commit();
+            return;
+        }
+        if (match == fragmentOhterCode3){
+            ft.replace(R.id.fragmentContainer,new FragmentSkipApp())
                     .addToBackStack(FragmentOher.class.getSimpleName())
                     .commit();
             return;
