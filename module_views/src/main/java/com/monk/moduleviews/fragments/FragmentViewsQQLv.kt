@@ -11,7 +11,7 @@ import com.monk.activity.base.BaseFragment
 import com.monk.moduleviews.R
 import com.monk.moduleviews.views.QQListView
 
-class FragmentViewsQQLv :BaseFragment<FragmentViewsQQLv?>(){
+class FragmentViewsQQLv : BaseFragment<FragmentViewsQQLv?>(){
 
     private var qqListView: QQListView? = null
 

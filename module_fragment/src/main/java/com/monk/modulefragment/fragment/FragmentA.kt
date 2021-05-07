@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.monk.activity.base.BaseFragment
 import com.monk.global.Constant
-import com.monk.modulefragment.FragmentsActivity
 import com.monk.modulefragment.R
 
 /**
@@ -39,7 +38,7 @@ class FragmentA : BaseFragment<FragmentA?>() ,View.OnClickListener{
     override fun onClick(v: View?) {
         if (mListener!=null){
             val uriPath = Constant.URI_SCKEME+context?.packageName+"/"+FragmentA::class.simpleName
-            mListener.onFragmentInteraction(Uri.parse(uriPath))
+            mListener?.onFragmentInteraction(Uri.parse(uriPath))
         }
     }
 }

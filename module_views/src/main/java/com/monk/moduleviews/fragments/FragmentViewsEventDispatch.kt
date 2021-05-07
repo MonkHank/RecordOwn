@@ -10,7 +10,7 @@ import com.monk.ViewsDetailActivity
 import com.monk.activity.base.BaseFragment
 import com.monk.moduleviews.R
 
-class FragmentViewsEventDispatch :BaseFragment<FragmentViewsEventDispatch?>(){
+class FragmentViewsEventDispatch : BaseFragment<FragmentViewsEventDispatch?>(){
 
     private lateinit var btMessage: AppCompatButton
     private lateinit var tvMsg: TextView

@@ -197,7 +197,7 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         outState.putInt("menuItemItemId", menuItemItemId);
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         for (Fragment t : fragments) {
-            LogUtil.w(tag, "fragment:" + t.getClass().getSimpleName());
+            LogUtil.w(getTag(), "fragment:" + t.getClass().getSimpleName());
         }
     }
 }

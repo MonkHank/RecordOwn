@@ -13,7 +13,7 @@ import com.monk.moduleviews.adapters.ViewsBean
 import com.monk.moduleviews.fragments.*
 import java.lang.StringBuilder
 
-class ViewsDetailActivity:BaseCompatActivity<ViewsDetailActivity?>() {
+class ViewsDetailActivity: BaseCompatActivity<ViewsDetailActivity?>() {
 
     private var fragmentViewsEventDispatch: FragmentViewsEventDispatch? = null
     private var fragmentViewsLayoutInflater: FragmentViewLayoutInflater? = null
@@ -74,7 +74,7 @@ class ViewsDetailActivity:BaseCompatActivity<ViewsDetailActivity?>() {
         fragmentViewsLayoutInflater?.onWindowFocusChanged(hasFocus)
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         LogUtil.i(tag, "$simpleName：dispatchTouchEvent")
         sb.append("$simpleName：dispatchTouchEvent\n")
         return super.dispatchTouchEvent(ev)

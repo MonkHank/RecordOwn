@@ -1,79 +1,65 @@
-package com.monk.activity.base;
+package com.monk.activity.base
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.View;
-
-import com.monk.commonutils.LogUtil;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.View
+import com.monk.commonutils.LogUtil
 
 /**
  * @author monk
  * @date 2019-06-05
  */
-public class BaseView<T extends BaseView<T>> extends View {
-    protected  String tag;
-    protected  String simpleName;
+open class BaseView<T : BaseView<T>?> @JvmOverloads constructor(context: Context?,
+                                                                attrs: AttributeSet? = null,
+                                                                defStyleAttr: Int = 0)
+    : View(context, attrs, defStyleAttr) {
 
-    public BaseView(Context context) {
-        this(context,null);
+    protected var tag: String
+    protected var simpleName: String
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        LogUtil.i(tag, simpleName + "onFinishInflate")
     }
 
-    public BaseView(Context context,  AttributeSet attrs) {
-        this(context, attrs,0);
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        LogUtil.i(tag, simpleName + "onAttachedToWindow")
     }
 
-    public BaseView(Context context,  AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        BaseView<T> mView = this;
-        simpleName= mView.getClass().getSimpleName()+"：";
-        tag = mView.getClass().getSimpleName();
+    override fun onWindowVisibilityChanged(visibility: Int) {
+        super.onWindowVisibilityChanged(visibility)
+        LogUtil.i(tag, simpleName + "onWindowVisibilityChanged")
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        LogUtil.i(tag,simpleName+"onFinishInflate");
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        LogUtil.i(tag, simpleName + "onMeasure")
     }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        LogUtil.i(tag,simpleName+"onAttachedToWindow");
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        LogUtil.i(tag, simpleName + "onSizeChanged")
     }
 
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        super.onWindowVisibilityChanged(visibility);
-        LogUtil.i(tag,simpleName+"onWindowVisibilityChanged");
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        LogUtil.i(tag, simpleName + "onLayout")
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        LogUtil.i(tag,simpleName+"onMeasure");
+    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        LogUtil.i(tag, simpleName + "onWindowFocusChanged")
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        LogUtil.i(tag,simpleName+"onSizeChanged");
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        LogUtil.e(tag, simpleName + "onDetachedFromWindow")
     }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        LogUtil.i(tag,simpleName+"onLayout");
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        LogUtil.i(tag,simpleName+"onWindowFocusChanged");
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        LogUtil.e(tag,simpleName+"onDetachedFromWindow");
+    init {
+        val mView = this
+        simpleName = mView.javaClass.simpleName + "："
+        tag = mView.javaClass.simpleName
     }
 }

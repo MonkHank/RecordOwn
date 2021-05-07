@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.monk.activity.base.BaseFragment
 
-class FragmentChildA :BaseFragment<FragmentChildA?>(){
+class FragmentChildA : BaseFragment<FragmentChildA?>(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val textView = TextView(mActivity)

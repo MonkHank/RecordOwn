@@ -1,23 +1,18 @@
-package com.monk.home;
+package com.monk.home
 
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 
-public abstract class OnTabLayoutTabSelectListener implements TabLayout.OnTabSelectedListener {
-
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        selectTab(tab);
+abstract class OnTabLayoutTabSelectListener : OnTabSelectedListener {
+    override fun onTabSelected(tab: TabLayout.Tab) {
+        selectTab(tab)
     }
 
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-        unSelectTab(tab);
+    override fun onTabUnselected(tab: TabLayout.Tab) {
+        unSelectTab(tab)
     }
 
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-    }
-
-    public abstract void selectTab(TabLayout.Tab tab);
-    public abstract void unSelectTab(TabLayout.Tab tab);
+    override fun onTabReselected(tab: TabLayout.Tab) {}
+    abstract fun selectTab(tab: TabLayout.Tab?)
+    abstract fun unSelectTab(tab: TabLayout.Tab?)
 }

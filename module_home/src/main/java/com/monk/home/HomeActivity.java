@@ -13,7 +13,7 @@ import com.monk.ui.view.NoScrollViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-@RouteNode(path = "/uirouter/demo" ,desc = "home")
+@RouteNode(path = "/uirouter/demo" ,desc = "module_home主页")
 public class HomeActivity extends BaseCompatActivity<HomeActivity> {
 
     TabLayout tabLayout;
@@ -39,7 +39,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
         fragmentList.add(fragmentMine);
 
         LogUtils.i("tag","viewPager = "+viewPager);
-        pagerAdapter = new MainPagerAdapter(mContext,getSupportFragmentManager(),fragmentList);
+        pagerAdapter = new MainPagerAdapter(getMContext(),getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(2);
 
@@ -69,13 +69,13 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
         viewPager.setCurrentItem(position,false);
         switch (position) {
             case 0:
-                immersionBar.statusBarColor(R.color.status_bar_bg).init();
+                getImmersionBar().statusBarColor(R.color.status_bar_bg).init();
                 break;
             case 1:
-                immersionBar.statusBarColor(R.color.status_bar_bg).init();
+                getImmersionBar().statusBarColor(R.color.status_bar_bg).init();
                 break;
             case 2:
-                immersionBar.statusBarColor(R.color.status_bar_bg).init();
+                getImmersionBar().statusBarColor(R.color.status_bar_bg).init();
                 break;
         }
 

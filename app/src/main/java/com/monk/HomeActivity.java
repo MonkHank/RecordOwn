@@ -21,7 +21,6 @@ import com.monk.aidldemo.R;
 import com.monk.broadcast.BroadcastReciver;
 import com.monk.commonutils.LogUtil;
 import com.monk.commonutils.ToastUtils;
-import com.monk.eventdispatch.EventDispatchActivity;
 import com.monk.jni.ActivityJni;
 import com.monk.ui.HomeBean;
 import com.monk.ui.adapter.HomeAdapter;
@@ -59,9 +58,9 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
 
         navigationView.setCheckedItem(R.id.nav_call);
         View headerView = navigationView.getHeaderView(0);
-        headerView.findViewById(R.id.icon_image).setOnClickListener(v -> ToastUtils.showImageToast(mContext,"点击了头像"));
-        headerView.findViewById(R.id.mail).setOnClickListener(v -> ToastUtils.showImageToast(mContext,"点击了邮箱"));
-        headerView.findViewById(R.id.username).setOnClickListener(v -> ToastUtils.showImageToast(mContext,"点击了名字"));
+        headerView.findViewById(R.id.icon_image).setOnClickListener(v -> ToastUtils.showImageToast(getMContext(),"点击了头像"));
+        headerView.findViewById(R.id.mail).setOnClickListener(v -> ToastUtils.showImageToast(getMContext(),"点击了邮箱"));
+        headerView.findViewById(R.id.username).setOnClickListener(v -> ToastUtils.showImageToast(getMContext(),"点击了名字"));
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // 关闭侧滑
@@ -74,7 +73,6 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
 
         list.add(new HomeBean(0,"Fragment"));
         list.add(new HomeBean(1,"Jni"));
-        list.add(new HomeBean(3,EventDispatchActivity.class.getSimpleName()));
         list.add(new HomeBean(6,"kill MySelf"));
         list.add(new HomeBean(7,"unregisterReceiver"));
         list.add(new HomeBean(9, DeviceActivity.class.getSimpleName()));
@@ -104,7 +102,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
      */
     @Override
     public void onRecyclerViewItemClick(View view) {
-        LogUtil.i(simpleName,"view:"+view);
+        LogUtil.i(getSimpleName(),"view:"+view);
     }
 
     @Override
@@ -117,9 +115,6 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
             case 1:
                 startActivity(ActivityJni.class);
                 break;
-            case 3:
-                startActivity(EventDispatchActivity.class);
-                break;
             case 6:
 //                Process.killProcess(Process.myPid());
                 break;
@@ -130,7 +125,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
                 }
                 break;
             case 9:
-                startActivity(DeviceActivity.class);
+//                startActivity((DeviceActivity.class));
                 break;
             case 10:
                 UIRouter.getInstance().openUri(HomeActivity.this, "monk://moduleviews/views/main", null);

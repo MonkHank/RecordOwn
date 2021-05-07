@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.monk.activity.base.BaseFragment
 import com.monk.moduleviews.R
 
-class FragmentViewPercent :BaseFragment<FragmentViewPercent?>(){
+class FragmentViewPercent : BaseFragment<FragmentViewPercent?>(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fra_moduleviews_pcv,container,false)

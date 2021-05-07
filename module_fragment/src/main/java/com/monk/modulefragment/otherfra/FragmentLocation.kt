@@ -45,7 +45,7 @@ class FragmentLocation : BaseFragment<FragmentLocation?>() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        LogUtil.i(tag, "requestCode=$requestCode")
+        LogUtil.i(Tags, "requestCode=$requestCode")
         if (requestCode == 0x01) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 gpsLocation()
@@ -63,21 +63,21 @@ class FragmentLocation : BaseFragment<FragmentLocation?>() {
         val locationManager: LocationManager = mActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val locationListener: LocationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
-                LogUtil.i(tag, location.toString())
+                LogUtil.i(Tags, location.toString())
                 tvLocation?.text = location.altitude.toString()
             }
 
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
                 // gps状态改变
-                LogUtil.i(tag, "provider=$provider,status=$status,extras=$extras")
+                LogUtil.i(Tags, "provider=$provider,status=$status,extras=$extras")
             }
 
             override fun onProviderEnabled(provider: String) {
-                LogUtil.i(tag, provider)
+                LogUtil.i(Tags, provider)
             }
 
             override fun onProviderDisabled(provider: String) {
-                LogUtil.i(tag, provider)
+                LogUtil.i(Tags, provider)
             }
         }
         /**
@@ -92,7 +92,7 @@ class FragmentLocation : BaseFragment<FragmentLocation?>() {
                 ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return
         }
-        LogUtil.i(tag, "执行")
+        LogUtil.i(Tags, "执行")
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListener)
     }//        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     //Location[gps 31.205570,121.314256 acc=30 et=+43d22h41m23s854ms alt=38.6268196105957 vel=3.0
@@ -109,7 +109,7 @@ class FragmentLocation : BaseFragment<FragmentLocation?>() {
             //        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             //Location[gps 31.205570,121.314256 acc=30 et=+43d22h41m23s854ms alt=38.6268196105957 vel=3.0
             // bear=0.13394096 {Bundle[mParcelledData.dataSize=40]}]
-            LogUtil.i(tag, location.toString())
+            LogUtil.i(Tags, location.toString())
         }
 
     companion object {

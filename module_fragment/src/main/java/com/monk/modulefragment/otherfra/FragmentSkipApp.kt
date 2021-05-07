@@ -6,19 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import com.blankj.utilcode.util.ToastUtils
 import com.monk.activity.base.BaseFragment
 import com.monk.commonutils.IntentUtils
-import com.monk.commonutils.LogUtil
 import com.monk.modulefragment.R
-import com.monk.modulefragment.retrofit.RetrofitUtils
-import com.monk.modulefragment.retrofit.bean.Bean
-import com.monk.modulefragment.retrofit.mvp.present.RetrofitPresent
-import com.monk.modulefragment.retrofit.mvp.present.RetrofitPresentImpl
-import com.monk.modulefragment.retrofit.mvp.view.RetrofitView
 
 /**
  * @author monk

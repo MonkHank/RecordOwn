@@ -1,33 +1,25 @@
-package com.monk.ui.view;
+package com.monk.ui.view
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.MotionEvent
+import androidx.viewpager.widget.ViewPager
 
-import androidx.viewpager.widget.ViewPager;
-
-public class NoScrollViewPager extends ViewPager {
-
+class NoScrollViewPager : ViewPager {
     /**
      * 是否禁止左右滑动，true为禁止，false为不禁止
      */
-    private boolean noScroll = true;
+    private var noScroll = true
 
-    public NoScrollViewPager(Context context) {
-        super(context);
-    }
-
-    public NoScrollViewPager(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+    constructor(context: Context?) : super(context!!) {}
+    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs) {}
 
     /**
      * 事件拦截
      */
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         // false 不拦截子控件的事件；
-        return !noScroll && super.onInterceptTouchEvent(ev);
+        return !noScroll && super.onInterceptTouchEvent(ev)
     }
 
     /**
@@ -36,15 +28,14 @@ public class NoScrollViewPager extends ViewPager {
      * @param ev
      * @return
      */
-    @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        return noScroll || super.onTouchEvent(ev);
+    override fun onTouchEvent(ev: MotionEvent): Boolean {
+        return noScroll || super.onTouchEvent(ev)
     }
 
     /**
      * @param noScroll true为禁止，false为不禁止
      */
-    public void setNoScroll(boolean noScroll) {
-        this.noScroll = noScroll;
+    fun setNoScroll(noScroll: Boolean) {
+        this.noScroll = noScroll
     }
 }

@@ -1,11 +1,11 @@
-package com.monk.activity.base;
+package com.monk.activity.base
 
-import android.net.Uri;
+import android.net.Uri
 
 /**
  * @author monk
  * @date 2019-01-28
  */
-public interface OnFragmentInteractionListener {
-    void onFragmentInteraction(Uri uri);
+interface OnFragmentInteractionListener {
+    fun onFragmentInteraction(uri: Uri?)
 }

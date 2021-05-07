@@ -2,7 +2,6 @@ package com.monk.moduleviews.fragments
 
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,20 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
-import com.blankj.utilcode.util.ToastUtils
 import com.monk.ViewsDetailActivity
 import com.monk.activity.base.BaseFragment
-import com.monk.commonutils.IntentUtils
 import com.monk.commonutils.LogUtil
 import com.monk.moduleviews.R
 
-class FragmentViewLayoutInflater :BaseFragment<FragmentViewLayoutInflater?>(){
+class FragmentViewLayoutInflater : BaseFragment<FragmentViewLayoutInflater?>(){
 
     private var button: Button? = null
     private var tvMsg: TextView? = null
@@ -40,7 +34,7 @@ class FragmentViewLayoutInflater :BaseFragment<FragmentViewLayoutInflater?>(){
 //        linearLayout.addView(view);
 //        linearLayout.addView(view);
 
-        LogUtil.v(tag, "相对parent的高度：" + button?.top)
+        LogUtil.v(Tags, "相对parent的高度：" + button?.top)
         sb.append("onCreate()-相对parent的高度：${button?.top}\n")
         tvMsg?.text=sb.toString()
 
@@ -63,7 +57,7 @@ class FragmentViewLayoutInflater :BaseFragment<FragmentViewLayoutInflater?>(){
     }
 
     fun onWindowFocusChanged(hasFocus: Boolean){
-        LogUtil.v(tag, "onWindowFocusChanged()-相对parent的高度：${button?.top}")
+        LogUtil.v(Tags, "onWindowFocusChanged()-相对parent的高度：${button?.top}")
         sb.append("onWindowFocusChanged()-相对parent的高度：${button?.top}\n")
         tvMsg?.text=sb.toString()
     }
