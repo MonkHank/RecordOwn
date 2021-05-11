@@ -1,57 +1,51 @@
-package com.monk.commonutils;
+package com.monk.commonutils
 
-import android.content.Context;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import static android.widget.Toast.LENGTH_SHORT;
+import android.content.Context
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.widget.TextView
+import android.widget.Toast
 
 /**
  * @author Administrator
  * @date 2017/8/2/002.
  */
-
-public class ToastUtils {
-    private static Toast mToast;
-    private static Toast mToast2;
-    private static TextView mTvToast;
-
-    public static void showToast(Context context, String text) {
+object ToastUtils {
+    private var mToast: Toast? = null
+    private var mToast2: Toast? = null
+    private var mTvToast: TextView? = null
+    fun showToast(context: Context?, text: String?) {
         if (mToast == null) {
-            mToast = Toast.makeText(context, text, LENGTH_SHORT);
+            mToast = Toast.makeText(context, text, Toast.LENGTH_SHORT)
         } else {
-            mToast.setText(text);
+            mToast!!.setText(text)
         }
-        mToast.show();
+        mToast!!.show()
     }
 
-    public static void showImageToast(Context context, String text) {
+    fun showImageToast(context: Context, text: String) {
         if (mToast2 == null) {
-            mToast2 = new Toast(context);
-            mToast2.setDuration(LENGTH_SHORT);
-            mToast2.setGravity(Gravity.CENTER, 0, 0);
-            View view = LayoutInflater.from(context).inflate(R.layout.toast_layout,null);
-            mTvToast = view.findViewById(R.id.tv_save_contact);
-            mToast2.setView(view);
+            mToast2 = Toast(context)
+            mToast2!!.duration = Toast.LENGTH_SHORT
+            mToast2!!.setGravity(Gravity.CENTER, 0, 0)
+            val view = LayoutInflater.from(context).inflate(R.layout.toast_layout, null)
+            mTvToast = view.findViewById(R.id.tv_save_contact)
+            mToast2!!.view = view
         }
-        mTvToast.setText(text);
-        mToast2.show();
+        mTvToast!!.text = text
+        mToast2!!.show()
     }
 
-
-    public static void destroyExToast() {
+    fun destroyExToast() {
         if (mToast2 != null) {
-            mToast2 = null;
-            mTvToast = null;
+            mToast2 = null
+            mTvToast = null
         }
     }
 
-    public static void destroyToast() {
+    fun destroyToast() {
         if (mToast != null) {
-            mToast = null;
+            mToast = null
         }
     }
 }

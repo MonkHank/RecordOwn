@@ -1,93 +1,86 @@
-package com.monk.commonutils;
+package com.monk.commonutils
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.res.Resources;
-import android.os.Build;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Field;
+import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
+import android.os.Build
+import android.util.TypedValue
+import java.io.BufferedReader
+import java.io.FileNotFoundException
+import java.io.FileReader
+import java.io.IOException
 
 /**
  * @author JackieHank
  * @date 2017-08-11 17:51.
  */
+object DeviceUtils {
+    private const val TAG = "DeviceUtils"
 
-public class DeviceUtils {
-    private final static String TAG = "DeviceUtils";
-
-    public static String getScreenHeightAndWidth(Activity activity) {
-        int height = activity.getWindowManager().getDefaultDisplay().getHeight();
-        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
-        return "height：" + height + "\twidth：" + width;
+    fun getScreenHeightAndWidth(activity: Activity): String {
+        val height = activity.windowManager.defaultDisplay.height
+        val width = activity.windowManager.defaultDisplay.width
+        return "height：$height\twidth：$width"
     }
 
-    /*** 获取屏幕宽高多少（像素）*/
-    public static int[] getWidthAndHeight(Context context){
-        int[] ints = new int[2];
-        Resources res = context.getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        int widthPixels = dm.widthPixels;
-        int heightPixels = dm.heightPixels;
-        ints[0]=widthPixels;
-        ints[1]=heightPixels;
-        return ints;
+    /*** 获取屏幕宽高多少（像素） */
+    fun getWidthAndHeight(context: Context): IntArray {
+        val ints = IntArray(2)
+        val res = context.resources
+        val dm = res.displayMetrics
+        val widthPixels = dm.widthPixels
+        val heightPixels = dm.heightPixels
+        ints[0] = widthPixels
+        ints[1] = heightPixels
+        return ints
     }
 
-    public static int getScreenHeight(Activity activity) {
-        return activity.getWindowManager().getDefaultDisplay().getHeight();
+    fun getScreenHeight(activity: Activity): Int {
+        return activity.windowManager.defaultDisplay.height
     }
 
-    public static float getDensity(Context context) {
-        return getWidthAndHeight(context)[0]/360f;
-//        return context.getResources().getDisplayMetrics().density;
+    fun getDensity(context: Context): Float {
+        return getWidthAndHeight(context)[0] / 360f
+        //        return context.getResources().getDisplayMetrics().density;
     }
 
-    public static int getDensityDpi(Context context) {
-        return context.getResources().getDisplayMetrics().densityDpi;
+    fun getDensityDpi(context: Context): Int {
+        return context.resources.displayMetrics.densityDpi
     }
 
-    public static String getDensityAndDensityDpi(Context context) {
-        float density = context.getResources().getDisplayMetrics().density;
-        int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
-        return "density:" + density + "\tdensityDpi(dpi):" + densityDpi;
+    fun getDensityAndDensityDpi(context: Context): String {
+        val density = context.resources.displayMetrics.density
+        val densityDpi = context.resources.displayMetrics.densityDpi
+        return "density:$density\tdensityDpi(dpi):$densityDpi"
     }
 
-    public static int dp2px(Context context, int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                context.getResources().getDisplayMetrics());
+    fun dp2px(context: Context, dp: Int): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+                context.resources.displayMetrics).toInt()
     }
 
-    public static int px2dip(Context context, int px) {
-        float density = context.getResources().getDisplayMetrics().density;
-        float dip = px / density;
-        return (int) dip;
+    fun px2dip(context: Context, px: Int): Int {
+        val density = context.resources.displayMetrics.density
+        val dip = px / density
+        return dip.toInt()
     }
 
-    public static long msToMin(long ms) {
-        long consumedSecond;
+    fun msToMin(ms: Long): Long {
+        val consumedSecond: Long
         //取余数
-        long s = ms / 1000 % 60;
-        long m = ms / 1000 / 60 % 60;
-        long h = ms / 1000 / 60 / 60;
-        if (h < 1) {
-            consumedSecond = m * 60 + s;
+        val s = ms / 1000 % 60
+        val m = ms / 1000 / 60 % 60
+        val h = ms / 1000 / 60 / 60
+        consumedSecond = if (h < 1) {
+            m * 60 + s
         } else {
-            consumedSecond = h * 3600 + s;
+            h * 3600 + s
         }
-        long currentMin = consumedSecond / 60;
-        return currentMin;
+        return consumedSecond / 60
     }
 
-    public static String[] getDeviceNoAndModel(Context context) {
-        String[] str = new String[2];
+    fun getDeviceNoAndModel(context: Context?): Array<String?> {
+        val str = arrayOfNulls<String>(2)
         // 针对华为mate10下面这个反射方式是获取不到的；
         /*try {
             Method get = Class.forName("android.os.SystemProperties").getMethod("get", String.class);
@@ -98,142 +91,149 @@ public class DeviceUtils {
             str[0]=boot;
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
-        str[0]=Build.SERIAL;
-//        换成阿里给的
+        }*/str[0] = Build.SERIAL
+        //        换成阿里给的
 //        str[0] = PrefUtils.getAliDeviceId(context);
-        str[1] = Build.BRAND + "-" + Build.DEVICE;
-        return str;
+        str[1] = Build.BRAND + "-" + Build.DEVICE
+        return str
     }
 
-    public static String getModel() {
-        return "SDK:"+ Build.VERSION.SDK_INT+"\n"
-                +"MODEL:" + Build.MODEL + "\n"
-                +"BOARD:" + Build.BOARD + "\n"
-                +"BRAND:" + Build.BRAND + "\n"
-                +"DEVICE:" + Build.DEVICE + "\n"
-                +"DISPLAY:" + Build.DISPLAY + "\n"
-                +"FINGERPRINT:" + Build.FINGERPRINT + "\n"
-                +"HARDWARE:" + Build.HARDWARE + "\n"
-                +"MANUFACTURER:" + Build.MANUFACTURER + "\n"
-                +"SDK_INT:" + Build.VERSION.SDK_INT + "\n"
-                +"ID:" + Build.ID + "\n"
-                +"SERIAL:" + Build.SERIAL + "\n";
-    }
+    val model: String
+        get() = """
+               SDK:${Build.VERSION.SDK_INT}
+               MODEL:${Build.MODEL}
+               BOARD:${Build.BOARD}
+               BRAND:${Build.BRAND}
+               DEVICE:${Build.DEVICE}
+               DISPLAY:${Build.DISPLAY}
+               FINGERPRINT:${Build.FINGERPRINT}
+               HARDWARE:${Build.HARDWARE}
+               MANUFACTURER:${Build.MANUFACTURER}
+               SDK_INT:${Build.VERSION.SDK_INT}
+               ID:${Build.ID}
+               SERIAL:${Build.SERIAL}
+               
+               """.trimIndent()
 
     /**
      * 通过反编译来获取设备信息
      * @return String
      */
-    public static String decompile() {
-        StringBuilder sb = new StringBuilder();
-        Field[] fields = Build.class.getDeclaredFields();
-        for (Field field : fields) {
+    fun decompile(): String {
+        val sb = StringBuilder()
+        val fields = Build::class.java.declaredFields
+        for (field in fields) {
             try {
-                field.setAccessible(true);
-                sb.append(field.getName() + " : " + field.get(null) + "\n");
-            } catch (Exception e) {
-                LogUtil.i(TAG, "an error occurred when collect crash info");
+                field.isAccessible = true
+                sb.append("""${field.name} : ${field[null]}
+""")
+            } catch (e: Exception) {
+                LogUtil.i(TAG, "an error occurred when collect crash info")
             }
         }
-        return sb.toString();
+        return sb.toString()
     }
 
-    public static String getMaxMemoryInfo(Context context){
-        StringBuilder sb = new StringBuilder();
-        Runtime rt= Runtime.getRuntime();
-        long maxMemory=rt.maxMemory();
-        ActivityManager ac = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        int memoryClass = ac.getMemoryClass();
-        int largeMemoryClass = ac.getLargeMemoryClass();
-        sb.append("rt.maxMemory:" + (maxMemory/1024/1024)+"\t");
-        sb.append("ac.memoryClass:" + memoryClass+"\t");
-        sb.append("ac.largeMemoryClass:" + largeMemoryClass+"\t");
-        return sb.toString();
+    fun getMaxMemoryInfo(context: Context): String {
+        val sb = StringBuilder()
+        val rt = Runtime.getRuntime()
+        val maxMemory = rt.maxMemory()
+        val ac = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val memoryClass = ac.memoryClass
+        val largeMemoryClass = ac.largeMemoryClass
+        sb.append("rt.maxMemory:" + maxMemory / 1024 / 1024 + "\t")
+        sb.append("ac.memoryClass:$memoryClass\t")
+        sb.append("ac.largeMemoryClass:$largeMemoryClass\t")
+        return sb.toString()
     }
 
     // 获取CPU最大频率（单位KHZ）
     // "/system/bin/cat" 命令行
     // "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq" 存储最大频率的文件的路径
-    private static String getMaxCpuFreq() {
-        String result = "";
-        ProcessBuilder cmd;
-        try {
-            String[] args = {"/system/bin/cat",
-                    "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq"};
-            cmd = new ProcessBuilder(args);
-            Process process = cmd.start();
-            InputStream in = process.getInputStream();
-            byte[] re = new byte[24];
-            while (in.read(re) != -1) {
-                result = result + new String(re);
+    private val maxCpuFreq: String
+        private get() {
+            var result = ""
+            val cmd: ProcessBuilder
+            try {
+                val args = arrayOf("/system/bin/cat",
+                        "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq")
+                cmd = ProcessBuilder(*args)
+                val process = cmd.start()
+                val `in` = process.inputStream
+                val re = ByteArray(24)
+                while (`in`.read(re) != -1) {
+                    result = result + String(re)
+                }
+                `in`.close()
+            } catch (ex: IOException) {
+                ex.printStackTrace()
+                result = "N/A"
             }
-            in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            result = "N/A";
+            return result.trim { it <= ' ' }
         }
-        return result.trim();
-    }
 
     /**
      * 获取CPU最小频率（单位KHZ）
      * @return String
      */
-    private static String getMinCpuFreq() {
-        String result = "";
-        ProcessBuilder cmd;
-        try {
-            String[] args = {"/system/bin/cat",
-                    "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq"};
-            cmd = new ProcessBuilder(args);
-            Process process = cmd.start();
-            InputStream in = process.getInputStream();
-            byte[] re = new byte[24];
-            while (in.read(re) != -1) {
-                result = result + new String(re);
+    private val minCpuFreq: String
+        private get() {
+            var result = ""
+            val cmd: ProcessBuilder
+            try {
+                val args = arrayOf("/system/bin/cat",
+                        "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq")
+                cmd = ProcessBuilder(*args)
+                val process = cmd.start()
+                val `in` = process.inputStream
+                val re = ByteArray(24)
+                while (`in`.read(re) != -1) {
+                    result = result + String(re)
+                }
+                `in`.close()
+            } catch (ex: IOException) {
+                ex.printStackTrace()
+                result = "N/A"
             }
-            in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            result = "N/A";
+            return result.trim { it <= ' ' }
         }
-        return result.trim();
-    }
 
     /**
      * 实时获取CPU当前频率（单位KHZ）
      * @return String
      */
-    private static String getCurCpuFreq() {
-        String result = "N/A";
-        try {
-            FileReader fr = new FileReader(
-                    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq");
-            BufferedReader br = new BufferedReader(fr);
-            String text = br.readLine();
-            result = text.trim();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private val curCpuFreq: String
+        private get() {
+            var result = "N/A"
+            try {
+                val fr = FileReader(
+                        "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq")
+                val br = BufferedReader(fr)
+                val text = br.readLine()
+                result = text.trim { it <= ' ' }
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return result
         }
-        return result;
-    }
 
     // 获取CPU名字
-    private static String getCpuName() {
-        try {
-            FileReader fr = new FileReader("/proc/cpuinfo");
-            BufferedReader br = new BufferedReader(fr);
-            String text = br.readLine();
-            String[] array = text.split(":\\s+", 2);
-            return array[1];
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private val cpuName: String?
+        private get() {
+            try {
+                val fr = FileReader("/proc/cpuinfo")
+                val br = BufferedReader(fr)
+                val text = br.readLine()
+                val array: List<String> = text.split(":\\s+")
+                return array[1]
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return null
         }
-        return null;
-    }
 }
+

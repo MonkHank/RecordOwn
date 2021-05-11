@@ -1,42 +1,41 @@
-package com.monk.commonutils;
+package com.monk.commonutils
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 /**
  * @author monk
  * @date 2018-12-27
  */
-public class ThreadPoolManager {
-    private static ThreadPool threadPool;
-
-    public static ThreadPool getInstance() {
-        if (threadPool == null) {
-            synchronized (ThreadPoolManager.class) {
-                if (threadPool == null) {
-                    threadPool=new ThreadPool();
+object ThreadPoolManager {
+    private var threadPool: ThreadPool? = null
+    val instance: ThreadPool?
+        get() {
+            if (threadPool == null) {
+                synchronized(ThreadPoolManager::class.java) {
+                    if (threadPool == null) {
+                        threadPool = ThreadPool()
+                    }
                 }
             }
-        }
-        return threadPool;
-    }
-
-
-    public static class ThreadPool{
-        private final ExecutorService executorService;
-        ThreadPool() {
-            executorService = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 0,
-                    TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+            return threadPool
         }
 
-        public void execute(Runnable r) {
-            executorService.execute(r);
+    class ThreadPool internal constructor() {
+        private val executorService: ExecutorService
+        fun execute(r: Runnable?) {
+            executorService.execute(r)
         }
 
-        public void cancel() {
-            executorService.shutdown();
+        fun cancel() {
+            executorService.shutdown()
+        }
+
+        init {
+            executorService = ThreadPoolExecutor(0, Int.MAX_VALUE, 0,
+                    TimeUnit.SECONDS, LinkedBlockingQueue())
         }
     }
 }

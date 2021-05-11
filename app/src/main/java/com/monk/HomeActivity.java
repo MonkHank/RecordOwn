@@ -58,9 +58,9 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> implements
 
         navigationView.setCheckedItem(R.id.nav_call);
         View headerView = navigationView.getHeaderView(0);
-        headerView.findViewById(R.id.icon_image).setOnClickListener(v -> ToastUtils.showImageToast(getMContext(),"点击了头像"));
-        headerView.findViewById(R.id.mail).setOnClickListener(v -> ToastUtils.showImageToast(getMContext(),"点击了邮箱"));
-        headerView.findViewById(R.id.username).setOnClickListener(v -> ToastUtils.showImageToast(getMContext(),"点击了名字"));
+        headerView.findViewById(R.id.icon_image).setOnClickListener(v -> ToastUtils.INSTANCE.showImageToast(getMContext(),"点击了头像"));
+        headerView.findViewById(R.id.mail).setOnClickListener(v -> ToastUtils.INSTANCE.showImageToast(getApplicationContext(),"点击了邮箱"));
+        headerView.findViewById(R.id.username).setOnClickListener(v -> ToastUtils.INSTANCE.showImageToast(getMContext(),"点击了名字"));
 
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             // 关闭侧滑

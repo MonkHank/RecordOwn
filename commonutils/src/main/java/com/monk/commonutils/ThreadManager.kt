@@ -1,56 +1,44 @@
-package com.monk.commonutils;
+package com.monk.commonutils
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor.AbortPolicy;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Executors
+import java.util.concurrent.LinkedBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 
 /**
  * 线程管理器
  * @author monk
  * @date 2018-7-25
  */
-public class ThreadManager {
-    private static ThreadPool mThreadPool;
-
-    public static ThreadPool getThreadPool() {
-        if (mThreadPool == null) {
-            synchronized (ThreadManager.class) {
-                if (mThreadPool == null) {
-                    int threadCount = 10;
-                    int cpuCount = Runtime.getRuntime().availableProcessors();
-                    mThreadPool = new ThreadPool(cpuCount+1, threadCount, 1L);
+object ThreadManager {
+    private var mThreadPool: ThreadPool? = null
+    val threadPool: ThreadPool?
+        get() {
+            if (mThreadPool == null) {
+                synchronized(ThreadManager::class.java) {
+                    if (mThreadPool == null) {
+                        val threadCount = 10
+                        val cpuCount = Runtime.getRuntime().availableProcessors()
+                        mThreadPool = ThreadPool(cpuCount + 1, threadCount, 1L)
+                    }
                 }
             }
-        }
-        return mThreadPool;
-    }
-
-    public static class ThreadPool {
-        private final int corePoolSize;
-        private final int maximumPoolSize;
-        private final long keepAliveTime;
-
-        private ThreadPoolExecutor executor;
-
-        private ThreadPool(int corePoolSize, int maximumPoolSize, long keepAliveTime) {
-            this.corePoolSize = corePoolSize;
-            this.maximumPoolSize = maximumPoolSize;
-            this.keepAliveTime = keepAliveTime;
+            return mThreadPool
         }
 
-        public void execute(Runnable r) {
+    class ThreadPool(private val corePoolSize: Int, private val maximumPoolSize: Int, private val keepAliveTime: Long) {
+        private var executor: ThreadPoolExecutor? = null
+        fun execute(r: Runnable?) {
             if (executor == null) {
-                executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
-                        TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), Executors.defaultThreadFactory(), new AbortPolicy());
+                executor = ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
+                        TimeUnit.SECONDS, LinkedBlockingQueue(), Executors.defaultThreadFactory(), ThreadPoolExecutor.AbortPolicy())
             }
-            executor.execute(r);
+            executor!!.execute(r)
         }
 
-        public void cancel(Runnable r) {
+        fun cancel(r: Runnable?) {
             if (executor != null) {
-                executor.getQueue().remove(r);
+                executor!!.queue.remove(r)
             }
         }
     }

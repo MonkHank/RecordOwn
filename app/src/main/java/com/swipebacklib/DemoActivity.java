@@ -85,7 +85,7 @@ public class DemoActivity extends SwipeBackActivity implements View.OnClickListe
             }
         });
 
-        ThreadPoolManager.getInstance().execute(() -> {
+        ThreadPoolManager.INSTANCE.getInstance().execute(() -> {
 //                Looper.prepare();
 //                ToastUtils.showToast(DemoActivity.this, "测绘looper函数");
             // onResume()方法还没执行，不会检测是否在子线程哦

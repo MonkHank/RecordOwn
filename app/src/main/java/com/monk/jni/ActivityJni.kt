@@ -1,48 +1,36 @@
-package com.monk.jni;
+package com.monk.jni
 
-import android.os.Bundle;
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.monk.activity.base.BaseCompatActivity
+import com.monk.aidldemo.R
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.monk.activity.base.BaseCompatActivity;
-import com.monk.aidldemo.R;
-
-public class ActivityJni extends BaseCompatActivity<ActivityJni> {
-
-
-//    static {
-//        System.loadLibrary("native-lib");
-//    }
-//
-//    public native String sayHello(String string);
-
-    private FragmentManager fragmentManager;
-    private Fragment mCurrentFragment;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initToolbar(R.layout.fragment_jni);
-
-        fragmentManager = getSupportFragmentManager();
-
-        addAndShowFragment(new JniFragment());
+class ActivityJni : BaseCompatActivity<ActivityJni?>() {
+    //    static {
+    //        System.loadLibrary("native-lib");
+    //    }
+    //
+    //    public native String sayHello(String string);
+    private var fragmentManager: FragmentManager? = null
+    private var mCurrentFragment: Fragment? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initToolbar(R.layout.fragment_jni)
+        fragmentManager = supportFragmentManager
+        addAndShowFragment(JniFragment())
     }
 
-    public void addAndShowFragment(Fragment fragment) {
+    fun addAndShowFragment(fragment: Fragment) {
         // FragmentTransaction表示一次完整的事务，commit() 之前的一系列连贯操作称之为一次事务。
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        if (mCurrentFragment != null) ft.hide(mCurrentFragment);
-
-        if (!fragment.isAdded()) {
-            ft.add(R.id.fragmentContainer, fragment, fragment.getClass().getName());
+        val ft = fragmentManager!!.beginTransaction()
+        if (mCurrentFragment != null) ft.hide(mCurrentFragment!!)
+        if (!fragment.isAdded) {
+            ft.add(R.id.fragmentContainer, fragment, fragment.javaClass.name)
         } else {
-            ft.show(fragment);
+            ft.show(fragment)
         }
-        ft.commit();
-        mCurrentFragment = fragment;
+        ft.commit()
+        mCurrentFragment = fragment
     }
-
 }

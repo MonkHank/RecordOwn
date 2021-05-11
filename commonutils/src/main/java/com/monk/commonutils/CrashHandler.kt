@@ -41,7 +41,7 @@ class CrashHandler private constructor() : Thread.UncaughtExceptionHandler {
             return
         }
         LogUtil.i(tag, Thread.currentThread().name)
-        ThreadManager.getThreadPool().execute {
+        ThreadManager.threadPool?.execute {
             Looper.prepare()
             ToastUtils.showToast(mContext, crash_text)
             Looper.loop()

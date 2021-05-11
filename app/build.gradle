@@ -4,6 +4,7 @@ import groovy.xml.MarkupBuilder
 
 // jimu-config-step4:应用组件化编译脚本，在组件和host的build.gradle都需要增加此配置
 apply plugin: 'com.dd.comgradle'
+apply plugin: 'kotlin-android'
 
 // 把buidl.gradle看成个类来设计
 def mCompileVersion = 28
