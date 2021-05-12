@@ -38,7 +38,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
         fragmentList.add(fragmentDevelop);
         fragmentList.add(fragmentMine);
 
-        LogUtils.i("tag","viewPager = "+viewPager);
+        LogUtils.INSTANCE.i("tag","viewPager = "+viewPager);
         pagerAdapter = new MainPagerAdapter(getMContext(),getSupportFragmentManager(),fragmentList);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(2);
