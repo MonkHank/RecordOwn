@@ -1,22 +1,19 @@
-package com.swipebacklib.app;
+package com.swipebacklib.app
 
-
-import com.swipebacklib.SwipeBackLayout;
+import com.swipebacklib.SwipeBackLayout
 
 /**
  * @author Yrom
  */
-public interface SwipeBackActivityBase {
+interface SwipeBackActivityBase {
     /**
      * @return the SwipeBackLayout associated with this activity.
      */
-    SwipeBackLayout getSwipeBackLayout();
-
-    void setSwipeBackEnable(boolean enable);
+    fun getSwipeBackLayout(): SwipeBackLayout?
+    fun setSwipeBackEnable(enable: Boolean)
 
     /**
      * Scroll out contentView and finish the activity
      */
-    void scrollToFinishActivity();
-
+    fun scrollToFinishActivity()
 }

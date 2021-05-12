@@ -1,51 +1,40 @@
+package com.swipebacklib.app
 
-package com.swipebacklib.app;
+import android.app.Activity
+import android.os.Bundle
+import android.view.View
+import com.swipebacklib.SwipeBackLayout
+import com.swipebacklib.Utils
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-
-import com.swipebacklib.SwipeBackLayout;
-import com.swipebacklib.Utils;
-
-
-public class SwipeBackActivity extends Activity implements SwipeBackActivityBase {
-    private SwipeBackActivityHelper mHelper;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mHelper = new SwipeBackActivityHelper(this);
-        mHelper.onActivityCreate();
+open class SwipeBackActivity : Activity(), SwipeBackActivityBase {
+    private var mHelper: SwipeBackActivityHelper? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mHelper = SwipeBackActivityHelper(this)
+        mHelper!!.onActivityCreate()
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mHelper.onPostCreate();
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        mHelper!!.onPostCreate()
     }
 
-    @Override
-    public View findViewById(int id) {
-        View v = super.findViewById(id);
-        if (v == null && mHelper != null)
-            return mHelper.findViewById(id);
-        return v;
+
+    override fun <T : View?> findViewById(id: Int): T {
+        val v = super.findViewById<T>(id)
+        return if (v == null && mHelper != null) mHelper!!.findViewById(id)!! else v
     }
 
-    @Override
-    public SwipeBackLayout getSwipeBackLayout() {
-        return mHelper.getSwipeBackLayout();
+    override fun getSwipeBackLayout(): SwipeBackLayout {
+        return mHelper!!.swipeBackLayout!!
     }
 
-    @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
+    override fun setSwipeBackEnable(enable: Boolean) {
+        getSwipeBackLayout().setEnableGesture(enable)
     }
 
-    @Override
-    public void scrollToFinishActivity() {
-        Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
+    override fun scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this)
+        getSwipeBackLayout().scrollToFinishActivity()
     }
 }

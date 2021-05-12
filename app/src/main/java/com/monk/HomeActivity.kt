@@ -32,7 +32,9 @@ import java.util.*
  * @author monk
  * @date 2019-05-27
  */
-class HomeActivity : BaseCompatActivity<HomeActivity?>(), OnRecyclerViewItemClickListener, OnRecyclerViewItemClickListener2 {
+class HomeActivity : BaseCompatActivity<HomeActivity?>()
+        , OnRecyclerViewItemClickListener
+        , OnRecyclerViewItemClickListener2 {
     var drawerLayout: DrawerLayout? = null
     var navigationView: NavigationView? = null
     var floatingActionButton: FloatingActionButton? = null

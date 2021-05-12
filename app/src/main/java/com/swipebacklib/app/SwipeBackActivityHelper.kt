@@ -1,62 +1,43 @@
-package com.swipebacklib.app;
+package com.swipebacklib.app
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import com.monk.aidldemo.R;
-import com.swipebacklib.SwipeBackLayout;
-import com.swipebacklib.Utils;
-
+import android.app.Activity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
+import android.view.View
+import com.monk.aidldemo.R
+import com.swipebacklib.SwipeBackLayout
+import com.swipebacklib.SwipeBackLayout.SwipeListener
+import com.swipebacklib.Utils
 
 /**
  * @author Yrom
  */
-public class SwipeBackActivityHelper {
-    private final Activity mActivity;
+class SwipeBackActivityHelper(private val mActivity: Activity) {
+    var swipeBackLayout: SwipeBackLayout? = null
+        private set
 
-    private SwipeBackLayout mSwipeBackLayout;
-
-    public SwipeBackActivityHelper(Activity activity) {
-        mActivity = activity;
-    }
-
-    @SuppressWarnings("deprecation")
-    public void onActivityCreate() {
-        mActivity.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mActivity.getWindow().getDecorView().setBackground(null);
-        mSwipeBackLayout = (SwipeBackLayout) LayoutInflater.from(mActivity).inflate(R.layout.swipeback_layout, null);
-        mSwipeBackLayout.addSwipeListener(new SwipeBackLayout.SwipeListener() {
-            @Override
-            public void onScrollStateChange(int state, float scrollPercent) {
+    fun onActivityCreate() {
+        mActivity.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        mActivity.window.decorView.background = null
+        swipeBackLayout = LayoutInflater.from(mActivity).inflate(R.layout.swipeback_layout, null) as SwipeBackLayout
+        swipeBackLayout!!.addSwipeListener(object : SwipeListener {
+            override fun onScrollStateChange(state: Int, scrollPercent: Float) {}
+            override fun onEdgeTouch(edgeFlag: Int) {
+                Utils.convertActivityToTranslucent(mActivity)
             }
 
-            @Override
-            public void onEdgeTouch(int edgeFlag) {
-                Utils.convertActivityToTranslucent(mActivity);
-            }
-
-            @Override
-            public void onScrollOverThreshold() {
-
-            }
-        });
+            override fun onScrollOverThreshold() {}
+        })
     }
 
-    public void onPostCreate() {
-        mSwipeBackLayout.attachToActivity(mActivity);
+    fun onPostCreate() {
+        swipeBackLayout!!.attachToActivity(mActivity)
     }
 
-    public View findViewById(int id) {
-        if (mSwipeBackLayout != null) {
-            return mSwipeBackLayout.findViewById(id);
-        }
-        return null;
-    }
-
-    public SwipeBackLayout getSwipeBackLayout() {
-        return mSwipeBackLayout;
+    fun  <T : View?> findViewById(id: Int): T? {
+        return if (swipeBackLayout != null) {
+            swipeBackLayout!!.findViewById(id)
+        } else null
     }
 }
