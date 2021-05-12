@@ -1,29 +1,21 @@
-package com.monk.moduleviews.views;
+package com.monk.moduleviews.views
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-
-import androidx.viewpager.widget.ViewPager;
+import android.content.Context
+import android.util.AttributeSet
+import android.view.MotionEvent
+import androidx.viewpager.widget.ViewPager
 
 /**
  * Created by bgl on 2017/5/16.
  */
+class TopNewsViewPager : ViewPager {
+    private var startX = 0
+    private var startY = 0
+    private var endY = 0
+    private var endX = 0
 
-public class TopNewsViewPager extends ViewPager {
-
-    private int startX;
-    private int startY;
-    private int endY;
-    private int endX;
-
-    public TopNewsViewPager(Context context) {
-        super(context);
-    }
-
-    public TopNewsViewPager(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+    constructor(context: Context?) : super(context!!) {}
+    constructor(context: Context?, attrs: AttributeSet?) : super(context!!, attrs) {}
 
     /**
      * 1、上下滑动需要拦截
@@ -33,45 +25,42 @@ public class TopNewsViewPager extends ViewPager {
      * @param ev
      * @return
      */
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         //请求所有父控件及祖宗控件不要拦截事件
-        getParent().requestDisallowInterceptTouchEvent(true);
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startX = (int) ev.getX();
-                startY = (int) ev.getY();
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                endX = (int) ev.getX();
-                endY = (int) ev.getY();
-
-                int dx = endX -startX;
-                int dy = endY - startY;
-                int currentItem = getCurrentItem();
-                if (Math.abs(dy)< Math.abs(dx)){
+        parent.requestDisallowInterceptTouchEvent(true)
+        when (ev.action) {
+            MotionEvent.ACTION_DOWN -> {
+                startX = ev.x.toInt()
+                startY = ev.y.toInt()
+            }
+            MotionEvent.ACTION_MOVE -> {
+                endX = ev.x.toInt()
+                endY = ev.y.toInt()
+                val dx = endX - startX
+                val dy = endY - startY
+                val currentItem = currentItem
+                if (Math.abs(dy) < Math.abs(dx)) {
                     // 右滑动
                     if (dx > 0) {
                         // 向右滑,需要拦截
-                        if (currentItem == 0){
+                        if (currentItem == 0) {
                             // 第一个页面
-                            getParent().requestDisallowInterceptTouchEvent(false);
+                            parent.requestDisallowInterceptTouchEvent(false)
                         }
-                    }else {
+                    } else {
                         // 向左滑
-                        int count = getAdapter().getCount();
-                        if (currentItem == count-1){
+                        val count = adapter!!.count
+                        if (currentItem == count - 1) {
                             // 最后一个页面,需要拦截
-                            getParent().requestDisallowInterceptTouchEvent(false);
+                            parent.requestDisallowInterceptTouchEvent(false)
                         }
                     }
-                }else {
+                } else {
                     // 上下滑动,需要拦截
-                    getParent().requestDisallowInterceptTouchEvent(false);
+                    parent.requestDisallowInterceptTouchEvent(false)
                 }
-                break;
+            }
         }
-        return super.dispatchTouchEvent(ev);
+        return super.dispatchTouchEvent(ev)
     }
 }
