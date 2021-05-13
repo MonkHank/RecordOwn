@@ -18,3 +18,6 @@
 
 ## 位运算符
 - [kotlin位操作和位运算](https://blog.csdn.net/jdsjlzx/article/details/108606777)
+
+## object
+- [object关键字的使用场景](https://blog.csdn.net/xlh1191860939/article/details/79460601)
