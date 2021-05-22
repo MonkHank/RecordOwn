@@ -26,7 +26,7 @@ object IOUtils {
             try {
                 io.close()
             } catch (e: IOException) {
-                LogUtil.e(e.message)
+                LogUtil.e(e.message!!)
             }
         }
         return true

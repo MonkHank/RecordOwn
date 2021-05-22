@@ -34,9 +34,10 @@ object LogUtil {
         if (BuildConfig.DEBUG) Log.e("tag", getMsg(msg, autoJumpLogInfos, Symbol))
     }
 
-    fun w(tag: String?, msg: String) {
+    @JvmStatic
+    fun w(tag: String?, msg: String?) {
         val autoJumpLogInfos = autoJumpLogInfos
-        if (BuildConfig.DEBUG) Log.w(tag, getMsg(msg, autoJumpLogInfos, Symbol))
+        if (BuildConfig.DEBUG) Log.w(tag, getMsg(msg?:"", autoJumpLogInfos, Symbol))
     }
 
     fun w(msg: String) {
@@ -44,15 +45,15 @@ object LogUtil {
         if (BuildConfig.DEBUG) Log.w("tag", getMsg(msg, autoJumpLogInfos, Symbol))
     }
 
-    fun e(`object`: Any, msg: String) {
+   /* fun e(`object`: Any, msg: String) {
         val autoJumpLogInfos = autoJumpLogInfos
         if (BuildConfig.DEBUG) Log.e(`object`.javaClass.simpleName, getMsg(msg, autoJumpLogInfos, Symbol))
-    }
+    }*/
 
     @JvmStatic
-    fun e(tag: String, msg: String) {
+    fun e(tag: String?, msg: String?) {
         val autoJumpLogInfos = autoJumpLogInfos
-        if (BuildConfig.DEBUG) Log.e(tag, getMsg(msg, autoJumpLogInfos, Symbol))
+        if (BuildConfig.DEBUG) Log.e(tag, getMsg(msg?:"", autoJumpLogInfos, Symbol))
     }
 
     fun e2(tag: String?, msg: String) {
@@ -65,15 +66,15 @@ object LogUtil {
         if (isPrint) Log.e(tag, getMsg(msg, autoJumpLogInfos, Symbol))
     }
 
-    fun v(`object`: Any, msg: String) {
+    fun v(`object`: Any?, msg: String?) {
         val autoJumpLogInfos = autoJumpLogInfos
-        if (BuildConfig.DEBUG) Log.v(`object`.javaClass.simpleName, getMsg(msg, autoJumpLogInfos, Symbol))
+        if (BuildConfig.DEBUG) Log.v(`object`?.javaClass?.simpleName, getMsg(msg?:"", autoJumpLogInfos, Symbol))
     }
 
     @JvmStatic
-    fun v(tag: String, msg: String) {
+    fun v(tag: String?, msg: String?) {
         val autoJumpLogInfos = autoJumpLogInfos
-        if (BuildConfig.DEBUG) Log.v(tag, getMsg(msg, autoJumpLogInfos, Symbol))
+        if (BuildConfig.DEBUG) Log.v(tag, getMsg(msg?:"", autoJumpLogInfos, Symbol))
     }
 
     fun v(msg: String) {
@@ -91,15 +92,16 @@ object LogUtil {
         if (BuildConfig.DEBUG) Log.i("tag", getMsg(msg, autoJumpLogInfos, Symbol))
     }
 
-    fun i(`object`: Any, msg: String) {
-        val autoJumpLogInfos = autoJumpLogInfos
-        if (BuildConfig.DEBUG) Log.i(`object`.javaClass.simpleName, getMsg(msg, autoJumpLogInfos, Symbol))
-    }
+//    fun i(`object`: Any, msg: String) {
+//        val autoJumpLogInfos = autoJumpLogInfos
+//        if (BuildConfig.DEBUG) Log.i(`object`.javaClass.simpleName, getMsg(msg, autoJumpLogInfos, Symbol))
+//    }
 
     @JvmStatic
-    fun i(tag: String, msg: String) {
+    fun i(tag: String?, msg: String?) {
         val infos = autoJumpLogInfos
-        if (BuildConfig.DEBUG) Log.i(tag, getMsg(msg, infos, Symbol))
+        if (BuildConfig.DEBUG) Log.i(tag, getMsg(msg?:"", infos, Symbol))
+
     }
 
     @JvmStatic
