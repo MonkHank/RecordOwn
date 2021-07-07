@@ -18,7 +18,7 @@ import com.monk.moduleviews.views.AddEquipmentItem
  * @author monk
  * @date 2019-05-29
  */
-class FragmentViewsAddEquip : BaseFragment<FragmentViewsAddEquip?>() ,View.OnClickListener{
+class FraViewsAddEquip : BaseFragment<FraViewsAddEquip?>() ,View.OnClickListener{
 
     private lateinit var flStartDate:AddEquipmentItem
     private lateinit var flEndDate:AddEquipmentItem

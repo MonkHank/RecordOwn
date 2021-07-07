@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.monk.activity.base.BaseFragment
 import com.monk.moduleviews.R
 
-class FragmentViewsMaxHsv : BaseFragment<FragmentViewsMaxHsv?>(){
+class FraViewsMaxHsv : BaseFragment<FraViewsMaxHsv?>(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fra_moduleviews_maxhsv,container,false)

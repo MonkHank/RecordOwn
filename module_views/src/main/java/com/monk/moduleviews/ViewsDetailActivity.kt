@@ -1,4 +1,4 @@
-package com.monk
+package com.monk.moduleviews
 
 import android.content.Context
 import android.content.Intent
@@ -8,19 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.monk.activity.base.BaseCompatActivity
 import com.monk.commonutils.LogUtil
-import com.monk.moduleviews.R
 import com.monk.moduleviews.adapters.ViewsBean
 import com.monk.moduleviews.fragments.*
-import java.lang.StringBuilder
 
 class ViewsDetailActivity: BaseCompatActivity<ViewsDetailActivity?>() {
 
-    private var fragmentViewsEventDispatch: FragmentViewsEventDispatch? = null
-    private var fragmentViewsLayoutInflater: FragmentViewLayoutInflater? = null
-    private var fragmentViewsAddEquip: FragmentViewsAddEquip? = null
-    private var fragmentViewsMaxHsv: FragmentViewsMaxHsv? = null
-    private var fragmentViewsQQLv: FragmentViewsQQLv? = null
-    private var fragmentViewPercent:FragmentViewPercent?=null
+    private var fraViewsEventDispatch: FraViewsEventDispatch? = null
+    private var fraViewsLayoutInflater: FraViewLayoutInflater? = null
+    private var fraViewsAddEquip: FraViewsAddEquip? = null
+    private var fraViewsMaxHsv: FraViewsMaxHsv? = null
+    private var fraViewsQQLv: FraViewsQQLv? = null
+    private var fraViewPercent:FraViewPercent?=null
+    private var fraCoordinatorLayout: FraCoordinatorLayout? = null
     private var mCurrentFragment: Fragment? = null
 
     val sb = StringBuilder()
@@ -37,21 +36,22 @@ class ViewsDetailActivity: BaseCompatActivity<ViewsDetailActivity?>() {
         super.onCreate(savedInstanceState)
         initToolbar(R.layout.act_moduleviews_detail)
 
-        fragmentViewsEventDispatch = FragmentViewsEventDispatch()
-        fragmentViewsLayoutInflater = FragmentViewLayoutInflater()
-        fragmentViewsAddEquip = FragmentViewsAddEquip()
-        fragmentViewPercent = FragmentViewPercent()
-        fragmentViewsMaxHsv = FragmentViewsMaxHsv()
-        fragmentViewsQQLv = FragmentViewsQQLv()
+        fraViewsEventDispatch = FraViewsEventDispatch()
+        fraViewsLayoutInflater = FraViewLayoutInflater()
+        fraViewsAddEquip = FraViewsAddEquip()
+        fraViewPercent = FraViewPercent()
+        fraViewsMaxHsv = FraViewsMaxHsv()
+        fraViewsQQLv = FraViewsQQLv()
+        fraCoordinatorLayout = FraCoordinatorLayout.newFra()
 
 
         when (intent.getStringExtra("type")) {
-            ViewsBean.ed -> addAndShowFragment(fragmentViewsEventDispatch!!)
-            ViewsBean.lf -> addAndShowFragment(fragmentViewsLayoutInflater!!)
-            ViewsBean.ae -> addAndShowFragment(fragmentViewsAddEquip!!)
-            ViewsBean.pc -> addAndShowFragment(fragmentViewPercent!!)
-            ViewsBean.mhv -> addAndShowFragment(fragmentViewsMaxHsv!!)
-            ViewsBean.qqlv -> addAndShowFragment(fragmentViewsQQLv!!)
+            ViewsBean.ed -> addAndShowFragment(fraViewsEventDispatch!!)
+            ViewsBean.lf -> addAndShowFragment(fraViewsLayoutInflater!!)
+            ViewsBean.ae -> addAndShowFragment(fraViewsAddEquip!!)
+            ViewsBean.pc -> addAndShowFragment(fraViewPercent!!)
+            ViewsBean.mhv -> addAndShowFragment(fraViewsMaxHsv!!)
+            ViewsBean.qqlv -> addAndShowFragment(fraViewsQQLv!!)
         }
 
     }
@@ -71,7 +71,7 @@ class ViewsDetailActivity: BaseCompatActivity<ViewsDetailActivity?>() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        fragmentViewsLayoutInflater?.onWindowFocusChanged(hasFocus)
+        fraViewsLayoutInflater?.onWindowFocusChanged(hasFocus)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {

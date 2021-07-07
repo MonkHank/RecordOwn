@@ -6,7 +6,7 @@ import android.view.GestureDetector
 import android.view.GestureDetector.OnDoubleTapListener
 import android.view.MotionEvent
 import android.widget.RelativeLayout
-import com.monk.ViewsDetailActivity
+import com.monk.moduleviews.ViewsDetailActivity
 import com.monk.commonutils.LogUtil
 import java.lang.StringBuilder
 

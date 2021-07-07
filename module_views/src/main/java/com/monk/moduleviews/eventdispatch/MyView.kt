@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.Scroller
 import androidx.appcompat.widget.AppCompatButton
-import com.monk.ViewsDetailActivity
+import com.monk.moduleviews.ViewsDetailActivity
 import com.monk.commonutils.LogUtil
 import java.lang.StringBuilder
 

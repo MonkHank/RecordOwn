@@ -12,12 +12,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
-import com.monk.ViewsDetailActivity
+import com.monk.moduleviews.ViewsDetailActivity
 import com.monk.activity.base.BaseFragment
 import com.monk.commonutils.LogUtil
 import com.monk.moduleviews.R
 
-class FragmentViewLayoutInflater : BaseFragment<FragmentViewLayoutInflater?>(){
+class FraViewLayoutInflater : BaseFragment<FraViewLayoutInflater?>(){
 
     private var button: Button? = null
     private var tvMsg: TextView? = null

@@ -21,6 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.monk.ViewsDetailActivity" />
+        <activity android:name=".ViewsDetailActivity" />
     </application>
 </manifest>

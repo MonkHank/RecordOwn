@@ -1,13 +1,12 @@
 package com.monk.moduleviews.eventdispatch
 
 import android.animation.ValueAnimator
-import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
-import com.monk.ViewsDetailActivity
+import com.monk.moduleviews.ViewsDetailActivity
 import com.monk.activity.base.BaseView
 import com.monk.commonutils.LogUtil
 import java.lang.StringBuilder

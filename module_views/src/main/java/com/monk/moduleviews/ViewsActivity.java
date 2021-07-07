@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.luojilab.router.facade.annotation.RouteNode;
-import com.monk.ViewsDetailActivity;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.moduleviews.adapters.ViewsAdapter;
 import com.monk.moduleviews.adapters.ViewsBean;
@@ -49,8 +48,9 @@ public class ViewsActivity extends BaseCompatActivity<ViewsActivity> implements
         list.add(new ViewsBean(ViewsBean.pc, "PercentCircleView"));
         list.add(new ViewsBean(ViewsBean.mhv, "MaxHeightView"));
         list.add(new ViewsBean(ViewsBean.qqlv, "QQListView"));
+
+
         ViewsAdapter adapter = new ViewsAdapter(this, list);
-//        adapter.setOnItemChildClickListener(this);
         adapter.setOnItemClickListener(this);
 
         recyclerView.setAdapter(adapter);

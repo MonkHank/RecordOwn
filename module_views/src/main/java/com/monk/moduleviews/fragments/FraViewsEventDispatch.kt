@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import com.monk.ViewsDetailActivity
+import com.monk.moduleviews.ViewsDetailActivity
 import com.monk.activity.base.BaseFragment
 import com.monk.moduleviews.R
 
-class FragmentViewsEventDispatch : BaseFragment<FragmentViewsEventDispatch?>(){
+class FraViewsEventDispatch : BaseFragment<FraViewsEventDispatch?>(){
 
     private lateinit var btMessage: AppCompatButton
     private lateinit var tvMsg: TextView
