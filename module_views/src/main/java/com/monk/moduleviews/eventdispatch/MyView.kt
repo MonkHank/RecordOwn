@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.Scroller
 import androidx.appcompat.widget.AppCompatButton
-import com.monk.moduleviews.ViewsDetailActivity
+import com.monk.ActViewsDetail
 import com.monk.commonutils.LogUtil
 import java.lang.StringBuilder
 
@@ -27,7 +27,7 @@ class MyView(context: Context?, attrs: AttributeSet?) : AppCompatButton(context!
     init {
         text = "按钮"
         mScroller = Scroller(context)
-        sb = (context as ViewsDetailActivity).sb
+        sb = (context as ActViewsDetail).sb
     }
 
     override fun onFinishInflate() {

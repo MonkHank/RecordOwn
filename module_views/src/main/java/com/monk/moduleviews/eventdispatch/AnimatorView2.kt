@@ -8,7 +8,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.MotionEvent
-import com.monk.moduleviews.ViewsDetailActivity
+import com.monk.ActViewsDetail
 import com.monk.activity.base.BaseView
 import com.monk.commonutils.LogUtil
 import java.lang.StringBuilder
@@ -27,7 +27,7 @@ class AnimatorView2 @JvmOverloads constructor(context: Context?, attrs: Attribut
 
     init {
         init()
-        sb = (context as ViewsDetailActivity).sb
+        sb = (context as ActViewsDetail).sb
     }
 
     private fun init() {

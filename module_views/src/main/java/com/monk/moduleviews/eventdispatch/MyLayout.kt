@@ -6,7 +6,7 @@ import android.view.GestureDetector
 import android.view.GestureDetector.OnDoubleTapListener
 import android.view.MotionEvent
 import android.widget.RelativeLayout
-import com.monk.moduleviews.ViewsDetailActivity
+import com.monk.ActViewsDetail
 import com.monk.commonutils.LogUtil
 import java.lang.StringBuilder
 
@@ -31,7 +31,7 @@ class MyLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? 
         mGestureDetector.setOnDoubleTapListener(this)
         val dm = context.resources.displayMetrics
         LogUtil.i(tag, simpleName + "构造函数：density=" + dm.density + "densityDpi:" + dm.densityDpi)
-        sb = (context as ViewsDetailActivity).sb
+        sb = (context as ActViewsDetail).sb
         sb?.append("$simpleName 构造函数:density=${dm.density}\tdensityDpi:${dm.densityDpi}\n")
     }
 

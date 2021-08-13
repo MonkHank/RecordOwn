@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.luojilab.router.facade.annotation.RouteNode;
+import com.monk.ActViewsDetail;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.moduleviews.adapters.ViewsAdapter;
 import com.monk.moduleviews.adapters.ViewsBean;
@@ -21,7 +22,7 @@ import java.util.List;
 
 
 @RouteNode(path = "/views/main", desc = "module_views主页")
-public class ViewsActivity extends BaseCompatActivity<ViewsActivity> implements
+public class ActViews extends BaseCompatActivity<ActViews> implements
         BaseQuickAdapter.OnItemChildClickListener,
         BaseQuickAdapter.OnItemClickListener {
 
@@ -48,9 +49,8 @@ public class ViewsActivity extends BaseCompatActivity<ViewsActivity> implements
         list.add(new ViewsBean(ViewsBean.pc, "PercentCircleView"));
         list.add(new ViewsBean(ViewsBean.mhv, "MaxHeightView"));
         list.add(new ViewsBean(ViewsBean.qqlv, "QQListView"));
-
-
         ViewsAdapter adapter = new ViewsAdapter(this, list);
+//        adapter.setOnItemChildClickListener(this);
         adapter.setOnItemClickListener(this);
 
         recyclerView.setAdapter(adapter);
@@ -72,6 +72,6 @@ public class ViewsActivity extends BaseCompatActivity<ViewsActivity> implements
         ViewsBean item = (ViewsBean) adapter.getItem(position);
         if (item==null)return;
 
-        startActivity(ViewsDetailActivity.Companion.createIntent(this,item.getTag()));
+        startActivity(ActViewsDetail.Companion.createIntent(this,item.getTag()));
     }
 }

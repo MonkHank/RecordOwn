@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label">
 
-        <activity android:name="com.monk.moduleviews.ViewsActivity">
+        <activity android:name="com.monk.moduleviews.ActViews">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ViewsDetailActivity" />
+        <activity android:name="com.monk.ActViewsDetail" />
 
 
     </application>

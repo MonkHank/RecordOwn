@@ -66,13 +66,16 @@ class HomeActivity : BaseCompatActivity<HomeActivity?>()
         recyclerView!!.layoutManager = layoutManager
         list.add(HomeBean(0, "Fragment"))
         list.add(HomeBean(1, "Jni"))
+        list.add(HomeBean(2, "Flutter"))
         list.add(HomeBean(6, "kill MySelf"))
         list.add(HomeBean(7, "unregisterReceiver"))
         list.add(HomeBean(9, DeviceActivity::class.java.simpleName))
         list.add(HomeBean(10, "Views"))
+
         val homeAdapter = HomeAdapter(this, list, this)
         recyclerView!!.adapter = homeAdapter
         homeAdapter.setOnRecyclerViewItemClickListener(this)
+
         isRegisterReceiver = registScreenStatusReceiver()
         monitorNetWork()
         EventBus.getDefault().postSticky(Any())
@@ -95,6 +98,7 @@ class HomeActivity : BaseCompatActivity<HomeActivity?>()
         when (bean.Tag) {
             0 -> UIRouter.getInstance().openUri(this@HomeActivity, "monk://modulefragment/main", null)
             1 -> startActivity(ActivityJni::class.java)
+            2 -> startActivity(ActFlutter::class.java)
             6 -> {
             }
             7 -> if (isRegisterReceiver) {

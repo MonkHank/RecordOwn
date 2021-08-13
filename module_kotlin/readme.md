@@ -11,7 +11,13 @@
     - final int y = 10;
     - 方法内部的final定义的常量
 - [kotlin中的单例](https://www.jianshu.com/p/5797b3d0ebd0)
+- [kotlin扩展函数](https://blog.csdn.net/u013064109/article/details/79968846)
+    - 接收者类型.方法名 = 接收者对象(this){...}
 - [let、with、run、apply、also](https://blog.csdn.net/u013064109/article/details/78786646)
+    - let/also 都是扩展函数，前者返回用户定义的，后者返回接收者对象
+    - with不是扩展函数，接收一个实例和扩展函数lambada表达式，返回lambada的返回
+    - run是let和with的结合，返回的是用户自定义
+    - apply和run唯一区别就是返回的是接收者对象本身
 - [Kotlin (一) 复合符号( '?.' '?:' '!!' 'as?' '?' )](https://blog.csdn.net/lckj686/article/details/80448471)
 - [kotlin 中得一些for语句](https://www.jianshu.com/p/27646c6561a7)
 - [菜鸟教程，kotlin循环控制](https://www.runoob.com/kotlin/kotlin-loop-control.html)

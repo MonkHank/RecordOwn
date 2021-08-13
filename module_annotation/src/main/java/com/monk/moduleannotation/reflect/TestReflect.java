@@ -177,7 +177,9 @@ public class TestReflect {
         println("---1. 获取所有字段，公有私有，不包含父类 - getDeclaredFields()");
         Field[] fields = clazz.getDeclaredFields();
         for (Field t : fields) {
-            println(t.getName());
+            t.setAccessible(true);
+            print(t.getName()+"："+t.get(newInstance));
+            println("");
         }
 
         println("---2. 获取指定字段 - getDeclaredField(name)");
@@ -228,6 +230,10 @@ public class TestReflect {
 
     private static void println(Object lineText) {
         System.out.println(lineText);
+    }
+
+    private static void print(Object lineText){
+        System.out.print(lineText);
     }
 
 

@@ -5,7 +5,7 @@ data class User(val name: String ,
                 val gradeInfo:String){
     companion object{
         @JvmStatic
-        fun main() {
+        fun main(args: Array<String>) {
             val user = User("jack","class0","99")
             println(user)
 

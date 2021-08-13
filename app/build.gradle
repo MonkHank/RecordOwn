@@ -28,6 +28,11 @@ android {
             }
         }
 
+        // Filter for architectures supported by Flutter.
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
+
     }
     externalNativeBuild {
         cmake {
@@ -104,6 +109,9 @@ dependencies {
     annotationProcessor project(path: ':annotationprocessor')
     implementation project(path: ':module_basic')
 
+//    implementation project(path:':flutter')
+//    implementation 'android.arch.lifecycle:runtime:1.1.1'
+//    implementation 'android.arch.lifecycle:extensions:1.1.1'
 
 }
 
