@@ -9,7 +9,7 @@ ext {
             // android构建工具的版本，其中包括了打包工具aapt、dx等等。这个工具的目录位于..your_sdk_path/build-tools/XX.XX.XX，
             // 通过SDK Manager 更新；
             buildToolsVersion: "30.0.2",
-            versionCode      : 16,
+            versionCode      : 18,
             versionName      : "2.0"
     ]
     dependencies = [

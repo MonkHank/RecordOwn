@@ -1,5 +1,11 @@
 package com.monk.javatest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Locale;
 
 /**
@@ -30,5 +36,38 @@ public class StringTest {
         MyClass.hideMid4("15105100141");
 
         MyClass.formatPhone("8615105199141");
+
+
+        String s = new String("a");
+        System.out.println(s);
+
+        httpBaidu();
     }
+
+    private static void httpBaidu() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                try {
+                    URL url = new URL("http://www.baidu.com");
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    InputStream in = connection.getInputStream();
+                    //下面对获取到的输入流进行读取
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line);
+                    }
+                    System.out.println(response.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
 }

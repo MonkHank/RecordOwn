@@ -2,12 +2,13 @@ package com.monk.dragviewlibrary;
 
 import android.content.Context;
 import android.graphics.Rect;
-import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
+
+import androidx.core.view.ViewCompat;
 
 import com.monk.commonutils.LogUtil;
 
@@ -35,7 +36,7 @@ public class DragViewGroup extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
         mSlop = ViewConfiguration.get(context).getScaledWindowTouchSlop();
-        LogUtil.d(tag,"touchSlop:"+mSlop);
+        LogUtil.INSTANCE.d(tag,"touchSlop:"+mSlop);
     }
 
     @Override
