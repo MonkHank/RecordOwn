@@ -6,6 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 一共4个元注解：@Target @Retention @Documented @Inherited
+ *
  * 字段 @Target
  *              用于描述注解的使用范围                  取值(ElementType)有
  *

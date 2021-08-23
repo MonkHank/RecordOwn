@@ -11,7 +11,7 @@ import com.monk.commonutils.LogUtil
 import com.monk.moduleviews.adapters.ViewsBean
 import com.monk.moduleviews.fragments.*
 
-class ViewsDetailActivity: BaseCompatActivity<ViewsDetailActivity?>() {
+class ActViewsDetail: BaseCompatActivity<ActViewsDetail?>() {
 
     private var fraViewsEventDispatch: FraViewsEventDispatch? = null
     private var fraViewsLayoutInflater: FraViewLayoutInflater? = null
@@ -26,7 +26,7 @@ class ViewsDetailActivity: BaseCompatActivity<ViewsDetailActivity?>() {
 
     companion object{
         fun createIntent(context: Context?, type: String): Intent {
-            val inteni = Intent(context, ViewsDetailActivity::class.java)
+            val inteni = Intent(context, ActViewsDetail::class.java)
             inteni.putExtra("type", type)
             return inteni
         }

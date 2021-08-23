@@ -1,4 +1,4 @@
-package com.monk.javatest.volatiletest;
+package com.monk.volatiletest;
 
 /**
  * Created by TanJiaJun on 2020-08-16.

@@ -1,4 +1,4 @@
-package com.monk.javatest.volatiletest;
+package com.monk.volatiletest;
 
 public class Singleton {
     // 用关键字volatile修饰变量sInstance，禁止指令重排序优化

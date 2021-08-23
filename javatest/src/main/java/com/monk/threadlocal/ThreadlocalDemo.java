@@ -1,4 +1,4 @@
-package com.monk.javatest.threadlocal;
+package com.monk.threadlocal;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

@@ -12,7 +12,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
-import com.monk.moduleviews.ViewsDetailActivity
+import com.monk.moduleviews.ActViewsDetail
 import com.monk.activity.base.BaseFragment
 import com.monk.commonutils.LogUtil
 import com.monk.moduleviews.R
@@ -48,7 +48,7 @@ class FraViewLayoutInflater : BaseFragment<FraViewLayoutInflater?>(){
         val notification = NotificationCompat.Builder(mActivity, simpleName)
                 .setContentTitle("contentTitle")
                 .setContentText("contentText")
-                .setContentIntent(PendingIntent.getActivity(mActivity, 0, Intent(mActivity, ViewsDetailActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
+                .setContentIntent(PendingIntent.getActivity(mActivity, 0, Intent(mActivity, ActViewsDetail::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .build()
         notificationManager.notify(0, notification)

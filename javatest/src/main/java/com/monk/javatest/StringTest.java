@@ -41,7 +41,19 @@ public class StringTest {
         String s = new String("a");
         System.out.println(s);
 
-        httpBaidu();
+//        httpBaidu();
+
+        String str1="abc";
+        String str2="def";
+        String str3=str1+str2;
+        System.out.println("===========test5============");
+        System.out.println(str3=="abcdef"); //false
+    }
+
+    private static void test6(){
+        String s0 ="a1";
+        String s1="a"+1;
+
     }
 
     private static void httpBaidu() {

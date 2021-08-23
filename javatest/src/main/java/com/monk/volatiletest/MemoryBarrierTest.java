@@ -1,4 +1,4 @@
-package com.monk.javatest.volatiletest;
+package com.monk.volatiletest;
 
 public class MemoryBarrierTest {
     private int a, b;

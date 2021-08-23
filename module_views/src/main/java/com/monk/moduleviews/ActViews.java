@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.luojilab.router.facade.annotation.RouteNode;
-import com.monk.ActViewsDetail;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.moduleviews.adapters.ViewsAdapter;
 import com.monk.moduleviews.adapters.ViewsBean;

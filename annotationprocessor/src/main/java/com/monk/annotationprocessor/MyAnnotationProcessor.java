@@ -46,7 +46,7 @@ public class MyAnnotationProcessor extends AbstractProcessor {
     }
 
     @Override
-    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+    public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnv) {
         // 构建方法 此处使用到square 公司的javapoet库，用来辅助生成类的代码
         MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("show")
                 .addModifiers(Modifier.PUBLIC)
@@ -69,7 +69,8 @@ public class MyAnnotationProcessor extends AbstractProcessor {
         }
 
         Map<String, String> map = new HashMap<>();
-        Set<? extends Element> set1 = roundEnvironment.getElementsAnnotatedWith(BindPath.class);
+        // 拿到被注解的元素的集合。包含所有被BindPath注解的元素。
+        Set<? extends Element> set1 = roundEnv.getElementsAnnotatedWith(BindPath.class);
         for (Element element : set1) {
             TypeElement te = (TypeElement) element;
             BindPath bindPath = te.getAnnotation(BindPath.class);
