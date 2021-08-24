@@ -14,7 +14,8 @@ class ActFlutter : BaseCompatActivity<ActFlutter?>() {
         initToolbar(R.layout.act_flutter)
 
 
-        //创建一个FlutterView
+      /*
+      //创建一个FlutterView
         val flutterView: FlutterView = Flutter.createView(this, lifecycle, "route1")
         //实例化容器
         val layout: FrameLayout = findViewById(R.id.flutter_container)
@@ -28,5 +29,6 @@ class ActFlutter : BaseCompatActivity<ActFlutter?>() {
             }
         }
         flutterView.addFirstFrameListener(listeners[0])
+        */
     }
 }

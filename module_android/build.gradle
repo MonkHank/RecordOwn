@@ -1,0 +1,91 @@
+//if (rootProject.ext.isApplication) {
+//    apply plugin:'com.android.application'
+//}else {
+//    apply plugin:'com.android.library'
+//}
+
+apply plugin: 'com.dd.comgradle'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        // java.lang.RuntimeException: Method put in android.util.LruCache not mocked.
+        testOptions{
+            unitTests.returnDefaultValues=true
+        }
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [host: "home"]
+            }
+        }
+
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets{
+        main {
+//            if (rootProject.ext.isApplication) {
+//                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+//            }else {
+//                manifest.srcFile 'src/main/AndroidManifest.xml'
+//            }
+        }
+
+    }
+
+
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    annotationProcessor(rootProject.ext.dependencies.jimu.router_anno_compiler)
+    implementation project(path: ':module_basic')
+
+}
+
+def projectRoot = project.getRootProject().rootDir.absolutePath
+combuild {
+    applicationName = 'com.monk.androidtest.runalone.application.AndroidTestApplication'
+    isRegisterCompoAuto = true
+
+    originalManifest = projectRoot + "/module_android/src/main/AndroidManifest.xml"
+
+    runAloneManifest = projectRoot + "/module_android/src/main/runalone/AndroidManifest.xml"
+    targetManifest = projectRoot + "/module_android/src/main/runalone/mergedManifest.xml"
+    //如果不需要合并，改为false
+    enableManifestMerge = false
+    useMaat= false
+
+
+
+}
+repositories {
+    mavenCentral()
+}

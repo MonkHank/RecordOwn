@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.LruCache
 import android.view.MenuItem
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
@@ -18,6 +19,7 @@ import com.monk.activity.DeviceActivity
 import com.monk.activity.base.BaseCompatActivity
 import com.monk.aidldemo.R
 import com.monk.broadcast.BroadcastReciver
+import com.monk.commonutils.L
 import com.monk.commonutils.LogUtil
 import com.monk.commonutils.ToastUtils
 import com.monk.jni.ActivityJni
@@ -83,6 +85,13 @@ class HomeActivity : BaseCompatActivity<HomeActivity?>()
         Router.registerComponent("com.monk.modulefragment.applike.FragmentApplike")
         Router.registerComponent("com.monk.moduleviews.applike.ViewsApplike")
         floatingActionButton!!.setOnClickListener { v: View? -> UIRouter.getInstance().openUri(this@HomeActivity, "monk://home/uirouter/demo", null) }
+
+        val lruCache = LruCache<Int,String>(5)
+        lruCache.put(0, "000")
+        L.i("ccccccccccccc","  value:${lruCache[0]}")
+        println("key:${0} --- value:${lruCache?.get(0)}")
+        println("${lruCache[0]}")
+        println(lruCache?.size())
     }
 
     /**

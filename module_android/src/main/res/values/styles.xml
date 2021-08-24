@@ -1,0 +1,53 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item><!--Actionbar颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item> <!--状态栏颜色-->
+        <item name="colorAccent">@color/colorAccent</item><!--contentParent颜色-->
+
+        <!-- 这两个设置是去除掉默认ActionBar，代码中用 Toolbar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--万一控件默认是大写，需要设置这个item-->
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!-- item name="android:windowBackground"         设置背景透明度及其颜色值 -->
+    <!-- item name="android:windowIsTranslucent"      设置当前Activity是否透明-->
+    <!-- item name="android:windowAnimationStyle"     设置当前Activity进出方式-->
+    <style name="translucent" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+
+    <!--父类是 AppTheme，不这样写，会提示 java.lang.IllegalStateException,
+    You need to use a Theme.AppCompat theme (or descendant) with this activity.-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+    <declare-styleable name="PercentCircleView">
+        <attr name="paintId" format="integer"/>
+    </declare-styleable>
+
+    <!--CustomDatePicker-->
+    <style name="time_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+</resources>

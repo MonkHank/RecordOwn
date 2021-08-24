@@ -15,6 +15,7 @@
 ## 一些三方框架
 1. [RxJava2 的一些东西](https://github.com/MonkHank/RecordOwn/blob/master/mdfiles/readme04.md)
 2. [OkHttp源码解析系列-简书(391)](https://www.jianshu.com/p/82f74db14a18)
+3. [Glide4.11源码解读](https://mp.weixin.qq.com/s/SoqLK7eoJYT15sSDorpr9g)
 
 ## 一些基本处理
 1. **HttpUrlConnection**  

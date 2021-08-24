@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
  * @date 2019-06-03
  */
 public class Test {
+
     public static void main(String[] args) throws InterruptedException {
+
         ThreadPoolExecutor executor = new ThreadPoolExecutor(6, 10, 5, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 
         Runnable myRunnable = new Runnable() {

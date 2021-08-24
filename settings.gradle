@@ -6,6 +6,7 @@ include ':module_kotlin'
 include ':module_basic'
 include ':annotation'
 include ':module_home'
+include ':module_android'
 include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils',
         ':generatevaluesfile',':generategreendao'
 include ':javatest'
