@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.monk.home">
+    package="com.monk.androidtest">
 
     <application
         android:name="com.monk.androidtest.runalone.applicatioin.AndroidTestApplication"

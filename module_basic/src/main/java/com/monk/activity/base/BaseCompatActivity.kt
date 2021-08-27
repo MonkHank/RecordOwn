@@ -19,6 +19,8 @@ import com.luojilab.component.componentlib.service.AutowiredService
 import com.monk.basic.R
 import com.monk.commonutils.LogUtil
 import com.monk.commonutils.ToastUtils
+import kotlinx.coroutines.GlobalScope
+import okhttp3.OkHttp
 
 /**
  * @author monk

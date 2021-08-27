@@ -30,7 +30,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [host: "home"]
+                arguments = [host: "androidtest"]
             }
         }
 

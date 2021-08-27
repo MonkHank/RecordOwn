@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
-    package="com.monk.home">
+    package="com.monk.andoridtest">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.monk.androidtest.runalone.applicatioin.AndroidTestApplication"
@@ -11,5 +13,12 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label">
 
+        <activity android:name="com.monk.androidtest.ActEmpty">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>

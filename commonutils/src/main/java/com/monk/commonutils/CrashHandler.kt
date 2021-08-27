@@ -2,9 +2,9 @@ package com.monk.commonutils
 
 import android.app.Application
 import android.os.Looper
-import java.io.PrintWriter
-import java.io.StringWriter
-import java.io.Writer
+import com.blankj.utilcode.util.CloseUtils
+import com.blankj.utilcode.util.LogUtils
+import java.io.*
 
 /**
  * @author user
@@ -41,10 +41,32 @@ class CrashHandler private constructor() : Thread.UncaughtExceptionHandler {
             return
         }
         LogUtil.i(tag, Thread.currentThread().name)
+        val sError = saveCrashInfo2File(ex)
         ThreadManager.threadPool?.execute {
             Looper.prepare()
-            ToastUtils.showToast(mContext, crash_text)
+            ToastUtils.showToast(mContext, sError)
+            writeToLocal(sError)
             Looper.loop()
+        }
+    }
+
+    private fun writeToLocal(txt: String?) {
+        //storage/emulated/0/Android/data/com.millibuf.pkbloodsampling/cache
+        val cacheDir = mContext!!.externalCacheDir!!.absolutePath
+        LogUtils.v(tag, "设置缓存：$cacheDir")
+        val cacheFile = File(cacheDir, "Exception.txt")
+        var fw: FileWriter? = null
+        try {
+            fw = FileWriter(cacheFile)
+            fw.write("异常信息：\n".trimIndent())
+            if (txt != null) {
+                fw.write(txt)
+            }
+            fw.flush()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        } finally {
+            CloseUtils.closeIO(fw)
         }
     }
 
