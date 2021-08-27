@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label">
 
-        <activity android:name="com.monk.androidtest.ActEmpty">
+        <activity android:name="com.monk.androidtest.kotlinxc.ActEmpty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

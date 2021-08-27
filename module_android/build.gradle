@@ -64,9 +64,17 @@ android {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     annotationProcessor(rootProject.ext.dependencies.jimu.router_anno_compiler)
+
     implementation project(path: ':module_basic')
+
+    def lifecycle_version="2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
 }
 

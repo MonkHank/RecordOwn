@@ -100,7 +100,7 @@ class TestRxjava2 private constructor() {
             LogUtil.i(tag, response.toString())
         }).map<DouBanMovie>(Function { response ->
             if (response.isSuccessful) {
-                val body = response.body()
+                val body = response.body
                 if (body != null) {
                     val string = body.string()
                     LogUtil.i(tag, string, false)
@@ -145,7 +145,7 @@ class TestRxjava2 private constructor() {
             // 指定订阅者接收事件在 mainThread 处理获取到的网络请求数据
         }.observeOn(Schedulers.io()).flatMap { response -> // 指定订阅者接收事件在 io 线程
             Observable.create { e ->
-                val body = response.body()
+                val body = response.body
                 var douBanMovie: DouBanMovie? = null
                 if (body != null) {
                     val json = body.string()

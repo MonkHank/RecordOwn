@@ -37,8 +37,10 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':module_basic')
+    
     annotationProcessor(rootProject.ext.dependencies.jimu.router_anno_compiler)
+
+    implementation project(path: ':module_basic')
 
 }
 

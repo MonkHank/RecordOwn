@@ -56,6 +56,7 @@ object L {
         if (BuildConfig.DEBUG) Log.e(tag, getMsg(msg?:"", autoJumpLogInfos, Symbol))
     }
 
+    @JvmStatic
     fun e2(tag: String?, msg: String) {
         val infos = autoJumpLogInfos
         if (BuildConfig.DEBUG) Log.e(tag, infos[2].toString() + Symbol + infos[1] + ":" + msg)
@@ -82,6 +83,7 @@ object L {
         if (BuildConfig.DEBUG) Log.v("tag", getMsg(msg, autoJumpLogInfos, Symbol))
     }
 
+    @JvmStatic
     fun v2(tag: String?, msg: String) {
         val infos = autoJumpLogInfos
         if (BuildConfig.DEBUG) Log.v(tag, infos[2].toString() + Symbol + infos[1] + ":" + msg)

@@ -1,6 +1,7 @@
 package com.monk.androidtest.kotlinxc
 
 import android.annotation.SuppressLint
+import com.monk.commonutils.LoggerInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -57,9 +58,9 @@ interface GithubApi {
             logger.level = HttpLoggingInterceptor.Level.BASIC
 
             val client = OkHttpClient.Builder()
-//                    .addInterceptor(logger)
 //                    .sslSocketFactory(createSSLSocketFactory(),myTrustManager)
 //                    .hostnameVerifier { _, _ -> true }
+//                    .addNetworkInterceptor(LoggerInterceptor())
                     .build()
             return Retrofit.Builder()
                     .baseUrl(BASE_URL)

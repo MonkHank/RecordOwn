@@ -148,7 +148,7 @@ println '------ 依赖相关api--------------'
 // 闭包参数可以去掉，是因为闭包的delegate就是去掉的这些参数
 buildscript {
     // kotlin (1)
-    ext.kotlin_version = '1.4.30-RC'
+    ext.kotlin_version = '1.4.31'
 
     repositories {
         jcenter()

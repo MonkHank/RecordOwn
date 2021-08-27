@@ -57,8 +57,9 @@ android {
 
 dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-    implementation project(path: ':module_basic')
     annotationProcessor(rootProject.ext.dependencies.jimu.router_anno_compiler)
+
+    implementation project(path: ':module_basic')
 
 }
 
