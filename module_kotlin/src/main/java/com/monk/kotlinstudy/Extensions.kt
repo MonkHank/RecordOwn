@@ -17,10 +17,33 @@ class Extensions{
         }
     }
 
+
     var bean:Bean?=null
+
+    fun Extensions.let(block:()->Boolean):Extensions?{
+        return if (block())this else null
+    }
+
+    fun Extensions.let2(block:()->Boolean):Void?{
+        block()
+        return null
+    }
+
+
+    fun funTakeIf(){
+        val takeIf = "takeIf".takeIf { it.isNotEmpty() }
+        println(takeIf)
+    }
+
+    fun startAction2(i:Int):String = String().let{
+        val str = it.toUpperCase()
+        return it
+    }
 
     // 最常用的就是判空作用
     fun functionLet(){
+        println(startAction2(2))
+
         val result = "let".let {
             println(it.length)
             "let--"
@@ -97,9 +120,26 @@ class Extensions{
          */
     }
 
+    fun <T> T.apply2(block: () -> Unit): Unit {
+        block()
+    }
+
+    // 与上面的区别在于 T.() 是携带 T对象的
+    fun <T> T.apply(block: T.() -> Unit): T {
+         block()
+        return this
+    }
+
+
     // 跟run唯一的不同点是返回，apply返回的是传入对象的本身
+    // 能用apply的地方，也能用also，前者自带对象，后者需要it指代一下；
     fun functionApply(){
         val user = User("monk", "B", "99")
+
+        user.apply {
+
+        }
+
         val apply = user.apply {
             bean?.name=name
             bean?.gradeInfo=gradeInfo
@@ -147,6 +187,7 @@ class Extensions{
         @JvmStatic
         fun main(args: Array<String>) {
             val extensions = Extensions()
+            extensions.funTakeIf()
             extensions.functionLet()
             extensions.functionWith()
             extensions.functionRun()

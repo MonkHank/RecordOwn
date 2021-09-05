@@ -30,6 +30,22 @@ class ActViewsDetail: BaseCompatActivity<ActViewsDetail?>() {
             inteni.putExtra("type", type)
             return inteni
         }
+
+        fun createIntentLet(context: Context?, type: String):Intent = Intent(context, ActViewsDetail::class.java).let {
+            return it.putExtra("type",type)
+        }
+
+        fun createIntentAlso(context: Context?, type: String):Intent = Intent(context, ActViewsDetail::class.java).also {
+            it.putExtra("type",type)
+        }
+
+        fun createIntentRun(context: Context?, type: String):Intent = Intent(context, ActViewsDetail::class.java).run {
+            return putExtra("type",type)
+        }
+
+        fun createIntentApply(context: Context?, type: String):Intent = Intent(context, ActViewsDetail::class.java).run {
+            putExtra("type",type)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,6 +14,7 @@
 - [kotlin扩展函数](https://blog.csdn.net/u013064109/article/details/79968846)
     - 接收者类型.方法名 = 接收者对象{...}
 - [let、with、run、apply、also](https://blog.csdn.net/u013064109/article/details/78786646)
+    - 扩展函数，接收高阶函数作为方法形参
     - let/also 都是扩展函数，前者返回用户定义的，后者返回接收者对象
     - with不是扩展函数，接收一个实例和扩展函数lambada表达式，返回lambada的返回
     - run是let和with的结合，返回的是用户自定义

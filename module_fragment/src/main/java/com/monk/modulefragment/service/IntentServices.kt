@@ -4,7 +4,6 @@ import android.app.IntentService
 import android.content.Context
 import android.content.Intent
 import com.monk.modulefragment.service.IntentServices
-import java.lang.UnsupportedOperationException
 
 /**
  * @author monk
@@ -32,6 +31,16 @@ class IntentServices : IntentService("MyIntentService") {
             intent.putExtra(EXTRA_PARAM1, param1)
             intent.putExtra(EXTRA_PARAM2, param2)
             context.startService(intent)
+        }
+
+        fun startAction(context: Context,params1:String?) = Intent(context, IntentServices::class.java).also {
+            it.putExtra(EXTRA_PARAM1, params1)
+            context.startService(it)
+        }
+
+        fun startAction2(context: Context,params1:String?) = Intent(context, IntentServices::class.java).let {
+            it.putExtra(EXTRA_PARAM1, params1)
+            context.startService(it)
         }
     }
 

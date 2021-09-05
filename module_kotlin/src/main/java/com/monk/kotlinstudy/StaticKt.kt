@@ -1,7 +1,6 @@
 package com.monk.kotlinstudy
 
 import com.monk.kotlinstudy.extends.Student
-import javax.xml.ws.Holder
 
 // kotlin中默认类都是final，想要实现继承关系，用open，方法亦是如此
 class StaticKt {
