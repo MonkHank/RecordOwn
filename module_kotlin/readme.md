@@ -12,7 +12,7 @@
     - 方法内部的final定义的常量
 - [kotlin中的单例](https://www.jianshu.com/p/5797b3d0ebd0)
 - [kotlin扩展函数](https://blog.csdn.net/u013064109/article/details/79968846)
-    - 接收者类型.方法名 = 接收者对象(this){...}
+    - 接收者类型.方法名 = 接收者对象{...}
 - [let、with、run、apply、also](https://blog.csdn.net/u013064109/article/details/78786646)
     - let/also 都是扩展函数，前者返回用户定义的，后者返回接收者对象
     - with不是扩展函数，接收一个实例和扩展函数lambada表达式，返回lambada的返回
