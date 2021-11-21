@@ -1,4 +1,4 @@
-import groovy.xml.MarkupBuilder
+//import groovy.xml.MarkupBuilder
 
 //apply plugin: 'com.android.application'
 
@@ -225,6 +225,7 @@ taskZ.dependsOn(taskX, taskY)
 //}
 
 // 实际应用中参考commonlibrary release.xml文件，输出版本信息
+/*
 task handleReleaseFile {
     def srcFile = file('release.xml')
     def desFile = new File(this.buildDir, 'generated/release/')
@@ -246,8 +247,10 @@ task handleReleaseFile {
         }
     }
 }
+*/
 
 // 测试上面task
+/*
 task handleReleaseFileTest(dependsOn: handleReleaseFile) {
     def dir = fileTree(this.buildDir.path + 'generated/release/')
     doLast {
@@ -257,6 +260,7 @@ task handleReleaseFileTest(dependsOn: handleReleaseFile) {
         println '输出完成...'
     }
 }
+*/
 
 /* ----------------- task 输入输出 -----------------------*/
 println '------------task 输入输出----------------------'
@@ -271,6 +275,7 @@ ext{
     }
 }
 
+/*
 task writeTask{
     // 为task指定输入
     inputs.property('versionCode',this.versionCode)
@@ -320,6 +325,7 @@ task writeTask{
         }
     }
 }
+*/
 class VersionMsg{
     String versionName,versionCode,versionInfo
 }
@@ -333,7 +339,7 @@ task readTask{
 }
 
 task taskTest{
-    dependsOn readTask,writeTask
+//    dependsOn readTask,writeTask
     doLast{
         println '输入输出任务结束'
     }

@@ -9,7 +9,7 @@ include ':module_home'
 include ':module_android'
 include ':app', ':annotationprocessor', ':dragviewlibrary', ':commonutils',
         ':generatevaluesfile',':generategreendao'
-include ':javatest'
+include ':module_java'
 
 println '-settings 开始执行gradle'
 

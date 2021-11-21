@@ -33,6 +33,7 @@ public class ChildAndParent {
 
 
     /**
+
      * 重点是虽然没有实现 IParent，不过已对其内部方法的实现
      */
     class Parent {

@@ -1,5 +1,6 @@
 package com.monk.javatest;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +37,6 @@ public class StringTest {
         MyClass.hideMid4("15105100141");
 
         MyClass.formatPhone("8615105199141");
-
 
         String s = new String("a");
         System.out.println(s);
