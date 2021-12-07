@@ -1,6 +1,33 @@
 package com.monk.kotlinstudy
 
+import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
+
+var observableProp: String by Delegates.observable("默认值：xxx"){
+        property, oldValue, newValue ->
+    println("property: $property: $oldValue -> $newValue ")
+}
+// 测试
+fun main() {
+    observableProp = "第一次修改值"
+    observableProp = "第二次修改值"
+
+    val baseImpl = By.BaseImpl()
+
+    By.BaseProxy(baseImpl).show()
+    By.BaseProxy(baseImpl).otherShow()
+
+    var name :String by By.A()
+    name="aaaa"
+    println(name)
+
+    val user=By.User()
+    user.name="first"
+    user.name="second"
+
+}
+
+
 
 // https://blog.csdn.net/wzgiceman/article/details/82689135
 class By {
@@ -36,19 +63,11 @@ class By {
         }
     }
 
-
-
-    companion object{
-        @JvmStatic
-        fun main(args: Array<String>) {
-            val baseImpl = BaseImpl()
-
-            BaseProxy(baseImpl).show()
-            BaseProxy(baseImpl).otherShow()
-
-            var name :String by A()
-            name="aaaa"
-            println(name)
+    class User{
+        var name:String by Delegates.observable("test"){property, oldValue, newValue ->
+            println("property:$property")
+            println("oldValue:$oldValue -- newValue:$newValue")
         }
     }
+
 }

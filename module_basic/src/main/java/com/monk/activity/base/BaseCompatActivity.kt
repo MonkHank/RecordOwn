@@ -13,6 +13,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import butterknife.ButterKnife
 import com.gyf.immersionbar.ImmersionBar
 import com.luojilab.component.componentlib.service.AutowiredService

@@ -24,6 +24,7 @@
 5.  [菜鸟教程，kotlin循环控制](https://www.runoob.com/kotlin/kotlin-loop-control.html)
 6. by关键字
     - 代理（委托）模式
+    - lazy
 
 ## 位运算符
 - [kotlin位操作和位运算](https://blog.csdn.net/jdsjlzx/article/details/108606777)
