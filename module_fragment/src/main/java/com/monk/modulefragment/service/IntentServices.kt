@@ -50,11 +50,19 @@ class IntentServices : IntentService("MyIntentService") {
             if (ACTION_FOO == action) {
                 val param1 = intent.getStringExtra(EXTRA_PARAM1)
                 val param2 = intent.getStringExtra(EXTRA_PARAM2)
-                handleActionFoo(param1, param2)
+                if (param1 != null) {
+                    if (param2 != null) {
+                        handleActionFoo(param1, param2)
+                    }
+                }
             } else if (ACTION_BAZ == action) {
                 val param1 = intent.getStringExtra(EXTRA_PARAM1)
                 val param2 = intent.getStringExtra(EXTRA_PARAM2)
-                handleActionBaz(param1, param2)
+                if (param1 != null) {
+                    if (param2 != null) {
+                        handleActionBaz(param1, param2)
+                    }
+                }
             }
         }
     }

@@ -1,30 +1,4 @@
 apply plugin: 'com.android.library'
-
-android {
-    compileSdkVersion rootProject.compileSdkVersion
+apply from:'../dependencies.gradle'
 
 
-
-    defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
-
-dependencies {
-
-    implementation project(path: ':module_basic')
-
-
-}

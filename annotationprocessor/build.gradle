@@ -4,7 +4,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
 
-    implementation 'com.squareup:javapoet:1.11.1'//这个库用于在build/generate下生成文件
+    implementation 'com.squareup:javapoet:1.13.0'//这个库用于在build/generate下生成文件
 //    implementation 'com.google.auto.service:auto-service:1.0-rc4'  // 这里千万不要改成annotationProcessor，否则运行不通过(3.4以下只这么写的)
 
     implementation project(path: ':annotation')
@@ -18,6 +18,6 @@ sourceCompatibility = "8"
 targetCompatibility = "8"
 
 // 错误: 编码GBK的不可映射字符 ，指定编译编码
-tasks.withType(JavaCompile){
-    options.encoding="UTF-8"
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
 }

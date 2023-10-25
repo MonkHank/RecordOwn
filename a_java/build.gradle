@@ -1,0 +1,9 @@
+//apply plugin: 'java-library'
+
+apply plugin: 'com.android.library'
+apply from:'../dependencies.gradle'
+
+
+dependencies {
+    implementation project(path: ':commonutils')
+}

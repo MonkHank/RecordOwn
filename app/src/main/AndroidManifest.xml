@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
-        android:name="com.monk.global.RecordOwnApplication"
+        android:name="com.monk.RecordOwnApplication"
         android:allowBackup="true"
         android:appComponentFactory="anycharctor"
         android:icon="@mipmap/ic_mk"
@@ -29,8 +29,9 @@
 
 
         <activity
-            android:name="com.monk.HomeActivity"
-            android:configChanges="orientation|screenSize">
+            android:name="com.monk.ActHome"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -40,9 +41,10 @@
         </activity>
 
 
-        <activity android:name="com.monk.jni.ActivityJni"/>
+        <activity android:name="com.monk.jni.ActivityJni"
+            android:exported="false"/>
 
-        <!--<receiver android:name="com.monk.broadcast.BroadcastReciver">-->
+        <!--<receiver android:name="com.monk.BroadcastReciver">-->
             <!--<intent-filter >-->
                 <!--<action android:name="android.intent.action.DATE_CHANGED"/>-->
                 <!--<action android:name="android.intent.action.BATTERY_CHANGED"/>-->
@@ -53,8 +55,10 @@
             <!--</intent-filter>-->
         <!--</receiver>-->
 
-        <activity android:name="com.monk.activity.DeviceActivity" />
-        <activity android:name="com.monk.ActFlutter"/>
+        <activity android:name="com.monk.DeviceActivity"
+            android:exported="false"/>
+        <activity android:name="com.monk.ActFlutter"
+            android:exported="false"/>
     </application>
 
 </manifest>

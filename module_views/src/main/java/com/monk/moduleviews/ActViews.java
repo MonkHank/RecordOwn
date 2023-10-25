@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.luojilab.router.facade.annotation.RouteNode;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.moduleviews.adapters.ViewsAdapter;
 import com.monk.moduleviews.adapters.ViewsBean;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@RouteNode(path = "/views/main", desc = "module_views主页")
+//@RouteNode(path = "/views/main", desc = "module_views主页")
 public class ActViews extends BaseCompatActivity<ActViews> implements
         BaseQuickAdapter.OnItemChildClickListener,
         BaseQuickAdapter.OnItemClickListener {

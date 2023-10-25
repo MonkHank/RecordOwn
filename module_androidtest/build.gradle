@@ -1,0 +1,40 @@
+if (!singleModule.toBoolean()) {
+  apply plugin: 'com.android.library'
+} else {
+  apply plugin: 'com.android.application'
+}
+apply from: '../dependencies.gradle'
+//apply plugin: 'com.jakewharton.butterknife'
+
+android {
+  defaultConfig {
+    // java.lang.RuntimeException: Method put in android.util.LruCache not mocked.
+    testOptions {
+      unitTests.returnDefaultValues = true
+    }
+
+    multiDexEnabled true
+
+    /* javaCompileOptions {
+         annotationProcessorOptions {
+             arguments = [host: "androidtest"]
+         }
+     }*/
+  }
+
+  sourceSets {
+    main {
+      if (!singleModule.toBoolean()) {
+        //如果是library，则编译manifest下AndroidManifest.xml
+        manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+      } else {
+        //如果是application，则编译主目录下AndroidManifest.xml
+        manifest.srcFile 'src/main/AndroidManifest.xml'
+      }
+    }
+  }
+}
+
+dependencies {
+  implementation project(path: ':module_basic')
+}

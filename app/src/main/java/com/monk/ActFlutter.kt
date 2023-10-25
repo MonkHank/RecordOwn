@@ -1,18 +1,16 @@
 package com.monk
 
 import android.os.Bundle
-import android.view.View
-import android.widget.FrameLayout
+import com.alibaba.android.arouter.launcher.ARouter
 import com.monk.activity.base.BaseCompatActivity
 import com.monk.aidldemo.R
-
 
 class ActFlutter : BaseCompatActivity<ActFlutter?>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initToolbar(R.layout.act_flutter)
-
+        ARouter.getInstance().inject(this)
 
       /*
       //创建一个FlutterView

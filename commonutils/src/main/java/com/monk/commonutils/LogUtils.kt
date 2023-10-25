@@ -4,7 +4,7 @@ import android.util.Log
 
 /**
  * @author Administrator
- * @date 2015-12-27
+ * @since 2015-12-27
  */
 object LogUtils {
     private const val Symbol = "--> "

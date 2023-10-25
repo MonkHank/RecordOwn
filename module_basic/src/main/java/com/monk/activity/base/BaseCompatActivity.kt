@@ -4,8 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
-import android.net.*
+import android.net.ConnectivityManager
 import android.net.ConnectivityManager.NetworkCallback
+import android.net.LinkProperties
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
@@ -13,20 +17,15 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import butterknife.ButterKnife
 import com.gyf.immersionbar.ImmersionBar
-import com.luojilab.component.componentlib.service.AutowiredService
 import com.monk.basic.R
 import com.monk.commonutils.LogUtil
 import com.monk.commonutils.ToastUtils
-import kotlinx.coroutines.GlobalScope
-import okhttp3.OkHttp
 
 /**
  * @author monk
- * @date 2019-05-27
+ * @since 2019-05-27
  */
 open class BaseCompatActivity<T : BaseCompatActivity<T>?> : AppCompatActivity() {
     protected var tag: String? = null
@@ -51,7 +50,7 @@ open class BaseCompatActivity<T : BaseCompatActivity<T>?> : AppCompatActivity() 
                 .keyboardEnable(true)
         //        immersionBar.init();
         fullScreen(mContext!!)
-        AutowiredService.Factory.getSingletonImpl().autowire(this)
+//        AutowiredService.Factory.getSingletonImpl().autowire(this)
     }
 
     protected fun initToolbar(layoutResId: Int) {

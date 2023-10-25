@@ -4,8 +4,9 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.tabs.TabLayout;
-import com.luojilab.router.facade.annotation.RouteNode;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.commonutils.LogUtils;
 import com.monk.ui.view.NoScrollViewPager;
@@ -13,7 +14,8 @@ import com.monk.ui.view.NoScrollViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-@RouteNode(path = "/uirouter/demo" ,desc = "module_home主页")
+//@RouteNode(path = "/uirouter/demo" ,desc = "module_home主页")
+@Route(path = "/test/activity")
 public class HomeActivity extends BaseCompatActivity<HomeActivity> {
 
     TabLayout tabLayout;
@@ -26,6 +28,7 @@ public class HomeActivity extends BaseCompatActivity<HomeActivity> {
         super.onCreate(savedInstanceState);
         // 组件化中不能使用同名的布局文件，必须唯一，否则布局id找不到
         initToolbar(R.layout.activity_home_home);
+        ARouter.getInstance().inject(this);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 

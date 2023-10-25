@@ -1,0 +1,124 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+//butterKnife how to use(3/3)
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+  compileSdk 32
+//    buildToolsVersion "30.0.3"
+  defaultConfig {
+    minSdkVersion 21
+    targetSdkVersion 31
+    multiDexEnabled true
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    /*javaCompileOptions  {
+        annotationProcessorOptions {
+            arguments = [AROUTER_MODULE_NAME: project.getName()]
+        }
+    }*/
+    kapt {
+      arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+        println("-----------project.name:${project.getName()}")
+      }
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  buildFeatures {
+    dataBinding = true
+    // for view binding :
+    viewBinding = true
+  }
+
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+
+  lintOptions {
+    checkReleaseBuilds false
+    // Or, if you prefer, you can continue to check for errors in release builds,
+    // but continue the build even when errors are found:
+    abortOnError false
+  }
+
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  testImplementation 'junit:junit:4.13.2'
+  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+  implementation 'androidx.appcompat:appcompat:1.3.1'
+  implementation 'com.google.android.material:material:1.4.0'
+  implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+  implementation 'androidx.multidex:multidex:2.0.1@aar'
+  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+  implementation 'androidx.recyclerview:recyclerview:1.2.1'
+  implementation 'com.google.code.gson:gson:2.8.6'
+
+  implementation "androidx.core:core-ktx:1.7.0"
+//    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0"
+
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8'
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8'
+
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+  implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0" // Lifecycles only (without ViewModel or LiveData)
+
+  implementation 'com.blankj:utilcodex:1.31.1'
+
+//    api 'io.reactivex.rxjava2:rxjava:2.2.19'
+  api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+  implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+  implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+  implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+  implementation('com.squareup.okhttp3:logging-interceptor:4.0.0') {
+    // 排除依赖，key排除的类型，value排除的名字
+//        exclude module:'support-v4'
+//        exclude group:'com.android.support'
+    // 传递依赖，不调用库中的依赖，gradle默认也是false
+//        transitive false
+  }
+
+  //butterKnife how to use(1/3)
+  implementation 'com.jakewharton:butterknife:10.2.3'
+  kapt 'com.jakewharton:butterknife-compiler:10.2.3'
+
+  implementation 'com.alibaba:arouter-api:1.5.2'
+  kapt 'com.alibaba:arouter-compiler:1.5.2'
+
+//    implementation 'com.yanzhenjie:permission:2.0.3'
+  implementation 'com.yanzhenjie.recyclerview:x:1.3.2'
+
+  implementation 'io.github.scwang90:refresh-layout-kernel:2.1.0'
+  implementation 'io.github.scwang90:refresh-header-material:2.1.0'
+  implementation 'io.github.scwang90:refresh-header-classics:2.1.0'
+  implementation 'io.github.scwang90:refresh-footer-ball:2.1.0'
+
+  implementation 'com.github.bumptech.glide:glide:4.16.0' // Glide v4
+  kapt 'com.github.bumptech.glide:compiler:4.16.0'
+
+  implementation 'com.alibaba:fastjson:1.2.54'
+  implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+  implementation 'org.greenrobot:eventbus:3.2.0'
+  implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+
+}

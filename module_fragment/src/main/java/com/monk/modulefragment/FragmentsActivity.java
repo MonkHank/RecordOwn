@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.luojilab.router.facade.annotation.RouteNode;
 import com.monk.activity.base.BaseCompatActivity;
 import com.monk.activity.base.OnFragmentInteractionListener;
 import com.monk.commonutils.LogUtil;
@@ -31,7 +31,8 @@ import com.monk.modulefragment.rxjava2.RxJava2Fragment;
 import java.util.List;
 
 
-@RouteNode(path = "/main", desc = "module_fragment主页")
+//@RouteNode(path = "/main", desc = "module_fragment主页")
+@Route(path = "/module_fragment/home")
 public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> implements
         OnFragmentInteractionListener,
         View.OnClickListener,
@@ -42,7 +43,7 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
     private Button btTestAttach, btAdd;
 
     private FragmentManager fragmentManager;
-    private Fragment fragmentA, rxJava2Fra, fragmentAIDL, fragmentService,fragmentOher;
+    private Fragment fragmentA, rxJava2Fra, fragmentAIDL, fragmentService, fragmentOher;
     private Fragment mCurrentFragment;
 
     private UriMatcher uriMatcher;
@@ -95,7 +96,7 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         }
         showOrHideFragmentButtons(false);
         if (menuItem.getItemId() == R.id.navigation_home) {
-            if (rxJava2Fra == null) rxJava2Fra =  RxJava2Fragment.Companion.newInstance("参数1","参数2");
+            if (rxJava2Fra == null) rxJava2Fra = RxJava2Fragment.Companion.newInstance("参数1", "参数2");
             addAndShowFragment(rxJava2Fra);
             return true;
         }
@@ -139,37 +140,37 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         uriMatcher.addURI(getPackageName(), FragmentSkipApp.class.getSimpleName(), fragmentOhterCode3);
     }
 
-    private void showOrHideFragmentButtons(boolean show){
-        btTestAttach.setVisibility(show?View.VISIBLE:View.GONE);
-        btAdd.setVisibility(show?View.VISIBLE:View.GONE);
-        tvFragmentMsg.setVisibility(show?View.VISIBLE:View.GONE);
+    private void showOrHideFragmentButtons(boolean show) {
+        btTestAttach.setVisibility(show ? View.VISIBLE : View.GONE);
+        btAdd.setVisibility(show ? View.VISIBLE : View.GONE);
+        tvFragmentMsg.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
         int match = uriMatcher.match(uri);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        tvFragmentMsg.setText("uri:"+uri.toString()+"\n match:"+match);
-        if (match == fragmentChildACode){
-            ft.replace(R.id.fragmentContainer,new FragmentChildA())
+        tvFragmentMsg.setText("uri:" + uri.toString() + "\n match:" + match);
+        if (match == fragmentChildACode) {
+            ft.replace(R.id.fragmentContainer, new FragmentChildA())
                     .addToBackStack(FragmentA.class.getSimpleName())
                     .commit();
             return;
         }
-        if (match == fragmentOhterCode1){
-            ft.replace(R.id.fragmentContainer,FragmentLocation.Companion.newInstance())
+        if (match == fragmentOhterCode1) {
+            ft.replace(R.id.fragmentContainer, FragmentLocation.Companion.newInstance())
                     .addToBackStack(FragmentOher.class.getSimpleName())
                     .commit();
             return;
         }
-        if (match == fragmentOhterCode2){
-            ft.replace(R.id.fragmentContainer,new FragmentRetrofit2())
+        if (match == fragmentOhterCode2) {
+            ft.replace(R.id.fragmentContainer, new FragmentRetrofit2())
                     .addToBackStack(FragmentOher.class.getSimpleName())
                     .commit();
             return;
         }
-        if (match == fragmentOhterCode3){
-            ft.replace(R.id.fragmentContainer,new FragmentSkipApp())
+        if (match == fragmentOhterCode3) {
+            ft.replace(R.id.fragmentContainer, new FragmentSkipApp())
                     .addToBackStack(FragmentOher.class.getSimpleName())
                     .commit();
             return;
@@ -182,7 +183,7 @@ public class FragmentsActivity extends BaseCompatActivity<FragmentsActivity> imp
         if (v.getId() == R.id.btTestAttach) {
             if (fragmentA.isAdded()) ft.detach(fragmentA).commit();
             else ft.attach(fragmentA).commit();
-            tvFragmentMsg.setText("fragmentA.isAdded:"+fragmentA.isAdded()+"\n isDetached:"+fragmentA.isDetached());
+            tvFragmentMsg.setText("fragmentA.isAdded:" + fragmentA.isAdded() + "\n isDetached:" + fragmentA.isDetached());
             return;
         }
         if (v.getId() == R.id.btAdd) {

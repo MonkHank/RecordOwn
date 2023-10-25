@@ -105,7 +105,7 @@ class FragmentLocation : BaseFragment<FragmentLocation?>() {
                     ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return
             }
-            val location: Location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            val location: Location? = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
             //        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             //Location[gps 31.205570,121.314256 acc=30 et=+43d22h41m23s854ms alt=38.6268196105957 vel=3.0
             // bear=0.13394096 {Bundle[mParcelledData.dataSize=40]}]

@@ -1,367 +1,70 @@
 //import groovy.xml.MarkupBuilder
 
-//apply plugin: 'com.android.application'
+plugins {
+  id 'com.android.application'
+}
 
-// jimu-config-step4:应用组件化编译脚本，在组件和host的build.gradle都需要增加此配置
-apply plugin: 'com.dd.comgradle'
-apply plugin: 'kotlin-android'
+apply from: '../dependencies.gradle' /* ../ 是当前目录的上一级目录*/
 
-// 把buidl.gradle看成个类来设计
-def mCompileVersion = 28
-def libAndroidDesign = 'com.google.android.material:material:1.0.0'
 
 android {
-//    compileSdkVersion mCompileVersion
-    compileSdkVersion rootProject.compileSdkVersion
-    defaultConfig {
-        applicationId "com.monk.aidldemo"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 4
-        versionName "1.0.1"
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        multiDexEnabled true
+  defaultConfig {
+    applicationId "com.monk.aidldemo"
+    versionCode 4
+    versionName "1.0.1"
+    multiDexEnabled true
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [host: "app"]
-            }
-        }
 
-        // Filter for architectures supported by Flutter.
-        ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
-        }
+    // Filter for architectures supported by Flutter.
+    ndk {
+      abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+    }
+  }
 
+  externalNativeBuild {
+    cmake {
+      path "src/main/cpp/CMakeLists.txt"
     }
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-        }
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+  }
 
-    sourceSets {
-        main{
-            // 修改so库存放位置
-            jniLibs.srcDirs=['libs']
-        }
+  sourceSets {
+    main {
+      // 修改so库存放位置
+      jniLibs.srcDirs = ['libs']
     }
-    sourceSets {
-        main{
-            res.srcDirs=['src/main/res','src/main/res-ad','src/main/res-player']
-        }
+  }
+  sourceSets {
+    main {
+      res.srcDirs = ['src/main/res', 'src/main/res-ad', 'src/main/res-player']
     }
-    lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
-        abortOnError false
-    }
+  }
+
 }
-this.android.sourceSets{
-    main{
-        res.srcDirs=['src/main/res','src/main/res-ad','src/main/res-player']
-    }
+this.android.sourceSets {
+  main {
+    res.srcDirs = ['src/main/res', 'src/main/res-ad', 'src/main/res-player']
+  }
 }
 
-/**========================== 文件属性操作API ================================*/
-// 文件拷贝
-/*
-copy {
-    from file('build/outputs/apk') into getRootProject().getBuildDir().path+'/apks/'
-}*/
+dependencies {
+  implementation project(path: ':module_basic')
+  if (!singleModule.toBoolean()) {
+    implementation project(path: ':module_home')
+    implementation project(path: ':module_fragment')
+  }
+
+  // 编译时期注解，执行到此处时，就会去生成相关注解处理类
+//    annotationProcessor project(path: ':annotationprocessor')
+//    implementation project(path: ':module_basic')
+
+}
 
 // 对文件数进行遍历
 fileTree('build/outputs/apk') { FileTree fileTree ->
-    fileTree.visit { FileTreeElement element ->
-        println "the file name is ${element.file.name}"
-        copy {
-            from element.file into getRootProject().getBuildDir().path + '/test/'
-        }
+  fileTree.visit { FileTreeElement element ->
+    println "the file name is ${element.file.name}"
+    copy {
+      from element.file into getRootProject().getBuildDir().path + '/test/'
     }
-}
-
-/**========================= 依赖相关api =============================================*/
-// 为应用程序添加的第三方库依赖，区分root下的build.gradle
-dependencies {
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-    // 一种方式
-//    implementation project(rootProject.ext.dependencies.implementation)
-//    implementation project(rootProject.ext.dependencies.common)
-
-    annotationProcessor 'com.github.jimu:router-anno-compiler:1.0.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-
-    // 编译时期注解，执行到此处时，就会去生成相关注解处理类
-    annotationProcessor project(path: ':annotationprocessor')
-    implementation project(path: ':module_basic')
-
-//    implementation project(path:':flutter')
-//    implementation 'android.arch.lifecycle:runtime:1.1.1'
-//    implementation 'android.arch.lifecycle:extensions:1.1.1'
-
-}
-
-// jimu-config-step5:增加extension配置
-def projectRoot = project.getRootProject().rootDir.absolutePath
-combuild{
-    applicationName = 'com.monk.global.RecordOwnApplication'
-    isRegisterCompoAuto = true
-    useMaat false
-
-    originalManifest = projectRoot + "/app/src/main/AndroidManifest.xml"
-
-    runAloneManifest = projectRoot + "/app/src/main/AndroidManifest.xml"
-    targetManifest = projectRoot + "/app/src/main/AndroidManifest.xml"
-    //如果不需要合并，改为false
-    enableManifestMerge = false
-}
-
-/**======================= 执行外部命令==============================================*/
-/*
-task(name:'apkcopy'){
-    doLast{
-        // gradle的执行的阶段执行
-        def sourcePaht=this.buildDir.path+"/outputs/apk"
-        def destinationPath='Users/xxx/Downloads/'
-        def commond="mv -f ${sourcePaht} ${destinationPath}"
-        exec {
-            try {
-                executable 'bash'
-                agrs '-c', commond
-                println 'the command is execute success'
-            } catch (GradleException e) {
-                println 'the command is execute fail'
-            }
-        }
-    }
-}*/
-/**=========================== Task ==========================================*/
-println '---------- Task------------------'
-// 直接通过task函数去创建，推荐这种方式
-task helloTask(group: 'imooc', description: 'task study') {
-    println 'i am helloTask.'
-    // 第一种方式指定执行阶段
-    doFirst {
-        println "the task group is ${group}"
-    }
-    doFirst {}
-}
-// 第二种方式指定执行阶段
-helloTask.doFirst {
-    println "the task description is ${description}"
-}
-// TaskContainer去创建Task
-this.tasks.create(name: 'helloTask2') {
-    println 'i am task2'
-    setGroup('imooc')
-    setDescription('task study')
-}
-
-// 计算build执行时长
-def startBuildTime, endBuildTime
-this.afterEvaluate { Project project ->
-    // 保证要找的task已经配置完毕，preBuild是第一个执行的task
-    def preBuildTask = project.tasks.getByName('preBuild')
-    preBuildTask.doFirst {
-        startBuildTime = System.currentTimeMillis()
-        println "the start time is ${startBuildTime}"
-    }
-    def buildTask = project.tasks.getByName('build')
-    buildTask.doLast {
-        endBuildTime = System.currentTimeMillis()
-        // 执行阶段的耗时,占了一大半，开发调试的task可以关闭掉，这个小技巧可以省点构建时间
-        println "the build time is ${endBuildTime - startBuildTime}"
-    }
-}
-
-/* ----------------- task依赖讲解 -----------------------*/
-println '------------task 依赖讲解----------------------'
-task taskX {
-    doLast {
-        println 'taskX'
-    }
-}
-task taskY {
-    doLast {
-        println 'taskY'
-    }
-}
-
-task taskZ(dependsOn: [taskX, taskY]) {
-    // 第二种方式依赖，先去掉上面的taskX,taskY依赖
-    /* dependsOn this.tasks.findAll { task ->
-         return task.name.startsWith('lib')
-     }*/
-    doLast {
-        println 'taskZ'
-    }
-}
-// 建议使用上一种方式
-taskZ.dependsOn(taskX, taskY)
-
-// 动态依赖 << 等效于 doLast，但还是建议使用doLast
-//task lib1 << {
-//    println 'lib1'
-//}
-//task lib2 << {
-//    println 'lib2'
-//}
-//task noLib << {
-//    println 'noLib'
-//}
-
-// 实际应用中参考commonlibrary release.xml文件，输出版本信息
-/*
-task handleReleaseFile {
-    def srcFile = file('release.xml')
-    def desFile = new File(this.buildDir, 'generated/release/')
-    doLast {
-        println '开始解析对应的xml文件...'
-        desFile.mkdir()
-        def releases = new XmlParser().parse(srcFile)
-        releases.release.each { releaseNode ->
-            // 解析每个release结点的内容
-            def name = releaseNode.name.text()
-            def versionCode = releaseNode.versionCode.text()
-            def versionInfo = releaseNode.versionInfo.text()
-            // 创建文件并写入结点数据
-            def destFile = new File(destDir, "release-${name}.text")
-            // 闭包的形式不需要处理流的关闭，已经做过了
-            destFile.withWriter { writer ->
-                writer.write("${name}->${versionCode}->${versionInfo}")
-            }
-        }
-    }
-}
-*/
-
-// 测试上面task
-/*
-task handleReleaseFileTest(dependsOn: handleReleaseFile) {
-    def dir = fileTree(this.buildDir.path + 'generated/release/')
-    doLast {
-        dir.each {
-            println "the file name is: ${it}"
-        }
-        println '输出完成...'
-    }
-}
-*/
-
-/* ----------------- task 输入输出 -----------------------*/
-println '------------task 输入输出----------------------'
-
-ext{
-    versionName = '1.0.0'
-    versionCode='100'
-    vsersionInfo='App的第1个版本'
-    destFile = file('release.xml')
-    if (destFile != null && !destFile.exists()) {
-        destFile.createNewFile()
-    }
-}
-
-/*
-task writeTask{
-    // 为task指定输入
-    inputs.property('versionCode',this.versionCode)
-    inputs.property('versionName',this.versionName)
-    inputs.property('vsersionInfo',this.vsersionInfo)
-    // 为task指定输出
-    outputs.file destFile
-    // 指定输入、输出后，执行
-    doLast{
-        def data= inputs.getProperties()
-        File file = outputs.getFiles().getSingleFile()
-        // 将map转化为实体对象
-        def versionMsg = new VersionMsg(data)
-        // 将实体对象转成xml，写入sw中
-        def sw = new StringWriter()
-        def xmlBuilder = new MarkupBuilder(sw)
-        if (file.text != null && file.text.size() <= 0) {
-            // 文件中没有内容
-            xmlBuilder.release{
-                release{
-                    // 全部写进sw
-                    versionCode(versionMsg.versionCode)
-                    versionName(versionMsg.versionName)
-                    versionInfo(versionMsg.versionInfo)
-                }
-            }
-            file.withWriter {writer->writer.append(sw.toString())}
-        }else {
-            xmlBuilder.release{
-                versionCode(versionMsg.versionCode)
-                versionName(versionMsg.versionName)
-                versionInfo(versionMsg.versionInfo)
-            }
-            // 将生成的xml数据插入到根节点之前
-            def lines=file.readLines()
-            def lengths=lines.size()-1
-            file.withWriter {writer->
-                lines.eachWithIndex { String line, int index ->
-                    if (index != lengths) {
-                        writer.append(line+'\r\n')
-                    }else if (index == lengths) {
-                        writer.append('\r\r\n'+sw.toString()+'\r\n')
-                        writer.append(lines.get(lengths))
-                    }
-                }
-            }
-        }
-    }
-}
-*/
-class VersionMsg{
-    String versionName,versionCode,versionInfo
-}
-
-task readTask{
-    inputs.file destFile
-    doLast{
-        def file = inputs.files.singleFile
-        println file.text
-    }
-}
-
-task taskTest{
-//    dependsOn readTask,writeTask
-    doLast{
-        println '输入输出任务结束'
-    }
-}
-
-/* -----------------  挂接自定义task到构建过程 -----------------------*/
-println '------------ 挂接自定义task到构建过程----------------------'
-
-task taskX1 {
-    doLast {
-        println 'taskX1'
-    }
-}
-task taskY1 {
-    mustRunAfter taskX1
-//    shoudRunAfter taskX1
-    doLast {
-        println 'taskY1'
-    }
-}
-task taskZ1() {
-    doLast {
-        println 'taskZ1'
-    }
+  }
 }

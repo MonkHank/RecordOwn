@@ -10,8 +10,6 @@ import android.widget.FrameLayout;
 
 import androidx.core.view.ViewCompat;
 
-import com.monk.commonutils.LogUtil;
-
 /**
  * 正好趁这次机会来实现Module之间的通信，比如app module的MainActivity 访问这个module的某个activity或 fragment
  * @author monk
@@ -36,7 +34,7 @@ public class DragViewGroup extends FrameLayout {
         super(context, attrs, defStyleAttr);
 
         mSlop = ViewConfiguration.get(context).getScaledWindowTouchSlop();
-        LogUtil.INSTANCE.d(tag,"touchSlop:"+mSlop);
+//        LogUtil.INSTANCE.d(tag,"touchSlop:"+mSlop);
     }
 
     @Override

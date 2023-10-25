@@ -9,9 +9,18 @@ import com.monk.commonutils.LogUtil
 
 /**
  * @author monk
- * @date 2019-01-03
+ * @since 2019-01-03
  */
 open class BaseApplication : MultiDexApplication() {
+
+    companion object {
+        var mApplication: Application? = null
+        var handler: Handler? = null
+            private set
+        var mainThreadId = 0
+            private set
+    }
+
     private val tag = "BaseApplication"
     override fun onCreate() {
         super.onCreate()
@@ -24,11 +33,5 @@ open class BaseApplication : MultiDexApplication() {
         LogUtil.v(tag, "占用内存(M) = " + occupyMemory / 1024 / 1024 + "\t maxMemory = " + maxMemory / 1024 / 1024)
     }
 
-    companion object {
-        var mApplication: Application? = null
-        var handler: Handler? = null
-            private set
-        var mainThreadId = 0
-            private set
-    }
+
 }

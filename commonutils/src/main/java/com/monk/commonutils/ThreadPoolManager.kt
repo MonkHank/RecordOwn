@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * @author monk
- * @date 2018-12-27
+ * @since 2018-12-27
  */
 object ThreadPoolManager {
     private var threadPool: ThreadPool? = null

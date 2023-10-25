@@ -4,5 +4,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-sourceCompatibility = rootProject.ext.sourceCompatibility
-targetCompatibility = rootProject.ext.targetCompatibility
+//sourceCompatibility = rootProject.ext.sourceCompatibility
+//targetCompatibility = rootProject.ext.targetCompatibility
+
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
