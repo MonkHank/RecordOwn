@@ -6,7 +6,6 @@ plugins {
 
 apply from: '../dependencies.gradle' /* ../ 是当前目录的上一级目录*/
 
-
 android {
   defaultConfig {
     applicationId "com.monk.aidldemo"
@@ -31,11 +30,13 @@ android {
     main {
       // 修改so库存放位置
       jniLibs.srcDirs = ['libs']
+      println("------------------line 33 excuted:${res.srcDirs}------------")
     }
   }
   sourceSets {
     main {
       res.srcDirs = ['src/main/res', 'src/main/res-ad', 'src/main/res-player']
+      println("------------------line 39 excuted:${res.srcDirs}------------")
     }
   }
 
@@ -43,6 +44,7 @@ android {
 this.android.sourceSets {
   main {
     res.srcDirs = ['src/main/res', 'src/main/res-ad', 'src/main/res-player']
+    println("------------------line 47 excuted:${res.srcDirs}------------")
   }
 }
 
@@ -51,6 +53,7 @@ dependencies {
   if (!singleModule.toBoolean()) {
     implementation project(path: ':module_home')
     implementation project(path: ':module_fragment')
+//    implementation project(path: ':module_gl')
   }
 
   // 编译时期注解，执行到此处时，就会去生成相关注解处理类

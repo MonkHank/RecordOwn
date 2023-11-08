@@ -56,7 +56,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.tvContactName.setText(bean.Name);
         int adapterPosition = holder.getAdapterPosition();
         int layoutPosition = holder.getLayoutPosition();
-        LogUtil.i("HomeAdapter","adapterPosition = "+adapterPosition+"\tlayoutPosition = "+layoutPosition+"\tposition = "+position);
+        LogUtil.i("HomeAdapter", "adapterPosition = " + adapterPosition + "\tlayoutPosition = " + layoutPosition + "\tposition = " + position);
     }
 
     @Override
@@ -69,14 +69,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
      * 并不是所有的内部类只能使用静态内部类，只有在该内部类中的生命周期不可控制的情况下，我们要采用静态内部类，其它时候大家可以照旧。
      */
     static class ViewHolder extends RecyclerView.ViewHolder {
-//        @BindView(R2.id.contacts_name)
+        //        @BindView(R2.id.contacts_name)
         TextView tvContactName;
 
         ViewHolder(@NonNull View itemView, OnRecyclerViewItemClickListener2 onRecyclerViewItemClickListener2) {
             super(itemView);
 //            ButterKnife.bind(this, itemView);
 
-            tvContactName=itemView.findViewById(R.id.contacts_name);
+            tvContactName = itemView.findViewById(R.id.contacts_name);
             // 第二种方式，其实和第一种方式本质是一样的
             itemView.setOnClickListener(v ->
                     onRecyclerViewItemClickListener2.onRecyclerViewItemClick(itemView, getAdapterPosition()));

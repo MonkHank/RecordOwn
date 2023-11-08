@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
+  println("-----------project.name:${project.getName()}-------------------")
   compileSdk 32
 //    buildToolsVersion "30.0.3"
   defaultConfig {
@@ -20,7 +21,6 @@ android {
     kapt {
       arguments {
         arg("AROUTER_MODULE_NAME", project.getName())
-        println("-----------project.name:${project.getName()}")
       }
     }
   }
@@ -120,5 +120,7 @@ dependencies {
   implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
   implementation 'org.greenrobot:eventbus:3.2.0'
   implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
+
+  implementation 'com.github.DylanCaiCoding.ViewBindingKTX:viewbinding-ktx:2.0.2'
 
 }

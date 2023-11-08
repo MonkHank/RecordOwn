@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import com.monk.activity.base.BaseCompatActivity
-import com.monk.commonutils.L
+import com.monk.commonutils.l
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -24,13 +24,13 @@ class ActEmpty : BaseCompatActivity<ActEmpty>() {
 
         scope.launch {
             val result = GithubApi.createGithubApi().searchRepos("Android",0,20)
-            L.v("cccc","result:$result")
+            l.v("cccc","result:$result")
         }
 
         scope.launch(Dispatchers.Unconfined) {
             val one = getResult(20)
             val two = getResult(40)
-            L.v("cccc", "one+two=${one + two}")
+            l.v("cccc", "one+two=${one + two}")
         }
 
         scope.launch {
@@ -38,7 +38,7 @@ class ActEmpty : BaseCompatActivity<ActEmpty>() {
             val one = async(start = CoroutineStart.LAZY) { getResult(20) }
             val two = async { getResult(40) }
 
-            L.v("cccc", "one+two = ${one.await() + two.await()}")
+            l.v("cccc", "one+two = ${one.await() + two.await()}")
         }
 
         lifecycleScope.launch {
@@ -47,7 +47,7 @@ class ActEmpty : BaseCompatActivity<ActEmpty>() {
             }.catch {
 
             }.collect {
-                L.i("ActEmpty", "$it")
+                l.i("ActEmpty", "$it")
             }
         }
 

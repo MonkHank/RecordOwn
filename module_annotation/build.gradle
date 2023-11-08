@@ -29,5 +29,5 @@ android {
 
 dependencies {
   implementation project(path: ':module_basic')
-  annotationProcessor project(path: ':annotationprocessor')
+  kapt project(path: ':annotationprocessor')
 }

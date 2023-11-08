@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.monk.module_z_copy">
+    package="com.monk.z_copy">
 
   <application
       android:allowBackup="true"
@@ -9,7 +9,7 @@
       android:supportsRtl="true"
       tools:replace="android:label">
 
-    <activity android:name="com.monk.z_copy.ActMain" />
+    <activity android:name=".ActMain" />
 
   </application>
 </manifest>

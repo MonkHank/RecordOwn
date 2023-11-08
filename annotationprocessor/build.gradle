@@ -1,16 +1,16 @@
 apply plugin: 'java-library'
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
 
 
-    implementation 'com.squareup:javapoet:1.13.0'//这个库用于在build/generate下生成文件
+  implementation 'com.squareup:javapoet:1.13.0'//这个库用于在build/generate下生成文件
 //    implementation 'com.google.auto.service:auto-service:1.0-rc4'  // 这里千万不要改成annotationProcessor，否则运行不通过(3.4以下只这么写的)
 
-    implementation project(path: ':annotation')
+  implementation project(path: ':annotation')
 
-    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
-    compileOnly 'com.google.auto.service:auto-service:1.0-rc4'// 只在编译时有效，不会参与打包
+  annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
+  compileOnly 'com.google.auto.service:auto-service:1.0-rc4'// 只在编译时有效，不会参与打包
 
 }
 
@@ -19,5 +19,5 @@ targetCompatibility = "8"
 
 // 错误: 编码GBK的不可映射字符 ，指定编译编码
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = "UTF-8"
+  options.encoding = "UTF-8"
 }

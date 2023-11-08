@@ -22,23 +22,26 @@ dependencyResolutionManagement {
 
 rootProject.name = "RecordOwn"
 
+include ':a_java'
+include ':a_kotlin'
+include ':annotation'
+include ':annotationprocessor'
+include ':commonutils'
+include ':dragviewlibrary'
+include ':generategreendao'
+include ':generatevaluesfile'
 include ':app'
 include ':module_basic'
 include ':module_views'
 include ':module_fragment'
 include ':module_home'
 include ':module_androidtest'
-include ':dragviewlibrary'
-include ':commonutils'
-include ':generatevaluesfile'
-include ':generategreendao'
 include ':module_annotation'
-include ':annotation'
-include ':annotationprocessor'
-include ':a_java'
-include ':a_kotlin'
+//include ':module_gl'
+include ':module_opengl'
 
 include ':module_z_copy'
 
 
-println '-settings start proceed gradle'
+println '-----------------settings start proceed gradle---------------------------'
+include ':a_lib'
