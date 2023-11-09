@@ -31,7 +31,9 @@ class SimpleRenderActivity : BaseCompatActivity<SimpleRenderActivity>() {
 
   private fun initRender(drawer: IDrawer) {
     mBinding.glSurfaceView.setEGLContextClientVersion(2)
-    mBinding.glSurfaceView.setRenderer(SimpleRender(drawer))
+    val render = SimpleRender()
+    render.addDrawer(drawer)
+    mBinding.glSurfaceView.setRenderer(render)
   }
 
   override fun onDestroy() {

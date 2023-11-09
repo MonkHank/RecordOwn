@@ -3,7 +3,8 @@ package com.monk.z_copy
 import android.os.Bundle
 import com.dylanc.viewbinding.binding
 import com.monk.activity.base.BaseCompatActivity
-import com.monk.z_copy.databinding.ActMainBinding
+import com.monk.module_z_copy.R
+import com.monk.module_z_copy.databinding.ActMainBinding
 
 /**
  * @author monk

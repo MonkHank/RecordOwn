@@ -24,6 +24,21 @@ class TriangleDrawer(private var mTextureId: Int = -1) : IDrawer {
     0.25f, 0f
   )
 
+
+  private fun getVertexShader(): String {
+    return "attribute vec4 aPosition;" +
+      "void main() {" +
+      "  gl_Position = aPosition;" +
+      "}"
+  }
+
+  private fun getFragmentShader(): String {
+    return "precision mediump float;" +
+      "void main() {" +
+      "  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);" +
+      "}"
+  }
+
   //OpenGL程序ID
   private var mProgram: Int = -1
 
@@ -69,6 +84,16 @@ class TriangleDrawer(private var mTextureId: Int = -1) : IDrawer {
     }
   }
 
+  private fun loadShader(type: Int, shaderCode: String): Int {
+    //根据type创建顶点着色器或者片元着色器
+    val shader = GLES20.glCreateShader(type)
+    //将资源加入到着色器中，并编译
+    GLES20.glShaderSource(shader, shaderCode)
+    GLES20.glCompileShader(shader)
+
+    return shader
+  }
+
   private fun createGLPrg() {
     if (mProgram == -1) {
       val vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, getVertexShader())
@@ -109,27 +134,4 @@ class TriangleDrawer(private var mTextureId: Int = -1) : IDrawer {
     GLES20.glDeleteProgram(mProgram)
   }
 
-  private fun getVertexShader(): String {
-    return "attribute vec4 aPosition;" +
-      "void main() {" +
-      "  gl_Position = aPosition;" +
-      "}"
-  }
-
-  private fun getFragmentShader(): String {
-    return "precision mediump float;" +
-      "void main() {" +
-      "  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);" +
-      "}"
-  }
-
-  private fun loadShader(type: Int, shaderCode: String): Int {
-    //根据type创建顶点着色器或者片元着色器
-    val shader = GLES20.glCreateShader(type)
-    //将资源加入到着色器中，并编译
-    GLES20.glShaderSource(shader, shaderCode)
-    GLES20.glCompileShader(shader)
-
-    return shader
-  }
 }

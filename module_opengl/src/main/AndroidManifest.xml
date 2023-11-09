@@ -3,22 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.monk.opengl">
 
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:label">
+  <application
+      android:allowBackup="true"
+      android:label="@string/app_name"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme"
+      tools:replace="android:label">
 
-        <activity android:name="com.monk.opengl.SimpleRenderActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <activity
+        android:name="com.monk.opengl.SimpleRenderActivity"
+        android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    </activity>
 
-    </application>
+    <activity
+        android:name=".video.OpenGLPlayerActivity"
+        android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+  </application>
 </manifest>
