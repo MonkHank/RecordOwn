@@ -48,8 +48,7 @@ class MMExtractor(path: String?) {
         break
       }
     }
-    return if (mVideoTrack >= 0)
-      mExtractor!!.getTrackFormat(mVideoTrack)
+    return if (mVideoTrack >= 0) mExtractor!!.getTrackFormat(mVideoTrack)
     else null
   }
 
@@ -76,7 +75,7 @@ class MMExtractor(path: String?) {
   fun readBuffer(byteBuffer: ByteBuffer): Int {
     byteBuffer.clear()
     selectSourceTrack()
-    var readSampleCount = mExtractor!!.readSampleData(byteBuffer, 0)
+    val readSampleCount = mExtractor!!.readSampleData(byteBuffer, 0)
     if (readSampleCount < 0) {
       return -1
     }

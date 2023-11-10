@@ -1,6 +1,8 @@
 package com.monk.opengl.video
 
 import android.media.MediaFormat
+import com.monk.commonutils.l
+import com.monk.opengl.video.VideoExtractor.Const.TAG
 import java.nio.ByteBuffer
 
 /**
@@ -8,12 +10,18 @@ import java.nio.ByteBuffer
  * @author monk
  * @since 2023/11/9 10:23 星期四
  */
-class VideoExtractor(path: String): IExtractor {
+class VideoExtractor(path: String) : IExtractor {
+
+  object Const {
+    const val TAG = "VideoExtractor"
+  }
 
   private val mMediaExtractor = MMExtractor(path)
 
   override fun getFormat(): MediaFormat? {
-    return mMediaExtractor.getVideoFormat()
+    val videoFormat = mMediaExtractor.getVideoFormat()
+    l.i(TAG,"videoFormat:$videoFormat")
+    return videoFormat
   }
 
   override fun readBuffer(byteBuffer: ByteBuffer): Int {

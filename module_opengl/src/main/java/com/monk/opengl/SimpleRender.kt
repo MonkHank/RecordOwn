@@ -11,7 +11,7 @@ import javax.microedition.khronos.opengles.GL10
  * @author monk
  * @since 2023/11/8 15:46
  */
-class SimpleRender() : GLSurfaceView.Renderer {
+class SimpleRender : GLSurfaceView.Renderer {
 
   private val drawers = mutableListOf<IDrawer>()
 

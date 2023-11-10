@@ -50,7 +50,7 @@ class AudioDecoder(path: String) : BaseDecoder(path) {
         //如果没有这个参数，默认为16位采样
         AudioFormat.ENCODING_PCM_16BIT
       }
-    } catch (e: Exception) {
+    } catch (_: Exception) {
     }
   }
 

@@ -11,7 +11,7 @@ import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import java.nio.ByteBuffer
-
+import com.monk.opengl.video.VideoDecoder.Const.TAG as tag
 
 /**
  * 视频解码器
@@ -23,14 +23,16 @@ import java.nio.ByteBuffer
  *
  */
 class VideoDecoder(path: String, sfv: SurfaceView?, surface: Surface?) : BaseDecoder(path) {
-  private val TAG = "VideoDecoder"
+  object Const {
+    const val TAG = "VideoDecoder"
+  }
 
   private val mSurfaceView = sfv
   private var mSurface = surface
 
   override fun check(): Boolean {
     if (mSurfaceView == null && mSurface == null) {
-      Log.w(TAG, "SurfaceView和Surface都为空，至少需要一个不为空")
+      Log.w(tag, "SurfaceView和Surface都为空，至少需要一个不为空")
       mStateListener?.decoderError(this, "显示器为空")
       return false
     }
@@ -49,7 +51,7 @@ class VideoDecoder(path: String, sfv: SurfaceView?, surface: Surface?) : BaseDec
       codec.configure(format, mSurface, null, 0)
       notifyDecode()
     } else if (mSurfaceView?.holder?.surface != null) {
-      mSurface = mSurfaceView?.holder?.surface
+      mSurface = mSurfaceView.holder?.surface
       configCodec(codec, format)
     } else {
       mSurfaceView?.holder?.addCallback(object : SurfaceHolder.Callback2 {
@@ -78,7 +80,8 @@ class VideoDecoder(path: String, sfv: SurfaceView?, surface: Surface?) : BaseDec
   }
 
   override fun render(
-    outputBuffer: ByteBuffer, bufferInfo: MediaCodec.BufferInfo
+    outputBuffer: ByteBuffer,
+    bufferInfo: MediaCodec.BufferInfo
   ) {
   }
 

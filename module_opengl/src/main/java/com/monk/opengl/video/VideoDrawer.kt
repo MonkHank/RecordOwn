@@ -33,34 +33,39 @@ class VideoDrawer : IDrawer {
 
 
   private fun getVertexShader(): String {
-    return "attribute vec4 aPosition;" +
-      "precision mediump float;" +
-      "uniform mat4 uMatrix;" +
-      "attribute vec2 aCoordinate;" +
-      "varying vec2 vCoordinate;" +
-      "attribute float alpha;" +
-      "varying float inAlpha;" +
-      "void main() {" +
-      "    gl_Position = uMatrix*aPosition;" +
-      "    vCoordinate = aCoordinate;" +
-      "    inAlpha = alpha;" +
-      "}"
+    return """
+      attribute vec4 aPosition;
+      precision mediump float;
+      uniform mat4 uMatrix;
+      attribute vec2 aCoordinate;
+      varying vec2 vCoordinate;
+      attribute float alpha;
+      varying float inAlpha;
+      void main() {
+          gl_Position = uMatrix*aPosition;
+          vCoordinate = aCoordinate;
+          inAlpha = alpha;
+      }
+    """.trimIndent()
+
   }
 
   private fun getFragmentShader(): String {
     //一定要加换行"\n"，否则会和下一行的precision混在一起，导致编译出错
-    return "#extension GL_OES_EGL_image_external : require\n" +
-      "precision mediump float;" +
-      "varying vec2 vCoordinate;" +
-      "varying float inAlpha;" +
-      "uniform samplerExternalOES uTexture;" +
-      "void main() {" +
-      "  vec4 color = texture2D(uTexture, vCoordinate);" +
-      "  float gray=(color.r+color.g+color.b)/3.0;" +
-      "  gl_FragColor = vec4(gray,gray,gray,1.0);" +
-      "}"
+    return """
+      #extension GL_OES_EGL_image_external : require
+      precision mediump float;
+      varying vec2 vCoordinate;
+      varying float inAlpha;
+      uniform samplerExternalOES uTexture;
+      void main() {
+        vec4 color = texture2D(uTexture, vCoordinate);
+        float gray=(color.r+color.g+color.b)/3.0;
+        gl_FragColor = vec4(gray,gray,gray,1.0);
+      }
+    """.trimIndent()
 
-//    "  gl_FragColor = vec4(color.r, color.g, color.b, inAlpha);" +
+//    gl_FragColor = vec4(color.r, color.g, color.b, inAlpha);
   }
 
   private var mWorldWidth: Int = -1
