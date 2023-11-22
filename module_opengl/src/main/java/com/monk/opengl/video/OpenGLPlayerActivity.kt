@@ -1,11 +1,14 @@
 package com.monk.opengl.video
 
 import android.Manifest
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.Surface
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.ToastUtils
+import com.monk.commonutils.FileUtils
 import com.monk.commonutils.l
 import com.monk.opengl.R
 import com.monk.opengl.SimpleRender
@@ -17,16 +20,18 @@ import java.util.concurrent.Executors
  * @since 2023/11/9 9:21
  */
 class OpenGLPlayerActivity : AppCompatActivity() {
-  private val path = "/storage/emulated/0/DCIM/FaceUnity/20220905-193219.mp4"
+//  private val path = "/storage/emulated/0/DCIM/FaceUnity/test.mp4"
 
-  //  private val path = Environment.getExternalStorageDirectory()
-//    .absolutePath+"/DCIM/FaceUnity/20220905-193219.mp4"
+  private var path = "F:/github\\RecordOwn\\module_opengl\\test.mp4"
   private lateinit var drawer: VideoDrawer
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_opengl_player)
 
+
+
+    path = FileUtils.loadStringFromLocal(applicationContext,"20220905-193219.mp4")
     l.i("path:$path")
 
     requestPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
