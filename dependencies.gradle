@@ -79,7 +79,8 @@ dependencies {
 
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
-  implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0" // Lifecycles only (without ViewModel or LiveData)
+  implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+  // Lifecycles only (without ViewModel or LiveData)
 
   implementation 'com.blankj:utilcodex:1.31.1'
 

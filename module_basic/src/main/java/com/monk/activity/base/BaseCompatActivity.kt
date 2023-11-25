@@ -46,8 +46,9 @@ open class BaseCompatActivity<T : BaseCompatActivity<T>?> : AppCompatActivity() 
     simpleName = mContext!!.javaClass.simpleName
     tag = simpleName
     LogUtil.i(tag, "$simpleName：savedInstanceState = $savedInstanceState")
-    immersionBar = ImmersionBar.with(this) //                .statusBarDarkFont(true, 0.2f)// 白色状态栏透明方案
-      .keyboardEnable(true)
+    immersionBar =
+      ImmersionBar.with(this) //                .statusBarDarkFont(true, 0.2f)// 白色状态栏透明方案
+        .keyboardEnable(true)
     //        immersionBar.init();
     fullScreen(mContext!!)
 //        AutowiredService.Factory.getSingletonImpl().autowire(this)
@@ -241,58 +242,63 @@ open class BaseCompatActivity<T : BaseCompatActivity<T>?> : AppCompatActivity() 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       val connectivityManager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
       // 请注意这里会有一个版本适配bug，所以请在这里添加非空判断
-      connectivityManager?.requestNetwork(NetworkRequest.Builder().build(), object : NetworkCallback() {
-        /**
-         * 网络可用的回调
-         */
-        override fun onAvailable(network: Network) {
-          super.onAvailable(network)
-          LogUtil.e(tag, "$simpleName：onAvailable")
-        }
+      connectivityManager?.requestNetwork(
+        NetworkRequest.Builder().build(),
+        object : NetworkCallback() {
+          /**
+           * 网络可用的回调
+           */
+          override fun onAvailable(network: Network) {
+            super.onAvailable(network)
+            LogUtil.e(tag, "$simpleName：onAvailable")
+          }
 
-        /**
-         * 网络丢失的回调
-         */
-        override fun onLost(network: Network) {
-          super.onLost(network)
-          LogUtil.e(tag, "$simpleName：onLost")
-        }
+          /**
+           * 网络丢失的回调
+           */
+          override fun onLost(network: Network) {
+            super.onLost(network)
+            LogUtil.e(tag, "$simpleName：onLost")
+          }
 
-        /**
-         * 当建立网络连接时，回调连接的属性
-         */
-        override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
-          super.onLinkPropertiesChanged(network, linkProperties)
-          LogUtil.e(tag, "$simpleName：onLinkPropertiesChanged")
-        }
+          /**
+           * 当建立网络连接时，回调连接的属性
+           */
+          override fun onLinkPropertiesChanged(network: Network, linkProperties: LinkProperties) {
+            super.onLinkPropertiesChanged(network, linkProperties)
+            LogUtil.e(tag, "$simpleName：onLinkPropertiesChanged")
+          }
 
-        /**
-         * 按照官方的字面意思是，当我们的网络的某个能力发生了变化回调，那么也就是说可能会回调多次
-         *
-         *
-         * 之后在仔细的研究
-         */
-        override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
-          super.onCapabilitiesChanged(network, networkCapabilities)
-          LogUtil.e(tag, "$simpleName：onCapabilitiesChanged")
-        }
+          /**
+           * 按照官方的字面意思是，当我们的网络的某个能力发生了变化回调，那么也就是说可能会回调多次
+           *
+           *
+           * 之后在仔细的研究
+           */
+          override fun onCapabilitiesChanged(
+            network: Network,
+            networkCapabilities: NetworkCapabilities
+          ) {
+            super.onCapabilitiesChanged(network, networkCapabilities)
+            LogUtil.e(tag, "$simpleName：onCapabilitiesChanged")
+          }
 
-        /**
-         * 在网络失去连接的时候回调，但是如果是一个生硬的断开，他可能不回调
-         */
-        override fun onLosing(network: Network, maxMsToLive: Int) {
-          super.onLosing(network, maxMsToLive)
-          LogUtil.e(tag, "$simpleName：onLosing")
-        }
+          /**
+           * 在网络失去连接的时候回调，但是如果是一个生硬的断开，他可能不回调
+           */
+          override fun onLosing(network: Network, maxMsToLive: Int) {
+            super.onLosing(network, maxMsToLive)
+            LogUtil.e(tag, "$simpleName：onLosing")
+          }
 
-        /**
-         * 按照官方注释的解释，是指如果在超时时间内都没有找到可用的网络时进行回调
-         */
-        override fun onUnavailable() {
-          super.onUnavailable()
-          LogUtil.e(tag, "$simpleName：onUnavailable")
-        }
-      })
+          /**
+           * 按照官方注释的解释，是指如果在超时时间内都没有找到可用的网络时进行回调
+           */
+          override fun onUnavailable() {
+            super.onUnavailable()
+            LogUtil.e(tag, "$simpleName：onUnavailable")
+          }
+        })
     }
   }
 }

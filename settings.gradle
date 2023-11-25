@@ -40,7 +40,7 @@ include ':module_annotation'
 //include ':module_gl'
 include ':module_opengl'
 
-include ':module_z_copy'
+//include ':module_z_copy'
 
 
 println '-----------------settings start proceed gradle---------------------------'

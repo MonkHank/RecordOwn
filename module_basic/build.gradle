@@ -1,23 +1,23 @@
 plugins {
-    id 'com.android.library'
+  id 'com.android.library'
 }
 
-apply from:'../dependencies.gradle'
+apply from: '../dependencies.gradle'
 
 android {
-    defaultConfig {
+  defaultConfig {
 
-        consumerProguardFiles "consumer-rules.pro"
-    }
+    consumerProguardFiles "consumer-rules.pro"
+  }
 
-    sourceSets {
-        main{
-            res.srcDirs=['src/main/res','src/main/res-ad','src/main/res-player']
-        }
+  sourceSets {
+    main {
+      res.srcDirs = ['src/main/res', 'src/main/res-ad', 'src/main/res-player']
     }
+  }
 
 }
 
 dependencies {
-    api project(":commonutils")
+  api project(":commonutils")
 }

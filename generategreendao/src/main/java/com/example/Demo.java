@@ -60,7 +60,7 @@ class Person implements IPresnet {
 
     @Override
     public String toString() {
-        return "name£º" + name + "£¬age£º" + age;
+        return "name" + name + "age" + age;
     }
 
     @Override

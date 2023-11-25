@@ -19,12 +19,18 @@ import com.monk.commonutils.l
 import com.monk.interfaces.OnRecyclerViewItemClickListener
 import com.monk.interfaces.OnRecyclerViewItemClickListener2
 import com.monk.jni.ActivityJni
+import com.monk.ActHome.Const.TAG as tag
 
 /**
  * @author monk
  * @since 2019-05-27
  */
-class ActHome : BaseCompatActivity<ActHome?>(), OnRecyclerViewItemClickListener, OnRecyclerViewItemClickListener2 {
+class ActHome : BaseCompatActivity<ActHome?>(), OnRecyclerViewItemClickListener,
+  OnRecyclerViewItemClickListener2 {
+
+  object Const{
+    const val TAG="ActHome"
+  }
 
   private var drawerLayout: DrawerLayout? = null
   private var navigationView: NavigationView? = null
@@ -46,9 +52,12 @@ class ActHome : BaseCompatActivity<ActHome?>(), OnRecyclerViewItemClickListener,
 
     navigationView!!.setCheckedItem(R.id.nav_call)
     val headerView = navigationView!!.getHeaderView(0)
-    headerView.findViewById<View>(R.id.icon_image).setOnClickListener { ToastUtils.showImageToast(mContext!!, "点击了头像") }
-    headerView.findViewById<View>(R.id.mail).setOnClickListener { ToastUtils.showImageToast(mContext!!, "点击了邮箱") }
-    headerView.findViewById<View>(R.id.username).setOnClickListener { ToastUtils.showImageToast(mContext!!, "点击了名字") }
+    headerView.findViewById<View>(R.id.icon_image)
+      .setOnClickListener { ToastUtils.showImageToast(mContext!!, "点击了头像") }
+    headerView.findViewById<View>(R.id.mail)
+      .setOnClickListener { ToastUtils.showImageToast(mContext!!, "点击了邮箱") }
+    headerView.findViewById<View>(R.id.username)
+      .setOnClickListener { ToastUtils.showImageToast(mContext!!, "点击了名字") }
     navigationView!!.setNavigationItemSelectedListener { menuItem: MenuItem? ->
       // 关闭侧滑
       drawerLayout!!.closeDrawers()
@@ -70,6 +79,8 @@ class ActHome : BaseCompatActivity<ActHome?>(), OnRecyclerViewItemClickListener,
     floatingActionButton!!.setOnClickListener {
       ARouter.getInstance().build("/test/activity").navigation()
     }
+
+    l.i(tag,"getIntent() = $intent")
 
   }
 

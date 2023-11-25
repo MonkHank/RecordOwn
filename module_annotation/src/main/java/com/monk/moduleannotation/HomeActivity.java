@@ -15,15 +15,12 @@ import butterknife.BindView;
 
 public class HomeActivity extends BaseCompatActivity<HomeActivity> {
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initToolbar(R.layout.activity_home);
-
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+//    initToolbar(R.layout.activity_home);
 
 
-
-    }
+  }
 
 }
