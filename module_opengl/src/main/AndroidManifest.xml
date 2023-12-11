@@ -14,12 +14,6 @@
       tools:replace="android:label">
 
     <activity
-        android:name="com.monk.opengl.SimpleRenderActivity"
-        android:exported="true">
-
-    </activity>
-
-    <activity
         android:name=".video.OpenGLPlayerActivity"
         android:exported="true">
       <intent-filter>
@@ -27,6 +21,12 @@
 
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
+    </activity>
+
+    <activity
+        android:name="com.monk.opengl.SimpleRenderActivity"
+        android:exported="true">
+
     </activity>
 
   </application>
