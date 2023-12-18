@@ -4,6 +4,15 @@ apply plugin: 'com.android.library'
 apply from:'../dependencies.gradle'
 
 
+// 不会重写 dependencies.gradle 的 android{} 闭包，会先执行 dependencies.gradle,
+// 再执行这里的
+android{
+
+}
+
+
 dependencies {
     implementation project(path: ':commonutils')
 }
+
+

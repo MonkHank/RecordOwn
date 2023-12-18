@@ -5,7 +5,7 @@ apply from:'../dependencies.gradle'
 android {
 
     defaultConfig {
-        //测试是否是dependencies.gradle中的
+        //测试是否是dependencies.gradle中的 (是的)
 //        println("compilesdkversion:$compileSdkVersion")
     }
 }
