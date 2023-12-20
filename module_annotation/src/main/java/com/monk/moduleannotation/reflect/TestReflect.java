@@ -147,7 +147,9 @@ public class TestReflect {
     }
 
     println("---4. 执行方法，需要对象 - invoke(obj,args...)");
+    //setName方法返回this(ReflectClass)
     Object jack = setName.invoke(newInstance, "jack");
+    //setAge方法返回void
     Object age = setAge.invoke(newInstance, 0, 11);
     Object get = getAge.invoke(newInstance);
     System.out.println("jack = " + jack);

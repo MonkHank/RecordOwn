@@ -40,8 +40,6 @@
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
@@ -52,12 +50,6 @@
         <attr name="paintId" format="integer"/>
     </declare-styleable>
 
-    <style name="SwipeBackLayout">
-        <item name="edge_size">50dip</item>
-        <item name="shadow_left">@drawable/shadow_left</item>
-        <item name="shadow_right">@drawable/shadow_right</item>
-        <item name="shadow_bottom">@drawable/shadow_bottom</item>
-    </style>
 
     <!--CustomDatePicker-->
     <style name="time_dialog" parent="android:style/Theme.Dialog">
