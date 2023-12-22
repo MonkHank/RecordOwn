@@ -37,7 +37,7 @@ include ':module_fragment'
 include ':module_home'
 include ':module_androidtest'
 include ':module_annotation'
-//include ':module_gl'
+//include ':module_gl'        // 由于module中很多类还未全部实现,所以会报红,影响编译,需要查看的时候再打开注释
 include ':module_opengl'
 
 //include ':module_z_copy'
