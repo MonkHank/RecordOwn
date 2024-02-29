@@ -113,9 +113,14 @@ public class TestReflect {
     println(setName);
     println(setAge);
 
+    Type[] parameterTypes0 = setAge.getGenericParameterTypes();
+    for (Type parameterType : parameterTypes0) {
+      println("parameterType -- "+ parameterType);
+    }
+
     println("---1.1 获取方法修饰符 - getModifiers()");
     for (Method t : methods) {
-      println(t.getModifiers());
+      println(t.getName()+" -- "+t.getModifiers());
     }
 
     println("---1.2 EventBus中的一个运算");

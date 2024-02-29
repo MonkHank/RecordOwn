@@ -42,6 +42,10 @@ public class ReflectClass<T> implements IInterface {
     this.age = age;
   }
 
+  public void setData(T t){
+
+  }
+
   private void privateMethod() {
   }
 
