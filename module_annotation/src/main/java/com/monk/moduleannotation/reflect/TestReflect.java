@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
@@ -72,6 +73,17 @@ public class TestReflect {
     String className = "com.monk.moduleannotation.reflect.ReflectClass";
     clazz = Class.forName(className);
 
+    Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass("com.monk.moduleannotation.reflect.MyType");
+    println("loadClass加载的class:"+aClass);
+    ParameterizedType pt = (ParameterizedType) aClass.getGenericSuperclass();
+    println("genericSuperclass-------------------："+pt);
+    Type[] types = pt.getActualTypeArguments();
+    for (Type zt : pt.getActualTypeArguments()) {
+      print("zt:"+zt);
+    }
+    println("\n");
+
+
     println("---1. 类实例");
     println(clazz);
 
@@ -81,6 +93,7 @@ public class TestReflect {
     println("---3. 判断是否为某个类的父类 - isAssignableFrom()");
     println(clazz.isAssignableFrom(clazz0));
     println(clazz.isAssignableFrom(Object.class));
+    println(Object.class.isAssignableFrom(clazz));
 
     println("=================== 无参构造和有参构造 ===================");
 
@@ -186,13 +199,13 @@ public class TestReflect {
     Field[] fields = clazz.getDeclaredFields();
     for (Field t : fields) {
       t.setAccessible(true);
-      print(t.getName() + "：" + t.get(newInstance));
-      println("");
+      println(t.getName() + "：" + t.get(newInstance));
+      println("getType:"+t.getType());
     }
 
     println("---2. 获取指定字段 - getDeclaredField(name)");
     Field name = clazz.getDeclaredField("name");
-    println(name.getName());
+    println(name);
 
     println("---3. 使用字段，获取指定对象指定变量的值get()，修改指定对象指定字段的值set() ");
     Object value = name.get(newInstance);

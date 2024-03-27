@@ -6,13 +6,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProjectViewModel:ViewModel() {
+class ProjectViewModel : ViewModel() {
 
-    val mProjectTreeLiveData = MutableLiveData<List<Any>>()
+  val mProjectTreeLiveData = MutableLiveData<List<Any>>()
 
-    fun loadProjectTree(){
-        viewModelScope.launch(Dispatchers.IO){
+  fun loadProjectTree() {
+    viewModelScope.launch(Dispatchers.IO) {
 
-        }
     }
+  }
 }
