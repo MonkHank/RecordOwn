@@ -74,12 +74,13 @@ public class TestReflect {
     clazz = Class.forName(className);
 
     Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass("com.monk.moduleannotation.reflect.MyType");
+
     println("loadClass加载的class:"+aClass);
     ParameterizedType pt = (ParameterizedType) aClass.getGenericSuperclass();
-    println("genericSuperclass-------------------："+pt);
+    println("pt-------------------："+pt);
     Type[] types = pt.getActualTypeArguments();
-    for (Type zt : pt.getActualTypeArguments()) {
-      print("zt:"+zt);
+    for (Type zt : types) {
+      print("zt:"+zt+"\t\t");
     }
     println("\n");
 

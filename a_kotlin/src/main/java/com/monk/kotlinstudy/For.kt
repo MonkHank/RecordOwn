@@ -33,18 +33,19 @@ class For {
         println()
 
         // 7. break
+        println("----7.break------")
         val array4 = arrayOf(1, 2, 3, 4, 5, 6)
         run breaker@{
             array4.forEach {
                 println("it = $it")
-                if (it == 4) return@breaker
+                if (it == 4) return
             }
             println("执行了....") // 内部这里是不执行的
         }
         println("后续执行了....") // 这里是执行的
 
         // 8. break
-        println("----break------")
+        println("----8.break------")
         run breaker@{
             for (i in array4.indices) {
                 println("i = $i")
@@ -62,9 +63,9 @@ class For {
 
 
         //9. continue
-        println("-----continue-----")
-        array4.forEach continues@{
-            if (it == 2) return@continues
+        println("-----9.continue-----")
+        array4.forEach {
+            if (it == 2) return@forEach
             print(it)
         }
 
@@ -82,6 +83,7 @@ class For {
         fun main(args: Array<String>) {
             val fo = For()
             fo.forStatement()
+
         }
     }
 }

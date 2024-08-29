@@ -13,18 +13,21 @@ public class MyType2<T> {
 
   MyType2() {
     Type superclass = getClass().getGenericSuperclass();
+    System.out.println("superclass = "+superclass);
     if (superclass instanceof Class) {
       throw new RuntimeException("Missing type parameter.");
     }
     ParameterizedType parameterized = (ParameterizedType) superclass;
     type = parameterized.getActualTypeArguments()[0];
-    System.out.println("============================================");
-    System.out.println("============================================");
-    System.out.println("============================================");
+
     System.out.println("type = "+type);
   }
 
   public static void main(String[] args) {
     new MyType2<Map<String,Integer>>(){};
+
+    System.out.println();
+
+    new MyType2<Map<String, String>>();
   }
 }
