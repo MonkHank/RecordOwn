@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -77,7 +76,6 @@ public class JavaTest {
     /**
      * 测试 空字符串 substring() 的结果；报异常
      *
-     * @throws Exception
      */
     @Test
     public void addition_isCorrect() throws Exception {
@@ -167,31 +165,31 @@ public class JavaTest {
                 }
             }
         };
-        ExecutorService service = new ThreadPoolExecutor(3, 6, 5, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+        ThreadPoolExecutor service = new ThreadPoolExecutor(3, 6, 5, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
         service.execute(runnable);
         service.execute(runnable);
         service.execute(runnable);
 
         System.out.println("===先开3个线程===");
-        System.out.println("核心线程数:" + ((ThreadPoolExecutor) service).getCorePoolSize());
-        System.out.println("线程池中线程数:" + ((ThreadPoolExecutor) service).getPoolSize());
-        System.out.println("队列任务数:" + ((ThreadPoolExecutor) service).getQueue().size());
+        System.out.println("核心线程数:" + service.getCorePoolSize());
+        System.out.println("线程池中线程数:" + service.getPoolSize());
+        System.out.println("队列任务数:" + service.getQueue().size());
 
         service.execute(runnable);
         service.execute(runnable);
         service.execute(runnable);
 
         System.out.println("===再开3个线程===");
-        System.out.println("核心线程数:" + ((ThreadPoolExecutor) service).getCorePoolSize());
-        System.out.println("线程池中线程数:" + ((ThreadPoolExecutor) service).getPoolSize());
-        System.out.println("队列任务数:" + ((ThreadPoolExecutor) service).getQueue().size());
+        System.out.println("核心线程数:" + service.getCorePoolSize());
+        System.out.println("线程池中线程数:" + service.getPoolSize());
+        System.out.println("队列任务数:" + service.getQueue().size());
 
         Thread.sleep(8000);
 
         System.out.println("===8秒之后===");
-        System.out.println("核心线程数:" + ((ThreadPoolExecutor) service).getCorePoolSize());
-        System.out.println("线程池中线程数:" + ((ThreadPoolExecutor) service).getPoolSize());
-        System.out.println("队列任务数:" + ((ThreadPoolExecutor) service).getQueue().size());
+        System.out.println("核心线程数:" + service.getCorePoolSize());
+        System.out.println("线程池中线程数:" + service.getPoolSize());
+        System.out.println("队列任务数:" + service.getQueue().size());
 
     }
 
@@ -296,7 +294,7 @@ public class JavaTest {
         Base base = new Base(strings);
     }
 
-    class Base {
+    static class Base {
         private String[] strings;
         StringCallBackImpl callback = new StringCallBackImpl(strings);
 
@@ -305,7 +303,7 @@ public class JavaTest {
         }
     }
 
-    class StringCallBackImpl {
+    static class StringCallBackImpl {
         String[] strings;
 
         StringCallBackImpl(String[] strings) {

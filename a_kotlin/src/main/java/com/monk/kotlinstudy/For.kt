@@ -38,7 +38,7 @@ class For {
         run breaker@{
             array4.forEach {
                 println("it = $it")
-                if (it == 4) return
+                if (it == 4) return@breaker
             }
             println("执行了....") // 内部这里是不执行的
         }
@@ -70,12 +70,18 @@ class For {
         }
 
         println()
-        for (i in array4.indices){
+        for (i in array4){
             if (i==2)continue
             print(i)
         }
         println()
 
+        listOf(1, 2, 3, 4, 5).forEach{
+            // 默认隐式标签是 @forEach，这里相当于continue
+            if (it == 3) return
+            println("it:$it")
+        }
+        println("循环外继续执行")
     }
 
     companion object {

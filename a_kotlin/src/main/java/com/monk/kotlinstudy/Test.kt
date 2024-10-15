@@ -6,14 +6,18 @@ package com.monk.kotlinstudy
  */
 object Test {
 
-  private var IDENTITY_MATRIX: FloatArray = FloatArray(16)
-
-  init {
-    println(IDENTITY_MATRIX)
-  }
 
 }
 
 fun main() {
-  println(Test.toString())
+    val str = "a_b_c_d"
+    val newStr = str.replace("_",".")
+
+    println(str)
+    println(newStr)
+
+    val javaClass = JavaClass()
+    // 测试 isNotEmpty 对于 null 是否有效
+    println(javaClass.nulls.isNotEmpty())
+
 }
