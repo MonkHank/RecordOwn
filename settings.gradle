@@ -6,7 +6,15 @@ pluginManagement {
     gradlePluginPortal()
     google()
     mavenCentral()
+    // 配置HMS Core SDK的Maven仓地址。
+    maven {url 'https://developer.huawei.com/repo/'}
   }
+ /* dependencies {
+    // 增加Android Gradle插件版本号配置，{version}为实际的Gradle插件版本号，例如7.0.1。
+    classpath 'com.android.tools.build:gradle:7.2.2'
+    // 增加AGC插件配置，请您参见AGC插件依赖关系选择合适的AGC插件版本。
+    classpath 'com.huawei.agconnect:agcp:1.6.0.300'
+  }*/
 }
 //用于配置依赖的 Maven 仓库 ,配置的是 工程 或 模块 下的依赖使用的仓库 ;
 dependencyResolutionManagement {
@@ -16,6 +24,8 @@ dependencyResolutionManagement {
     maven { url 'https://www.jitpack.io' }
     google()
     mavenCentral()
+    // 配置HMS Core SDK的Maven仓地址。
+    maven {url 'https://developer.huawei.com/repo/'}
   }
 
 }
@@ -39,6 +49,7 @@ include ':module_androidtest'
 include ':module_annotation'
 //include ':module_gl'        // 由于module中很多类还未全部实现,所以会报红,影响编译,需要查看的时候再打开注释
 include ':module_opengl'
+include ':module_demo'
 
 //include ':module_z_copy'
 

@@ -382,8 +382,8 @@ public class JavaTest {
     public void testForDeleteList() {
         ArrayList<String> list = new ArrayList<>();
         list.add("A");
-        list.add("b");
-        list.add("c");
+        list.add("B");
+        list.add("C");
         list.add("D");
 
         // java.util.ConcurrentModificationException
@@ -391,15 +391,22 @@ public class JavaTest {
 //            if ("D".equals(s1))list.remove(s1);
 //        }
 
-        System.out.println(list.size());
+        System.out.println("list.size = "+list.size()+" "+list);
         for (int i = 0; i < list.size(); i++) {
             String s = list.get(i);
-            if (s.equals("A")) list.remove(s);
-            System.out.println("-- " + list.get(i));
-
-            System.out.println(s);
+            if (s.equals("D")) list.remove(s);
         }
+        System.out.println("list.size = "+list.size()+" "+list);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -9);
+        String sdf = new SimpleDateFormat("yyyyMMdd").format(calendar.getTime());
+        int iDate = Integer.parseInt(sdf);
+
+        System.out.println(iDate);
     }
+
+
 
     /**
      * 双重for循环判断问题，只有一个可以不判断
@@ -627,6 +634,7 @@ public class JavaTest {
         // 清除操作
         mPrivateFlags &= ~PFLAG_FORCE_LAYOUT;
         System.out.println("mPrivateFlags =                      "+mPrivateFlags);
+
 
     }
 

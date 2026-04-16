@@ -25,34 +25,34 @@ public class TestReflect {
    */
   public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
     /**===================== 类加载器 ==========================*/
-    println("==================类加载器====================");
+    println("==================ClassLoader====================");
     // 1.获取一个系统的类加载器(可以获取，当前这个类 ExampleUnitTest 就是它加载的)
     ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-    println("系统类加载器:" + classLoader);
+    println("SystemClassLoader:" + classLoader);
 
 
     // 2.获取系统类加载器的父类加载器（扩展类加载器，可以获取）.
     classLoader = classLoader.getParent();
-    println("扩展类加载器:" + classLoader);
+    println("ExtClassLoader:" + classLoader);
 
     // 3.获取扩展类加载器的父类加载器（引导类加载器，不可获取）.
     classLoader = classLoader.getParent();
-    println("引导类加载器:" + classLoader);
+    println("GuideClassLoader:" + classLoader);
 
 
     // 4.测试当前类由哪个类加载器进行加载（系统类加载器）:
     classLoader = Class.forName("com.monk.moduleannotation.reflect.ReflectClass").getClassLoader();
-    System.out.println("系统类加载器:" + classLoader);
+    System.out.println("SystemClassLoader:" + classLoader);
     InputStream in = classLoader.getResourceAsStream("Student.java");
-    println("获取文件：" + in);
+    println("getFile:" + in);
 
     //5. 测试 JDK 提供的 Object 类由哪个类加载器负责加载（引导类）
     classLoader = Class.forName("java.lang.Object").getClassLoader();
-    println("Object类加载器：" + classLoader);
+    println("Object ClassLoader:" + classLoader);
 
     /***===================================== 常用API =================================*/
 
-    println("=================== 获取 Class 的三种方式 ==================");
+    println("=================== Get Class usually 3 ways ==================");
     Class<?> clazz0;
     //1.通过类名
     clazz0 = ReflectClass.class;
@@ -75,9 +75,9 @@ public class TestReflect {
 
     Class<?> aClass = ClassLoader.getSystemClassLoader().loadClass("com.monk.moduleannotation.reflect.MyType");
 
-    println("loadClass加载的class:"+aClass);
+    println("loadClass class:"+aClass);
     ParameterizedType pt = (ParameterizedType) aClass.getGenericSuperclass();
-    println("pt-------------------："+pt);
+    println("pt-------------------: "+pt);
     Type[] types = pt.getActualTypeArguments();
     for (Type zt : types) {
       print("zt:"+zt+"\t\t");
@@ -85,18 +85,18 @@ public class TestReflect {
     println("\n");
 
 
-    println("---1. 类实例");
+    println("---1. Class newInstance");
     println(clazz);
 
-    println("---2. 类实例名字（全类名）");
+    println("---2. Class.getName");
     println(clazz.getName());
 
-    println("---3. 判断是否为某个类的父类 - isAssignableFrom()");
+    println("---3. Determine whether it is the parent class of a class - isAssignableFrom()");
     println(clazz.isAssignableFrom(clazz0));
     println(clazz.isAssignableFrom(Object.class));
     println(Object.class.isAssignableFrom(clazz));
 
-    println("=================== 无参构造和有参构造 ===================");
+    println("=================== No param Constructor && Param Constructor ===================");
 
     ReflectClass newInstance = (ReflectClass) clazz.newInstance();// 默认无参构造函数，没有无参构造函数则会报错
     println(newInstance);
@@ -105,7 +105,7 @@ public class TestReflect {
     ReflectClass nancy = (ReflectClass) constructor.newInstance("nancy", 12);
     println(nancy);
 
-    println("=================== 反射方法 =============================");
+    println("=================== Reflect methods =============================");
 
     println("---1. 获取指定类所有方法，不含父类方法，private方法也可以获取 - getDeclaredMethods()");
     Method[] methods = clazz.getDeclaredMethods();
@@ -194,8 +194,7 @@ public class TestReflect {
 
     println("=================== end 反射方法 end=============================\n");
 
-    println("=================== 反射字段 =============================");
-
+    println("=================== Reflect Fields  =============================");
     println("---1. 获取所有字段，公有私有，不包含父类 - getDeclaredFields()");
     Field[] fields = clazz.getDeclaredFields();
     for (Field t : fields) {
@@ -214,34 +213,34 @@ public class TestReflect {
     name.set(newInstance, "jack_set");
     println(name.get(newInstance));
 
-    println("---4. 反射 final 和 static 变量");
-    Class<Person> personClass = Person.class;
+    println("---4. 反射 static 和 final 变量");
+    Field staticGender = Person.class.getDeclaredField("staticGender");
+    staticGender.setAccessible(true);
+    println("staticGender default：" + staticGender.get(null));
+    staticGender.set(null, "男");
+    println("staticGender：" + staticGender.get(null));
+
     final Person person = new Person();
 
-    Field name1 = personClass.getDeclaredField("name");
-    name1.setAccessible(true);
-    name1.set(person, "xixi");
-    println("修改后：" + person.getName());
+    Field finalName = Person.class.getDeclaredField("finalName");
+    finalName.setAccessible(true);
+    finalName.set(person, "xixi");
+    println("finalName default：" + person.getFinalName());
+    Object o = finalName.get(person);
+    println("finalName：" + o);// 通过这种方式获取final变量
 
-    Field age1 = personClass.getDeclaredField("age");
-    age1.setAccessible(true);
-    age1.set(person, 12);
-    println("修改后：" + person.age);
+    Field finalAge = Person.class.getDeclaredField("finalAge");
+    finalAge.setAccessible(true);
+    println("finalAge default：" + finalAge.get( person));
+    finalAge.set(person, 12);
+    println("finalAge：" + finalAge.get(person));
 
-    println("修改前：" + person.student);
-    Field student = personClass.getDeclaredField("student");
+
+    println("objectStu default：" + person.student);
+    Field student = Person.class.getDeclaredField("student");
     student.setAccessible(true);
     student.set(person, new Student());
-    println("修改后：" + person.student);
-
-    Object o = name1.get(person);
-    println("修改后：" + o);// 通过这种方式获取final变量
-    println("修改后：" + age1.get(person));
-
-    Field sex = personClass.getDeclaredField("sex");
-    sex.setAccessible(true);
-    sex.set(null, "男");
-    println("修改后：" + sex.get(null));
+    println("objectStu：" + person.student);
 
     println("=================== 反射类泛型 =============================");
     TypeVariable<? extends Class<?>>[] typeParameters = clazz.getTypeParameters();
